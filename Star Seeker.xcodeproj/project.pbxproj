@@ -12,6 +12,16 @@
 		2097B7842C114C00002261C3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7832C114C00002261C3 /* Item.swift */; };
 		2097B7862C114C01002261C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2097B7852C114C01002261C3 /* Assets.xcassets */; };
 		2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2097B7882C114C01002261C3 /* Preview Assets.xcassets */; };
+		2097B79B2C1152AD002261C3 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B79A2C1152AD002261C3 /* Game.swift */; };
+		2097B79F2C115AA5002261C3 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B79E2C115AA5002261C3 /* Debug.swift */; };
+		2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A02C115AC2002261C3 /* AppConfig.swift */; };
+		2097B7A32C115AED002261C3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A22C115AED002261C3 /* Logger.swift */; };
+		2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A42C115E99002261C3 /* Wrapper.swift */; };
+		2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A62C119C27002261C3 /* HoldButton.swift */; };
+		2097B7AA2C121DA8002261C3 /* MovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A92C121DA8002261C3 /* MovementController.swift */; };
+		2097B7AC2C122000002261C3 /* PressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AB2C122000002261C3 /* PressButton.swift */; };
+		2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AD2C1227EE002261C3 /* UIConfig.swift */; };
+		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +31,16 @@
 		2097B7832C114C00002261C3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2097B7852C114C01002261C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2097B7882C114C01002261C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2097B79A2C1152AD002261C3 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		2097B79E2C115AA5002261C3 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		2097B7A02C115AC2002261C3 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		2097B7A22C115AED002261C3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		2097B7A42C115E99002261C3 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
+		2097B7A62C119C27002261C3 /* HoldButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldButton.swift; sourceTree = "<group>"; };
+		2097B7A92C121DA8002261C3 /* MovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementController.swift; sourceTree = "<group>"; };
+		2097B7AB2C122000002261C3 /* PressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButton.swift; sourceTree = "<group>"; };
+		2097B7AD2C1227EE002261C3 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
+		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,10 +73,13 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
-				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
-				2097B7812C114C00002261C3 /* ContentView.swift */,
-				2097B7832C114C00002261C3 /* Item.swift */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
+				2097B7812C114C00002261C3 /* ContentView.swift */,
+				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
+				2097B79C2C115A87002261C3 /* Globals */,
+				2097B7922C114C74002261C3 /* Extensions */,
+				2097B7902C114C20002261C3 /* Models */,
+				2097B78F2C114C1A002261C3 /* Views */,
 				2097B7872C114C01002261C3 /* Preview Content */,
 			);
 			path = "Star Seeker";
@@ -68,6 +91,93 @@
 				2097B7882C114C01002261C3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2097B78F2C114C1A002261C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A82C121D74002261C3 /* Compositions */,
+				2097B7972C114E21002261C3 /* Components */,
+				2097B7962C114E1A002261C3 /* Presenters */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2097B7902C114C20002261C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7832C114C00002261C3 /* Item.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2097B7912C114C48002261C3 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A02C115AC2002261C3 /* AppConfig.swift */,
+				2097B7AD2C1227EE002261C3 /* UIConfig.swift */,
+				2097B7AF2C122862002261C3 /* GameConfig.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		2097B7922C114C74002261C3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A22C115AED002261C3 /* Logger.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2097B7962C114E1A002261C3 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				2097B79A2C1152AD002261C3 /* Game.swift */,
+			);
+			name = Presenters;
+			sourceTree = "<group>";
+		};
+		2097B7972C114E21002261C3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A42C115E99002261C3 /* Wrapper.swift */,
+				2097B7A62C119C27002261C3 /* HoldButton.swift */,
+				2097B7AB2C122000002261C3 /* PressButton.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		2097B79C2C115A87002261C3 /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7B12C1232D3002261C3 /* Providers */,
+				2097B79D2C115A97002261C3 /* Functions */,
+				2097B7912C114C48002261C3 /* Configs */,
+			);
+			path = Globals;
+			sourceTree = "<group>";
+		};
+		2097B79D2C115A97002261C3 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				2097B79E2C115AA5002261C3 /* Debug.swift */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
+		2097B7A82C121D74002261C3 /* Compositions */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A92C121DA8002261C3 /* MovementController.swift */,
+			);
+			name = Compositions;
+			sourceTree = "<group>";
+		};
+		2097B7B12C1232D3002261C3 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,8 +251,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2097B7822C114C00002261C3 /* ContentView.swift in Sources */,
+				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
+				2097B7AA2C121DA8002261C3 /* MovementController.swift in Sources */,
+				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
+				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
+				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
+				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
+				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
+				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
+				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
+				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
