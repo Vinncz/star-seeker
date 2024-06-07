@@ -2,12 +2,16 @@ import SpriteKit
 import SwiftUI
 
 class Game : SKScene {
+        
     override func didMove ( to view: SKView ) {
-        print("loaded")
+        view.allowsTransparency = true
         self.view!.isMultipleTouchEnabled = true
+        self.backgroundColor = .clear
     }
     
     override func sceneDidLoad () {
-        self.view?.isMultipleTouchEnabled = true
+       // MARK: - One time scene setup
+        
     }
+    
 }

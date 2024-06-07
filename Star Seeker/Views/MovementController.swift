@@ -2,7 +2,7 @@ import SpriteKit
 
 class MovementController : SKNode {
     
-    let bSize  = UIConfig.SquareSizes.mini
+    let bSize  = UIConfig.SquareSizes.mini + 10
     let hForce = GameConfig.lateralForce
     let vForce = GameConfig.elevationalForce
     let hImpls = GameConfig.lateralImpulse
@@ -64,8 +64,8 @@ class MovementController : SKNode {
         hDiv.addSpacedChild(bRight)
         
         let vDiv = Wrapper(spacing: UIConfig.Spacings.large, direction: .horizontal)
-        vDiv.addSpacedChild(bJump)
         vDiv.addSpacedChild(bClimb)
+        vDiv.addSpacedChild(bJump)
         
         let div = Wrapper(spacing: 196, direction: .horizontal)
         div.addSpacedChild(hDiv)

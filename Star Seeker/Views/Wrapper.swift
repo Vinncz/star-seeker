@@ -17,12 +17,12 @@ class Wrapper : SKNode {
             updateChildPositions()
         }
     }
-    private var boundary: SKShapeNode?
     
-    init ( spacing: CGFloat, direction: Direction ) {
+    init ( name: String = "", spacing: CGFloat, direction: Direction ) {
         self.spacing   = spacing
         self.direction = direction
         super.init()
+        self.name = name
     }
 
     func addSpacedChild ( _ node: SKNode ) {
