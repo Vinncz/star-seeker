@@ -23,6 +23,15 @@
 		2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AD2C1227EE002261C3 /* UIConfig.swift */; };
 		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
 		2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7B22C12ABC2002261C3 /* Bundle.swift */; };
+		2097B7BB2C15DDD6002261C3 /* NeoWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */; };
+		2097B7BE2C15E138002261C3 /* Sizeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7BD2C15E138002261C3 /* Sizeable.swift */; };
+		2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7BF2C15E193002261C3 /* SKSpriteNode.swift */; };
+		2097B7C22C15E1EE002261C3 /* SKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7C12C15E1EE002261C3 /* SKLabelNode.swift */; };
+		2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7C42C15E47D002261C3 /* NodeNamingConstant.swift */; };
+		2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7C72C15FAFC002261C3 /* SKNode.swift */; };
+		2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CD2C161DB6002261C3 /* Movable.swift */; };
+		2097B7D02C169CA3002261C3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CF2C169CA3002261C3 /* Player.swift */; };
+		2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +52,15 @@
 		2097B7AD2C1227EE002261C3 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		2097B7B22C12ABC2002261C3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoWrapper.swift; sourceTree = "<group>"; };
+		2097B7BD2C15E138002261C3 /* Sizeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizeable.swift; sourceTree = "<group>"; };
+		2097B7BF2C15E193002261C3 /* SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSpriteNode.swift; sourceTree = "<group>"; };
+		2097B7C12C15E1EE002261C3 /* SKLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKLabelNode.swift; sourceTree = "<group>"; };
+		2097B7C42C15E47D002261C3 /* NodeNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeNamingConstant.swift; sourceTree = "<group>"; };
+		2097B7C72C15FAFC002261C3 /* SKNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKNode.swift; sourceTree = "<group>"; };
+		2097B7CD2C161DB6002261C3 /* Movable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movable.swift; sourceTree = "<group>"; };
+		2097B7CF2C169CA3002261C3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNamingConstant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,15 +93,16 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
-				2097B7B52C12FC0D002261C3 /* Objects */,
-				2097B7B42C12FC02002261C3 /* Concepts */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
 				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
+				2097B7B42C12FC02002261C3 /* Concepts */,
+				2097B7B52C12FC0D002261C3 /* Objects */,
 				2097B79C2C115A87002261C3 /* Globals */,
 				2097B7922C114C74002261C3 /* Extensions */,
 				2097B7902C114C20002261C3 /* Models */,
 				2097B78F2C114C1A002261C3 /* Views */,
+				2097B7C32C15E44A002261C3 /* Strings */,
 				2097B7872C114C01002261C3 /* Preview Content */,
 			);
 			path = "Star Seeker";
@@ -128,6 +147,7 @@
 		2097B7922C114C74002261C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7C62C15FAEF002261C3 /* SKNodes */,
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
 			);
@@ -148,6 +168,8 @@
 				2097B7A42C115E99002261C3 /* Wrapper.swift */,
 				2097B7A62C119C27002261C3 /* HoldButton.swift */,
 				2097B7AB2C122000002261C3 /* PressButton.swift */,
+				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
+				2097B7CF2C169CA3002261C3 /* Player.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -188,6 +210,7 @@
 		2097B7B42C12FC02002261C3 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7BC2C15E12A002261C3 /* Scalable */,
 				2097B7B92C12FC2C002261C3 /* Movable */,
 				2097B7B82C12FC1F002261C3 /* Position */,
 			);
@@ -227,8 +250,36 @@
 		2097B7B92C12FC2C002261C3 /* Movable */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7CD2C161DB6002261C3 /* Movable.swift */,
 			);
 			path = Movable;
+			sourceTree = "<group>";
+		};
+		2097B7BC2C15E12A002261C3 /* Scalable */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7BD2C15E138002261C3 /* Sizeable.swift */,
+			);
+			path = Scalable;
+			sourceTree = "<group>";
+		};
+		2097B7C32C15E44A002261C3 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7C42C15E47D002261C3 /* NodeNamingConstant.swift */,
+				2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		2097B7C62C15FAEF002261C3 /* SKNodes */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7C72C15FAFC002261C3 /* SKNode.swift */,
+				2097B7BF2C15E193002261C3 /* SKSpriteNode.swift */,
+				2097B7C12C15E1EE002261C3 /* SKLabelNode.swift */,
+			);
+			path = SKNodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,16 +353,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				2097B7822C114C00002261C3 /* ContentView.swift in Sources */,
+				2097B7BB2C15DDD6002261C3 /* NeoWrapper.swift in Sources */,
 				2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */,
+				2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
+				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
 				2097B7AA2C121DA8002261C3 /* MovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
+				2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */,
+				2097B7BE2C15E138002261C3 /* Sizeable.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
+				2097B7C22C15E1EE002261C3 /* SKLabelNode.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
+				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
+				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
+				2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */,
 				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,

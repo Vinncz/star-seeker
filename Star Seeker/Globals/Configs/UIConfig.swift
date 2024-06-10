@@ -1,6 +1,6 @@
 import Foundation
 
-protocol Sizable {
+protocol UISizes {
     static var nano   : Double { get set }
     static var micro  : Double { get set }
     static var mini   : Double { get set }
@@ -9,26 +9,46 @@ protocol Sizable {
     static var huge   : Double { get set }
 }
 
+protocol UIMiniSizes {
+    static var little : Double { get set }
+}
+
+protocol UIGiantSizes {
+    static var giant        : Double { get set }
+    static var colossal     : Double { get set }
+    static var titanic      : Double { get set }
+    static var monumental   : Double { get set }
+    static var astronomical : Double { get set }
+}
+
 struct UIConfig {
     
-    struct FontSizes : Sizable {
+    struct FontSizes : UISizes, UIGiantSizes {
         /** Represents 16px on screen */
-        static var nano   : Double = 16
+        static var nano         : Double = 16
         /** Represents 24px on screen */
-        static var micro  : Double = 24
+        static var micro        : Double = 24
         /** Represents 36px on screen */
-        static var mini   : Double = 36
+        static var mini         : Double = 36
         /** Represents 48px on screen */
-        static var normal : Double = 48
+        static var normal       : Double = 48
         /** Represents 56px on screen */
-        static var large  : Double = 56
+        static var large        : Double = 56
         /** Represents 64px on screen */
-        static var huge   : Double = 64
+        static var huge         : Double = 64
         /** Represents 72px on screen */
-        static var giant  : Double = 72
+        static var giant        : Double = 72
+        /** Represents 81px on screen */
+        static var colossal     : Double = 81
+        /** Represents 90px on screen */
+        static var titanic      : Double = 90
+        /** Represents 106px on screen */
+        static var monumental   : Double = 106
+        /** Represents 128px on screen */
+        static var astronomical : Double = 128
     }
     
-    struct SidebarSizes : Sizable {
+    struct SidebarSizes : UISizes {
         /** Represents 160px on screen */
         static var nano   : Double = 160
         /** Represents 192px on screen */
@@ -43,7 +63,7 @@ struct UIConfig {
         static var huge   : Double = 384
     }
     
-    struct SquareSizes : Sizable {
+    struct SquareSizes : UISizes {
         /** Represents 16px on screen */
         static var nano   : Double = 16
         /** Represents 32px on screen */
@@ -60,7 +80,7 @@ struct UIConfig {
         static var giant  : Double = 256
     }
     
-    struct CornerRadiuses : Sizable {
+    struct CornerRadiuses : UISizes {
         /** Represents 2px on screen */
         static var nano   : Double = 2
         /** Represents 4px on screen */
@@ -75,7 +95,7 @@ struct UIConfig {
         static var huge   : Double = 24
     }
     
-    struct Spacings : Sizable {
+    struct Spacings : UISizes {
         /** Represents 1px on screen */
         static var nano   : Double = 1
         /** Represents 2px on screen */
@@ -90,7 +110,7 @@ struct UIConfig {
         static var huge   : Double = 32
     }
     
-    struct Paddings : Sizable {
+    struct Paddings : UISizes {
         /** Represents 2px on screen */
         static var nano   : Double = 2
         /** Represents 4px on screen */

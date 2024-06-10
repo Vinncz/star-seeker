@@ -8,13 +8,13 @@ class MovementController : SKNode {
     let hImpls = GameConfig.lateralImpulse
     let vImpls = GameConfig.elevationalImpulse
     
-    let target : SKNode
+    let target : Player
     var bLeft  : HoldButtonNode
     var bRight : HoldButtonNode
     var bJump  : PressButtonNode
     var bClimb : HoldButtonNode
     
-    init ( target: SKNode ) {
+    init ( controls target: Player ) {
         self.target = target
         
         let hForce = self.hForce
@@ -24,7 +24,17 @@ class MovementController : SKNode {
         
         bLeft = HoldButtonNode (
             name: "left controller button",
-            imageNamed: "button-left", command: {
+            imageNamed: ImageNamingConstant.Button.left, command: {
+                
+                switch ( target.previousState ) {
+                    case .jumpingRight:
+                        target.state = .jumpingLeft
+                    
+                    default:
+                        target.state = .movingLeft
+                    
+                }
+                
                 target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
                 debug("\(target) was moved leftward")
             }
@@ -33,7 +43,17 @@ class MovementController : SKNode {
         
         bRight = HoldButtonNode (
             name: "right controller button",
-            imageNamed: "button-right", command: { 
+            imageNamed: ImageNamingConstant.Button.right, command: { 
+                
+                switch ( target.previousState ) {
+                    case .jumpingLeft:
+                        target.state = .jumpingRight
+                    
+                    default:
+                        target.state = .movingRight
+                    
+                }
+                
                 target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
                 debug("\(target) was moved rightward")
             }
@@ -42,7 +62,17 @@ class MovementController : SKNode {
         
         bJump = PressButtonNode (
             name: "jump controller button",
-            imageNamed: "button-jump", command: { 
+            imageNamed: ImageNamingConstant.Button.jump, command: { 
+                
+                switch ( target.previousState ) {
+                    case .idleLeft, .movingLeft, .jumpingLeft, .climbing:
+                        target.state = .jumpingLeft
+                    
+                    default:
+                        target.state = .jumpingRight
+                    
+                }
+                
                 target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
                 debug("\(target) was moved upward")
             }
@@ -51,23 +81,23 @@ class MovementController : SKNode {
         
         bClimb = HoldButtonNode (
             name: "climb controller button",
-            imageNamed: "button-climb", command: { 
+            imageNamed: ImageNamingConstant.Button.climb, command: { 
+                target.state = .climbing
                 target.physicsBody?.applyForce(CGVectorMake(0, vForce))
                 debug("\(target) was made climbing")
             }
         )
         bClimb.size = CGSize(width: bSize, height: bSize)
         
-        
-        let hDiv = Wrapper(spacing: UIConfig.Spacings.large, direction: .horizontal)
+        let hDiv = NeoWrapper(spacing: UIConfig.Spacings.large, direction: .horizontal)
         hDiv.addSpacedChild(bLeft)
         hDiv.addSpacedChild(bRight)
         
-        let vDiv = Wrapper(spacing: UIConfig.Spacings.large, direction: .horizontal)
+        let vDiv = NeoWrapper(spacing: UIConfig.Spacings.large, direction: .vertical)
         vDiv.addSpacedChild(bClimb)
         vDiv.addSpacedChild(bJump)
         
-        let div = Wrapper(spacing: 196, direction: .horizontal)
+        let div = NeoWrapper(spacing: UIConfig.Spacings.huge * 1.75, direction: .horizontal)
         div.addSpacedChild(hDiv)
         div.addSpacedChild(vDiv)
 
