@@ -1,7 +1,6 @@
 import Foundation
 
 struct GameConfig {
-    
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
     static let lateralForce       : CGFloat = 1500
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
@@ -11,8 +10,46 @@ struct GameConfig {
     /** Dictates how much should a movement controller button applies a vertical impulse to a target */
     static let elevationalImpulse : CGFloat = 125
     /** Dictates how much fastening factor a Slippery platform does to a target */
-    static let slipperyFrictionModifier : CGFloat = 0.0    
+    static let slipperyFrictionModifier : CGFloat = 0.0
     /** Dictates how much slowing factor a Sticky platform does to a target */
     static let stickyFrictionModifier   : CGFloat = 0.55
+    /** Dictates how much friction of a base platform does to a target */
+    static let defaultFrictionModifier   : CGFloat = 0.2
+}
+
+
+enum PlatformTypes: CaseIterable, Hashable {
+    case sticky
+    case base
+    case slippery
     
+    var frictionValue: CGFloat {
+        switch self {
+            case .sticky: GameConfig.stickyFrictionModifier
+            case .base: GameConfig.defaultFrictionModifier
+            case .slippery: GameConfig.slipperyFrictionModifier
+        }
+    }
+    
+    var texture: String {
+        switch self {
+            case .sticky: "sticky"
+            case .base: "base"
+            case .slippery: "slippery"
+        }
+    }
+}
+
+struct PlatformObject: Identifiable {
+    var id: UUID
+    var type: PlatformTypes
+    var x: Int
+    var y: Int
+    
+    init(type: PlatformTypes, x: Int, y: Int) {
+        self.id = UUID()
+        self.type = type
+        self.x = x
+        self.y = y
+    }
 }

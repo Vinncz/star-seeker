@@ -2,6 +2,7 @@ import SpriteKit
 
 class MovementController : SKNode {
     
+    
     let bSize  = UIConfig.SquareSizes.mini + 10
     let hForce = GameConfig.lateralForce
     let vForce = GameConfig.elevationalForce
@@ -19,13 +20,25 @@ class MovementController : SKNode {
         
         let hForce = self.hForce
         let vForce = self.vForce
-        let hImpls = self.hImpls
+        let _ = self.hImpls
         let vImpls = self.vImpls
         
         bLeft = HoldButtonNode (
             name: "left controller button",
             imageNamed: "button-left", command: {
+                let leftMovementTextures = (1...20).map { SKTexture(imageNamed: "left\($0)") }
+            // Create an animation action using the textures
+                let animateAction = SKAction.animate(with: leftMovementTextures, timePerFrame: 0.05)
+            
+            let applyForce = SKAction.run {
                 target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
+//                target.physicsBody?.applyForce(CGVector(dx: 100, dy: 0))
+            }
+            
+            let sequence = SKAction.group([animateAction, applyForce])
+//                target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
+                target.run(sequence)
+//                target.run(animateAction)
                 debug("\(target) was moved leftward")
             }
         )
