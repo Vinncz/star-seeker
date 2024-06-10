@@ -5,12 +5,17 @@ class HoldButtonNode : SKSpriteNode {
     var isAttached : Bool { return parent != nil || scene != nil }
     var isPressed  : Bool = false
     var command    : () -> Void = {}
+    var completion : () -> Void = {}
     var timer      : Timer?
     
-    init ( name: String = "", imageNamed: String, command: @escaping () -> Void = {} ) {
-        self.command = command
+    init ( name: String = "", imageNamed: String, command: @escaping () -> Void = {}, completion: @escaping () -> Void = {} ) {
+        self.command    = command
+        self.completion = completion
+        
         let texture = SKTexture(imageNamed: imageNamed)
+        
         super.init(texture: texture, color: .clear, size: texture.size())
+        
         self.name = name
         isUserInteractionEnabled = true
     }
@@ -26,6 +31,8 @@ class HoldButtonNode : SKSpriteNode {
         isPressed = false
         timer?.invalidate()
         timer = nil
+        
+        completion()
     }
     
     
