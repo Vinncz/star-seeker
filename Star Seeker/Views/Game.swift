@@ -2,14 +2,15 @@ import SpriteKit
 import SwiftUI
 
 class GameControl: ObservableObject {
-    @Published var isMovingHero = false
+    @Published var isPlayerMoving = false
+    @Published var playerState: PlayerState = .idleRight
+    
 }
 
 class Game : SKScene {
     @ObservedObject var gameControl: GameControl
     
     var hero: SKSpriteNode!
-    var moveAction: SKAction!
     
     init(size: CGSize, gameControl: GameControl) {
         self.gameControl = gameControl
@@ -24,19 +25,15 @@ class Game : SKScene {
         self.backgroundColor = .clear
         self.scaleMode = .resizeFill
         
-        
-
-        let heroTextures = (1...20).map { SKTexture(imageNamed: "left\($0)") }
-        hero = SKSpriteNode(texture: SKTexture(imageNamed: "left-standing"), size: CGSize(width: unitSize*1.5, height: unitSize*1.5))
+        hero = SKSpriteNode(texture: gameControl.playerState.texture.first, size: CGSize(width: unitSize*1.5, height: unitSize*1.5))
         hero.position = CGPoint(xGrid: 0, yGrid: 11, unitSize: unitSize)
-        hero.physicsBody = SKPhysicsBody(rectangleOf: hero.size)
+        hero.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: unitSize*0.6, height: unitSize*1.2), center: CGPoint(x: 0, y: -6))
         hero.physicsBody?.isDynamic = true
         hero.physicsBody?.mass = 0.25
         hero.physicsBody?.linearDamping = 1
         hero.physicsBody?.friction = 0.6
         hero.physicsBody?.allowsRotation = false
         addChild(hero)
-        moveAction = createAnimateAction(with: heroTextures)
         
         let platform = SKSpriteNode(color: .green, size: CGSize(width: unitSize*22, height: unitSize*10))
         platform.position = CGPoint(x: 0, y: 0)
@@ -54,6 +51,7 @@ class Game : SKScene {
             PlatformObject(type: .slippery, x: 7, y: 10),
             PlatformObject(type: .slippery, x: 8, y: 10),
             PlatformObject(type: .sticky, x: 0, y: 7),
+            PlatformObject(type: .sticky, x: 0, y: 8),
             PlatformObject(type: .sticky, x: 1, y: 7),
             PlatformObject(type: .sticky, x: 2, y: 7),
             PlatformObject(type: .sticky, x: 3, y: 7),
@@ -64,23 +62,23 @@ class Game : SKScene {
             addPlatform(type: platform.type, size: unitSize, x: platform.x, y: platform.y)
         }
         
-        let movementController = MovementController(target: hero)
+        let movementController = MovementController(target: hero, gameControl: gameControl)
         movementController.position = CGPoint(x: UIConfig.Paddings.huge, y: UIConfig.Paddings.huge * 2)
         addChild(movementController)
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if gameControl.isMovingHero && !hero.hasActions() {
-            hero.run(SKAction.repeatForever(moveAction), withKey: "moveHero")
-        } else if !gameControl.isMovingHero && hero.hasActions() {
+        if gameControl.isPlayerMoving {
+            if hero.action(forKey: "moveHero") == nil {
+                let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
+                hero.run(SKAction.repeatForever(moveAction), withKey: "moveHero")
+            }
+        } else {
             hero.removeAction(forKey: "moveHero")
+            hero.texture = gameControl.playerState.texture.first
         }
+        
     }
-    
-    func createAnimateAction(with textures: [SKTexture]) -> SKAction {
-            let animateAction = SKAction.animate(with: textures, timePerFrame: 0.05)
-            return animateAction
-        }
     
     func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) -> Void {
         let platformSize = CGSize(width: size, height: size)

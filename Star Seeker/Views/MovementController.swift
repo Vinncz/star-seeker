@@ -1,7 +1,7 @@
+import SwiftUI
 import SpriteKit
 
 class MovementController : SKNode {
-    
     
     let bSize  = UIConfig.SquareSizes.mini + 10
     let hForce = GameConfig.lateralForce
@@ -10,13 +10,15 @@ class MovementController : SKNode {
     let vImpls = GameConfig.elevationalImpulse
     
     let target : SKNode
+    @ObservedObject var gameControl: GameControl
     var bLeft  : HoldButtonNode
     var bRight : HoldButtonNode
     var bJump  : PressButtonNode
     var bClimb : HoldButtonNode
     
-    init ( target: SKNode ) {
+    init ( target: SKNode, gameControl: GameControl ) {
         self.target = target
+        self.gameControl = gameControl
         
         let hForce = self.hForce
         let vForce = self.vForce
@@ -25,37 +27,25 @@ class MovementController : SKNode {
         
         bLeft = HoldButtonNode (
             name: "left controller button",
-            imageNamed: "button-left", command: {
-                let leftMovementTextures = (1...20).map { SKTexture(imageNamed: "left\($0)") }
-            // Create an animation action using the textures
-                let animateAction = SKAction.animate(with: leftMovementTextures, timePerFrame: 0.05)
-            
-            let applyForce = SKAction.run {
-                target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
-//                target.physicsBody?.applyForce(CGVector(dx: 100, dy: 0))
-            }
-            
-            let sequence = SKAction.group([animateAction, applyForce])
-//                target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
-                target.run(sequence)
-//                target.run(animateAction)
-                debug("\(target) was moved leftward")
-            }
+            imageNamed: "button-left",
+            command: {},
+            completion: {}
         )
         bLeft.size = CGSize(width: bSize, height: bSize)
         
         bRight = HoldButtonNode (
             name: "right controller button",
-            imageNamed: "button-right", command: { 
+            imageNamed: "button-right", command: {
                 target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
                 debug("\(target) was moved rightward")
-            }
+            },
+            completion: {}
         )
         bRight.size = CGSize(width: bSize, height: bSize)
         
         bJump = PressButtonNode (
             name: "jump controller button",
-            imageNamed: "button-jump", command: { 
+            imageNamed: "button-jump", command: {
                 target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
                 debug("\(target) was moved upward")
             }
@@ -64,7 +54,7 @@ class MovementController : SKNode {
         
         bClimb = HoldButtonNode (
             name: "climb controller button",
-            imageNamed: "button-climb", command: { 
+            imageNamed: "button-climb", command: {
                 target.physicsBody?.applyForce(CGVectorMake(0, vForce))
                 debug("\(target) was made climbing")
             }
@@ -83,9 +73,31 @@ class MovementController : SKNode {
         let div = Wrapper(spacing: 196, direction: .horizontal)
         div.addSpacedChild(hDiv)
         div.addSpacedChild(vDiv)
-
+        
         super.init()
         addChild(div)
+        
+        bLeft.command = {
+            self.gameControl.isPlayerMoving = true
+            self.gameControl.playerState = .movingLeft
+            target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
+            debug("\(self.target) was moved leftward")
+        }
+        bLeft.completion = {
+            self.gameControl.playerState = .idleLeft
+            self.gameControl.isPlayerMoving = false
+        }
+
+        bRight.command = {
+            self.gameControl.isPlayerMoving = true
+            self.gameControl.playerState = .movingRight
+            target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
+            debug("\(self.target) was moved rightward")
+        }
+        bRight.completion = {
+            self.gameControl.playerState = .idleRight
+            self.gameControl.isPlayerMoving = false
+        }
     }
     
     /* Inherited from SKNode. Refrain from modifying the following */

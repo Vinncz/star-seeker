@@ -1,4 +1,5 @@
 import Foundation
+import SpriteKit
 
 struct GameConfig {
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
@@ -25,17 +26,17 @@ enum PlatformTypes: CaseIterable, Hashable {
     
     var frictionValue: CGFloat {
         switch self {
-            case .sticky: GameConfig.stickyFrictionModifier
-            case .base: GameConfig.defaultFrictionModifier
-            case .slippery: GameConfig.slipperyFrictionModifier
+        case .sticky: GameConfig.stickyFrictionModifier
+        case .base: GameConfig.defaultFrictionModifier
+        case .slippery: GameConfig.slipperyFrictionModifier
         }
     }
     
     var texture: String {
         switch self {
-            case .sticky: "sticky"
-            case .base: "base"
-            case .slippery: "slippery"
+        case .sticky: "sticky"
+        case .base: "base"
+        case .slippery: "slippery"
         }
     }
 }
@@ -51,5 +52,25 @@ struct PlatformObject: Identifiable {
         self.type = type
         self.x = x
         self.y = y
+    }
+}
+
+enum PlayerState {
+    case idleLeft
+    case idleRight
+    case movingLeft
+    case movingRight
+    
+    var texture: [SKTexture] {
+        switch self {
+        case .idleLeft: 
+            return [SKTexture(imageNamed: "left-standing")]
+        case .idleRight: 
+            return [SKTexture(imageNamed: "right-standing")]
+        case .movingLeft:
+            return (0...19).map { SKTexture(imageNamed: "left\($0)") }
+        case .movingRight:
+            return (0...19).map { SKTexture(imageNamed: "right\($0)") }
+        }
     }
 }
