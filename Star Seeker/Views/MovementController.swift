@@ -8,6 +8,7 @@ class MovementController : SKNode {
     let vForce = GameConfig.elevationalForce
     let hImpls = GameConfig.lateralImpulse
     let vImpls = GameConfig.elevationalImpulse
+    let vImpls2 = GameConfig.elevationalImpulseSecond
     
     let target : SKNode
     @ObservedObject var gameControl: GameControl
@@ -22,8 +23,9 @@ class MovementController : SKNode {
         
         let hForce = self.hForce
         let vForce = self.vForce
-        let _ = self.hImpls
+        let hImpls = self.hImpls
         let vImpls = self.vImpls
+        let vImpls2 = self.vImpls2
         
         bLeft = HoldButtonNode (
             name: "left controller button",
@@ -35,20 +37,16 @@ class MovementController : SKNode {
         
         bRight = HoldButtonNode (
             name: "right controller button",
-            imageNamed: "button-right", command: {
-                target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
-                debug("\(target) was moved rightward")
-            },
+            imageNamed: "button-right",
+            command: {},
             completion: {}
         )
         bRight.size = CGSize(width: bSize, height: bSize)
         
         bJump = PressButtonNode (
             name: "jump controller button",
-            imageNamed: "button-jump", command: {
-                target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
-                debug("\(target) was moved upward")
-            }
+            imageNamed: "button-jump",
+            command: {}
         )
         bJump.size = CGSize(width: bSize, height: bSize)
         
@@ -79,20 +77,36 @@ class MovementController : SKNode {
         
         bLeft.command = {
             self.gameControl.playerState = .movingLeft
-            target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
-            debug("\(self.target) was moved leftward")
+            target.physicsBody?.velocity = CGVector(dx: gameControl.currentPlatform == .base ? -100 : gameControl.currentPlatform == .slippery ? -125 : -75 , dy: target.physicsBody?.velocity.dy ?? 0)
+            //            target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
         }
         bLeft.completion = {
+            target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
             self.gameControl.playerState = .idleLeft
         }
-
+        
         bRight.command = {
             self.gameControl.playerState = .movingRight
-            target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
-            debug("\(self.target) was moved rightward")
+            target.physicsBody?.velocity = CGVector(dx:  gameControl.currentPlatform == .base ? 100 : gameControl.currentPlatform == .slippery ? 125 : 75, dy: target.physicsBody?.velocity.dy ?? 0)
+            //            target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
         }
         bRight.completion = {
+            target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
             self.gameControl.playerState = .idleRight
+        }
+        
+        bJump.command = {
+            if self.gameControl.jumpCount < 2 {
+                if (self.gameControl.jumpCount == 0 && self.gameControl.currentPlatform == .base) {
+                    target.physicsBody?.velocity = CGVector(dx: target.physicsBody?.velocity.dx ?? 0, dy: 0)
+                    target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
+                } else {
+                    target.physicsBody?.velocity = CGVector(dx: target.physicsBody?.velocity.dx ?? 0, dy: 0)
+                    target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls2))
+                }
+                self.gameControl.currentPlatform = .base
+                self.gameControl.jumpCount += 1
+            }
         }
     }
     

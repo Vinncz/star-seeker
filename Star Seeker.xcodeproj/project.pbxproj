@@ -24,6 +24,7 @@
 		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
 		2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7B22C12ABC2002261C3 /* Bundle.swift */; };
 		67AC9ED72C16348200A3D3A8 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */; };
+		67BB0F3F2C18BA1F00724A01 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		2097B7B22C12ABC2002261C3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
+		67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
 				67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */,
+				67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
+				67BB0F3F2C18BA1F00724A01 /* CGFloat.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
 				67AC9ED72C16348200A3D3A8 /* CoreGraphics.swift in Sources */,

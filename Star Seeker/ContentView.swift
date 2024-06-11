@@ -37,6 +37,23 @@ struct ContentView : View {
             }
             .edgesIgnoringSafeArea(.all)
             .disabled(true)
+//            .opacity(0)
+            VStack{
+                HStack {
+                    Text("\(gameControl.score)")
+                        .foregroundStyle(.white)
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                    Button {
+                        gameControl.score = 0
+                        gameControl.lastPlatformY = 0.0
+                    } label:{
+                        Image(systemName: "arrow.circlepath")
+                            .foregroundStyle(.white)
+                    }
+                }
+                Spacer()
+            }
         }
     }
 }
