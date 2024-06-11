@@ -32,6 +32,23 @@
 		2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CD2C161DB6002261C3 /* Movable.swift */; };
 		2097B7D02C169CA3002261C3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CF2C169CA3002261C3 /* Player.swift */; };
 		2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */; };
+		2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D32C16E0BD002261C3 /* ValueProvider.swift */; };
+		2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D52C16E14F002261C3 /* CGPoint.swift */; };
+		2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D72C16EFE5002261C3 /* Platform.swift */; };
+		2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D92C16F03E002261C3 /* BasePlatform.swift */; };
+		2097B7DE2C1701DC002261C3 /* CollapsiblePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */; };
+		2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7DF2C1701E9002261C3 /* MovingPlatform.swift */; };
+		2097B7E42C17021F002261C3 /* StickyPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7E32C17021F002261C3 /* StickyPlatform.swift */; };
+		2097B7E62C170228002261C3 /* SlipperyPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7E52C170228002261C3 /* SlipperyPlatform.swift */; };
+		2097B7E92C170244002261C3 /* ClimbablePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7E82C170244002261C3 /* ClimbablePlatform.swift */; };
+		2097B7EB2C170268002261C3 /* PassThroughPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */; };
+		2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7EC2C17028A002261C3 /* InertPlatform.swift */; };
+		2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */; };
+		2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */; };
+		2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F82C17F350002261C3 /* CountdownTimer.swift */; };
+		2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FA2C17F891002261C3 /* PauseScreen.swift */; };
+		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
+		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +78,23 @@
 		2097B7CD2C161DB6002261C3 /* Movable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movable.swift; sourceTree = "<group>"; };
 		2097B7CF2C169CA3002261C3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNamingConstant.swift; sourceTree = "<group>"; };
+		2097B7D32C16E0BD002261C3 /* ValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueProvider.swift; sourceTree = "<group>"; };
+		2097B7D52C16E14F002261C3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		2097B7D72C16EFE5002261C3 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		2097B7D92C16F03E002261C3 /* BasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlatform.swift; sourceTree = "<group>"; };
+		2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsiblePlatform.swift; sourceTree = "<group>"; };
+		2097B7DF2C1701E9002261C3 /* MovingPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingPlatform.swift; sourceTree = "<group>"; };
+		2097B7E32C17021F002261C3 /* StickyPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyPlatform.swift; sourceTree = "<group>"; };
+		2097B7E52C170228002261C3 /* SlipperyPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlipperyPlatform.swift; sourceTree = "<group>"; };
+		2097B7E82C170244002261C3 /* ClimbablePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClimbablePlatform.swift; sourceTree = "<group>"; };
+		2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughPlatform.swift; sourceTree = "<group>"; };
+		2097B7EC2C17028A002261C3 /* InertPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InertPlatform.swift; sourceTree = "<group>"; };
+		2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPlatform.swift; sourceTree = "<group>"; };
+		2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactivePlatform.swift; sourceTree = "<group>"; };
+		2097B7F82C17F350002261C3 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		2097B7FA2C17F891002261C3 /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
+		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +130,6 @@
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
 				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
-				2097B7B42C12FC02002261C3 /* Concepts */,
-				2097B7B52C12FC0D002261C3 /* Objects */,
 				2097B79C2C115A87002261C3 /* Globals */,
 				2097B7922C114C74002261C3 /* Extensions */,
 				2097B7902C114C20002261C3 /* Models */,
@@ -119,9 +151,9 @@
 		2097B78F2C114C1A002261C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2097B7A82C121D74002261C3 /* Compositions */,
-				2097B7972C114E21002261C3 /* Components */,
-				2097B7962C114E1A002261C3 /* Presenters */,
+				2097B7F52C175F59002261C3 /* Presenters */,
+				2097B7F42C175F4C002261C3 /* Components */,
+				2097B7F32C175F40002261C3 /* Compositions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +161,8 @@
 		2097B7902C114C20002261C3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7B42C12FC02002261C3 /* Concepts */,
+				2097B7B52C12FC0D002261C3 /* Objects */,
 				2097B7832C114C00002261C3 /* Item.swift */,
 			);
 			path = Models;
@@ -150,28 +184,9 @@
 				2097B7C62C15FAEF002261C3 /* SKNodes */,
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
+				2097B7D52C16E14F002261C3 /* CGPoint.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		2097B7962C114E1A002261C3 /* Presenters */ = {
-			isa = PBXGroup;
-			children = (
-				2097B79A2C1152AD002261C3 /* Game.swift */,
-			);
-			name = Presenters;
-			sourceTree = "<group>";
-		};
-		2097B7972C114E21002261C3 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				2097B7A42C115E99002261C3 /* Wrapper.swift */,
-				2097B7A62C119C27002261C3 /* HoldButton.swift */,
-				2097B7AB2C122000002261C3 /* PressButton.swift */,
-				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
-				2097B7CF2C169CA3002261C3 /* Player.swift */,
-			);
-			name = Components;
 			sourceTree = "<group>";
 		};
 		2097B79C2C115A87002261C3 /* Globals */ = {
@@ -192,17 +207,10 @@
 			path = Functions;
 			sourceTree = "<group>";
 		};
-		2097B7A82C121D74002261C3 /* Compositions */ = {
-			isa = PBXGroup;
-			children = (
-				2097B7A92C121DA8002261C3 /* MovementController.swift */,
-			);
-			name = Compositions;
-			sourceTree = "<group>";
-		};
 		2097B7B12C1232D3002261C3 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7D32C16E0BD002261C3 /* ValueProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -229,6 +237,14 @@
 		2097B7B62C12FC13002261C3 /* Platforms */ = {
 			isa = PBXGroup;
 			children = (
+				2097B7D72C16EFE5002261C3 /* Platform.swift */,
+				2097B7EC2C17028A002261C3 /* InertPlatform.swift */,
+				2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */,
+				2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */,
+				2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */,
+				2097B7E72C170230002261C3 /* PassThrough */,
+				2097B7DB2C1701C5002261C3 /* Inert */,
+				2097B7E12C170202002261C3 /* Reactive */,
 			);
 			path = Platforms;
 			sourceTree = "<group>";
@@ -268,6 +284,7 @@
 			children = (
 				2097B7C42C15E47D002261C3 /* NodeNamingConstant.swift */,
 				2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */,
+				2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -280,6 +297,88 @@
 				2097B7C12C15E1EE002261C3 /* SKLabelNode.swift */,
 			);
 			path = SKNodes;
+			sourceTree = "<group>";
+		};
+		2097B7DB2C1701C5002261C3 /* Inert */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7D92C16F03E002261C3 /* BasePlatform.swift */,
+				2097B7DC2C1701CF002261C3 /* Dynamic */,
+			);
+			path = Inert;
+			sourceTree = "<group>";
+		};
+		2097B7DC2C1701CF002261C3 /* Dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */,
+				2097B7DF2C1701E9002261C3 /* MovingPlatform.swift */,
+			);
+			path = Dynamic;
+			sourceTree = "<group>";
+		};
+		2097B7E12C170202002261C3 /* Reactive */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7E32C17021F002261C3 /* StickyPlatform.swift */,
+				2097B7E52C170228002261C3 /* SlipperyPlatform.swift */,
+			);
+			path = Reactive;
+			sourceTree = "<group>";
+		};
+		2097B7E72C170230002261C3 /* PassThrough */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7E82C170244002261C3 /* ClimbablePlatform.swift */,
+			);
+			path = PassThrough;
+			sourceTree = "<group>";
+		};
+		2097B7F32C175F40002261C3 /* Compositions */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A92C121DA8002261C3 /* MovementController.swift */,
+			);
+			path = Compositions;
+			sourceTree = "<group>";
+		};
+		2097B7F42C175F4C002261C3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7F72C17F342002261C3 /* DelayedExecution */,
+				2097B7F62C175F6A002261C3 /* Buttons */,
+				2097B7A42C115E99002261C3 /* Wrapper.swift */,
+				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
+				2097B7CF2C169CA3002261C3 /* Player.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2097B7F52C175F59002261C3 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				2097B79A2C1152AD002261C3 /* Game.swift */,
+				2097B7FA2C17F891002261C3 /* PauseScreen.swift */,
+				2097B7FC2C17F8B9002261C3 /* GridView.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		2097B7F62C175F6A002261C3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7A62C119C27002261C3 /* HoldButton.swift */,
+				2097B7AB2C122000002261C3 /* PressButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2097B7F72C17F342002261C3 /* DelayedExecution */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7F82C17F350002261C3 /* CountdownTimer.swift */,
+			);
+			path = DelayedExecution;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,27 +453,44 @@
 			files = (
 				2097B7822C114C00002261C3 /* ContentView.swift in Sources */,
 				2097B7BB2C15DDD6002261C3 /* NeoWrapper.swift in Sources */,
+				2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */,
 				2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */,
+				2097B7DE2C1701DC002261C3 /* CollapsiblePlatform.swift in Sources */,
 				2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
 				2097B7AA2C121DA8002261C3 /* MovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
+				2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */,
+				2097B7E42C17021F002261C3 /* StickyPlatform.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
+				2097B7E62C170228002261C3 /* SlipperyPlatform.swift in Sources */,
 				2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */,
+				2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */,
 				2097B7BE2C15E138002261C3 /* Sizeable.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7C22C15E1EE002261C3 /* SKLabelNode.swift in Sources */,
+				2097B7E92C170244002261C3 /* ClimbablePlatform.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
+				2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */,
+				2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */,
+				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
 				2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */,
 				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
+				2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
+				2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */,
+				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,
+				2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */,
+				2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */,
+				2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
+				2097B7EB2C170268002261C3 /* PassThroughPlatform.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

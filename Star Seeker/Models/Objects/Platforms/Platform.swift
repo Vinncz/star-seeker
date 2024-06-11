@@ -1,8 +1,26 @@
-//
-//  Platform.swift
-//  Star Seeker
-//
-//  Created by Vin on 10/06/24.
-//
+import SpriteKit
 
-import Foundation
+class Platform : SKSpriteNode {
+        
+    init ( 
+        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Inert.base ), 
+        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
+    ) {
+        super.init (
+            texture : texture, 
+            color   : .clear, 
+            size    : size
+        )
+        
+        self.name = NodeNamingConstant.Platform.platform
+        self.physicsBody = SKPhysicsBody(texture: texture, size: size)
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.friction = GameConfig.baseFrictionModifier
+    }
+    
+    /* Inherited from SKNode. Refrain from altering the following */
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
