@@ -77,6 +77,8 @@ class MovementController : SKNode {
         bJump = PressButtonNode (
             name: NodeNamingConstant.Button.jumpControl,
             imageNamed: ImageNamingConstant.Button.jump, 
+            maxPressedCount: 2,
+            timeIntervalToReset: 0.632,
             command: { 
                 switch ( target.previousState ) {
                     case .idleLeft, .movingLeft, .jumpingLeft:

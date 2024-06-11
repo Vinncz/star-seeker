@@ -63,14 +63,14 @@ import Observation
     
     init () {
         self.state = .idleRight
-        let texture = SKTexture( imageNamed: ImageNamingConstant.Player.idleRight )
+        let texture = SKTexture( imageNamed: ImageNamingConstant.Player.Idle.Right.name )
         
         super.init( texture: texture, color: .clear, size: ValueProvider.playerDimension )
         
         self.name = NodeNamingConstant.player
         self.state = .idleRight
         
-        self.physicsBody = SKPhysicsBody( rectangleOf: ValueProvider.playerPhysicsBodyDimension )
+        self.physicsBody = SKPhysicsBody( texture: texture, size: ValueProvider.playerPhysicsBodyDimension )
         self.physicsBody?.isDynamic      = GameConfig.playerIsDynamic
         self.physicsBody?.mass           = GameConfig.playerMass
         self.physicsBody?.linearDamping  = GameConfig.playerLinearDamping

@@ -17,7 +17,7 @@ struct GameConfig {
     static let playerIsDynamic    : Bool    = true
     static let playerMass         : CGFloat = 0.25
     static let playerLinearDamping: CGFloat = 1
-    static let playerFriction     : CGFloat = 1
+    static let playerFriction     : CGFloat = 0.4
     static let playerRotates      : Bool    = false
     
     /**  */
@@ -25,6 +25,6 @@ struct GameConfig {
     /** Dictates how much fastening factor a Slippery platform does to a target */
     static let slipperyFrictionModifier : CGFloat = 0.0    
     /** Dictates how much slowing factor a Sticky platform does to a target */
-    static let stickyFrictionModifier   : CGFloat = 0.55
+    static let stickyFrictionModifier   : CGFloat = 0.8
     
 }

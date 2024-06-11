@@ -18,8 +18,8 @@ import Observation
     }
     static var playerPhysicsBodyDimension : CGSize {
         CGSize (
-            width : gridDimension.width * 1.1,
-            height: gridDimension.width * 1.5
+            width : gridDimension.width * 1.3,
+            height: gridDimension.width * 1.3
         )
     }
     
