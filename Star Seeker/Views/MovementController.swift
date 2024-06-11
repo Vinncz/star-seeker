@@ -53,10 +53,13 @@ class MovementController : SKNode {
         )
         bRight.size = CGSize(width: bSize, height: bSize)
         
-        bJump = PressButtonNode (
+        bJump = PressButtonNode(
             name: "jump controller button",
-            imageNamed: "button-jump", command: { 
+            imageNamed: "button-jump", command: {
                 target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
+                if let game = target.scene as? Game {
+                    game.jumpAnimation()
+                }
                 debug("\(target) was moved upward")
             }
         )

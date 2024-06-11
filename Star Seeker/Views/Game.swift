@@ -10,6 +10,8 @@ class Game : SKScene {
     
     var hero: SKSpriteNode!
     var moveAction: SKAction!
+    var jumpAction: SKAction!
+
     
     init(size: CGSize, gameControl: GameControl) {
         self.gameControl = gameControl
@@ -25,6 +27,10 @@ class Game : SKScene {
         self.scaleMode = .resizeFill
         
         
+
+        //jump action
+//        let jumpTextures = (1...3).map { SKTexture(imageNamed: "leftJump\($0)") }
+//        jumpAction = createAnimateAction(with: jumpTextures)
 
         let heroTextures = (1...20).map { SKTexture(imageNamed: "left\($0)") }
         hero = SKSpriteNode(texture: SKTexture(imageNamed: "left-standing"), size: CGSize(width: unitSize*1.5, height: unitSize*1.5))
@@ -78,9 +84,20 @@ class Game : SKScene {
     }
     
     func createAnimateAction(with textures: [SKTexture]) -> SKAction {
-            let animateAction = SKAction.animate(with: textures, timePerFrame: 0.05)
+            let animateAction = SKAction.animate(with: textures, timePerFrame: 0.3)
             return animateAction
         }
+    
+    func jumpAnimation() {
+        let jumpTextures = (1...3).map { SKTexture(imageNamed: "leftJump\($0)") }
+        let forwardJumpAction = createAnimateAction(with: jumpTextures)
+        let reverseJumpAction = createAnimateAction(with: jumpTextures.reversed())
+
+        let jumpSequence = SKAction.sequence([forwardJumpAction, reverseJumpAction])
+
+        hero.run(jumpSequence)
+    }
+
     
     func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) -> Void {
         let platformSize = CGSize(width: size, height: size)
