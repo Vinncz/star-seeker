@@ -3,7 +3,7 @@ import SpriteKit
 
 struct GameConfig {
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
-    static let lateralForce       : CGFloat = 1500
+    static let lateralForce       : CGFloat = 900
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
     static let lateralImpulse     : CGFloat = 500
     /** Dictates how much should a movement controller button applies a vertical force to a target */
@@ -63,14 +63,15 @@ enum PlayerState {
     
     var texture: [SKTexture] {
         switch self {
-        case .idleLeft: 
-            return [SKTexture(imageNamed: "left-standing")]
-        case .idleRight: 
-            return [SKTexture(imageNamed: "right-standing")]
+        case .idleLeft:
+            return (0...30).map { SKTexture(imageNamed: "standing-left\($0)") }
+        case .idleRight:
+            return (0...30).map { SKTexture(imageNamed: "standing-right\($0)") }
         case .movingLeft:
             return (0...19).map { SKTexture(imageNamed: "left\($0)") }
         case .movingRight:
             return (0...19).map { SKTexture(imageNamed: "right\($0)") }
         }
+        
     }
 }

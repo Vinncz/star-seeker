@@ -3,8 +3,9 @@ import SwiftUI
 
 class GameControl: ObservableObject {
     @Published var isPlayerMoving = false
+    @Published var isPlayerIdle = true
+    @Published var isAnimating = false
     @Published var playerState: PlayerState = .idleRight
-    
 }
 
 class Game : SKScene {
@@ -70,14 +71,23 @@ class Game : SKScene {
     override func update(_ currentTime: TimeInterval) {
         if gameControl.isPlayerMoving {
             if hero.action(forKey: "moveHero") == nil {
+                print("move action")
                 let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
                 hero.run(SKAction.repeatForever(moveAction), withKey: "moveHero")
             }
         } else {
             hero.removeAction(forKey: "moveHero")
-            hero.texture = gameControl.playerState.texture.first
         }
         
+        if gameControl.isPlayerIdle {
+            if hero.action(forKey: "idleHero") == nil {
+                let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
+                hero.run(SKAction.repeatForever(moveAction), withKey: "idleHero")
+            }
+        } else {
+            hero.removeAction(forKey: "idleHero")
+        }
+
     }
     
     func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) -> Void {
