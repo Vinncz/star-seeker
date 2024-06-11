@@ -2,9 +2,6 @@ import SpriteKit
 import SwiftUI
 
 class GameControl: ObservableObject {
-    @Published var isPlayerMoving = false
-    @Published var isPlayerIdle = true
-    @Published var isAnimating = false
     @Published var playerState: PlayerState = .idleRight
 }
 
@@ -28,7 +25,7 @@ class Game : SKScene {
         
         hero = SKSpriteNode(texture: gameControl.playerState.texture.first, size: CGSize(width: unitSize*1.5, height: unitSize*1.5))
         hero.position = CGPoint(xGrid: 0, yGrid: 11, unitSize: unitSize)
-        hero.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: unitSize*0.6, height: unitSize*1.2), center: CGPoint(x: 0, y: -6))
+        hero.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: unitSize*0.6, height: unitSize*1.2), center: CGPoint(x: 0, y: -5))
         hero.physicsBody?.isDynamic = true
         hero.physicsBody?.mass = 0.25
         hero.physicsBody?.linearDamping = 1
@@ -69,7 +66,7 @@ class Game : SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if gameControl.isPlayerMoving {
+        if (gameControl.playerState == .movingLeft || gameControl.playerState == .movingRight) {
             if hero.action(forKey: "moveHero") == nil {
                 print("move action")
                 let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
@@ -79,7 +76,7 @@ class Game : SKScene {
             hero.removeAction(forKey: "moveHero")
         }
         
-        if gameControl.isPlayerIdle {
+        if (gameControl.playerState == .idleLeft || gameControl.playerState == .idleRight)  {
             if hero.action(forKey: "idleHero") == nil {
                 let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
                 hero.run(SKAction.repeatForever(moveAction), withKey: "idleHero")

@@ -3,7 +3,7 @@ import SpriteKit
 
 struct GameConfig {
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
-    static let lateralForce       : CGFloat = 900
+    static let lateralForce       : CGFloat = 1000
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
     static let lateralImpulse     : CGFloat = 500
     /** Dictates how much should a movement controller button applies a vertical force to a target */

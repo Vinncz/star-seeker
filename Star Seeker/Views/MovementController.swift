@@ -78,29 +78,21 @@ class MovementController : SKNode {
         addChild(div)
         
         bLeft.command = {
-            self.gameControl.isPlayerMoving = true
-            self.gameControl.isPlayerIdle = false
             self.gameControl.playerState = .movingLeft
             target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
             debug("\(self.target) was moved leftward")
         }
         bLeft.completion = {
             self.gameControl.playerState = .idleLeft
-            self.gameControl.isPlayerMoving = false
-            self.gameControl.isPlayerIdle = true
         }
 
         bRight.command = {
-            self.gameControl.isPlayerMoving = true
-            self.gameControl.isPlayerIdle = false
             self.gameControl.playerState = .movingRight
             target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
             debug("\(self.target) was moved rightward")
         }
         bRight.completion = {
             self.gameControl.playerState = .idleRight
-            self.gameControl.isPlayerMoving = false
-            self.gameControl.isPlayerIdle = true
         }
     }
     
