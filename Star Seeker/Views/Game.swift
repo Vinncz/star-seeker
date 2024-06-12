@@ -14,7 +14,7 @@ enum CollisionType: UInt32 {
     case platform = 2
 }
 
-class Game : SKScene, SKPhysicsContactDelegate {
+class Game: SKScene, SKPhysicsContactDelegate {
     @ObservedObject var gameControl: GameControl
     
     var hero: SKSpriteNode!
@@ -25,7 +25,7 @@ class Game : SKScene, SKPhysicsContactDelegate {
         self.scaleMode = .resizeFill
     }
     
-    override func didMove ( to view: SKView ) {
+    override func didMove(to view: SKView) {
         let unitSize = UIScreen.main.bounds.width / 11
         view.allowsTransparency = true
         self.view!.isMultipleTouchEnabled = true
@@ -110,7 +110,7 @@ class Game : SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if (gameControl.playerState == .movingLeft || gameControl.playerState == .movingRight) {
+        if gameControl.playerState == .movingLeft || gameControl.playerState == .movingRight {
             if hero.action(forKey: "moveHero") == nil {
                 let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
                 hero.run(SKAction.repeatForever(moveAction), withKey: "moveHero")
@@ -119,15 +119,33 @@ class Game : SKScene, SKPhysicsContactDelegate {
             hero.removeAction(forKey: "moveHero")
         }
         
-        if (gameControl.playerState == .idleLeft || gameControl.playerState == .idleRight)  {
+        if gameControl.playerState == .idleLeft || gameControl.playerState == .idleRight {
             if hero.action(forKey: "idleHero") == nil {
-                let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
-                hero.run(SKAction.repeatForever(moveAction), withKey: "idleHero")
+                let idleAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
+                hero.run(SKAction.repeatForever(idleAction), withKey: "idleHero")
             }
         } else {
             hero.removeAction(forKey: "idleHero")
         }
         
+        if gameControl.playerState == .jumpingLeft || gameControl.playerState == .jumpingRight {
+                  if hero.action(forKey: "jumpHero") == nil {
+                      let forwardJumpAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.056)
+                      let reverseJumpAction = forwardJumpAction.reversed()
+                      let jumpSequence = SKAction.sequence([forwardJumpAction, reverseJumpAction])
+                      hero.run(jumpSequence, withKey: "jumpHero")
+                  }
+              } else {
+                  hero.removeAction(forKey: "jumpHero")
+            }
+        if gameControl.playerState == .climbing {
+                   if hero.action(forKey: "climbHero") == nil {
+                       let climbAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.06)
+                       hero.run(SKAction.repeatForever(climbAction), withKey: "climbHero")
+                   }
+               } else {
+                   hero.removeAction(forKey: "climbHero")
+            }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -142,22 +160,23 @@ class Game : SKScene, SKPhysicsContactDelegate {
             if isHeroOnTop(hero: firstNode as! SKSpriteNode, platform: secondNode as! SKSpriteNode) {
                 gameControl.jumpCount = 0
                 addScore(platform: secondNode as! SKSpriteNode)
+                
+                if gameControl.playerState == .jumpingLeft {
+                    gameControl.playerState = .idleLeft
+                } else if gameControl.playerState == .jumpingRight {
+                    gameControl.playerState = .idleRight
+                }
+
                 switch secondNode.name {
                 case PlatformTypes.base.name:
                     gameControl.currentPlatform = .base
-                    return
                 case PlatformTypes.slippery.name:
                     gameControl.currentPlatform = .slippery
-                    return
                 case PlatformTypes.sticky.name:
                     gameControl.currentPlatform = .sticky
-                    return
-                case .none:
-                    return
-                case .some(_):
-                    return
+                default:
+                    break
                 }
-                
             }
         }
     }
@@ -168,9 +187,9 @@ class Game : SKScene, SKPhysicsContactDelegate {
         return heroBottom >= platformTop - 0.8
     }
     
-    func addScore (platform: SKSpriteNode) -> Void {
+    func addScore(platform: SKSpriteNode) {
         if gameControl.lastPlatformY < platform.position.y {
-            if (gameControl.lastPlatformY == 0) {
+            if gameControl.lastPlatformY == 0 {
                 gameControl.lastPlatformY = platform.size.height * 5
             }
             let diff = ((platform.position.y - gameControl.lastPlatformY) / platform.size.height).rounded(toPlaces: 1)
@@ -179,8 +198,7 @@ class Game : SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-    func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) -> Void {
+    func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) {
         let platformSize = CGSize(width: size, height: size)
         let platform = SKSpriteNode(texture: SKTexture(imageNamed: type.texture), size: platformSize)
         platform.name = type.name
@@ -188,7 +206,6 @@ class Game : SKScene, SKPhysicsContactDelegate {
         
         let roundedRectPath = UIBezierPath(roundedRect: CGRect(x: -size * 0.5, y: -size * 0.5, width: size, height: size), cornerRadius: 10).cgPath
         platform.physicsBody = SKPhysicsBody(polygonFrom: roundedRectPath)
-        //        platform.physicsBody = SKPhysicsBody(rectangleOf: platformSize)
         platform.physicsBody?.isDynamic = false
         platform.physicsBody?.friction = type.frictionValue
         platform.physicsBody?.categoryBitMask = CollisionType.platform.rawValue

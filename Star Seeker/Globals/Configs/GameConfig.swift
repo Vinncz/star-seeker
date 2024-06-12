@@ -69,6 +69,9 @@ enum PlayerState {
     case idleRight
     case movingLeft
     case movingRight
+    case jumpingLeft
+    case jumpingRight
+    case climbing
     
     var texture: [SKTexture] {
         switch self {
@@ -80,6 +83,12 @@ enum PlayerState {
             return (0...19).map { SKTexture(imageNamed: "left\($0)") }
         case .movingRight:
             return (0...19).map { SKTexture(imageNamed: "right\($0)") }
+        case .jumpingLeft:
+            return (0...4).map { SKTexture(imageNamed: "leftJump\($0)") }
+        case .jumpingRight:
+            return (0...4).map { SKTexture(imageNamed: "rightJump\($0)") }
+        case .climbing:
+            return (0...10).map { SKTexture(imageNamed: "climbing\($0)") }
         }
         
     }

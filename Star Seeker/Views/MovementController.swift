@@ -1,7 +1,7 @@
 import SwiftUI
 import SpriteKit
 
-class MovementController : SKNode {
+class MovementController: SKNode {
     
     let bSize  = UIConfig.SquareSizes.mini + 10
     let hForce = GameConfig.lateralForce
@@ -10,14 +10,14 @@ class MovementController : SKNode {
     let vImpls = GameConfig.elevationalImpulse
     let vImpls2 = GameConfig.elevationalImpulseSecond
     
-    let target : SKNode
+    let target: SKNode
     @ObservedObject var gameControl: GameControl
-    var bLeft  : HoldButtonNode
-    var bRight : HoldButtonNode
-    var bJump  : PressButtonNode
-    var bClimb : HoldButtonNode
+    var bLeft: HoldButtonNode
+    var bRight: HoldButtonNode
+    var bJump: PressButtonNode
+    var bClimb: HoldButtonNode
     
-    init ( target: SKNode, gameControl: GameControl ) {
+    init(target: SKNode, gameControl: GameControl) {
         self.target = target
         self.gameControl = gameControl
         
@@ -27,7 +27,7 @@ class MovementController : SKNode {
         let vImpls = self.vImpls
         let vImpls2 = self.vImpls2
         
-        bLeft = HoldButtonNode (
+        bLeft = HoldButtonNode(
             name: "left controller button",
             imageNamed: "button-left",
             command: {},
@@ -35,7 +35,7 @@ class MovementController : SKNode {
         )
         bLeft.size = CGSize(width: bSize, height: bSize)
         
-        bRight = HoldButtonNode (
+        bRight = HoldButtonNode(
             name: "right controller button",
             imageNamed: "button-right",
             command: {},
@@ -43,22 +43,20 @@ class MovementController : SKNode {
         )
         bRight.size = CGSize(width: bSize, height: bSize)
         
-        bJump = PressButtonNode (
+        bJump = PressButtonNode(
             name: "jump controller button",
             imageNamed: "button-jump",
             command: {}
         )
         bJump.size = CGSize(width: bSize, height: bSize)
         
-        bClimb = HoldButtonNode (
+        bClimb = HoldButtonNode(
             name: "climb controller button",
-            imageNamed: "button-climb", command: {
-                target.physicsBody?.applyForce(CGVectorMake(0, vForce))
-                debug("\(target) was made climbing")
-            }
+            imageNamed: "button-climb",
+            command: {},
+            completion: {}
         )
         bClimb.size = CGSize(width: bSize, height: bSize)
-        
         
         let hDiv = Wrapper(spacing: UIConfig.Spacings.large, direction: .horizontal)
         hDiv.addSpacedChild(bLeft)
@@ -78,7 +76,6 @@ class MovementController : SKNode {
         bLeft.command = {
             self.gameControl.playerState = .movingLeft
             target.physicsBody?.velocity = CGVector(dx: gameControl.currentPlatform == .base ? -100 : gameControl.currentPlatform == .slippery ? -125 : -75 , dy: target.physicsBody?.velocity.dy ?? 0)
-            //            target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
         }
         bLeft.completion = {
             target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
@@ -88,7 +85,6 @@ class MovementController : SKNode {
         bRight.command = {
             self.gameControl.playerState = .movingRight
             target.physicsBody?.velocity = CGVector(dx:  gameControl.currentPlatform == .base ? 100 : gameControl.currentPlatform == .slippery ? 125 : 75, dy: target.physicsBody?.velocity.dy ?? 0)
-            //            target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
         }
         bRight.completion = {
             target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
@@ -97,21 +93,37 @@ class MovementController : SKNode {
         
         bJump.command = {
             if self.gameControl.jumpCount < 2 {
-                if (self.gameControl.jumpCount == 0 && self.gameControl.currentPlatform == .base) {
+                if self.gameControl.jumpCount == 0 && self.gameControl.currentPlatform == .base {
                     target.physicsBody?.velocity = CGVector(dx: target.physicsBody?.velocity.dx ?? 0, dy: 0)
-                    target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls))
+                    target.physicsBody?.applyImpulse(CGVector(dx: 0, dy: vImpls))
                 } else {
                     target.physicsBody?.velocity = CGVector(dx: target.physicsBody?.velocity.dx ?? 0, dy: 0)
-                    target.physicsBody?.applyImpulse(CGVectorMake(0, vImpls2))
+                    target.physicsBody?.applyImpulse(CGVector(dx: 0, dy: vImpls2))
                 }
+                
+                if self.gameControl.playerState == .idleLeft || self.gameControl.playerState == .movingLeft {
+                    self.gameControl.playerState = .jumpingLeft
+                } else {
+                    self.gameControl.playerState = .jumpingRight
+                }
+                
                 self.gameControl.currentPlatform = .base
                 self.gameControl.jumpCount += 1
             }
         }
+        
+        bClimb.command = {
+            self.gameControl.playerState = .climbing
+            target.physicsBody?.applyForce(CGVector(dx: 0, dy: vForce))
+            debug("\(target) was made climbing")
+        }
+        bClimb.completion = {
+            self.gameControl.playerState = .idleLeft
+        }
     }
     
     /* Inherited from SKNode. Refrain from modifying the following */
-    required init? ( coder aDecoder: NSCoder ) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
