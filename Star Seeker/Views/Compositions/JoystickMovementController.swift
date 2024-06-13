@@ -2,12 +2,6 @@ import SpriteKit
 
 class JoystickMovementController : SKNode {
     
-    let bSize  = UIConfig.SquareSizes.mini + 10
-    
-    let target   : Player
-    let hImpls   : CGFloat
-    let vImpls   : CGFloat
-    
     init ( controls target : Player ) {
         self.target = target
         
@@ -15,43 +9,53 @@ class JoystickMovementController : SKNode {
         self.vImpls = GameConfig.elevationalImpulse
         
         super.init()
-        let joystick = attachJoystick()
-        joystick.size = CGSize(width: bSize, height: bSize)
+        
+        let joystick      = attachJoystick()
+            joystick.size = CGSize(width: bSize, height: bSize)
+        
         addChild(joystick)
-        let initialPos = SKSpriteNode( color: .red, size: CGSize(width: 10, height: 10) )
-        addChild(initialPos)
     }
     
-    func attachJoystick () -> DragButtonNode {
+    /** Instanciates a draggable button, which will later becomes the joystick knob. */
+    private func attachJoystick () -> DragButtonNode {
         return DragButtonNode (
-            name: "JOYSTICK",
-            imageNamed: ImageNamingConstant.Button.jump,
-            command: { [weak self] deltaX, deltaY in
-                // nothing for now -- player will squat
-            },
-            completion: { [weak self] deltaX, deltaY in
-                guard ( self?.target.restrictions.list[RestrictionConstant.Player.jump] == nil ) else { return }
-                
-                let resultingImpulse = CGVector(
-                    dx: -1 * (deltaX * 0.0025) * (self?.hImpls ?? 0), 
-                    dy: -1 * (deltaY * 0.0025) * (self?.vImpls ?? 0)
-                )
-                
-                if ( deltaX > 0 ) {
-                    self?.target.facingDirection = .leftward
-                } else {
-                    self?.target.facingDirection = .rightward                    
-                }
-                
-                self?.target.physicsBody?.applyImpulse( resultingImpulse )
-                switch ( self?.target.previousState ) {
-                    case .idle, .moving, .jumping:
-                        self?.target.state = .jumping
+            name       : NodeNamingConstant.movementControls,
+            imageNamed : ImageNamingConstant.Button.jump,
+            command    : { [weak self] deltaX, deltaY in
+                switch ( self?.target.state ) {
+                    case .moving, .jumping:
                         break                     
                     default:
-                        self?.target.state = .idle
+                        self?.target.state = .squating
                         break
                 }
+                
+                if ( deltaX < -GameConfig.joystickSafeArea || deltaX > GameConfig.joystickSafeArea || deltaY < -GameConfig.joystickSafeArea || deltaY > GameConfig.joystickSafeArea) {
+                    let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+                    feedbackGenerator.prepare()
+                    feedbackGenerator.impactOccurred()
+                }
+            },
+            completion : { [weak self] deltaX, deltaY in
+                guard ( self?.target.restrictions.list[RestrictionConstant.Player.jump] == nil ) else { return }
+                
+                let deltaXIsLessThanTreshold : Bool = deltaX >= -GameConfig.joystickSafeArea && deltaX <= GameConfig.joystickSafeArea
+                let deltaYIsLessThanTreshold : Bool = deltaY >= -GameConfig.joystickSafeArea && deltaY <= GameConfig.joystickSafeArea
+                guard ( !( deltaXIsLessThanTreshold && deltaYIsLessThanTreshold ) ) else { 
+                    self?.target.state = .idle
+                    self?.target.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
+                    return 
+                }
+                
+                let resultingImpulse = CGVector (
+                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0), 
+                    dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
+                )
+                
+                self?.target.facingDirection = deltaX > 0 ? .leftward : .rightward
+                
+                self?.target.physicsBody?.applyImpulse( resultingImpulse )
+                self?.target.state = .jumping
                 
                 self?.target.restrictions.list[RestrictionConstant.Player.jump] = PlayerRestriction( comparer: {
                     self?.target.state == .jumping
@@ -59,6 +63,15 @@ class JoystickMovementController : SKNode {
             }
         )
     }
+    
+    /** Specifies how large the joystick knob will be */
+    let bSize   = UIConfig.SquareSizes.mini + 10
+    /** Reference to an SKNode which an instance of Joystick will control */
+    let target   : Player
+    /** Convenience class-exclusive variable, which gets its value by deriving horizontal impulse value from GameConfig */
+    let hImpls   : CGFloat
+    /** Convenience class-exclusive variable, which gets its value by deriving vertical impulse value from GameConfig */
+    let vImpls   : CGFloat
     
     /* Inherited from SKNode. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {

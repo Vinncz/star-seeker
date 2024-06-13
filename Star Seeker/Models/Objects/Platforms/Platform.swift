@@ -17,8 +17,8 @@ class Platform : SKSpriteNode {
         self.physicsBody?.isDynamic = false
         self.physicsBody?.friction = GameConfig.baseFrictionModifier
         
-        self.physicsBody?.categoryBitMask    = BitMaskConstant.platform.rawValue
-        self.physicsBody?.contactTestBitMask = BitMaskConstant.player.rawValue
+        self.physicsBody?.categoryBitMask    = BitMaskConstant.platform
+        self.physicsBody?.contactTestBitMask = BitMaskConstant.player
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

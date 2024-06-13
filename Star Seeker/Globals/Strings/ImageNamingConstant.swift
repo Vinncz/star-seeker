@@ -57,6 +57,10 @@ struct ImageNamingConstant {
             }
         }
         
+        struct Squating {
+            static let name : String = "player.squat."
+        }
+        
         struct Jumping {
             struct Left {
                 static let name : String = "player.jumping.left."

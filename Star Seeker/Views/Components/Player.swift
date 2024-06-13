@@ -1,12 +1,38 @@
 import SpriteKit
 import Observation
 
+@Observable class PlayerStatistic {
+    
+    var highestPlatform : CGPoint = CGPoint(x: 0, y: 0)
+    var currentlyStandingOn : Platform? = nil
+    
+}
+
 @Observable class Player : SKSpriteNode {
     
-    var facingDirection : MovementDirection
+    init () {
+        self.state = .idle
+        self.facingDirection = .rightward
+        let texture = SKTexture( imageNamed: ImageNamingConstant.Player.Idle.Right.name )
+        
+        super.init( texture: texture, color: .clear, size: ValueProvider.playerDimension )
+        
+        self.name = NodeNamingConstant.player
+        self.state = .idle
+        
+        let physicsBody = Player.defaultPhysicsBody()
+        self.physicsBody = physicsBody
+    }
+    
+    var statistics      : PlayerStatistic = PlayerStatistic()
+    var facingDirection : MovementDirection {
+        didSet {
+            self.state = state
+        }
+    }
     var state           : PlayerState {
         didSet {
-//            print("Player's state: \(state)")
+            debug("Player's state: \(state)")
             previousState = oldValue
 
             switch state {
@@ -35,11 +61,26 @@ import Observation
                     }
                     break
                     
+                case .squating:
+                    self.removeAction( forKey: ActionNamingConstant.idle     )
+                    self.removeAction( forKey: ActionNamingConstant.moving   )
+                    self.removeAction( forKey: ActionNamingConstant.jumping  )
+                    self.removeAction( forKey: ActionNamingConstant.climbing )
+                    if ( self.action ( forKey: ActionNamingConstant.squating ) == nil ) {
+                        let textureName      : String = ImageNamingConstant.Player.Squating.name
+                        let squatingTextures : [SKTexture] = (0...10).map { SKTexture( imageNamed: textureName + String($0) ) }
+                        let squatingAction   = SKAction.animate(with: squatingTextures, timePerFrame: 0.05)
+                        
+                        self.run(SKAction.repeatForever(squatingAction), withKey: ActionNamingConstant.squating)
+                    }
+                    break
+                    
                 case .jumping:
                     self.removeAction( forKey: ActionNamingConstant.idle     )
                     self.removeAction( forKey: ActionNamingConstant.moving   )
                     self.removeAction( forKey: ActionNamingConstant.jumping  )
                     self.removeAction( forKey: ActionNamingConstant.climbing )
+                    self.removeAction( forKey: ActionNamingConstant.squating )
                     if ( self.action ( forKey: ActionNamingConstant.jumping  ) == nil ) {
                         let textureName     : String = self.facingDirection == .leftward ? ImageNamingConstant.Player.Jumping.Left.name : ImageNamingConstant.Player.Jumping.Right.name
                         let jumpingTextures : [SKTexture] = (0...19).map { SKTexture( imageNamed: textureName + String($0) ) }
@@ -67,25 +108,10 @@ import Observation
     var previousState   : PlayerState = .idle
     var restrictions    : RestrictionGroup = RestrictionGroup()
     
-    init () {
-        self.state = .idle
-        self.facingDirection = .rightward
-        let texture = SKTexture( imageNamed: ImageNamingConstant.Player.Idle.Right.name )
-        
-        super.init( texture: texture, color: .clear, size: ValueProvider.playerDimension )
-        
-        self.name = NodeNamingConstant.player
-        self.state = .idle
-        
-        let physicsBody = Player.defaultPhysicsBody()
-        self.physicsBody = physicsBody
-    }
-    
     /* Inherited from SKNode. Refrain from altering the following */
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension Player {
@@ -97,7 +123,7 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            let bottomMostPointOfplayer = player.position.y - player.size.height / 2
+            let bottomMostPointOfplayer = player.position.y   - player.size.height   / 2
             let topMostPointOfPlatform  = platform.position.y + platform.size.height / 2
             
             if ( bottomMostPointOfplayer >= topMostPointOfPlatform - 0.8 ) {
@@ -108,7 +134,7 @@ extension Player {
     }
     
     static func releasePlatformCollision ( contact: SKPhysicsContact ) {
-        // do smt
+        //
     }
     
 }
@@ -116,15 +142,16 @@ extension Player {
 extension Player {
     
     static func defaultPhysicsBody ( ) -> SKPhysicsBody {
-        let pb = SKPhysicsBody( rectangleOf: ValueProvider.playerDimension )
+        let pb = SKPhysicsBody( rectangleOf: ValueProvider.playerPhysicsBodyDimension, center: CGPoint(x: 0, y: -5) )
+        
             pb.isDynamic          = GameConfig.playerIsDynamic
             pb.mass               = GameConfig.playerMass
             pb.linearDamping      = GameConfig.playerLinearDamping
             pb.friction           = GameConfig.playerFriction
             pb.allowsRotation     = GameConfig.playerRotates
         
-            pb.categoryBitMask    = BitMaskConstant.player.rawValue
-            pb.contactTestBitMask = BitMaskConstant.platform.rawValue
+            pb.categoryBitMask    = BitMaskConstant.player
+            pb.contactTestBitMask = BitMaskConstant.platform
         
             pb.usesPreciseCollisionDetection = true
         
@@ -138,6 +165,7 @@ extension Player {
     enum PlayerState {
         case idle,
              moving,
+             squating,
              jumping,
              climbing
     }

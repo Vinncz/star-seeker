@@ -2,12 +2,13 @@ import Foundation
 
 struct NodeNamingConstant {
     
-    static let any        : String = "VERTEX.STAR_SEEKER.UNIDENTIFIED.OBJECT"
-    static let boundary   : String = "VERTEX.STAR_SEEKER.BOUNDARY.OBJECT"
-    static let wrapper    : String = "VERTEX.STAR_SEEKER.WRAPPER.OBJECT"
-    static let neoWrapper : String = "VERTEX.STAR_SEEKER.NEO_WRAPPER.OBJECT"
-    static let player     : String = "VERTEX.STAR_SEEKER.PLAYER.OBJECT"
-    static let game       : String = "VERTEX.STAR_SEEKER.GAME_SCENE.OBJECT"
+    static let any              : String = "VERTEX.STAR_SEEKER.UNIDENTIFIED.OBJECT"
+    static let boundary         : String = "VERTEX.STAR_SEEKER.BOUNDARY.OBJECT"
+    static let wrapper          : String = "VERTEX.STAR_SEEKER.WRAPPER.OBJECT"
+    static let neoWrapper       : String = "VERTEX.STAR_SEEKER.NEO_WRAPPER.OBJECT"
+    static let player           : String = "VERTEX.STAR_SEEKER.PLAYER.OBJECT"
+    static let game             : String = "VERTEX.STAR_SEEKER.GAME_SCENE.OBJECT"
+    static let movementControls : String = "VERTEX.STAR_SEEKER.MOVEMENT_CONTROLS.OBJECT"
     
     struct Platform {
         static let platform : String = "VERTEX.STAR_SEEKER.PLATFORM.OBJECT"
