@@ -14,6 +14,10 @@ struct ContentView : View {
                 .background(.clear)
             GridScreen()
             if ( scene.state == .paused ) { PauseScreen() }
+            Text("\(scene.player?.statistics.highestPlatform.y ?? 0)m")
+                .font(.title)
+                .bold()
+                .foregroundStyle(.white)
             PlayPauseButton()
             CountdownBeforeResuming()
         }

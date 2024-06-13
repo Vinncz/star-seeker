@@ -27,6 +27,7 @@ import SwiftUI
     }
     var previousState : GameState = .notYetStarted
     var generator     : LevelGenerator?
+    var player        : Player?
     
     override init ( size: CGSize ) {
         self.state = .playing
@@ -44,9 +45,9 @@ import SwiftUI
         setup(view)
         attachPlatforms()
         
-        let player     = setupPlayer()
-        let controller = setupMovementController(for: player)
-        addChild(player)
+        self.player     = setupPlayer()
+        let controller  = setupMovementController(for: player!)
+        addChild(player!)
         addChild(controller)
         
     }
@@ -67,6 +68,10 @@ extension Game {
         switch ( collision ) {
             case BitMaskConstant.player | BitMaskConstant.platform:
                 Player.handlePlatformCollision(contact: contact)
+                break
+                
+            case BitMaskConstant.player | BitMaskConstant.darkness:
+                // do something
                 break
                 
             default:

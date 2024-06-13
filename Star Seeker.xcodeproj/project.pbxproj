@@ -20,6 +20,7 @@
 		204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CB2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift */; };
 		204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */; };
 		204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */; };
+		204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3D22C1B655100C1BBCC /* Darkness.swift */; };
 		2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */; };
 		2097B7822C114C00002261C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7812C114C00002261C3 /* ContentView.swift */; };
 		2097B7842C114C00002261C3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7832C114C00002261C3 /* Item.swift */; };
@@ -78,6 +79,7 @@
 		204FC3CB2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalNodeIdentifier.swift; sourceTree = "<group>"; };
 		204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskConstant.swift; sourceTree = "<group>"; };
 		204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionConstant.swift; sourceTree = "<group>"; };
+		204FC3D22C1B655100C1BBCC /* Darkness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkness.swift; sourceTree = "<group>"; };
 		2097B77C2C114C00002261C3 /* Star Seeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Seeker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_SeekerApp.swift; sourceTree = "<group>"; };
 		2097B7812C114C00002261C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,14 @@
 				204FC3C72C1AE15A00C1BBCC /* PlayerRestriction.swift */,
 			);
 			path = Player;
+			sourceTree = "<group>";
+		};
+		204FC3D12C1B652F00C1BBCC /* LevelResetters */ = {
+			isa = PBXGroup;
+			children = (
+				204FC3D22C1B655100C1BBCC /* Darkness.swift */,
+			);
+			path = LevelResetters;
 			sourceTree = "<group>";
 		};
 		2097B7732C114C00002261C3 = {
@@ -301,6 +311,7 @@
 		2097B7B52C12FC0D002261C3 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				204FC3D12C1B652F00C1BBCC /* LevelResetters */,
 				2097B7B72C12FC18002261C3 /* Obstacles */,
 				2097B7B62C12FC13002261C3 /* Platforms */,
 			);
@@ -565,6 +576,7 @@
 				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
+				204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */,
 				20006B1D2C18BB1D00EC46C6 /* LevelGenerator.swift in Sources */,
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,

@@ -4,7 +4,11 @@ import Observation
 @Observable class PlayerStatistic {
     
     var highestPlatform : CGPoint = CGPoint(x: 0, y: 0)
-    var currentlyStandingOn : Platform? = nil
+    var currentlyStandingOn : Platform? = nil {
+        didSet {
+            debug("player is standing on \(currentlyStandingOn)")
+        }
+    }
     
 }
 
@@ -116,6 +120,10 @@ import Observation
 
 extension Player {
     
+    static func calculateHeight () {
+        
+    }
+    
     static func handlePlatformCollision ( contact: SKPhysicsContact ) {
         let nodes = UniversalNodeIdentifier.identify(
             types: [Player.self, Platform.self], 
@@ -128,6 +136,15 @@ extension Player {
             
             if ( bottomMostPointOfplayer >= topMostPointOfPlatform - 0.8 ) {
                 player.state = .idle
+                
+                player.statistics.currentlyStandingOn = platform
+                
+                if ( player.statistics.highestPlatform.y < platform.position.y ) {
+                    player.statistics.highestPlatform = platform.position
+                }
+                
+                calculateHeight()
+                
                 player.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
             } 
         }
@@ -135,6 +152,17 @@ extension Player {
     
     static func releasePlatformCollision ( contact: SKPhysicsContact ) {
         //
+    }
+    
+    static func handleDarknessCollision ( contact: SKPhysicsContact ) {
+        let nodes = UniversalNodeIdentifier.identify(
+            types: [Player.self, Darkness.self], 
+            contact.bodyA.node!, 
+            contact.bodyB.node!
+        )
+        if let player = nodes[0] as? Player, let platform = nodes[1] as? Darkness {
+            // die
+        }
     }
     
 }
