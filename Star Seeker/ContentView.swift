@@ -3,7 +3,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView : View {
-    
+        
     var body: some View {
         ZStack ( alignment: .topLeading ) {
             Rectangle()
@@ -12,8 +12,8 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            if ( scene.state == .paused ) { PauseScreen() }
             GridScreen()
+            if ( scene.state == .paused ) { PauseScreen() }
             PlayPauseButton()
             CountdownBeforeResuming()
         }

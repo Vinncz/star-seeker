@@ -7,6 +7,7 @@ class BasePlatform : InertPlatform {
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)        
+        self.name = NodeNamingConstant.Platform.Inert.base
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

@@ -12,7 +12,7 @@ class PassTroughPlatform : SKSpriteNode {
             size    : size
         )
         
-        self.name = NodeNamingConstant.Platform.platform
+        self.name = NodeNamingConstant.Platform.PassThrough.name
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

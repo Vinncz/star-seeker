@@ -6,9 +6,11 @@ class HoldButtonNode : SKSpriteNode {
     var isPressed  : Bool = false
     var command    : () -> Void = {}
     var completion : () -> Void = {}
-    var timer      : Timer?
     
-    init ( name: String = "", imageNamed: String, command: @escaping () -> Void = {}, completion: @escaping () -> Void = {} ) {
+    var timer      : Timer?
+    var updateInterval : TimeInterval = 0.1
+    
+    init ( name: String = "", imageNamed: String, updateInterval: TimeInterval = 0.1, command: @escaping () -> Void = {}, completion: @escaping () -> Void = {} ) {
         self.command    = command
         self.completion = completion
         
@@ -22,7 +24,7 @@ class HoldButtonNode : SKSpriteNode {
     
     override func touchesBegan ( _ touches: Set<UITouch>, with event: UIEvent? ) {
         isPressed = true
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { [weak self] _ in
             self?.command()
         }
     }

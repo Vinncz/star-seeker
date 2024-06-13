@@ -8,6 +8,7 @@ class StickyPlatform : ReactivePlatform {
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)
+        self.name = NodeNamingConstant.Platform.Reactive.sticky
         
         self.physicsBody?.friction = GameConfig.stickyFrictionModifier
     }

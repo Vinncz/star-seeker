@@ -8,6 +8,7 @@ class CollapsiblePlatform : DynamicPlatform {
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)        
+        self.name = NodeNamingConstant.Platform.Inert.Dynamic.collapsible
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

@@ -8,6 +8,7 @@ class SlipperyPlatform : ReactivePlatform {
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)
+        self.name = NodeNamingConstant.Platform.Reactive.slippery
         
         self.physicsBody?.friction = GameConfig.slipperyFrictionModifier
     }
