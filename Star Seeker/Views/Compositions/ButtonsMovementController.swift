@@ -26,12 +26,13 @@ class ButtonsMovementController : SKNode {
             name: NodeNamingConstant.Button.leftControl,
             imageNamed: ImageNamingConstant.Button.left, 
             command: {
+                target.facingDirection = .leftward
                 switch ( target.previousState ) {
-                    case .jumpingRight:
-                        target.state = .jumpingLeft
+                    case .jumping:
+                        target.state = .jumping
                         break
                     default:
-                        target.state = .movingLeft
+                        target.state = .moving
                         break
                 }
                 
@@ -42,7 +43,7 @@ class ButtonsMovementController : SKNode {
             completion: { 
                 switch ( target.previousState ) {
                     default:
-                        target.state = .idleLeft
+                        target.state = .idle
                         break
                 }
                 target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
@@ -54,12 +55,13 @@ class ButtonsMovementController : SKNode {
             name: NodeNamingConstant.Button.rightControl,
             imageNamed: ImageNamingConstant.Button.right, 
             command: { 
+                target.facingDirection = .rightward
                 switch ( target.previousState ) {
-                    case .jumpingLeft:
-                        target.state = .jumpingRight
+                    case .jumping:
+                        target.state = .jumping
                         break
                     default:
-                        target.state = .movingRight
+                        target.state = .moving
                         break
                 }
                 
@@ -70,7 +72,7 @@ class ButtonsMovementController : SKNode {
             completion: { 
                 switch ( target.previousState ) {
                     default:
-                        target.state = .idleRight
+                        target.state = .idle
                         break
                 }
                 target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
@@ -85,14 +87,14 @@ class ButtonsMovementController : SKNode {
             timeIntervalToReset: 0.632,
             command: { 
                 switch ( target.previousState ) {
-                    case .idleLeft, .movingLeft, .jumpingLeft:
-                        target.state = .jumpingLeft
+                    case .idle, .moving, .jumping:
+                        target.state = .jumping
                         break
-                    case .idleRight, .movingRight, .jumpingRight:
-                        target.state = .jumpingRight
+                    case .idle, .moving, .jumping:
+                        target.state = .jumping
                         break                        
                     default:
-                        target.state = .jumpingRight
+                        target.state = .jumping
                         break
                 }
                 
@@ -104,14 +106,14 @@ class ButtonsMovementController : SKNode {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.632, execute: {
                     switch ( target.previousState ) {
-                        case .idleLeft, .movingLeft, .jumpingLeft:
-                            target.state = .idleLeft
+                        case .idle, .moving, .jumping:
+                            target.state = .idle
                             break
-                        case .idleRight, .movingRight, .jumpingRight:
-                            target.state = .idleRight
+                        case .idle, .moving, .jumping:
+                            target.state = .idle
                             break
                         default:
-                            target.state = .idleRight
+                            target.state = .idle
                             break
                     }
                 })
@@ -130,7 +132,7 @@ class ButtonsMovementController : SKNode {
             completion: { 
                 switch ( target.previousState ) {
                     default:
-                        target.state = .idleRight
+                        target.state = .idle
                 }
             }
         )

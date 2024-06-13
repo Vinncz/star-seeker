@@ -54,21 +54,24 @@ import SwiftUI
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collision : UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
+        print("collide")
+        
         switch ( collision ) {
-            case NodeCategory.player.bitMask | NodeCategory.platform.bitMask:
-                let player : SKNode
-                let platform : SKNode
+            case BitMaskConstant.player.rawValue | BitMaskConstant.platform.rawValue:
+                Player.handlePlatformCollision(contact: contact)
+                break
                 
-                if (contact.bodyA.node!).name == NodeNamingConstant.player {
-                    player = contact.bodyA.node!
-                    platform = contact.bodyB.node!
-                } else {
-                    player = contact.bodyB.node!
-                    platform = contact.bodyA.node!
-                }
-                
-                handleCollisionBetweenPlayerAndPlatform( player: player as! SKSpriteNode, platform: platform as! SKSpriteNode )
-                
+            default:
+                break
+        }
+    }
+    
+    func didEnd ( _ contact: SKPhysicsContact ) {
+        let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        print("release collide")
+        switch ( collision ) {
+            case BitMaskConstant.player.rawValue | BitMaskConstant.platform.rawValue:
+                Player.releasePlatformCollision(contact: contact)
                 break
                 
             default:
@@ -79,36 +82,6 @@ import SwiftUI
     /* Inherited from SKScene. Refrain from altering the following */
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-extension Game {
-    
-    func handleCollisionBetweenPlayerAndPlatform ( player: SKSpriteNode, platform: SKSpriteNode ) {
-        switch ( platform.name ) {
-            case NodeNamingConstant.Platform.Inert.base:
-                print("player is on base")
-                (player as! Player).state = .idleLeft
-                break
-            case NodeNamingConstant.Platform.Inert.Dynamic.moving:
-                print("player is on moving")
-                break
-            case NodeNamingConstant.Platform.Inert.Dynamic.collapsible:
-                print("player is on collapsible")
-                break
-            case NodeNamingConstant.Platform.Reactive.slippery:
-                print("player is on slippery")
-                (player as! Player).state = .idleLeft
-                break
-            case NodeNamingConstant.Platform.Reactive.sticky:
-                print("player is on sticky")
-                (player as! Player).state = .idleLeft
-                break
-            default:
-                print("player is on \(platform.name) --")
-                break
-        }
     }
     
 }

@@ -20,19 +20,19 @@ class CSVDecipherer : Decipherer {
         ;;;;;;;;;;
         ;;;;;;;;;;
         ;;;;;;;;;;
-        ;pFN;pFN;pFN;;;;;;;
         ;;;;;;;;;;
-        ;;;;;;;pSL;pSL;;
+        ;;;pFN;pFN;pFN;pFN;;;;
         ;;;;;;;;;;
-        ;;;;;;;;;;pBP
-        ;;;;;;;;pBP;pBP;pBP
-        ;;pSL;pSL;;;;;;;
-        ;;;pSL;pSL;pSL;;;;;pST
-        ;;;;;;;;pST;pST;pST
-        pSL;pSL;;;;;;;;;
-        ;pSL;pSL;;;;;;pBP;pBP;
-        ;;;;;;pBP;pBP;pBP;;
-        ;;;pBG;pBG;;;;;;
+        ;;;;;;;;;;
+        ;pBP;;;;;;pBP;pBP;;
+        ;pBP;pBP;pBP;;;;;pBP;pBP;
+        ;;;;;;;;;;
+        ;;;pTM;pMV;pMV;pMV;pTM;;;
+        ;;;;;;;;;;
+        pBP;pBP;;;;;;;;;pBP
+        ;pBP;pBP;pBP;;;;pBP;pBP;pBP;pBP
+        ;;;;;;;;;;
+        ;;;;pBG;pBG;pBG;;;;
         ;;;;;;;;;;
         ;;;;;;;;;;
         ;;;;;;;;;;
