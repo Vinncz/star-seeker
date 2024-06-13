@@ -5,14 +5,25 @@ import SwiftUI
 struct ContentView : View {
     @StateObject private var gameControl = GameControl()
     
+    var scene : SKScene {
+        let scene = Game(size: CGSize(width: 600, height: 400), gameControl: gameControl)
+        return scene
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundStyle(.blue)
                 .ignoresSafeArea(.all)
-            SpriteView(scene: Game(size: CGSize(width: 600, height: 400), gameControl: gameControl), options: [.allowsTransparency])
+            SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
+                .onAppear {
+                    if let skView = scene.view {
+                        skView.showsFPS = true
+                        skView.showsNodeCount = true
+                    }
+                }
             GeometryReader { geometry in
                 let screenWidth = geometry.size.width
                 let screenHeight = geometry.size.height
@@ -37,21 +48,21 @@ struct ContentView : View {
             }
             .edgesIgnoringSafeArea(.all)
             .disabled(true)
-//            .opacity(0)
+            .opacity(0)
             VStack{
                 HStack {
-                    Text("\(gameControl.score)")
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .font(.largeTitle)
+                    Spacer()
                     Button {
                         gameControl.score = 0
                         gameControl.lastPlatformY = 0.0
                     } label:{
-                        Image(systemName: "arrow.circlepath")
+                        Text("\(gameControl.score)")
                             .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                            .font(.largeTitle)
                     }
                 }
+                .padding(.horizontal)
                 Spacer()
             }
         }

@@ -23,8 +23,10 @@
 		2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AD2C1227EE002261C3 /* UIConfig.swift */; };
 		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
 		2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7B22C12ABC2002261C3 /* Bundle.swift */; };
+		677F42152C1AA42100A8F5AD /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F42142C1AA42100A8F5AD /* Platform.swift */; };
+		677F42172C1AA50200A8F5AD /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F42162C1AA50200A8F5AD /* Hero.swift */; };
+		677F42192C1AA85800A8F5AD /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677F42182C1AA85800A8F5AD /* Darkness.swift */; };
 		67AC9ED72C16348200A3D3A8 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */; };
-		67BB0F3F2C18BA1F00724A01 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +47,10 @@
 		2097B7AD2C1227EE002261C3 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		2097B7B22C12ABC2002261C3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		677F42142C1AA42100A8F5AD /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		677F42162C1AA50200A8F5AD /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		677F42182C1AA85800A8F5AD /* Darkness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkness.swift; sourceTree = "<group>"; };
 		67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphics.swift; sourceTree = "<group>"; };
-		67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				2097B7832C114C00002261C3 /* Item.swift */,
+				677F42142C1AA42100A8F5AD /* Platform.swift */,
+				677F42162C1AA50200A8F5AD /* Hero.swift */,
+				677F42182C1AA85800A8F5AD /* Darkness.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,7 +142,6 @@
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
 				67AC9ED62C16348200A3D3A8 /* CoreGraphics.swift */,
-				67BB0F3E2C18BA1F00724A01 /* CGFloat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -309,19 +315,21 @@
 			files = (
 				2097B7822C114C00002261C3 /* ContentView.swift in Sources */,
 				2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */,
+				677F42192C1AA85800A8F5AD /* Darkness.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7AA2C121DA8002261C3 /* MovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
-				67BB0F3F2C18BA1F00724A01 /* CGFloat.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
 				67AC9ED72C16348200A3D3A8 /* CoreGraphics.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
 				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
+				677F42152C1AA42100A8F5AD /* Platform.swift in Sources */,
+				677F42172C1AA50200A8F5AD /* Hero.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

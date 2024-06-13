@@ -2,126 +2,113 @@ import SpriteKit
 import SwiftUI
 
 @Observable class GameControl: ObservableObject {
-    var playerState: PlayerState = .idleRight
+    var heroState: HeroState = .idleRight
     var currentPlatform: PlatformTypes = .base
     var jumpCount: Int = 0
     var score: Int = 0
     var lastPlatformY: CGFloat = 0.0
+    var fps: Double = 0.0
+    var platformPreviousPositions: [SKSpriteNode: CGPoint] = [:]
 }
 
 enum CollisionType: UInt32 {
     case hero = 1
     case platform = 2
+    case darkness = 3
+    case moving = 4
 }
+
 
 class Game : SKScene, SKPhysicsContactDelegate {
     @ObservedObject var gameControl: GameControl
+    var unitSize: CGFloat
+    let platformModel = PlatformModel()
+    let heroModel = HeroModel()
+    var darknessModel: DarknessModel
     
     var hero: SKSpriteNode!
+    var darkness: SKSpriteNode!
+    
+    var currentMovingPlatform: SKSpriteNode?
+    var currentMovingPlatformPosition: CGPoint?
+    
+    private var lastUpdateTime: TimeInterval = 0
     
     init(size: CGSize, gameControl: GameControl) {
         self.gameControl = gameControl
+        self.unitSize = UIScreen.main.bounds.width / 11
+        self.darknessModel = DarknessModel(unitSize: self.unitSize)
         super.init(size: size)
         self.scaleMode = .resizeFill
     }
     
     override func didMove ( to view: SKView ) {
-        let unitSize = UIScreen.main.bounds.width / 11
         view.allowsTransparency = true
+        view.showsFPS = true
+        view.showsNodeCount = true
         self.view!.isMultipleTouchEnabled = true
         self.backgroundColor = .clear
         self.scaleMode = .resizeFill
         physicsWorld.contactDelegate = self
         
-        hero = SKSpriteNode(texture: gameControl.playerState.texture.first, size: CGSize(width: unitSize*1.5, height: unitSize*1.5))
-        hero.name = "hero"
-        hero.position = CGPoint(xGrid: 5, yGrid: 6, unitSize: unitSize)
+        for platform in platformModel.platformArray {
+            addChild(platformModel.addPlatform(type: platform.type, unitSize: unitSize, x: platform.x, y: platform.y))
+        }
+        addChild(platformModel.addHMovingPlatform(xStart: 2, xEnd: 4, y: 18, size: 2, unitSize: unitSize))
+        //        addChild(platformModel.addGroundPlatform(unitSize: unitSize))
         
-        hero.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: unitSize*0.6, height: unitSize*1.2), center: CGPoint(x: 0, y: -5))
-        hero.physicsBody?.isDynamic = true
-        hero.physicsBody?.mass = 0.25
-        hero.physicsBody?.linearDamping = 1
-        hero.physicsBody?.friction = 0.6
-        hero.physicsBody?.allowsRotation = false
-        hero.physicsBody?.categoryBitMask = CollisionType.hero.rawValue
-        hero.physicsBody?.collisionBitMask = CollisionType.platform.rawValue
-        hero.physicsBody?.contactTestBitMask = CollisionType.platform.rawValue
-        hero.physicsBody?.usesPreciseCollisionDetection = true
-        hero.physicsBody?.restitution = 0
+        hero = heroModel.addHero(unitSize: unitSize, gameControl: gameControl)
         addChild(hero)
         
-        let platform = SKSpriteNode(color: .green, size: CGSize(width: unitSize*22, height: unitSize*10))
-        platform.name = "platform-base"
-        platform.position = CGPoint(x: 0, y: 0)
-        platform.physicsBody = SKPhysicsBody(rectangleOf: platform.size)
-        platform.physicsBody?.isDynamic = false
-        platform.scene?.backgroundColor = .white
-        platform.physicsBody?.friction = GameConfig.defaultFrictionModifier
-        addChild(platform)
-        
-        let platformArray: [PlatformObject] = [
-            PlatformObject(type: .base, x: 5, y: 5),
-            PlatformObject(type: .base, x: 6, y: 5),
-            PlatformObject(type: .base, x: 7, y: 5),
-            
-            PlatformObject(type: .sticky, x: 0, y: 8),
-            PlatformObject(type: .sticky, x: 1, y: 8),
-            PlatformObject(type: .sticky, x: 1, y: 7),
-            PlatformObject(type: .sticky, x: 2, y: 7),
-            PlatformObject(type: .sticky, x: 3, y: 7),
-            
-            PlatformObject(type: .base, x: 8, y: 7),
-            PlatformObject(type: .base, x: 9, y: 7),
-            PlatformObject(type: .base, x: 10, y: 7),
-            PlatformObject(type: .base, x: 10, y: 8),
-            
-            PlatformObject(type: .slippery, x: 5, y: 9),
-            PlatformObject(type: .slippery, x: 6, y: 9),
-            PlatformObject(type: .slippery, x: 6, y: 10),
-            PlatformObject(type: .slippery, x: 7, y: 10),
-            
-            PlatformObject(type: .base, x: 1, y: 11),
-            PlatformObject(type: .base, x: 2, y: 11),
-            PlatformObject(type: .base, x: 1, y: 12),
-            
-            PlatformObject(type: .slippery, x: 4, y: 13),
-            PlatformObject(type: .slippery, x: 5, y: 13),
-            PlatformObject(type: .slippery, x: 6, y: 13),
-            
-            PlatformObject(type: .base, x: 8, y: 12),
-            PlatformObject(type: .base, x: 9, y: 12),
-            PlatformObject(type: .base, x: 9, y: 13),
-            PlatformObject(type: .base, x: 10, y: 13),
-            
-            PlatformObject(type: .sticky, x: 1, y: 15),
-            PlatformObject(type: .sticky, x: 2, y: 15),
-            
-            PlatformObject(type: .base, x: 5, y: 16),
-            PlatformObject(type: .base, x: 6, y: 16),
-        ]
-        
-        for platform in platformArray {
-            addPlatform(type: platform.type, size: unitSize, x: platform.x, y: platform.y)
-        }
+        darkness = darknessModel.addDarkness(unitSize: unitSize)
+        addChild(darkness)
+        darkness.run(darknessModel.darknessMoveAction, withKey: "movingDarkness")
         
         let movementController = MovementController(target: hero, gameControl: gameControl)
         movementController.position = CGPoint(x: UIConfig.Paddings.huge, y: UIConfig.Paddings.huge * 2)
+        
         addChild(movementController)
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if (gameControl.playerState == .movingLeft || gameControl.playerState == .movingRight) {
+        
+        if lastUpdateTime > 0 {
+            let deltaTime = currentTime - lastUpdateTime
+            let fps = 1.0 / deltaTime
+            gameControl.fps = fps
+        }
+        lastUpdateTime = currentTime
+        
+        if let platform = currentMovingPlatform {
+            //            if (platform.action(forKey: "moveRight") != nil) {
+            //                hero.position.x += 1 * unitSize / 62
+            //            } else if (platform.action(forKey: "moveLeft") != nil) {
+            //                hero.position.x -= 1 * unitSize / 60
+            //            }
+            if let previousPosition = currentMovingPlatformPosition {
+                let deltaX = platform.position.x - previousPosition.x
+                currentMovingPlatformPosition = platform.position
+                hero.position.x += deltaX
+                
+            } else {
+                currentMovingPlatformPosition = currentMovingPlatform?.position
+            }
+        }
+        
+        
+        
+        if (gameControl.heroState == .movingLeft || gameControl.heroState == .movingRight) {
             if hero.action(forKey: "moveHero") == nil {
-                let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
+                let moveAction = SKAction.animate(with: gameControl.heroState.texture, timePerFrame: 0.05)
                 hero.run(SKAction.repeatForever(moveAction), withKey: "moveHero")
             }
         } else {
             hero.removeAction(forKey: "moveHero")
         }
         
-        if (gameControl.playerState == .idleLeft || gameControl.playerState == .idleRight)  {
+        if (gameControl.heroState == .idleLeft || gameControl.heroState == .idleRight)  {
             if hero.action(forKey: "idleHero") == nil {
-                let moveAction = SKAction.animate(with: gameControl.playerState.texture, timePerFrame: 0.05)
+                let moveAction = SKAction.animate(with: gameControl.heroState.texture, timePerFrame: 0.05)
                 hero.run(SKAction.repeatForever(moveAction), withKey: "idleHero")
             }
         } else {
@@ -138,7 +125,18 @@ class Game : SKScene, SKPhysicsContactDelegate {
         let firstNode = sortedNodes[0]
         let secondNode = sortedNodes[1]
         
-        if (secondNode.name == PlatformTypes.slippery.name || secondNode.name == PlatformTypes.base.name || secondNode.name == PlatformTypes.sticky.name) && firstNode.name == "hero" {
+        if (firstNode.name == "darkness" && secondNode.name == "hero") {
+            restartGame()
+        }
+        
+        
+        if firstNode.name == "hero" && secondNode.name == PlatformTypes.moving.name {
+            if isHeroOnTop(hero: firstNode as! SKSpriteNode, platform: secondNode as! SKSpriteNode) {
+                currentMovingPlatform = secondNode as? SKSpriteNode
+            }
+        }
+        
+        if (secondNode.name == PlatformTypes.slippery.name || secondNode.name == PlatformTypes.base.name || secondNode.name == PlatformTypes.sticky.name || secondNode.name == PlatformTypes.moving.name) && firstNode.name == "hero" {
             if isHeroOnTop(hero: firstNode as! SKSpriteNode, platform: secondNode as! SKSpriteNode) {
                 gameControl.jumpCount = 0
                 addScore(platform: secondNode as! SKSpriteNode)
@@ -160,6 +158,22 @@ class Game : SKScene, SKPhysicsContactDelegate {
                 
             }
         }
+        
+        
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        
+        let sortedNodes = [nodeA, nodeB].sorted { $0.name ?? "" < $1.name ?? "" }
+        let firstNode = sortedNodes[0]
+        let secondNode = sortedNodes[1]
+        
+        if firstNode.name == "hero" && secondNode.name == PlatformTypes.moving.name {
+            currentMovingPlatform = nil
+            currentMovingPlatformPosition = nil
+        }
     }
     
     func isHeroOnTop(hero: SKSpriteNode, platform: SKSpriteNode) -> Bool {
@@ -179,23 +193,19 @@ class Game : SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-    func addPlatform(type: PlatformTypes, size: CGFloat, x: Int, y: Int) -> Void {
-        let platformSize = CGSize(width: size, height: size)
-        let platform = SKSpriteNode(texture: SKTexture(imageNamed: type.texture), size: platformSize)
-        platform.name = type.name
-        platform.position = CGPoint(xGrid: x, yGrid: y, unitSize: size)
+    func restartGame() {
+        darkness.removeAction(forKey: "movingDarkness")
+        let darknessToInitial = SKAction.move(to: CGPoint(xGrid: 5, yGrid: -22, unitSize: unitSize), duration: 0)
+        darkness.run(darknessToInitial)
+        let moveAction = SKAction.move(to: CGPoint(xGrid: 5, yGrid: 20, unitSize: unitSize), duration: 150)
+        darkness.run(moveAction, withKey: "movingDarkness")
         
-        let roundedRectPath = UIBezierPath(roundedRect: CGRect(x: -size * 0.5, y: -size * 0.5, width: size, height: size), cornerRadius: 10).cgPath
-        platform.physicsBody = SKPhysicsBody(polygonFrom: roundedRectPath)
-        //        platform.physicsBody = SKPhysicsBody(rectangleOf: platformSize)
-        platform.physicsBody?.isDynamic = false
-        platform.physicsBody?.friction = type.frictionValue
-        platform.physicsBody?.categoryBitMask = CollisionType.platform.rawValue
-        platform.physicsBody?.collisionBitMask = CollisionType.hero.rawValue
-        platform.physicsBody?.contactTestBitMask = CollisionType.hero.rawValue
-        platform.physicsBody?.restitution = 0
-        addChild(platform)
+        let heroToInitial = SKAction.move(to: CGPoint(xGrid: 5, yGrid: 6, unitSize: unitSize), duration: 0)
+        hero.run(heroToInitial)
+        
+        gameControl.score = 0
+        gameControl.lastPlatformY = 0
+        gameControl.jumpCount = 0
     }
     
     required init?(coder aDecoder: NSCoder) {

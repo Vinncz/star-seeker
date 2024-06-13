@@ -21,9 +21,7 @@ class MovementController : SKNode {
         self.target = target
         self.gameControl = gameControl
         
-        let hForce = self.hForce
         let vForce = self.vForce
-        let hImpls = self.hImpls
         let vImpls = self.vImpls
         let vImpls2 = self.vImpls2
         
@@ -76,23 +74,23 @@ class MovementController : SKNode {
         addChild(div)
         
         bLeft.command = {
-            self.gameControl.playerState = .movingLeft
+            self.gameControl.heroState = .movingLeft
             target.physicsBody?.velocity = CGVector(dx: gameControl.currentPlatform == .base ? -100 : gameControl.currentPlatform == .slippery ? -125 : -75 , dy: target.physicsBody?.velocity.dy ?? 0)
             //            target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
         }
         bLeft.completion = {
             target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
-            self.gameControl.playerState = .idleLeft
+            self.gameControl.heroState = .idleLeft
         }
         
         bRight.command = {
-            self.gameControl.playerState = .movingRight
+            self.gameControl.heroState = .movingRight
             target.physicsBody?.velocity = CGVector(dx:  gameControl.currentPlatform == .base ? 100 : gameControl.currentPlatform == .slippery ? 125 : 75, dy: target.physicsBody?.velocity.dy ?? 0)
             //            target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
         }
         bRight.completion = {
             target.physicsBody?.velocity = CGVector(dx: 0, dy: target.physicsBody?.velocity.dy ?? 0)
-            self.gameControl.playerState = .idleRight
+            self.gameControl.heroState = .idleRight
         }
         
         bJump.command = {
