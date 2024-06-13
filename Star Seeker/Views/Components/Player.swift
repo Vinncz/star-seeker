@@ -14,6 +14,11 @@ import Observation
 
 @Observable class Player : SKSpriteNode {
     
+    var facingDirection : MovementDirection {
+        didSet {
+            self.state = state
+        }
+    }
     init () {
         self.state = .idle
         self.facingDirection = .rightward

@@ -62,6 +62,16 @@ import SwiftUI
 /** Extension which gives Game the ability to recieve and respond to contact between two physics bodies. */
 extension Game {
     
+    /* Inherited from SKScene. Refrain from altering the following */
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+/** Extension which gives Game the ability to recieve and respond to contact between two physics bodies. */
+extension Game {
+    
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collision : UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
@@ -116,6 +126,7 @@ extension Game {
     
     func setupMovementController ( for target: Player ) -> JoystickMovementController {
         let controller = JoystickMovementController( controls: target )
+        controller.position = CGPoint(5, 6)
         controller.position = CGPoint(5, 6)
         
         return controller
