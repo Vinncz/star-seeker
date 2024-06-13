@@ -5,4 +5,5 @@ struct ActionNamingConstant {
     static let moving   : String = "VERTEX.STAR_SEEKER.ANIMATION.MOVING"
     static let jumping  : String = "VERTEX.STAR_SEEKER.ANIMATION.JUMPING"
     static let climbing : String = "VERTEX.STAR_SEEKER.ANIMATION.CLIMBING"
+    static let squating : String = "VERTEX.STAR_SEEKER.ANIMATION.SQUATING"
 }

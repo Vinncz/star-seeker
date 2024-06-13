@@ -51,13 +51,21 @@ import SwiftUI
         
     }
     
+    /* Inherited from SKScene. Refrain from altering the following */
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+/** Extension which gives Game the ability to recieve and respond to contact between two physics bodies. */
+extension Game {
+    
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collision : UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-        print("collide")
-        
         switch ( collision ) {
-            case BitMaskConstant.player.rawValue | BitMaskConstant.platform.rawValue:
+            case BitMaskConstant.player | BitMaskConstant.platform:
                 Player.handlePlatformCollision(contact: contact)
                 break
                 
@@ -68,9 +76,8 @@ import SwiftUI
     
     func didEnd ( _ contact: SKPhysicsContact ) {
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-        print("release collide")
         switch ( collision ) {
-            case BitMaskConstant.player.rawValue | BitMaskConstant.platform.rawValue:
+            case BitMaskConstant.player | BitMaskConstant.platform:
                 Player.releasePlatformCollision(contact: contact)
                 break
                 
@@ -79,13 +86,9 @@ import SwiftUI
         }
     }
     
-    /* Inherited from SKScene. Refrain from altering the following */
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
+/** Extension which gives Game the ability to setup itself. */
 extension Game {
     
     func attachPlatforms () {
@@ -99,10 +102,6 @@ extension Game {
         self.backgroundColor = .clear
     }
     
-}
-
-extension Game {
-    
     func setupPlayer () -> Player {
         let player = Player()
         player.position = CGPoint(4, 6)
@@ -112,13 +111,13 @@ extension Game {
     
     func setupMovementController ( for target: Player ) -> JoystickMovementController {
         let controller = JoystickMovementController( controls: target )
-        controller.position = CGPoint(5, 4)
+        controller.position = CGPoint(5, 6)
         
         return controller
     }
-    
 }
 
+/** Extension which lets Game track "in what state its in". */
 extension Game {
     
     enum GameState {

@@ -3,10 +3,14 @@ import Observation
 
 @Observable class Player : SKSpriteNode {
     
-    var facingDirection : MovementDirection
+    var facingDirection : MovementDirection {
+        didSet {
+            self.state = state
+        }
+    }
     var state           : PlayerState {
         didSet {
-//            print("Player's state: \(state)")
+            debug("Player's state: \(state)")
             previousState = oldValue
 
             switch state {
@@ -35,11 +39,26 @@ import Observation
                     }
                     break
                     
+                case .squating:
+                    self.removeAction( forKey: ActionNamingConstant.idle     )
+                    self.removeAction( forKey: ActionNamingConstant.moving   )
+                    self.removeAction( forKey: ActionNamingConstant.jumping  )
+                    self.removeAction( forKey: ActionNamingConstant.climbing )
+                    if ( self.action ( forKey: ActionNamingConstant.squating ) == nil ) {
+                        let textureName      : String = ImageNamingConstant.Player.Squating.name
+                        let squatingTextures : [SKTexture] = (0...10).map { SKTexture( imageNamed: textureName + String($0) ) }
+                        let squatingAction   = SKAction.animate(with: squatingTextures, timePerFrame: 0.05)
+                        
+                        self.run(SKAction.repeatForever(squatingAction), withKey: ActionNamingConstant.squating)
+                    }
+                    break
+                    
                 case .jumping:
                     self.removeAction( forKey: ActionNamingConstant.idle     )
                     self.removeAction( forKey: ActionNamingConstant.moving   )
                     self.removeAction( forKey: ActionNamingConstant.jumping  )
                     self.removeAction( forKey: ActionNamingConstant.climbing )
+                    self.removeAction( forKey: ActionNamingConstant.squating )
                     if ( self.action ( forKey: ActionNamingConstant.jumping  ) == nil ) {
                         let textureName     : String = self.facingDirection == .leftward ? ImageNamingConstant.Player.Jumping.Left.name : ImageNamingConstant.Player.Jumping.Right.name
                         let jumpingTextures : [SKTexture] = (0...19).map { SKTexture( imageNamed: textureName + String($0) ) }
@@ -85,7 +104,6 @@ import Observation
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension Player {
@@ -97,7 +115,7 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            let bottomMostPointOfplayer = player.position.y - player.size.height / 2
+            let bottomMostPointOfplayer = player.position.y   - player.size.height   / 2
             let topMostPointOfPlatform  = platform.position.y + platform.size.height / 2
             
             if ( bottomMostPointOfplayer >= topMostPointOfPlatform - 0.8 ) {
@@ -108,7 +126,7 @@ extension Player {
     }
     
     static func releasePlatformCollision ( contact: SKPhysicsContact ) {
-        // do smt
+        //
     }
     
 }
@@ -123,8 +141,8 @@ extension Player {
             pb.friction           = GameConfig.playerFriction
             pb.allowsRotation     = GameConfig.playerRotates
         
-            pb.categoryBitMask    = BitMaskConstant.player.rawValue
-            pb.contactTestBitMask = BitMaskConstant.platform.rawValue
+            pb.categoryBitMask    = BitMaskConstant.player
+            pb.contactTestBitMask = BitMaskConstant.platform
         
             pb.usesPreciseCollisionDetection = true
         
@@ -138,6 +156,7 @@ extension Player {
     enum PlayerState {
         case idle,
              moving,
+             squating,
              jumping,
              climbing
     }

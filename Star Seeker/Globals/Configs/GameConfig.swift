@@ -21,12 +21,15 @@ struct GameConfig {
     static let playerFriction     : CGFloat = 0.4
     static let playerRotates      : Bool    = false
     
-    /**  */
+    /** Dictates how much slowing factor a Base platform does to a target */
     static let baseFrictionModifier : CGFloat = 0.2
-    /** Dictates how much fastening factor a Slippery platform does to a target */
+    /** Dictates how much slowing factor a Slippery platform does to a target */
     static let slipperyFrictionModifier : CGFloat = 0.0    
     /** Dictates how much slowing factor a Sticky platform does to a target */
     static let stickyFrictionModifier   : CGFloat = 0.8
+    
+    static let joystickSafeArea        : CGFloat = 32
+    static let joystickDampeningFactor : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
         "pFN" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
