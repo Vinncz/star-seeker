@@ -37,7 +37,6 @@ class JoystickMovementController : SKNode {
                 }
             },
             completion : { [weak self] deltaX, deltaY in
-                guard ( self?.target.restrictions.list[RestrictionConstant.Player.jump] == nil ) else { return }
                 
                 let deltaXIsLessThanTreshold : Bool = deltaX >= -GameConfig.joystickSafeArea && deltaX <= GameConfig.joystickSafeArea
                 let deltaYIsLessThanTreshold : Bool = deltaY >= -GameConfig.joystickSafeArea && deltaY <= GameConfig.joystickSafeArea
@@ -47,19 +46,48 @@ class JoystickMovementController : SKNode {
                     return 
                 }
                 
-                let resultingImpulse = CGVector (
-                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0), 
-                    dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
-                )
+                let noRestrictionOnJumping = self?.target.restrictions.list[RestrictionConstant.Player.jump] == nil
                 
-                self?.target.facingDirection = deltaX > 0 ? .leftward : .rightward
-                
-                self?.target.physicsBody?.applyImpulse( resultingImpulse )
-                self?.target.state = .jumping
-                
-                self?.target.restrictions.list[RestrictionConstant.Player.jump] = PlayerRestriction( comparer: {
-                    self?.target.state == .jumping
-                } )
+                if ( noRestrictionOnJumping ) {
+                    let resultingImpulse = CGVector (
+                        dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0), 
+                        dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
+                    )
+                    
+                    self?.target.facingDirection = deltaX > 0 ? .leftward : .rightward
+                    
+                    self?.target.physicsBody?.applyImpulse( resultingImpulse )
+                    self?.target.state = .jumping
+                    
+                    self?.target.restrictions.list[RestrictionConstant.Player.jump] = PlayerRestriction( comparer: {
+                        /* if the player isn't standing on any platform, then they shouldn't jump */
+                        self?.target.statistics.currentlyStandingOn == nil 
+                    } )
+                    
+                } else {
+                    /* MARK: -- FOR MITIGATION AGAINST "BEING STUCK IN JUMPING STATE" */
+                    
+                    let conditionB = self?.target.statistics.currentlyStandingOn == nil 
+                    if ( conditionB ) {
+                        print("masuk b \(conditionB)")
+                        let resultingImpulse = CGVector (
+                            dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0), 
+                            dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
+                        )
+                        
+                        self?.target.facingDirection = deltaX > 0 ? .leftward : .rightward
+                        
+                        self?.target.physicsBody?.applyImpulse( resultingImpulse )
+                        self?.target.state = .jumping
+                        
+                        self?.target.restrictions.list[RestrictionConstant.Player.jump] = PlayerRestriction( comparer: {
+                            /* if the player isn't standing on any platform, then they shouldn't jump */
+                            self?.target.statistics.currentlyStandingOn == nil 
+                        } )
+                    }
+
+                }
+//                guard ( conditionB ) else { return }                
             }
         )
     }

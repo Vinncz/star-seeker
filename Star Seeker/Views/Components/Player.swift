@@ -6,7 +6,7 @@ import Observation
     var highestPlatform : CGPoint = CGPoint(x: 0, y: 0)
     var currentlyStandingOn : Platform? = nil {
         didSet {
-            debug("player is standing on \(currentlyStandingOn)")
+            print("player is standing on \(currentlyStandingOn)")
         }
     }
     
@@ -14,11 +14,6 @@ import Observation
 
 @Observable class Player : SKSpriteNode {
     
-    var facingDirection : MovementDirection {
-        didSet {
-            self.state = state
-        }
-    }
     init () {
         self.state = .idle
         self.facingDirection = .rightward
@@ -125,10 +120,6 @@ import Observation
 
 extension Player {
     
-    static func calculateHeight () {
-        
-    }
-    
     static func handlePlatformCollision ( contact: SKPhysicsContact ) {
         let nodes = UniversalNodeIdentifier.identify(
             types: [Player.self, Platform.self], 
@@ -147,16 +138,24 @@ extension Player {
                 if ( player.statistics.highestPlatform.y < platform.position.y ) {
                     player.statistics.highestPlatform = platform.position
                 }
-                
-                calculateHeight()
-                
+                                
                 player.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
             } 
         }
     }
     
     static func releasePlatformCollision ( contact: SKPhysicsContact ) {
-        //
+        let nodes = UniversalNodeIdentifier.identify(
+            types: [Player.self, Platform.self], 
+            contact.bodyA.node!, 
+            contact.bodyB.node!
+        )
+        if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
+            if ( player.statistics.currentlyStandingOn == platform ) {
+                player.statistics.currentlyStandingOn = nil
+            }
+            player.state = .jumping
+        }
     }
     
     static func handleDarknessCollision ( contact: SKPhysicsContact ) {
