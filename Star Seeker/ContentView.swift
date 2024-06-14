@@ -14,10 +14,7 @@ struct ContentView : View {
                 .background(.clear)
             GridScreen()
             if ( scene.state == .paused ) { PauseScreen() }
-            Text("\(scene.player?.statistics.highestPlatform.y ?? 0)m")
-                .font(.title)
-                .bold()
-                .foregroundStyle(.white)
+            PlayerScore()
             PlayPauseButton()
             CountdownBeforeResuming()
         }
@@ -31,6 +28,17 @@ struct ContentView : View {
 }
 
 extension ContentView {
+    
+    func PlayerScore () -> some View {
+        HStack {
+            Spacer()
+            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
+                .font(.title)
+                .bold()
+                .foregroundStyle(.white)
+        }
+            .padding()
+    }
     
     func CountdownBeforeResuming () -> some View {
         if ( self.stopwatch != nil ) {

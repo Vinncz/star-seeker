@@ -1,10 +1,12 @@
 import SpriteKit
 
-class Platform : SKSpriteNode {
+class Platform : SKSpriteNode, Identifiable {
 
+    var id = UUID()
+    
     init ( 
         texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Inert.base ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
+        size   : CGSize    = ValueProvider.gridDimension
     ) {
         super.init (
             texture : texture, 
@@ -15,6 +17,7 @@ class Platform : SKSpriteNode {
         self.name = NodeNamingConstant.Platform.platform
         self.physicsBody = SKPhysicsBody(texture: texture, size: size)
         self.physicsBody?.isDynamic = false
+        self.physicsBody?.restitution = 0
         self.physicsBody?.friction = GameConfig.baseFrictionModifier
         
         self.physicsBody?.categoryBitMask    = BitMaskConstant.platform

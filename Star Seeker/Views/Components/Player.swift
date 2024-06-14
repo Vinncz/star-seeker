@@ -3,10 +3,29 @@ import Observation
 
 @Observable class PlayerStatistic {
     
+    let owner : Player
+    init ( for player: Player ) {
+        self.owner = player
+    }
+    
     var highestPlatform : CGPoint = CGPoint(x: 0, y: 0)
-    var currentlyStandingOn : Platform? = nil {
+    var currentlyStandingOn : Set<Platform> = [] {
         didSet {
-            print("player is standing on \(currentlyStandingOn)")
+            debug("player is standing on:")
+            currentlyStandingOn.forEach {
+                debug("    \($0.name), \($0.position)")
+            }
+            debug("")
+            
+            if ( currentlyStandingOn.isEmpty ) {
+                owner.state = .jumping
+                owner.restrictions.list[RestrictionConstant.Player.jump] = PlayerRestriction( comparer: {
+                    self.owner.statistics!.currentlyStandingOn == nil 
+                } )
+            } else {
+                owner.state = .idle
+                owner.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
+            }
         }
     }
     
@@ -21,6 +40,7 @@ import Observation
         
         super.init( texture: texture, color: .clear, size: ValueProvider.playerDimension )
         
+        self.statistics = PlayerStatistic(for: self)
         self.name = NodeNamingConstant.player
         self.state = .idle
         
@@ -28,7 +48,7 @@ import Observation
         self.physicsBody = physicsBody
     }
     
-    var statistics      : PlayerStatistic = PlayerStatistic()
+    var statistics      : PlayerStatistic?
     var facingDirection : MovementDirection {
         didSet {
             self.state = state
@@ -120,30 +140,28 @@ import Observation
 
 extension Player {
     
+    /** This method is only called when an instance of player collided with an instance of platform */
     static func handlePlatformCollision ( contact: SKPhysicsContact ) {
+        let contactPoint = contact.contactPoint
         let nodes = UniversalNodeIdentifier.identify(
             types: [Player.self, Platform.self], 
             contact.bodyA.node!, 
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            let bottomMostPointOfplayer = player.position.y   - player.size.height   / 2
-            let topMostPointOfPlatform  = platform.position.y + platform.size.height / 2
-            
-            if ( bottomMostPointOfplayer >= topMostPointOfPlatform - 0.8 ) {
-                player.state = .idle
+            debug("player collided with \(platform.position) with player's feet position of \(player.position.y   - (player.size.height   / 2)) and platform's top at \(platform.position.y + (platform.size.height / 2))")
+            let expandedFrame = platform.frame.insetBy(dx: -1, dy: -1)
+            if ( expandedFrame.contains(contactPoint) ) {
+                player.statistics!.currentlyStandingOn.insert(platform)
                 
-                player.statistics.currentlyStandingOn = platform
-                
-                if ( player.statistics.highestPlatform.y < platform.position.y ) {
-                    player.statistics.highestPlatform = platform.position
-                }
-                                
-                player.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
+                if ( player.statistics!.highestPlatform.y < platform.position.y ) {
+                    player.statistics!.highestPlatform = platform.position
+                }                                
             } 
         }
     }
     
+    /** This method is only called when an instance of player is no longer in contact with an instance of platform */
     static func releasePlatformCollision ( contact: SKPhysicsContact ) {
         let nodes = UniversalNodeIdentifier.identify(
             types: [Player.self, Platform.self], 
@@ -151,10 +169,8 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            if ( player.statistics.currentlyStandingOn == platform ) {
-                player.statistics.currentlyStandingOn = nil
-            }
-            player.state = .jumping
+            debug("player did release from \(platform.position)")
+            player.statistics!.currentlyStandingOn.remove(platform)
         }
     }
     
@@ -181,6 +197,7 @@ extension Player {
             pb.linearDamping      = GameConfig.playerLinearDamping
             pb.friction           = GameConfig.playerFriction
             pb.allowsRotation     = GameConfig.playerRotates
+            pb.restitution        = 0
         
             pb.categoryBitMask    = BitMaskConstant.player
             pb.contactTestBitMask = BitMaskConstant.platform

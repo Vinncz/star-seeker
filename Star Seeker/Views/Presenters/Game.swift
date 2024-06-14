@@ -105,11 +105,12 @@ extension Game {
         view.allowsTransparency = true
         self.view!.isMultipleTouchEnabled = true
         self.backgroundColor = .clear
+        self.physicsWorld.speed = 1
     }
     
     func setupPlayer () -> Player {
         let player = Player()
-        player.position = CGPoint(4, 6)
+        player.position = CGPoint(4, 19)
         
         return player
     }
