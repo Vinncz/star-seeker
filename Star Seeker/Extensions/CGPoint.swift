@@ -20,4 +20,8 @@ extension CGPoint {
         )
     }
     
+    init(xGrid: Int, yGrid: Int, width: Int, height: Int, unitSize: CGFloat = ValueProvider.gridDimension.width) {
+        self.init(x: (CGFloat(xGrid) * unitSize) + (unitSize * CGFloat(width) * 0.5), y: (CGFloat(yGrid) * unitSize) + (unitSize * CGFloat(height) * 0.5))
+    }
+    
 }

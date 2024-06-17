@@ -3,23 +3,26 @@ import SwiftUI
 
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
+    var currentMovingPlatform: SKSpriteNode?
+    var currentMovingPlatformPosition: CGPoint?
+    
     var state         : GameState {
         didSet {
             previousState = oldValue
             switch ( state ) {
-                case .playing:
-                    self.isPaused = false
-                    break
-                case .paused:
+            case .playing:
+                self.isPaused = false
+                break
+            case .paused:
+                self.isPaused = true
+                break
+            case .finished:
+                /* Freeze the game to save memory */
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self.isPaused = true
-                    break
-                case .finished:
-                    /* Freeze the game to save memory */
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.isPaused = true
-                    }
-                default:
-                    break
+                }
+            default:
+                break
             }
             
             debug("Game state was updated to: \(state)")
@@ -62,32 +65,53 @@ import SwiftUI
 /** Extension which gives Game the ability to recieve and respond to contact between two physics bodies. */
 extension Game {
     
+    override func update(_ currentTime: TimeInterval) {
+        if let platform = currentMovingPlatform {
+            if let previousPosition = currentMovingPlatformPosition {
+                let deltaX = platform.position.x - previousPosition.x
+                currentMovingPlatformPosition = platform.position
+                if let player {
+                    player.position.x += deltaX
+                }
+            } else {
+                currentMovingPlatformPosition = currentMovingPlatform?.position
+            }
+        }
+    }
+    
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collision : UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         switch ( collision ) {
-            case BitMaskConstant.player | BitMaskConstant.platform:
-                Player.handlePlatformCollision(contact: contact)
-                break
-                
-            case BitMaskConstant.player | BitMaskConstant.darkness:
-                // do something
-                break
-                
-            default:
-                break
+        case BitMaskConstant.player | BitMaskConstant.platform:
+            Player.handlePlatformCollision(contact: contact)
+            if (contact.bodyA.node?.name == NodeNamingConstant.Platform.Inert.Dynamic.moving){
+                currentMovingPlatform = contact.bodyA.node as? SKSpriteNode
+            }
+            break
+            
+        case BitMaskConstant.player | BitMaskConstant.darkness:
+            // do something
+            break
+            
+        default:
+            break
         }
     }
     
     func didEnd ( _ contact: SKPhysicsContact ) {
         let collision: UInt32 = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         switch ( collision ) {
-            case BitMaskConstant.player | BitMaskConstant.platform:
-                Player.releasePlatformCollision(contact: contact)
-                break
-                
-            default:
-                break
+        case BitMaskConstant.player | BitMaskConstant.platform:
+            Player.releasePlatformCollision(contact: contact)
+            if (contact.bodyA.node?.name == NodeNamingConstant.Platform.Inert.Dynamic.moving){
+                currentMovingPlatform = nil
+                currentMovingPlatformPosition = nil
+            }
+            break
+            
+        default:
+            break
         }
     }
     

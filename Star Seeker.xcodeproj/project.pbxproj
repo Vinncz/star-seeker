@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		20006B1B2C18BB0200EC46C6 /* CSVDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */; };
-		20006B1D2C18BB1D00EC46C6 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */; };
 		20006B232C18C6D800EC46C6 /* LevelFormat2 in Resources */ = {isa = PBXBuildFile; fileRef = 20006B222C18C6D800EC46C6 /* LevelFormat2 */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
 		204FC3B82C19B37300C1BBCC /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */; };
@@ -63,11 +62,12 @@
 		2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FA2C17F891002261C3 /* PauseScreen.swift */; };
 		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
+		6724BF102C1C1F5300E15138 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */; };
+		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDecipherer.swift; sourceTree = "<group>"; };
-		20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelGenerator.swift; path = "/Users/vin/Documents/Projects/Star Seeker/Star Seeker/Views/Components/LevelGenerator/LevelGenerator.swift"; sourceTree = "<absolute>"; };
 		20006B222C18C6D800EC46C6 /* LevelFormat2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = LevelFormat2; sourceTree = "<group>"; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
 		204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
@@ -123,6 +123,8 @@
 		2097B7FA2C17F891002261C3 /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
+		6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +141,8 @@
 		20006B192C18BAE400EC46C6 /* LevelGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */,
 				20006B222C18C6D800EC46C6 /* LevelFormat2 */,
+				6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */,
 			);
 			path = LevelGenerator;
 			sourceTree = "<group>";
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				2097B7E82C170244002261C3 /* ClimbablePlatform.swift */,
+				6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */,
 			);
 			path = PassThrough;
 			sourceTree = "<group>";
@@ -577,7 +580,6 @@
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
 				204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */,
-				20006B1D2C18BB1D00EC46C6 /* LevelGenerator.swift in Sources */,
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */,
@@ -588,9 +590,11 @@
 				2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
 				2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */,
+				6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */,
 				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,
 				2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */,
 				2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */,
+				6724BF102C1C1F5300E15138 /* LevelGenerator.swift in Sources */,
 				2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */,
 				204FC3CA2C1AE4A200C1BBCC /* RestrictionGroup.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
@@ -728,7 +732,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = STU45DAFT2;
+				DEVELOPMENT_TEAM = 5E27WSDAU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -757,7 +761,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = STU45DAFT2;
+				DEVELOPMENT_TEAM = 5E27WSDAU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

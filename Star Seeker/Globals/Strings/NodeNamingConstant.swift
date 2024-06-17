@@ -36,6 +36,7 @@ struct NodeNamingConstant {
             static let name      : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.OBJECT"
             
             static let climbable : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.CLIMBABLE.OBJECT"
+            static let movingTrack : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.MOVING_TRACK.OBJECT"
         }
     }
     

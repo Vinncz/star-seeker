@@ -10,6 +10,15 @@ import Observation
             height : screenDimension.width / GameConfig.playArea.width
         )
     }
+    static var customGridDimension : (Int, Int) -> CGSize {
+        func function (width: Int, height: Int) -> CGSize {
+            return CGSize (
+                width  : (screenDimension.width / GameConfig.playArea.width) * CGFloat(width),
+                height : (screenDimension.width / GameConfig.playArea.width) * CGFloat(height)
+            )
+        }
+        return function
+    }
     static var playerDimension : CGSize {
         CGSize (
             width : gridDimension.width * 1.5,

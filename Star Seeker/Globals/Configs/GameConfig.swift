@@ -32,11 +32,15 @@ struct GameConfig {
     static let joystickDampeningFactor : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
-        "pFN" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
-        "pBG" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
-        "pBP" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
-        "pST" : { StickyPlatform    ( size: ValueProvider.gridDimension ) },
-        "pSL" : { SlipperyPlatform  ( size: ValueProvider.gridDimension ) },
-        "pCL" : { ClimbablePlatform ( size: ValueProvider.gridDimension ) }
+        "pFN" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
+        "pBG" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
+        "pBP" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
+        "pST" : { StickyPlatform        ( size: ValueProvider.gridDimension ) },
+        "pSL" : { SlipperyPlatform      ( size: ValueProvider.gridDimension ) },
+        "pCL" : { ClimbablePlatform     ( size: ValueProvider.gridDimension ) },
+        /** This value size is ignored temporarily */
+        "pMV" : { MovingPlatform        ( size: ValueProvider.gridDimension ) },
+        "pMT" : { MovingTrackPlatform   ( size: ValueProvider.gridDimension ) },
+        
     ]
 }
