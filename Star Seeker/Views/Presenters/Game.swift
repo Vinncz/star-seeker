@@ -136,10 +136,9 @@ extension Game {
         return player
     }
     
-    /** Instanciates a movement controller that controls something. The controller object persists even after the game has been reset. */
+    /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
     func setupMovementController ( for target: Player ) -> MovementController {
         let controller = JoystickMovementController( controls: target )
-        controller.position = CGPoint(5, 6)
         controller.position = CGPoint(5, 6)
         
         return controller
@@ -172,7 +171,7 @@ extension Game {
         detachAllElements()
         attachElements()
         self.player = try? findPlayerElement()
-        self.controller?.target = self.player!
+        self.controller = setupMovementController(for: self.player!)
         attachDarkness()
         addChild(controller!)
         self.state = .playing

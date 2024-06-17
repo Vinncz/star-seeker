@@ -1,9 +1,10 @@
 import SpriteKit
+import SwiftUI
 
 class MovementController : SKNode {
     
     /** Reference to an instance of SKNode, which will be controlled by self */
-    var target : Player
+    @State var target : Player
     
     init ( controls target : Player ) {
         self.target = target

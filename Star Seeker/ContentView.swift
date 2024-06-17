@@ -12,7 +12,7 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            GridScreen()
+//            GridScreen()
             HStack {
                 PlayPauseButton().font(.largeTitle).foregroundStyle(.white)
                 RestartButton().font(.largeTitle).foregroundStyle(.white)
@@ -47,13 +47,13 @@ extension ContentView {
     
     func PlayerScore () -> some View {
         withAnimation {
-            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
+            Text(String(format: "%.0fm", scene.player?.statistics!.currentHeight.y ?? 0))
                 .scaleEffect(playerScoreScalingFactor)
                 .font(.system(.title, design: .rounded))
                 .bold()
                 .foregroundStyle(.white)
                 .animation(.bouncy(duration: 0.1), value: playerScoreScalingFactor)
-                .onChange(of: scene.player?.statistics!.highestPlatform.y) { oldValue, newValue in
+                .onChange(of: scene.player?.statistics!.currentHeight.y) { oldValue, newValue in
                     playerScoreScalingFactor = 1.25
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3){
                         playerScoreScalingFactor = 1.0
@@ -120,24 +120,24 @@ extension ContentView {
                         VStack {
                             Spacer()
                             VStack ( spacing: UIConfig.Spacings.normal ) {
-                                Text("Paused")
+                                Text("PAUSED")
                                     .font(.system(.largeTitle, design: .rounded))
                                     .bold()
                                     .foregroundStyle(.gray)
                                 HStack () {
                                     PlayPauseButton()
                                         .foregroundStyle(.gray)
-                                        .font(.system(size: 64))
+                                        .font(.system(size: UIConfig.FontSizes.huge))
                                     RestartButton()
                                         .foregroundStyle(.gray)
-                                        .font(.system(size: 64))
+                                        .font(.system(size: UIConfig.FontSizes.huge))
                                 }
                             }
                                 .padding()
                                 .frame(width: 320)
                                 .background(
                                     Color(red: 255, green: 208, blue: 193),
-                                    in: RoundedRectangle(cornerRadius: 16)
+                                    in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
                                 )
                             Spacer()
                         }
@@ -156,19 +156,36 @@ extension ContentView {
     }
     
     func EndScreen () -> some View {
-        HStack {
-            Spacer()
-            VStack {
+        withAnimation {
+            HStack ( alignment: .center ) {
                 Spacer()
-                Text("Game Over")
-                    .bold()
-                    .font(.system(.largeTitle, design: .rounded))
-                    .foregroundStyle(.white)
-                RestartButton().font(.largeTitle).foregroundStyle(.white)
+                VStack {
+                    Spacer()
+                    VStack ( spacing: UIConfig.Spacings.large ) {
+                        Text("GAME OVER")
+                            .bold()
+                            .font(.system(.largeTitle, design: .rounded))
+                        VStack {
+                            Text("You managed to reach")
+                                .font(.system(.body, design: .rounded))
+                            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
+                                .font(.system(.largeTitle, design: .rounded))
+                                .bold()
+                                .rotationEffect(.degrees(7))
+                        }
+                        RestartButton().font(.system(size: UIConfig.FontSizes.huge))
+                    }
+                        .padding(.horizontal, UIConfig.Paddings.huge)
+                        .padding(.vertical, UIConfig.Paddings.huge)
+                        .background (
+                            .white,
+                            in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
+                        )
+                    Spacer()
+                }
                 Spacer()
             }
-                .padding()
-            Spacer()
+                .foregroundStyle(.gray)
         }
     }
     

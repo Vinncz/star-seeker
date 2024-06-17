@@ -97,7 +97,7 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let darkness = nodes[1] as? Darkness {
-            debug("Player collided with darkness object at \(darkness.position) -- with player's feet position of \(player.position.y   - (player.size.height   / 2)) and darkness' top at \(darkness.position.y + (darkness.size.height / 2))")
+            debug("Player collided with darkness object at \(darkness.position) -- with player's feet position of \(player.position.y - (player.size.height / 2)) and darkness' top at \(darkness.position.y + (darkness.size.height / 2))")
             player.state = .dying
         }
     }
@@ -255,6 +255,7 @@ extension Player {
     }
     
     var highestPlatform : CGPoint = CGPoint(x: 0, y: 0)
+    var currentHeight   : CGPoint = CGPoint(x: 0, y: 0)
     var currentlyStandingOn : Set<Platform> = [] {
         didSet {
             debug("player is standing on:")
@@ -262,6 +263,12 @@ extension Player {
                 debug("    \($0.name), \($0.position)")
             }
             debug("")
+            
+            if ( currentlyStandingOn.first == nil ) {
+                self.currentHeight = oldValue.first?.position ?? CGPoint(x: 0, y: 0)
+            } else {
+                self.currentHeight = currentlyStandingOn.first?.position ?? CGPoint(x: 0, y: 0)
+            }
             
             if ( currentlyStandingOn.isEmpty ) {
                 owner.state = .jumping

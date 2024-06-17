@@ -62,6 +62,7 @@
 		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
 		20AF26432C1F0D9F0045EAE7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AF26422C1F0D9F0045EAE7 /* LevelGenerator.swift */; };
+		20AF26462C2071A10045EAE7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AF26452C2071A10045EAE7 /* CGSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
 		20AF26422C1F0D9F0045EAE7 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		20AF26452C2071A10045EAE7 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,10 +260,10 @@
 		2097B7922C114C74002261C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				20AF26442C2071850045EAE7 /* CoreGraphics */,
 				2097B7C62C15FAEF002261C3 /* SKNodes */,
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
-				2097B7D52C16E14F002261C3 /* CGPoint.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +478,15 @@
 			path = Generator;
 			sourceTree = "<group>";
 		};
+		20AF26442C2071850045EAE7 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7D52C16E14F002261C3 /* CGPoint.swift */,
+				20AF26452C2071A10045EAE7 /* CGSize.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -580,6 +591,7 @@
 				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
+				20AF26462C2071A10045EAE7 /* CGSize.swift in Sources */,
 				204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */,
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,

@@ -21,14 +21,20 @@ struct GameConfig {
     static let playerRotates      : Bool    = false
     
     /** Dictates how much slowing factor a Base platform does to a target */
-    static let baseFrictionModifier : CGFloat = 0.2
+    static let baseFrictionModifier     : CGFloat = 0.2
     /** Dictates how much slowing factor a Slippery platform does to a target */
     static let slipperyFrictionModifier : CGFloat = 0.0    
     /** Dictates how much slowing factor a Sticky platform does to a target */
     static let stickyFrictionModifier   : CGFloat = 0.8
     
-    static let joystickSafeArea        : CGFloat = 32
-    static let joystickDampeningFactor : CGFloat = 400
+    /** Area where drag inputs are nullified if their distance fall below this threshold */
+    static let joystickSafeArea              : CGFloat = 32
+    /** Dictates how far can you pull on the joystick knob*/
+    static let joystickMaxDistance           : CGFloat = 100
+    /** Compensates for the width of the touch, for the joystick's maximum pull distance */
+    static let joystickInaccuracyCompensator : CGFloat = 0.9
+    /** A factor which reduces the impulse given by pulling on a joystick knob */
+    static let joystickDampeningFactor       : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
         "PLY" : { Player() },
