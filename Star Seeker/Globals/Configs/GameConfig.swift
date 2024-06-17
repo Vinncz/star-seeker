@@ -5,7 +5,6 @@ struct GameConfig {
     
     /** Divides the screen into grids with the specified value */
     static let playArea           : CGSize = CGSize( width: 11, height: 23 )
-    
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
     static let lateralForce       : CGFloat = 1250
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
@@ -32,11 +31,18 @@ struct GameConfig {
     static let joystickDampeningFactor : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
+        "PLY" : { Player() },
         "pFN" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
         "pBG" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
         "pBP" : { BasePlatform      ( size: ValueProvider.gridDimension ) },
         "pST" : { StickyPlatform    ( size: ValueProvider.gridDimension ) },
         "pSL" : { SlipperyPlatform  ( size: ValueProvider.gridDimension ) },
         "pCL" : { ClimbablePlatform ( size: ValueProvider.gridDimension ) }
+    ]
+    static let modifierMapping : [String : () -> String] = [
+        "au" : { ImageNamingConstant.Season.autumn },
+        "wi" : { ImageNamingConstant.Season.winter },
+        "sp" : { ImageNamingConstant.Season.spring },
+        "sm" : { ImageNamingConstant.Season.summer }
     ]
 }
