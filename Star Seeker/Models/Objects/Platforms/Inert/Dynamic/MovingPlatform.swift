@@ -9,6 +9,7 @@ class MovingPlatform : DynamicPlatform {
     ) {
         super.init(texture: texture, size: size)
         self.name = NodeNamingConstant.Platform.Inert.Dynamic.moving
+        self.physicsBody!.categoryBitMask = BitMaskConstant.movingPlatform
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

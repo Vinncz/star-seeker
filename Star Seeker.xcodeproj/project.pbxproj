@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20006B1B2C18BB0200EC46C6 /* CSVDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */; };
-		20006B232C18C6D800EC46C6 /* LevelFormat2 in Resources */ = {isa = PBXBuildFile; fileRef = 20006B222C18C6D800EC46C6 /* LevelFormat2 */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
-		204FC3B82C19B37300C1BBCC /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
 		204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3C02C1A9B7700C1BBCC /* DragButton.swift */; };
 		204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3C32C1AE11B00C1BBCC /* Restriction.swift */; };
@@ -20,6 +18,12 @@
 		204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */; };
 		204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */; };
 		204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3D22C1B655100C1BBCC /* Darkness.swift */; };
+		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
+		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
+		206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A42C21642A004270C7 /* LevelGenerator.swift */; };
+		206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A72C21648C004270C7 /* ButtonsMovementController.swift */; };
+		206332AC2C21648C004270C7 /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A82C21648C004270C7 /* JoystickMovementController.swift */; };
+		206332AD2C21648C004270C7 /* MovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A92C21648C004270C7 /* MovementController.swift */; };
 		2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */; };
 		2097B7822C114C00002261C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7812C114C00002261C3 /* ContentView.swift */; };
 		2097B7842C114C00002261C3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7832C114C00002261C3 /* Item.swift */; };
@@ -31,7 +35,6 @@
 		2097B7A32C115AED002261C3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A22C115AED002261C3 /* Logger.swift */; };
 		2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A42C115E99002261C3 /* Wrapper.swift */; };
 		2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A62C119C27002261C3 /* HoldButton.swift */; };
-		2097B7AA2C121DA8002261C3 /* ButtonsMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */; };
 		2097B7AC2C122000002261C3 /* PressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AB2C122000002261C3 /* PressButton.swift */; };
 		2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AD2C1227EE002261C3 /* UIConfig.swift */; };
 		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
@@ -46,7 +49,6 @@
 		2097B7D02C169CA3002261C3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CF2C169CA3002261C3 /* Player.swift */; };
 		2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */; };
 		2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D32C16E0BD002261C3 /* ValueProvider.swift */; };
-		2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D52C16E14F002261C3 /* CGPoint.swift */; };
 		2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D72C16EFE5002261C3 /* Platform.swift */; };
 		2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D92C16F03E002261C3 /* BasePlatform.swift */; };
 		2097B7DE2C1701DC002261C3 /* CollapsiblePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */; };
@@ -59,18 +61,14 @@
 		2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */; };
 		2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */; };
 		2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F82C17F350002261C3 /* CountdownTimer.swift */; };
-		2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FA2C17F891002261C3 /* PauseScreen.swift */; };
 		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
-		6724BF102C1C1F5300E15138 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */; };
 		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDecipherer.swift; sourceTree = "<group>"; };
-		20006B222C18C6D800EC46C6 /* LevelFormat2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = LevelFormat2; sourceTree = "<group>"; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
-		204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
 		204FC3C02C1A9B7700C1BBCC /* DragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragButton.swift; sourceTree = "<group>"; };
 		204FC3C32C1AE11B00C1BBCC /* Restriction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restriction.swift; sourceTree = "<group>"; };
@@ -80,6 +78,12 @@
 		204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskConstant.swift; sourceTree = "<group>"; };
 		204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionConstant.swift; sourceTree = "<group>"; };
 		204FC3D22C1B655100C1BBCC /* Darkness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkness.swift; sourceTree = "<group>"; };
+		2063329F2C2163F2004270C7 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		206332A02C2163F2004270C7 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		206332A42C21642A004270C7 /* LevelGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		206332A72C21648C004270C7 /* ButtonsMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsMovementController.swift; sourceTree = "<group>"; };
+		206332A82C21648C004270C7 /* JoystickMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
+		206332A92C21648C004270C7 /* MovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementController.swift; sourceTree = "<group>"; };
 		2097B77C2C114C00002261C3 /* Star Seeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Seeker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_SeekerApp.swift; sourceTree = "<group>"; };
 		2097B7812C114C00002261C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,7 +96,6 @@
 		2097B7A22C115AED002261C3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2097B7A42C115E99002261C3 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		2097B7A62C119C27002261C3 /* HoldButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldButton.swift; sourceTree = "<group>"; };
-		2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsMovementController.swift; sourceTree = "<group>"; };
 		2097B7AB2C122000002261C3 /* PressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButton.swift; sourceTree = "<group>"; };
 		2097B7AD2C1227EE002261C3 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
@@ -107,7 +110,6 @@
 		2097B7CF2C169CA3002261C3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNamingConstant.swift; sourceTree = "<group>"; };
 		2097B7D32C16E0BD002261C3 /* ValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueProvider.swift; sourceTree = "<group>"; };
-		2097B7D52C16E14F002261C3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		2097B7D72C16EFE5002261C3 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		2097B7D92C16F03E002261C3 /* BasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlatform.swift; sourceTree = "<group>"; };
 		2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsiblePlatform.swift; sourceTree = "<group>"; };
@@ -120,10 +122,8 @@
 		2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPlatform.swift; sourceTree = "<group>"; };
 		2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactivePlatform.swift; sourceTree = "<group>"; };
 		2097B7F82C17F350002261C3 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
-		2097B7FA2C17F891002261C3 /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
-		6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,15 +138,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		20006B192C18BAE400EC46C6 /* LevelGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				20006B222C18C6D800EC46C6 /* LevelFormat2 */,
-				6724BF0F2C1C1F5300E15138 /* LevelGenerator.swift */,
-			);
-			path = LevelGenerator;
-			sourceTree = "<group>";
-		};
 		204FC3B92C19F97700C1BBCC /* Decipherer */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +178,33 @@
 				204FC3D22C1B655100C1BBCC /* Darkness.swift */,
 			);
 			path = LevelResetters;
+			sourceTree = "<group>";
+		};
+		206332A12C2163F2004270C7 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				2063329F2C2163F2004270C7 /* CGPoint.swift */,
+				206332A02C2163F2004270C7 /* CGSize.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
+		206332A52C21642A004270C7 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				206332A42C21642A004270C7 /* LevelGenerator.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
+		206332AA2C21648C004270C7 /* MovementController */ = {
+			isa = PBXGroup;
+			children = (
+				206332A72C21648C004270C7 /* ButtonsMovementController.swift */,
+				206332A82C21648C004270C7 /* JoystickMovementController.swift */,
+				206332A92C21648C004270C7 /* MovementController.swift */,
+			);
+			path = MovementController;
 			sourceTree = "<group>";
 		};
 		2097B7732C114C00002261C3 = {
@@ -264,7 +282,7 @@
 				2097B7C62C15FAEF002261C3 /* SKNodes */,
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
-				2097B7D52C16E14F002261C3 /* CGPoint.swift */,
+				206332A12C2163F2004270C7 /* CoreGraphics */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,6 +318,7 @@
 		2097B7B42C12FC02002261C3 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
+				206332A52C21642A004270C7 /* Generator */,
 				204FC3C22C1AE10D00C1BBCC /* Restrictions */,
 				204FC3BF2C1A1BB100C1BBCC /* Handler */,
 				204FC3B92C19F97700C1BBCC /* Decipherer */,
@@ -427,8 +446,7 @@
 		2097B7F32C175F40002261C3 /* Compositions */ = {
 			isa = PBXGroup;
 			children = (
-				2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */,
-				204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */,
+				206332AA2C21648C004270C7 /* MovementController */,
 			);
 			path = Compositions;
 			sourceTree = "<group>";
@@ -437,7 +455,6 @@
 			isa = PBXGroup;
 			children = (
 				2097B7F62C175F6A002261C3 /* Buttons */,
-				20006B192C18BAE400EC46C6 /* LevelGenerator */,
 				2097B7F72C17F342002261C3 /* DelayedExecution */,
 				2097B7A42C115E99002261C3 /* Wrapper.swift */,
 				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
@@ -450,7 +467,6 @@
 			isa = PBXGroup;
 			children = (
 				2097B79A2C1152AD002261C3 /* Game.swift */,
-				2097B7FA2C17F891002261C3 /* PauseScreen.swift */,
 				2097B7FC2C17F8B9002261C3 /* GridView.swift */,
 			);
 			path = Presenters;
@@ -532,7 +548,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20006B232C18C6D800EC46C6 /* LevelFormat2 in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
 			);
@@ -558,18 +573,18 @@
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
 				204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */,
-				2097B7AA2C121DA8002261C3 /* ButtonsMovementController.swift in Sources */,
+				206332AC2C21648C004270C7 /* JoystickMovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
-				2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */,
 				2097B7E42C17021F002261C3 /* StickyPlatform.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
 				2097B7E62C170228002261C3 /* SlipperyPlatform.swift in Sources */,
 				2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */,
+				206332AD2C21648C004270C7 /* MovementController.swift in Sources */,
 				2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */,
+				206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */,
 				2097B7BE2C15E138002261C3 /* Sizeable.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
-				204FC3B82C19B37300C1BBCC /* JoystickMovementController.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7C22C15E1EE002261C3 /* SKLabelNode.swift in Sources */,
 				2097B7E92C170244002261C3 /* ClimbablePlatform.swift in Sources */,
@@ -578,12 +593,14 @@
 				2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */,
 				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
+				206332A22C2163F2004270C7 /* CGPoint.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
 				204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */,
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */,
 				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
+				206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */,
 				204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */,
 				2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */,
 				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
@@ -593,9 +610,8 @@
 				6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */,
 				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,
 				2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */,
-				2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */,
-				6724BF102C1C1F5300E15138 /* LevelGenerator.swift in Sources */,
 				2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */,
+				206332A32C2163F2004270C7 /* CGSize.swift in Sources */,
 				204FC3CA2C1AE4A200C1BBCC /* RestrictionGroup.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
 				2097B7EB2C170268002261C3 /* PassThroughPlatform.swift in Sources */,

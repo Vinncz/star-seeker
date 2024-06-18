@@ -5,7 +5,6 @@ struct GameConfig {
     
     /** Divides the screen into grids with the specified value */
     static let playArea           : CGSize = CGSize( width: 11, height: 23 )
-    
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
     static let lateralForce       : CGFloat = 1250
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
@@ -22,16 +21,23 @@ struct GameConfig {
     static let playerRotates      : Bool    = false
     
     /** Dictates how much slowing factor a Base platform does to a target */
-    static let baseFrictionModifier : CGFloat = 0.2
+    static let baseFrictionModifier     : CGFloat = 0.2
     /** Dictates how much slowing factor a Slippery platform does to a target */
     static let slipperyFrictionModifier : CGFloat = 0.0    
     /** Dictates how much slowing factor a Sticky platform does to a target */
     static let stickyFrictionModifier   : CGFloat = 0.8
     
-    static let joystickSafeArea        : CGFloat = 32
-    static let joystickDampeningFactor : CGFloat = 400
+    /** Area where drag inputs are nullified if their distance fall below this threshold */
+    static let joystickSafeArea              : CGFloat = 32
+    /** Dictates how far can you pull on the joystick knob*/
+    static let joystickMaxDistance           : CGFloat = 100
+    /** Compensates for the width of the touch, for the joystick's maximum pull distance */
+    static let joystickInaccuracyCompensator : CGFloat = 0.9
+    /** A factor which reduces the impulse given by pulling on a joystick knob */
+    static let joystickDampeningFactor       : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
+        "PLY" : { Player          () },
         "pFN" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
         "pBG" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
         "pBP" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
@@ -41,6 +47,11 @@ struct GameConfig {
         /** This value size is ignored temporarily */
         "pMV" : { MovingPlatform        ( size: ValueProvider.gridDimension ) },
         "pMT" : { MovingTrackPlatform   ( size: ValueProvider.gridDimension ) },
-        
+    ]
+    static let modifierMapping : [String : () -> String] = [
+        "au" : { ImageNamingConstant.Season.autumn },
+        "wi" : { ImageNamingConstant.Season.winter },
+        "sp" : { ImageNamingConstant.Season.spring },
+        "sm" : { ImageNamingConstant.Season.summer }
     ]
 }
