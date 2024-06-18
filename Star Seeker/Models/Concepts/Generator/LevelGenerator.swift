@@ -30,7 +30,7 @@ class LevelGenerator {
                     }
                 } else {
                     if movingPlatformLength != 0 {
-                        let platform = MovingPlatform(size: ValueProvider.customGridDimension(movingPlatformLength, 1))
+                        let platform = MovingPlatform(texture: SKTexture(imageNamed: ImageNamingConstant.Platform.PassThrough.Autumn.climbable), size: ValueProvider.customGridDimension(movingPlatformLength, 1))
                         
                         let xStart = columnIndex - movingPlatformLength - movingPlaformTrackLength
                         let xEnd = columnIndex

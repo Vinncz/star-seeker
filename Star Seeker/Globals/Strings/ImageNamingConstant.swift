@@ -3,7 +3,7 @@ import Foundation
 struct ImageNamingConstant {
     
     struct Season {
-        static let autumn : String = ".Seautumn"
+        static let autumn : String = ".autumn"
         static let winter : String = ".winter"
         static let spring : String = ".spring"
         static let summer : String = ".summer"
@@ -11,12 +11,32 @@ struct ImageNamingConstant {
     
     static let darkness : String = "darkness."
     
+    struct Background {
+        struct Winter {
+            static let background : String = "background.winter.background"
+            static let overlay    : String = "background.winter.overlay"
+        }
+        struct Spring {
+            static let background : String = "background.spring.background"
+            static let overlay    : String = "background.spring.overlay"
+        }
+        struct Autumn {
+            static let background : String = "background.autumn.background"
+            static let overlay    : String = "background.autumn.overlay"
+        }
+    }
+    
     struct Platform {
         static let platform = "platform"
         
         struct Inert {
             static let inert : String = "platform.inert"
             static let base  : String = "platform.inert.base"
+            
+            struct Autumn {
+                static let base : String = "platform.inert.autumn.base"
+                static let wall : String = "platform.inert.autumn.wall"
+            }
             
             struct Dynamic {
                 static let dynamic     : String = "platform.inert.dynamic"
@@ -28,12 +48,23 @@ struct ImageNamingConstant {
         
         struct Reactive {
             static let reactive : String = "platform.reactive"
+            
+            struct Autumn {
+                static let splippery : String = "platform.reactive.autumn.slippery"
+                static let sticky : String = "platform.reactive.autumn.sticky"
+            }
+            
             static let slippery : String = "platform.reactive.slippery"
             static let sticky   : String = "platform.reactive.sticky"
         }
         
         struct PassThrough {
             static let passThrough : String = "platform.passthrough"
+            
+            struct Autumn {
+                static let climbable : String = "platform.passthrough.autumn.climbable"
+            }
+            
             static let climbable   : String = "platform.passthrough.climbable"
         }
         

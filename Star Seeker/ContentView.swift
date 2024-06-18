@@ -6,8 +6,9 @@ struct ContentView : View {
     
     var body: some View {
         ZStack ( alignment: .topLeading ) {
-            Rectangle()
-                .foregroundStyle(.blue)
+            Image(ImageNamingConstant.Background.Autumn.background)
+                .resizable()
+                .scaledToFit()
                 .ignoresSafeArea(.all)
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)

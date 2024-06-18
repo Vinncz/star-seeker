@@ -23,7 +23,7 @@ class CSVDecipherer : Decipherer {
         ;;;;;;;;;;
         ;;;pFN;pFN;pFN;pFN;;;;
         ;;;;;;;;;;
-        ;;;;;;;;PLY;;
+        ;;;;;;;;;;
         ;pBP;;;;;;pBP;pBP;;
         ;pBP;pBP;pBP;;;;;pBP;pBP;
         ;;;;;;;;;;
@@ -31,7 +31,7 @@ class CSVDecipherer : Decipherer {
         ;;;;;;;;;;
         pBP;pBP;;;;;;;;;pBP
         ;pBP;pBP;pBP;;;;pBP;pBP;pBP;pBP
-        ;;;;;;;;;;
+        ;;;;PLY;;;;;;
         ;;;;pBG;pBG;pBG;;;;
         ;;;;;;;;;;
         ;;;;;;;;;;

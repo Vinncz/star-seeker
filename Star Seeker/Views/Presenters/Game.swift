@@ -33,6 +33,10 @@ import SwiftUI
         
         attachDarkness()
         addChild(controller!)
+        
+//        let overlay = SKVideoNode(fileNamed: "overlay.mp4")
+//        addChild(overlay)
+//        overlay.play()
     }
     
     /** The state of situation for self */
@@ -47,10 +51,11 @@ import SwiftUI
                     self.isPaused = true
                     break
                 case .finished:
-                    /* Freeze the game to save memory */
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.isPaused = true
+                    let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
+                        let progress = elapsedTime / 6
+                        self.speed = 1 - progress
                     }
+                    self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
                 default:
                     break
             }

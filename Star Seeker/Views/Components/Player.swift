@@ -58,7 +58,7 @@ extension Player {
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
             debug("Player collided with \(platform.position) platform -- with player's feet position of \(player.position.y   - (player.size.height   / 2)) and platform's top at \(platform.position.y + (platform.size.height / 2))")
             
-            let expandedFrame = platform.frame.insetBy(dx: -1, dy: -1)
+            let expandedFrame = platform.frame.insetBy(dx: -2, dy: -2)
             let contactPoint = contact.contactPoint
             if ( expandedFrame.contains(contactPoint) ) {
                 player.statistics!.currentlyStandingOn.insert(platform)
@@ -114,7 +114,6 @@ extension Player {
         )
         if let player = nodes[0] as? Player, let darkness = nodes[1] as? Darkness {
             debug("Player did release from \(darkness.position) darkness. Player is at \(player.position)")
-            print("How did you ... ?!")
         }
     }
 }

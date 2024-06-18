@@ -38,14 +38,14 @@ struct GameConfig {
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
         "PLY" : { Player          () },
-        "pFN" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
-        "pBG" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
-        "pBP" : { BasePlatform          ( size: ValueProvider.gridDimension ) },
+        "pFN" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
+        "pBG" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
+        "pBP" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.wall), size: ValueProvider.gridDimension ) },
         "pST" : { StickyPlatform        ( size: ValueProvider.gridDimension ) },
         "pSL" : { SlipperyPlatform      ( size: ValueProvider.gridDimension ) },
         "pCL" : { ClimbablePlatform     ( size: ValueProvider.gridDimension ) },
         /** This value size is ignored temporarily */
-        "pMV" : { MovingPlatform        ( size: ValueProvider.gridDimension ) },
+        "pMV" : { MovingPlatform        ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.PassThrough.Autumn.climbable), size: ValueProvider.gridDimension ) },
         "pMT" : { MovingTrackPlatform   ( size: ValueProvider.gridDimension ) },
     ]
     static let modifierMapping : [String : () -> String] = [
