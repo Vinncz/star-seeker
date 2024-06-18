@@ -14,14 +14,13 @@ struct ContentView : View {
                 .background(.clear)
             //            GridScreen()
             HStack {
-                PlayPauseButton().font(.largeTitle).foregroundStyle(.white)
+                PauseButton().font(.largeTitle).foregroundStyle(.white)
                 Spacer()
                 PlayerScore()
             }
             .padding()
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
-            EndScreen().background(.black.opacity(0.5))
         }
     }
     
@@ -36,25 +35,65 @@ struct ContentView : View {
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
 extension ContentView {
-    
     func RestartButton () -> some View {
         Button {
             scene.restart()
         } label: {
-            Image("pause-reset-button")
+            Image("reset-button")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80)
         }
     }
     
+    func ExitButton () -> some View {
+        Button {
+            print("go to start screen")
+        } label: {
+            Image("exit-button")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80)
+        }
+    }
+    
+    func PlayButton () -> some View {
+        Button {
+            let game = self.scene
+            self.gameIsTransitioningToPlaying = true
+            self.stopwatch = CountdownTimer(duration: 2, action: {
+                game.state = .playing
+                self.stopwatch?.end()
+                self.stopwatch = nil
+                self.gameIsTransitioningToPlaying = false
+            })
+            self.stopwatch?.begin()
+        } label: {
+            Image("play-button")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80)
+        }
+    }
+    
+    func PauseButton () -> some View {
+        Button {
+            let game = self.scene
+            if ( game.state == .playing ) {
+                game.state = .paused
+            }
+        } label: {
+            Image("pause-button")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30)
+        }
+    }
+    
     func PlayerScore () -> some View {
         withAnimation {
-            Text(String(format: "%.0fm", scene.player?.statistics!.currentHeight.y ?? 0))
+            StrokeText(text: String(format: "%.0fm", scene.player?.statistics!.currentHeight.y ?? 0), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
                 .scaleEffect(playerScoreScalingFactor)
-                .font(.system(.title, design: .rounded))
-                .bold()
-                .foregroundStyle(.white)
                 .animation(.bouncy(duration: 0.1), value: playerScoreScalingFactor)
                 .onChange(of: scene.player?.statistics!.currentHeight.y) { oldValue, newValue in
                     playerScoreScalingFactor = 1.25
@@ -88,31 +127,6 @@ extension ContentView {
         }
     }
     
-    func PlayPauseButton () -> some View {
-        return Button {
-            let game = self.scene
-            if ( game.state == .playing ) {
-                game.state = .paused
-            } else if ( game.state == .paused ) {
-                self.gameIsTransitioningToPlaying = true
-                self.stopwatch = CountdownTimer(duration: 2, action: {
-                    game.state = .playing
-                    self.stopwatch?.end()
-                    self.stopwatch = nil
-                    self.gameIsTransitioningToPlaying = false
-                })
-                self.stopwatch?.begin()
-            }
-        } label: {
-            let game = self.scene
-            if ( game.state == .playing || game.state == .notYetStarted ) {
-                Image(systemName: "pause.circle.fill")
-            } else if ( game.state == .paused ) {
-                Image(systemName: "play.circle.fill")
-            }
-        }
-    }
-    
     func PauseScreen () -> some View {
         if ( self.gameIsTransitioningToPlaying == false ) {
             AnyView (
@@ -129,22 +143,7 @@ extension ContentView {
                                 .opacity(0.2)
                             HStack (spacing: UIConfig.Spacings.huge) {
                                 RestartButton()
-                                Button {
-                                    let game = self.scene
-                                    self.gameIsTransitioningToPlaying = true
-                                    self.stopwatch = CountdownTimer(duration: 2, action: {
-                                        game.state = .playing
-                                        self.stopwatch?.end()
-                                        self.stopwatch = nil
-                                        self.gameIsTransitioningToPlaying = false
-                                    })
-                                    self.stopwatch?.begin()
-                                } label: {
-                                    Image("pause-play-button")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 80)
-                                }
+                                PlayButton()
                             }
                         }
                         
@@ -164,36 +163,6 @@ extension ContentView {
     
     func EndScreen () -> some View {
         withAnimation {
-            //            HStack ( alignment: .center ) {
-            //                Spacer()
-            //                VStack {
-            //                    Spacer()
-            //                    VStack ( spacing: UIConfig.Spacings.large ) {
-            //                        Text("GAME OVER")
-            //                            .bold()
-            //                            .font(.system(.largeTitle, design: .rounded))
-            //                        VStack {
-            //                            Text("You managed to reach")
-            //                                .font(.system(.body, design: .rounded))
-            //                            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
-            //                                .font(.system(.largeTitle, design: .rounded))
-            //                                .bold()
-            //                                .rotationEffect(.degrees(7))
-            //                        }
-            //                        RestartButton().font(.system(size: UIConfig.FontSizes.huge))
-            //                    }
-            //                    .padding(.horizontal, UIConfig.Paddings.huge)
-            //                    .padding(.vertical, UIConfig.Paddings.huge)
-            //                    .background (
-            //                        .white,
-            //                        in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
-            //                    )
-            //                    Spacer()
-            //                }
-            //                Spacer()
-            //            }
-            //            .foregroundStyle(.gray)
-            
             VStack {
                 Spacer()
                 ZStack {
@@ -204,18 +173,24 @@ extension ContentView {
                         VStack (spacing: UIConfig.Spacings.nano){
                             Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
-                                .foregroundStyle(.black)
-                            
+                                .foregroundStyle(Color(hue: 0, saturation: 0, brightness: 0.37))
                             Text("Hi Score: \(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))")
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.micro))
                                 .foregroundStyle(.gray)
                         }
-                        RestartButton()
+                        HStack (spacing: UIConfig.Spacings.large) {
+                            RestartButton()
+                            ExitButton()
+                        }
                     }
-//                    VStack {
-//                        Text("Game")
-//                        Text("Over")
-//                    }
+                    .padding(.top, 20)
+                    VStack (spacing: 0) {
+                        StrokeText(text: "Game", width: 2, borderColor: .black, size: UIConfig.FontSizes.normal, foregroudColor: .white)
+                            .offset(y: 10)
+                        StrokeText(text: "Over", width: 2, borderColor: .black, size: UIConfig.FontSizes.colossal, foregroudColor: .white)
+                    }
+                    .offset(y: -160)
+                    
                     
                 }
                 .frame(width: .infinity)
@@ -223,6 +198,33 @@ extension ContentView {
             }
             .padding(.horizontal, UIConfig.Spacings.huge)
             .frame(width: .infinity, height: .infinity)
+        }
+    }
+}
+
+struct StrokeText: View {
+    let text: String
+    let width: CGFloat
+    let borderColor: Color
+    let size: CGFloat
+    let foregroudColor: Color
+    
+    var body: some View {
+        ZStack{
+            ZStack{
+                Text(text).offset(x:  width, y:  width)
+                    .font(.custom("Chainwhacks", size: size))
+                Text(text).offset(x: -width, y: -width)
+                    .font(.custom("Chainwhacks", size: size))
+                Text(text).offset(x: -width, y:  width)
+                    .font(.custom("Chainwhacks", size: size))
+                Text(text).offset(x:  width, y: -width)
+                    .font(.custom("Chainwhacks", size: size))
+            }
+            .foregroundColor(borderColor)
+            Text(text)
+                .font(.custom("Chainwhacks", size: size))
+                .foregroundColor(foregroudColor)
         }
     }
 }
