@@ -82,9 +82,7 @@ extension Game {
             if let previousPosition = currentMovingPlatformPosition {
                 let deltaX = platform.position.x - previousPosition.x
                 currentMovingPlatformPosition = platform.position
-//                if let player = self.player {
-                    self.player?.position.x += deltaX
-//                }
+                self.player?.position.x += deltaX
             } else {
                 currentMovingPlatformPosition = currentMovingPlatform?.position
             }

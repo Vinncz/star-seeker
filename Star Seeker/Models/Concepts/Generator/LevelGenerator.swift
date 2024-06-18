@@ -19,8 +19,8 @@ class LevelGenerator {
             for ( columnIndex, column ) in row.enumerated() {
                 if let column {
                     if (column.name == NodeNamingConstant.Platform.Inert.Dynamic.moving) {
-                            movingPlatformLength += 1
-                    } 
+                        movingPlatformLength += 1
+                    }
                     else if (column.name == NodeNamingConstant.Platform.PassThrough.movingTrack) {
                         movingPlaformTrackLength += 1
                     }
@@ -32,13 +32,14 @@ class LevelGenerator {
                     if movingPlatformLength != 0 {
                         let platform = MovingPlatform(size: ValueProvider.customGridDimension(movingPlatformLength, 1))
                         
-                        let xStart = columnIndex-movingPlatformLength-movingPlaformTrackLength
+                        let xStart = columnIndex - movingPlatformLength - movingPlaformTrackLength
                         let xEnd = columnIndex
                         
-                        platform.position = CGPoint(xGrid: xStart, yGrid: rowIndex, width: movingPlatformLength, height: 1);                        target.addChild(platform)
+                        platform.position = CGPoint(xGrid: xStart, yGrid: rowIndex, width: movingPlatformLength, height: 1)
+                        target.addChild(platform)
                         
                         let distance = CGFloat(xEnd) - CGFloat(xStart) - CGFloat(movingPlatformLength)
-                                
+                        
                         let platformSpeed = 1.0
                         let platformActionDuration = distance / platformSpeed
                         
@@ -62,5 +63,4 @@ class LevelGenerator {
             }
         }
     }
-    
 }

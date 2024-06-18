@@ -3,7 +3,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView : View {
-        
+    
     var body: some View {
         ZStack ( alignment: .topLeading ) {
             Rectangle()
@@ -12,18 +12,18 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-//            GridScreen()
+            //            GridScreen()
             HStack {
                 PlayPauseButton().font(.largeTitle).foregroundStyle(.white)
-                RestartButton().font(.largeTitle).foregroundStyle(.white)
                 Spacer()
                 PlayerScore()
             }
-                .padding()
+            .padding()
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+            EndScreen().background(.black.opacity(0.5))
         }
-    }    
+    }
     
     let sw = UIScreen.main.bounds.width
     let sh = UIScreen.main.bounds.height
@@ -41,7 +41,10 @@ extension ContentView {
         Button {
             scene.restart()
         } label: {
-            Image(systemName: "arrow.counterclockwise.circle.fill")
+            Image("pause-reset-button")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80)
         }
     }
     
@@ -70,7 +73,7 @@ extension ContentView {
                     VStack {
                         Spacer()
                         Text(String((stopwatch?.remainingTime ?? -1) + 1))
-                            .font(.system(size: UIConfig.FontSizes.astronomical, design: .rounded))
+                            .font(.custom("Chainwhacks", size: UIConfig.FontSizes.titanic))
                             .bold()
                             .foregroundStyle(.white)
                         Spacer()
@@ -92,7 +95,7 @@ extension ContentView {
                 game.state = .paused
             } else if ( game.state == .paused ) {
                 self.gameIsTransitioningToPlaying = true
-                self.stopwatch = CountdownTimer(duration: 2, action: { 
+                self.stopwatch = CountdownTimer(duration: 2, action: {
                     game.state = .playing
                     self.stopwatch?.end()
                     self.stopwatch = nil
@@ -113,41 +116,45 @@ extension ContentView {
     func PauseScreen () -> some View {
         if ( self.gameIsTransitioningToPlaying == false ) {
             AnyView (
-                HStack {
+                VStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Spacer()
-                            VStack ( spacing: UIConfig.Spacings.normal ) {
-                                Text("PAUSED")
-                                    .font(.system(.largeTitle, design: .rounded))
-                                    .bold()
-                                    .foregroundStyle(.gray)
-                                HStack () {
-                                    PlayPauseButton()
-                                        .foregroundStyle(.gray)
-                                        .font(.system(size: UIConfig.FontSizes.huge))
-                                    RestartButton()
-                                        .foregroundStyle(.gray)
-                                        .font(.system(size: UIConfig.FontSizes.huge))
+                    ZStack {
+                        Image("pause-box")
+                            .resizable()
+                            .scaledToFit()
+                        VStack (spacing: UIConfig.Spacings.large) {
+                            Text("Paused")
+                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
+                                .foregroundStyle(.black)
+                                .opacity(0.2)
+                            HStack (spacing: UIConfig.Spacings.huge) {
+                                RestartButton()
+                                Button {
+                                    let game = self.scene
+                                    self.gameIsTransitioningToPlaying = true
+                                    self.stopwatch = CountdownTimer(duration: 2, action: {
+                                        game.state = .playing
+                                        self.stopwatch?.end()
+                                        self.stopwatch = nil
+                                        self.gameIsTransitioningToPlaying = false
+                                    })
+                                    self.stopwatch?.begin()
+                                } label: {
+                                    Image("pause-play-button")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80)
                                 }
                             }
-                                .padding()
-                                .frame(width: 320)
-                                .background(
-                                    Color(red: 255, green: 208, blue: 193),
-                                    in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
-                                )
-                            Spacer()
                         }
-                            .padding()
-                        Spacer()
+                        
                     }
+                    .frame(width: .infinity)
                     Spacer()
                 }
+                    .padding(.horizontal, UIConfig.Spacings.huge)
+                    .frame(width: .infinity, height: .infinity)
             )
-            
         } else {
             AnyView (
                 CountdownBeforeResuming()
@@ -157,38 +164,67 @@ extension ContentView {
     
     func EndScreen () -> some View {
         withAnimation {
-            HStack ( alignment: .center ) {
+            //            HStack ( alignment: .center ) {
+            //                Spacer()
+            //                VStack {
+            //                    Spacer()
+            //                    VStack ( spacing: UIConfig.Spacings.large ) {
+            //                        Text("GAME OVER")
+            //                            .bold()
+            //                            .font(.system(.largeTitle, design: .rounded))
+            //                        VStack {
+            //                            Text("You managed to reach")
+            //                                .font(.system(.body, design: .rounded))
+            //                            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
+            //                                .font(.system(.largeTitle, design: .rounded))
+            //                                .bold()
+            //                                .rotationEffect(.degrees(7))
+            //                        }
+            //                        RestartButton().font(.system(size: UIConfig.FontSizes.huge))
+            //                    }
+            //                    .padding(.horizontal, UIConfig.Paddings.huge)
+            //                    .padding(.vertical, UIConfig.Paddings.huge)
+            //                    .background (
+            //                        .white,
+            //                        in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
+            //                    )
+            //                    Spacer()
+            //                }
+            //                Spacer()
+            //            }
+            //            .foregroundStyle(.gray)
+            
+            VStack {
                 Spacer()
-                VStack {
-                    Spacer()
-                    VStack ( spacing: UIConfig.Spacings.large ) {
-                        Text("GAME OVER")
-                            .bold()
-                            .font(.system(.largeTitle, design: .rounded))
-                        VStack {
-                            Text("You managed to reach")
-                                .font(.system(.body, design: .rounded))
+                ZStack {
+                    Image("pause-box")
+                        .resizable()
+                        .scaledToFit()
+                    VStack (spacing: UIConfig.Spacings.large) {
+                        VStack (spacing: UIConfig.Spacings.nano){
                             Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
-                                .font(.system(.largeTitle, design: .rounded))
-                                .bold()
-                                .rotationEffect(.degrees(7))
+                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
+                                .foregroundStyle(.black)
+                            
+                            Text("Hi Score: \(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))")
+                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.micro))
+                                .foregroundStyle(.gray)
                         }
-                        RestartButton().font(.system(size: UIConfig.FontSizes.huge))
+                        RestartButton()
                     }
-                        .padding(.horizontal, UIConfig.Paddings.huge)
-                        .padding(.vertical, UIConfig.Paddings.huge)
-                        .background (
-                            .white,
-                            in: RoundedRectangle(cornerRadius: UIConfig.CornerRadiuses.huge)
-                        )
-                    Spacer()
+//                    VStack {
+//                        Text("Game")
+//                        Text("Over")
+//                    }
+                    
                 }
+                .frame(width: .infinity)
                 Spacer()
             }
-                .foregroundStyle(.gray)
+            .padding(.horizontal, UIConfig.Spacings.huge)
+            .frame(width: .infinity, height: .infinity)
         }
     }
-    
 }
 
 #Preview {
