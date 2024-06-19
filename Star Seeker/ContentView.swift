@@ -40,7 +40,7 @@ extension ContentView {
         Button {
             scene.restart()
         } label: {
-            Image("reset-button")
+            Image(ImageNamingConstant.Interface.Button.restart)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80)
@@ -51,7 +51,7 @@ extension ContentView {
         Button {
             print("go to start screen")
         } label: {
-            Image("exit-button")
+            Image(ImageNamingConstant.Interface.Button.exit)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80)
@@ -70,7 +70,7 @@ extension ContentView {
             })
             self.stopwatch?.begin()
         } label: {
-            Image("play-button")
+            Image(ImageNamingConstant.Interface.Button.play)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80)
@@ -84,7 +84,7 @@ extension ContentView {
                 game.state = .paused
             }
         } label: {
-            Image("pause-button")
+            Image(ImageNamingConstant.Interface.Button.pause)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30)
@@ -113,7 +113,7 @@ extension ContentView {
                     VStack {
                         Spacer()
                         Text(String((stopwatch?.remainingTime ?? -1) + 1))
-                            .font(.custom("Chainwhacks", size: UIConfig.FontSizes.titanic))
+                            .customFont(size: UIConfig.FontSizes.titanic)
                             .bold()
                             .foregroundStyle(.white)
                         Spacer()
@@ -134,12 +134,12 @@ extension ContentView {
                 VStack {
                     Spacer()
                     ZStack {
-                        Image("pause-box")
+                        Image(ImageNamingConstant.Interface.box)
                             .resizable()
                             .scaledToFit()
                         VStack (spacing: UIConfig.Spacings.large) {
                             Text("Paused")
-                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
+                                .customFont(size: UIConfig.FontSizes.normal)
                                 .foregroundStyle(.black)
                                 .opacity(0.2)
                             HStack (spacing: UIConfig.Spacings.huge) {
@@ -167,16 +167,16 @@ extension ContentView {
             VStack {
                 Spacer()
                 ZStack {
-                    Image("pause-box")
+                    Image(ImageNamingConstant.Interface.box)
                         .resizable()
                         .scaledToFit()
                     VStack (spacing: UIConfig.Spacings.large) {
                         VStack (spacing: UIConfig.Spacings.nano){
                             Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
-                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
+                                .customFont(size: UIConfig.FontSizes.normal)
                                 .foregroundStyle(Color(hue: 0, saturation: 0, brightness: 0.37))
                             Text("Hi Score: \(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))")
-                                .font(.custom("Chainwhacks", size: UIConfig.FontSizes.micro))
+                                .customFont(size: UIConfig.FontSizes.micro)
                                 .foregroundStyle(.gray)
                         }
                         HStack (spacing: UIConfig.Spacings.large) {
@@ -214,17 +214,17 @@ struct StrokeText: View {
         ZStack{
             ZStack{
                 Text(text).offset(x:  width, y:  width)
-                    .font(.custom("Chainwhacks", size: size))
+                    .customFont(size: size)
                 Text(text).offset(x: -width, y: -width)
-                    .font(.custom("Chainwhacks", size: size))
+                    .customFont(size: size)
                 Text(text).offset(x: -width, y:  width)
-                    .font(.custom("Chainwhacks", size: size))
+                    .customFont(size: size)
                 Text(text).offset(x:  width, y: -width)
-                    .font(.custom("Chainwhacks", size: size))
+                    .customFont(size: size)
             }
             .foregroundColor(borderColor)
             Text(text)
-                .font(.custom("Chainwhacks", size: size))
+                .customFont(size: size)
                 .foregroundColor(foregroudColor)
         }
     }

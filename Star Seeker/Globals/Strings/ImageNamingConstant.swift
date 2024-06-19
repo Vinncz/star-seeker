@@ -26,6 +26,22 @@ struct ImageNamingConstant {
         }
     }
     
+    struct Interface {
+        struct Button {
+            static let pause    : String = "interface.button.pause"
+            static let play     : String = "interface.button.play"
+            static let exit     : String = "interface.button.exit"
+            static let restart  : String = "interface.button.restart"
+        }
+        
+        static let box          : String = "interface.box"
+        
+        struct Joystick {
+            static let top      : String = "interface.joystick.top"
+            static let bottom   : String = "interface.joystick.bottom"
+        }
+    }
+    
     struct Platform {
         static let platform = "platform"
         

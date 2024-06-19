@@ -31,7 +31,7 @@ class JoystickMovementController : MovementController {
         
         return DragButtonNode (
             name       : NodeNamingConstant.movementControls,
-            imageNamed : ImageNamingConstant.Button.jump,
+            imageNamed : ImageNamingConstant.Interface.Joystick.top,
             maxDraggableDistance: maxDraggableDistance,
             command    : { [weak self] deltaX, deltaY in
                 switch ( self?.target.state ) {
