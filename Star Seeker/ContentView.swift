@@ -194,11 +194,11 @@ extension ContentView {
                     
                     
                 }
-                .frame(width: .infinity)
+                .frame(maxWidth: .infinity)
                 Spacer()
             }
             .padding(.horizontal, UIConfig.Spacings.huge)
-            .frame(width: .infinity, height: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }

@@ -1,3 +1,2 @@
 *.xcuserstate
-*.xcbkptlist
-*.plist
+.DS_Store
