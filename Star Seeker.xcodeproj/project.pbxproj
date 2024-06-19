@@ -18,7 +18,6 @@
 		204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */; };
 		204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */; };
 		204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3D22C1B655100C1BBCC /* Darkness.swift */; };
-		205A99652C21A98300C85B1B /* Star-Seeker-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44532C217DB10081CC26 /* Star-Seeker-Info.plist */; };
 		205A99672C21C3C900C85B1B /* overlay.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 205A99662C21C3C900C85B1B /* overlay.mp4 */; };
 		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
 		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
@@ -128,8 +127,8 @@
 		2097B7F82C17F350002261C3 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
+		674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
-		67FD44532C217DB10081CC26 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,9 +231,9 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
 				205A99662C21C3C900C85B1B /* overlay.mp4 */,
 				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
-				67FD44532C217DB10081CC26 /* Star-Seeker-Info.plist */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
 				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
@@ -557,7 +556,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				205A99652C21A98300C85B1B /* Star-Seeker-Info.plist in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
@@ -761,7 +759,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = STU45DAFT2;
+				DEVELOPMENT_TEAM = 5E27WSDAU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";
@@ -793,7 +791,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = STU45DAFT2;
+				DEVELOPMENT_TEAM = 5E27WSDAU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";
