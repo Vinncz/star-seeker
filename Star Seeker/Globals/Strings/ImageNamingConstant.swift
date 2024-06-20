@@ -20,51 +20,39 @@ struct ImageNamingConstant {
     }
     
     struct Platform {
-        static let platform = "platform"
+        static let prefix = "platform."
+        
+        struct Seasonal {
+            static let nonseasonal : String = "nonseasonal."
+            static let seasonal    : String = "seasonal."
+        }
         
         struct Inert {
-            static let name : String = "platform.inert"
-            static let base : String = "platform.inert.base"
+            static let prefix : String = "inert."
             
-            struct Autumn {
-                static let base : String = "platform.inert.autumn.base"
-                static let wall : String = "platform.inert.autumn.wall"
-            }
+            static let base   : String = "base"
+            static let wall   : String = "wall"
             
             struct Dynamic {
-                static let dynamic : String = "platform.inert.dynamic"
+                static let prefix      : String = "dynamic."
                 
-                static let collapsible : String = "platform.inert.dynamic.collapsible"
-                static let moving : String = "platform.inert.dynamic.moving"
+                static let collapsible : String = "collapsible"
+                static let moving      : String = "moving"
             }
         }
         
         struct Reactive {
-            static let name : String = "platform.reactive"
+            static let prefix   : String = "reactive."
             
-            struct Autumn {
-                static let splippery : String = "platform.reactive.autumn.slippery"
-                static let sticky : String = "platform.reactive.autumn.sticky"
-            }
-            
-            struct Placeholder {
-                static let slippery : String = "platform.reactive.slippery"
-                static let sticky   : String = "platform.reactive.sticky"
-            }
+            static let slippery : String = "slippery"
+            static let sticky   : String = "sticky"
         }
         
         struct PassThrough {
-            static let name : String = "platform.passthrough"
+            static let prefix : String = "passthrough."
             
-            struct Autumn {
-                static let climbable : String = "platform.passthrough.autumn.climbable"
-            }
-            
-            struct Placeholder {
-                static let climbable : String = "platform.passthrough.climbable"
-            }
+            static let climbable : String = "climbable"
         }
-        
     }
     
     struct Button {

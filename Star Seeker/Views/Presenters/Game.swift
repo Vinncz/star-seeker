@@ -95,9 +95,12 @@ extension Game {
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collisionHandlers : [Set<UInt32>: (SKPhysicsContact) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: Player.intoContactWithPlatform,
-            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
+            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact in
                 Player.intoContactWithPlatform(contact: contact)
                 self.advanceToNextLevel()
+            },
+            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
+                Player.intoContactWithPlatform(contact: contact)
                 // TODO: -- Fix this mess
                 if (contact.bodyA.node?.name == NodeNamingConstant.Platform.Inert.Dynamic.moving){
                     self.currentMovingPlatform = contact.bodyA.node as? SKSpriteNode
@@ -121,6 +124,7 @@ extension Game {
     func didEnd ( _ contact: SKPhysicsContact ) {
         let collisionHandlers : [Set<UInt32>: (SKPhysicsContact) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: Player.releaseContactWithPlatform,
+            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: Player.releaseContactWithPlatform,
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
                 self.currentMovingPlatform = nil
                 self.currentMovingPlatformPosition = nil
@@ -148,7 +152,7 @@ extension Game {
     
     /** Renders all platforms to the scene */
     func attachElements ( fromLevelOf: String = "easy-01" ) {
-        self.generator = LevelGenerator( for: self, decipherer: CSVDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ) )
+        self.generator = LevelGenerator( for: self, decipherer: CSVtoNodesDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ) )
         self.generator?.generate()
     }
     
@@ -164,7 +168,6 @@ extension Game {
             print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
             throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
-        print("generated player: \(self.player.hashValue)")
         return player
     }
     
@@ -203,10 +206,8 @@ extension Game {
             self.player = nil
             self.controller = nil
             self.attachElements(fromLevelOf: "easy-0" + String(Game.levelCounter))
-            print("attaching level easy-0" + String(Game.levelCounter))
             Game.levelCounter += 1
             self.player = try? self.findPlayerElement()
-            print("player: \(self.player.hashValue)")
             self.controller = self.setupMovementController(for: self.player!)
             self.attachDarkness()
             self.addChild(self.controller!)

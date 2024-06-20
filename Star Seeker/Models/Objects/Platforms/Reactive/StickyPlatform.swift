@@ -3,14 +3,20 @@ import SpriteKit
 /** Platform which slows the movement of the player */
 class StickyPlatform : ReactivePlatform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.Placeholder.sticky ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size)
-        self.name = NodeNamingConstant.Platform.Reactive.sticky
+    override var role : String {
+        ImageNamingConstant.Platform.Reactive.prefix + ImageNamingConstant.Platform.Reactive.sticky
+    } 
+    
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
+    }
+    
+    override func preparePhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
+        let pb          = Platform.defaultPhysicsBody(texture: texture, size: size)
+            pb.friction = GameConfig.stickyFrictionModifier
         
-        self.physicsBody?.friction = GameConfig.stickyFrictionModifier
+        return pb
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

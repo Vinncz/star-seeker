@@ -3,6 +3,8 @@ import Foundation
 struct BitMaskConstant {
     static let player                          : UInt32 = 0b001___000000001
     static let platform                        : UInt32 = 0b010___000000000
+        static let levelChangePlatform         : UInt32 = 0b010___000000001
+        static let levelBeginPlatform          : UInt32 = 0b010___000000010
         static let inertPlatform               : UInt32 = 0b010_01__0000000
             static let basePlatform            : UInt32 = 0b010_01__0000001
             static let dynamicPlatform         : UInt32 = 0b010_01_01_00000

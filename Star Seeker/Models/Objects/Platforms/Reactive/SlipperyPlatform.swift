@@ -3,14 +3,20 @@ import SpriteKit
 /** Platform which speeds up the movement of the player */
 class SlipperyPlatform : ReactivePlatform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.Placeholder.slippery ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size)
-        self.name = NodeNamingConstant.Platform.Reactive.slippery
+    override var role : String {
+        ImageNamingConstant.Platform.Reactive.prefix + ImageNamingConstant.Platform.Reactive.slippery
+    }
+    
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
+    }
+    
+    override func preparePhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
+        let pb          = Platform.defaultPhysicsBody(texture: texture, size: size)
+            pb.friction = GameConfig.slipperyFrictionModifier
         
-        self.physicsBody?.friction = GameConfig.slipperyFrictionModifier
+        return pb
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

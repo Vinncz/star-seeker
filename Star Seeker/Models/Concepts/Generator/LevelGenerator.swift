@@ -1,7 +1,6 @@
 import SpriteKit
 
 class LevelGenerator {
-    
     let decipherer : Decipherer
     let target     : SKScene
     

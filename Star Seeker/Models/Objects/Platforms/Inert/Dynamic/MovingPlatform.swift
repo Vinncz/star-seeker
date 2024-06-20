@@ -3,17 +3,13 @@ import SpriteKit
 /** Platform which moves around in a predicted path of movement */
 class MovingPlatform : DynamicPlatform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Inert.base ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size)
-        self.name = NodeNamingConstant.Platform.Inert.Dynamic.moving
-        self.physicsBody!.categoryBitMask = BitMaskConstant.movingPlatform
-    }
+    override var role : String {
+        ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.Dynamic.prefix + ImageNamingConstant.Platform.Inert.Dynamic.moving
+    } 
     
-    func attachAnimation () {
-        
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

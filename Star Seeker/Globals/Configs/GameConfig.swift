@@ -20,8 +20,15 @@ struct GameConfig {
     static let playerFriction     : CGFloat = 0.4
     static let playerRotates      : Bool    = false
     
+    /** Dictates whether platform can be affected by other physics bodies that came into contact with them */
+    static let platformIsDynamic    : Bool    = false
+    /** Dictates how much of a force does a platform can bounce an object back */
+    static let platformRestitution  : CGFloat = 0
+    /** Dictates whether a platform can rotate */
+    static let platformRotates      : Bool    = false
     /** Dictates how much slowing factor a Base platform does to a target */
-    static let baseFrictionModifier     : CGFloat = 0.2
+    static let platformFriction     : CGFloat = 0.2
+    
     /** Dictates how much slowing factor a Slippery platform does to a target */
     static let slipperyFrictionModifier : CGFloat = 0.0    
     /** Dictates how much slowing factor a Sticky platform does to a target */
@@ -36,16 +43,36 @@ struct GameConfig {
     /** A factor which reduces the impulse given by pulling on a joystick knob */
     static let joystickDampeningFactor       : CGFloat = 400
     
-    static let characterMapping : [String : () -> SKSpriteNode] = [
-        "PLY" : { Player () },
-        "pFN" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
-        "pBG" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
-        "pBP" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.wall), size: ValueProvider.gridDimension ) },
-        "pST" : { StickyPlatform        ( size: ValueProvider.gridDimension ) },
-        "pSL" : { SlipperyPlatform      ( size: ValueProvider.gridDimension ) },
-        "pCL" : { ClimbablePlatform     ( size: ValueProvider.gridDimension ) },
-        /** This value size is ignored temporarily */
-        "pMV" : { MovingPlatform        ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.PassThrough.Autumn.climbable), size: ValueProvider.gridDimension ) },
-        "pMT" : { MovingTrackPlatform   ( size: ValueProvider.gridDimension ) },
+    static let characterMapping : [String : (Season) -> SKSpriteNode] = [
+        "PLY" : { season in 
+            Player() 
+        },
+        "pBG" : { season in 
+            Platform(themed: season) 
+        },
+        "pFN" : { season in 
+            LevelChangePlatform(themed: season) 
+        },
+        "pBP" : { season in 
+            BasePlatform(themed: season) 
+        },
+        "pCP" : { season in 
+            CollapsiblePlatform(themed: season) 
+        },
+        "pMV" : { season in 
+            MovingPlatform(themed: season) 
+        },
+        "pMT" : { season in 
+            Platform(themed: season) 
+        },
+        "pST" : { season in 
+            StickyPlatform(themed: season) 
+        },
+        "pSL" : { season in 
+            SlipperyPlatform(themed: season) 
+        },
+        "pCL" : { season in 
+            ClimbablePlatform(themed: season) 
+        },
     ]
 }
