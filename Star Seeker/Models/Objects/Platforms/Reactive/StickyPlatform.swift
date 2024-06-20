@@ -4,7 +4,7 @@ import SpriteKit
 class StickyPlatform : ReactivePlatform {
     
     override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.sticky ), 
+        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.Placeholder.sticky ), 
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)

@@ -3,7 +3,7 @@ import SpriteKit
 class PassTroughPlatform : SKSpriteNode {
     
     init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.PassThrough.passThrough ), 
+        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.PassThrough.name ), 
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init (

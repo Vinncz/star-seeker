@@ -20,7 +20,7 @@ class Darkness : SKSpriteNode {
     func attachAnimation () {
         let textureName = ImageNamingConstant.darkness
         let idleTextures : [SKTexture] = (0...59).map { SKTexture( imageNamed: textureName + String($0) ) }
-        let idleAction   = SKAction.animate(with: idleTextures, timePerFrame: 0.1)
+        let idleAction   = SKAction.animate(with: idleTextures, timePerFrame: 0.02)
         
         self.run(SKAction.repeatForever(idleAction), withKey: ActionNamingConstant.idle)
     }

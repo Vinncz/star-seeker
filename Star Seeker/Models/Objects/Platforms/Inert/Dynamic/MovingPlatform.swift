@@ -12,6 +12,10 @@ class MovingPlatform : DynamicPlatform {
         self.physicsBody!.categoryBitMask = BitMaskConstant.movingPlatform
     }
     
+    func attachAnimation () {
+        
+    }
+    
     /* Inherited from SKNode. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
         fatalError("init(coder:) has not been implemented")

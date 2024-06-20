@@ -34,18 +34,18 @@ struct NodeNamingConstant {
         }
         
         struct PassThrough {
-            static let name      : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.OBJECT"
+            static let name        : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.OBJECT"
             
-            static let climbable : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.CLIMBABLE.OBJECT"
+            static let climbable   : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.CLIMBABLE.OBJECT"
             static let movingTrack : String = "VERTEX.STAR_SEEKER.PLATFORM.PASS_THROUGH.MOVING_TRACK.OBJECT"
         }
     }
     
     struct Button {
-        static let leftControl  : String = "VERTEX.STAR_SEEKER.CONTROLLER.LEFT_BUTTON"
-        static let rightControl : String = "VERTEX.STAR_SEEKER.CONTROLLER.RIGHT_BUTTON"
-        static let jumpControl  : String = "VERTEX.STAR_SEEKER.CONTROLLER.JUMP_BUTTON"
-        static let climbControl : String = "VERTEX.STAR_SEEKER.CONTROLLER.CLIMB_BUTTON"
+        static let leftControl  : String = "VERTEX.STAR_SEEKER.CONTROLLER.LEFT.BUTTON"
+        static let rightControl : String = "VERTEX.STAR_SEEKER.CONTROLLER.RIGHT.BUTTON"
+        static let jumpControl  : String = "VERTEX.STAR_SEEKER.CONTROLLER.JUMP.BUTTON"
+        static let climbControl : String = "VERTEX.STAR_SEEKER.CONTROLLER.CLIMB.BUTTON"
     }
     
 }

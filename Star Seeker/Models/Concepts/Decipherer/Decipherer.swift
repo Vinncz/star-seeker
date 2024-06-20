@@ -2,6 +2,6 @@ import Foundation
 
 protocol Decipherer {
     
-    func decipher () -> Any
+    func decipher () -> (Any, Error?)
     
 }

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "right16.png",
+      "filename" : "player.jumping.right.16.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

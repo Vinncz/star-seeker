@@ -10,6 +10,7 @@ import SwiftUI
     
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
+    static var levelCounter : Int = 2
     
     override init ( size: CGSize ) {
         self.state = .playing
@@ -33,10 +34,6 @@ import SwiftUI
         
         attachDarkness()
         addChild(controller!)
-        
-//        let overlay = SKVideoNode(fileNamed: "overlay.mp4")
-//        addChild(overlay)
-//        overlay.play()
     }
     
     /** The state of situation for self */
@@ -73,7 +70,7 @@ import SwiftUI
     var controller    : MovementController?
     
     /* Inherited from SKScene. Refrain from altering the following */
-    required init?(coder aDecoder: NSCoder) {
+    required init? ( coder aDecoder: NSCoder ) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -82,7 +79,7 @@ import SwiftUI
 /* MARK: -- Extension which gives Game the ability to recieve and respond to contact between two physics bodies within its physicsWorld. */
 extension Game {
     
-    override func update(_ currentTime: TimeInterval) {
+    override func update ( _ currentTime: TimeInterval ) {
         if let platform = currentMovingPlatform {
             if let previousPosition = currentMovingPlatformPosition {
                 let deltaX = platform.position.x - previousPosition.x
@@ -100,6 +97,7 @@ extension Game {
             [BitMaskConstant.player, BitMaskConstant.platform]: Player.intoContactWithPlatform,
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
                 Player.intoContactWithPlatform(contact: contact)
+                self.advanceToNextLevel()
                 // TODO: -- Fix this mess
                 if (contact.bodyA.node?.name == NodeNamingConstant.Platform.Inert.Dynamic.moving){
                     self.currentMovingPlatform = contact.bodyA.node as? SKSpriteNode
@@ -149,8 +147,8 @@ extension Game {
     }
     
     /** Renders all platforms to the scene */
-    func attachElements () {
-        self.generator = LevelGenerator( for: self, decipherer: CSVDecipherer( path: "./LevelFormat2", nodeConfigurations: GameConfig.characterMapping ) )
+    func attachElements ( fromLevelOf: String = "easy-01" ) {
+        self.generator = LevelGenerator( for: self, decipherer: CSVDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ) )
         self.generator?.generate()
     }
     
@@ -163,9 +161,10 @@ extension Game {
     func findPlayerElement () throws -> Player? {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
         if ( player == nil ) { 
+            print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
             throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
-        
+        print("generated player: \(self.player.hashValue)")
         return player
     }
     
@@ -181,10 +180,38 @@ extension Game {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -7)
         
-        let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 150)
+        let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
         darkness.run(moveAction)
         
         addChild(darkness)
+    }
+    
+    func slideEverythingDown () {
+        let moveAction = SKAction.move(by: CGVector(dx: 0, dy: -899), duration: 5)
+        for node in self.children {
+            node.removeAllActions()
+            node.run(moveAction)
+        }
+    }
+    
+    func advanceToNextLevel () {
+        guard ( self.state != .levelChange ) else {return}
+        self.state = .levelChange
+        slideEverythingDown()
+        self.run(.wait(forDuration: 5)) {
+            self.detachAllElements()
+            self.player = nil
+            self.controller = nil
+            self.attachElements(fromLevelOf: "easy-0" + String(Game.levelCounter))
+            print("attaching level easy-0" + String(Game.levelCounter))
+            Game.levelCounter += 1
+            self.player = try? self.findPlayerElement()
+            print("player: \(self.player.hashValue)")
+            self.controller = self.setupMovementController(for: self.player!)
+            self.attachDarkness()
+            self.addChild(self.controller!)
+            self.state = .playing
+        }
     }
     
     /// Resets the game, and returns it to how it initially was after self's state becomes .playing
@@ -201,6 +228,7 @@ extension Game {
         self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
         self.speed = 1
         self.isPaused = false
+        Game.levelCounter = 2
         detachAllElements()
         attachElements()
         self.player = try? findPlayerElement()
@@ -218,6 +246,7 @@ extension Game {
         case playing,
              paused,
              notYetStarted,
+             levelChange,
              finished
     }
     enum GeneratorError : Error {

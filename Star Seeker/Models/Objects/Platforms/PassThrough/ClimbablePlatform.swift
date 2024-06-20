@@ -3,7 +3,7 @@ import SpriteKit
 class ClimbablePlatform : PassTroughPlatform {
     
     override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.PassThrough.climbable ), 
+        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.PassThrough.Placeholder.climbable ), 
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size) 

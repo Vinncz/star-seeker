@@ -4,7 +4,7 @@ import SpriteKit
 class SlipperyPlatform : ReactivePlatform {
     
     override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.slippery ), 
+        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Reactive.Placeholder.slippery ), 
         size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
     ) {
         super.init(texture: texture, size: size)

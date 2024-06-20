@@ -1,58 +1,46 @@
-import Foundation
 import SpriteKit
-import os
+
+enum DecipherError: Error {
+    case fileNotFound
+    case fileNotReadable
+}
 
 class CSVDecipherer : Decipherer {
     
-    private var csvPath            : String
+    private var csvFileName        : String
     private var nodeConfigurations : [String: () -> SKSpriteNode]
     
-    init ( path: String, nodeConfigurations: [String: () -> SKSpriteNode] ) {
-        self.csvPath            = path
+    init ( csvFileName: String, nodeConfigurations: [String: () -> SKSpriteNode] ) {
+        self.csvFileName        = csvFileName
         self.nodeConfigurations = nodeConfigurations
     }
     
-    func decipher () -> Any {
-        let csvContent : String = 
-        """
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;pMV;pMV;pMT;pMT;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;pFN;pFN;pFN;pFN;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;pBP;;;;;;pBP;pBP;;
-        ;pBP;pBP;pBP;;;;;pBP;pBP;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        pBP;pBP;;;;;;;;;pBP
-        ;pBP;pBP;pBP;;;;pBP;pBP;pBP;pBP
-        ;;;;PLY;;;;;;
-        ;;;;pBG;pBG;pBG;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        ;;;;;;;;;;
-        """
-//        do {
-//            csvContent = try String(contentsOfFile: csvPath, encoding: .utf8)
-//        } catch {
-//            print("File not found. \(error)")
-//            csvContent = ""
-//        }
+    func decipher () -> (Any, (any Error)?) {
+        var csvContent : String
+        
+        guard let fileURL = Bundle.main.url(forResource: csvFileName, withExtension: "csv") else {
+            return ([], DecipherError.fileNotFound)
+        }
+
+        do {
+            let resourceValues = try fileURL.resourceValues(forKeys: [.isReadableKey])
+            if resourceValues.isReadable ?? false {
+                let data = try Data(contentsOf: fileURL)
+                csvContent = String(data: data, encoding: .utf8) ?? ""
+            } else {
+                return ([], DecipherError.fileNotReadable)
+            }
+        } catch {
+            return ([], error)
+        }
         
         var result : [[SKSpriteNode?]] = []
         
-        let rows = csvContent.components( separatedBy: AppConfig.newLineCharacter )
+        let rows = csvContent.components(separatedBy: AppConfig.newLineCharacter)
         for row in rows {
             var rowResult: [SKSpriteNode?] = []
 
-            let columns = row.components( separatedBy: AppConfig.delimiter )
+            let columns = row.components(separatedBy: AppConfig.delimiter)
             for column in columns {
                 if let nodeType = nodeConfigurations[column] {
                     let node: SKSpriteNode? = nodeType()
@@ -67,6 +55,6 @@ class CSVDecipherer : Decipherer {
             result.append(rowResult)
         }
         
-        return result
+        return (result, nil)
     }
 }

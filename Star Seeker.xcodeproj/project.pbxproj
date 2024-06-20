@@ -18,7 +18,10 @@
 		204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */; };
 		204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */; };
 		204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3D22C1B655100C1BBCC /* Darkness.swift */; };
-		205A99672C21C3C900C85B1B /* overlay.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 205A99662C21C3C900C85B1B /* overlay.mp4 */; };
+		205A996B2C2343CC00C85B1B /* ImageSequenceCountConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */; };
+		205A99702C23C52700C85B1B /* easy-02.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996D2C23C52700C85B1B /* easy-02.csv */; };
+		205A99712C23C52700C85B1B /* easy-03.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996E2C23C52700C85B1B /* easy-03.csv */; };
+		205A99722C23C52700C85B1B /* easy-01.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996F2C23C52700C85B1B /* easy-01.csv */; };
 		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
 		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
 		206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A42C21642A004270C7 /* LevelGenerator.swift */; };
@@ -80,7 +83,10 @@
 		204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskConstant.swift; sourceTree = "<group>"; };
 		204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionConstant.swift; sourceTree = "<group>"; };
 		204FC3D22C1B655100C1BBCC /* Darkness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkness.swift; sourceTree = "<group>"; };
-		205A99662C21C3C900C85B1B /* overlay.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = overlay.mp4; path = Raws/background/autumn/overlay.mp4; sourceTree = "<group>"; };
+		205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSequenceCountConstant.swift; sourceTree = "<group>"; };
+		205A996D2C23C52700C85B1B /* easy-02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-02.csv"; path = "Star Seeker/Raws/levelDesign/easy-02.csv"; sourceTree = SOURCE_ROOT; };
+		205A996E2C23C52700C85B1B /* easy-03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-03.csv"; path = "Star Seeker/Raws/levelDesign/easy-03.csv"; sourceTree = SOURCE_ROOT; };
+		205A996F2C23C52700C85B1B /* easy-01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-01.csv"; path = "Star Seeker/Raws/levelDesign/easy-01.csv"; sourceTree = SOURCE_ROOT; };
 		2063329F2C2163F2004270C7 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		206332A02C2163F2004270C7 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		206332A42C21642A004270C7 /* LevelGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
@@ -185,6 +191,16 @@
 			path = LevelResetters;
 			sourceTree = "<group>";
 		};
+		205A996C2C23C50F00C85B1B /* LevelDesign */ = {
+			isa = PBXGroup;
+			children = (
+				205A996F2C23C52700C85B1B /* easy-01.csv */,
+				205A996D2C23C52700C85B1B /* easy-02.csv */,
+				205A996E2C23C52700C85B1B /* easy-03.csv */,
+			);
+			path = LevelDesign;
+			sourceTree = "<group>";
+		};
 		206332A12C2163F2004270C7 /* CoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,8 +247,8 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				205A996C2C23C50F00C85B1B /* LevelDesign */,
 				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
-				205A99662C21C3C900C85B1B /* overlay.mp4 */,
 				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
@@ -401,6 +417,7 @@
 				2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */,
 				204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */,
 				204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */,
+				205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -557,9 +574,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
+				205A99722C23C52700C85B1B /* easy-01.csv in Resources */,
+				205A99712C23C52700C85B1B /* easy-03.csv in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
+				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
-				205A99672C21C3C900C85B1B /* overlay.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +636,7 @@
 				2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
 				2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */,
+				205A996B2C2343CC00C85B1B /* ImageSequenceCountConstant.swift in Sources */,
 				6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */,
 				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,
 				2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */,
@@ -759,7 +779,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = 5E27WSDAU2;
+				DEVELOPMENT_TEAM = STU45DAFT2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";
@@ -791,7 +811,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
-				DEVELOPMENT_TEAM = 5E27WSDAU2;
+				DEVELOPMENT_TEAM = STU45DAFT2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";

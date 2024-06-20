@@ -13,13 +13,12 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            //            GridScreen()
             HStack {
                 PauseButton().font(.largeTitle).foregroundStyle(.white)
                 Spacer()
                 PlayerScore()
             }
-            .padding()
+                .padding()
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
         }

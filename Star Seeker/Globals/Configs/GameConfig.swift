@@ -37,7 +37,7 @@ struct GameConfig {
     static let joystickDampeningFactor       : CGFloat = 400
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
-        "PLY" : { Player          () },
+        "PLY" : { Player () },
         "pFN" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
         "pBG" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.base), size: ValueProvider.gridDimension ) },
         "pBP" : { BasePlatform          ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.Inert.Autumn.wall), size: ValueProvider.gridDimension ) },
@@ -47,11 +47,5 @@ struct GameConfig {
         /** This value size is ignored temporarily */
         "pMV" : { MovingPlatform        ( texture: SKTexture(imageNamed: ImageNamingConstant.Platform.PassThrough.Autumn.climbable), size: ValueProvider.gridDimension ) },
         "pMT" : { MovingTrackPlatform   ( size: ValueProvider.gridDimension ) },
-    ]
-    static let modifierMapping : [String : () -> String] = [
-        "au" : { ImageNamingConstant.Season.autumn },
-        "wi" : { ImageNamingConstant.Season.winter },
-        "sp" : { ImageNamingConstant.Season.spring },
-        "sm" : { ImageNamingConstant.Season.summer }
     ]
 }
