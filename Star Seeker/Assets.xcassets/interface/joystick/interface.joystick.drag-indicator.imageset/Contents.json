@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "joystick-top-new.png",
+      "filename" : "drag-indicator.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

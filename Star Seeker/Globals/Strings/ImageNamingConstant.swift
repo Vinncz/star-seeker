@@ -39,6 +39,7 @@ struct ImageNamingConstant {
         struct Joystick {
             static let top      : String = "interface.joystick.top"
             static let bottom   : String = "interface.joystick.bottom"
+            static let arrow    : String = "interface.joystick.drag-indicator"
         }
     }
     
