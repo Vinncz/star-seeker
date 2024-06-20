@@ -9,6 +9,7 @@ class JoystickMovementController : MovementController {
         }
     }
     var directionIndicator : SKSpriteNode?
+    var bottomController : SKSpriteNode?
     
     override init ( controls target : Player ) {        
         self.hImpls = GameConfig.lateralImpulse
@@ -22,6 +23,11 @@ class JoystickMovementController : MovementController {
             joystick.size = CGSize(width: bSize, height: bSize)
         
         target.addChild(directionIndicator!)
+        
+        let bottomControllerTexture = SKTexture(imageNamed: ImageNamingConstant.Interface.Joystick.bottom)
+        self.bottomController = SKSpriteNode(texture: bottomControllerTexture, color: .clear, size: bottomControllerTexture.size())
+        addChild(bottomController!)
+        
         addChild(joystick)
     }
     
@@ -57,7 +63,7 @@ class JoystickMovementController : MovementController {
                     let scale = distanceAr / maxDraggableDistance
                     self?.directionIndicator?.xScale = scale
                     self?.directionIndicator?.yScale = scale
-
+                
                     let radius = self?.target.size.height ?? 0
                     self?.directionIndicator?.position = CGPoint(
                         x: radius * -cos(angle),
