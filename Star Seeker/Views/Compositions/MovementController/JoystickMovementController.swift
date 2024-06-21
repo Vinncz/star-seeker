@@ -66,11 +66,13 @@ class JoystickMovementController : MovementController {
                     break
                 }
                 
-                let bothDeltasExceedMinimumTreshold =  abs(deltaX) >= self!.joystickSafeArea || abs(deltaY) >= self!.joystickSafeArea
-                let bothDeltasExceedMaxTreshold =  abs(deltaX) >= self!.joystickMaxDistance || abs(deltaY) >= self!.joystickMaxDistance
+                let deltaDistance = sqrt(deltaX * deltaX + deltaY * deltaY)
+                
+                let deltasExceedMinimumTreshold =  deltaDistance >= self!.joystickSafeArea
+                let deltasExceedMaxTreshold =  deltaDistance >= self!.joystickMaxDistance
                 
                 /* MARK: Begin arrow logic */
-                guard ( bothDeltasExceedMinimumTreshold ) else {
+                guard ( deltasExceedMinimumTreshold ) else {
                     self?.directionIndicator?.isHidden = true
                     return
                 }
@@ -90,9 +92,9 @@ class JoystickMovementController : MovementController {
                 )
                 /* MARK: End arrow logic */
                 
-                if ( bothDeltasExceedMinimumTreshold ) {
+                if ( deltasExceedMinimumTreshold ) {
                     self!.commenceVibration(force: .soft)
-                } else if ( bothDeltasExceedMaxTreshold ) {
+                } else if ( deltasExceedMaxTreshold ) {
                     self!.commenceVibration(force: .heavy)
                 }
                 
@@ -102,8 +104,9 @@ class JoystickMovementController : MovementController {
                 self?.directionIndicator?.isHidden = true
                 guard let target = self?.target else { return }
                 
-                let bothDeltasExceedMinimumTreshold =  abs(deltaX) >= self!.joystickSafeArea || abs(deltaY) >= self!.joystickSafeArea
-                guard !bothDeltasExceedMinimumTreshold else {
+                let deltaDistance = sqrt(deltaX * deltaX + deltaY * deltaY)
+                let deltasExceedMinimumTreshold =  deltaDistance >= self!.joystickSafeArea
+                guard deltasExceedMinimumTreshold else {
                     target.state = .idle
                     target.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
                     return
@@ -114,8 +117,8 @@ class JoystickMovementController : MovementController {
                 let snapshotOfNodesWhichCollidedWithPlayer = target.statistics!.currentlyStandingOn
                 
                 let resultingImpulse = CGVector (
-                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0),
-                    dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
+                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self!.hImpls),
+                    dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self!.vImpls)
                 )
                 target.facingDirection = deltaX > 0 ? .leftward : .rightward
                 target.physicsBody?.applyImpulse(resultingImpulse)
