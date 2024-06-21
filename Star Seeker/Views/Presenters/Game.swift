@@ -174,7 +174,8 @@ extension Game {
     /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
     func setupMovementController ( for target: Player ) -> MovementController {
         let controller = JoystickMovementController( controls: target )
-        controller.position = CGPoint(5, 6)
+        controller.position = CGPoint(5, 4)
+        controller.zPosition = 20
         
         return controller
     }
