@@ -1,14 +1,14 @@
 import SpriteKit
 
 class Platform : SKSpriteNode, Identifiable {
-    let id            = UUID()
-    let variant       : Season
-    var role : String {
+    let id    = UUID()
+    let theme : Season
+    var role  : String {
         ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.base
     } 
     
     init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {
-        self.variant = themed
+        self.theme = themed
         
         super.init (
             texture: nil,
@@ -22,14 +22,19 @@ class Platform : SKSpriteNode, Identifiable {
     /// Prepares the platform for presentation. It is immidiately run ___after___ the initialization of platform.
     /// 
     /// Ideally, this method is called only once; by the initializer.
+    /// 
+    /// The sequence of execution is as follows:
+    /// 1. prepareTexture
+    /// 2. preparePhysicsBody
+    /// 3. prepareExtras
     func prepare () {
         let texture      : SKTexture     = prepareTexture()
         let physicsBody  : SKPhysicsBody = preparePhysicsBody(texture: texture, size: size)
         prepareDefault()
-        prepareExtras()
-        
         self.texture     = texture
         self.physicsBody = physicsBody
+        
+        prepareExtras()
     }
     
     /// Creates an instance of SKTexture for the platform to use.
@@ -41,12 +46,12 @@ class Platform : SKSpriteNode, Identifiable {
     func prepareTexture () -> SKTexture {
         var texture : String = ImageNamingConstant.Platform.prefix
         
-        switch ( variant ) {
+        switch ( theme ) {
             case .notApplicable:
                 texture += ImageNamingConstant.Platform.Seasonal.nonseasonal + role
                 break
             case .autumn, .winter, .spring, .summer:
-                texture += ImageNamingConstant.Platform.Seasonal.seasonal + variant.rawValue + role
+                texture += ImageNamingConstant.Platform.Seasonal.seasonal + theme.rawValue + role
                 break
         }
         
@@ -64,7 +69,7 @@ class Platform : SKSpriteNode, Identifiable {
     }
     
     private func prepareDefault () -> Void {
-        self.name = NodeNamingConstant.Platform.platform
+        // global preset
     }
     
     /// The method from which you finalize things up.
@@ -72,7 +77,9 @@ class Platform : SKSpriteNode, Identifiable {
     /// This method is intended to be overriden by a subclass. 
     /// 
     /// Everything done within the scope of this method is performed at the last stage of preparation -- meaning this method has the final say to override any configuration set by previous stages of preparation.
-    func prepareExtras() -> Void {}
+    func prepareExtras() -> Void {
+        self.name = NodeNamingConstant.Platform.platform
+    }
     
     /* Inherited from SKNode. Refrain from altering the following */
     required init?(coder aDecoder: NSCoder) {
@@ -86,15 +93,15 @@ extension Platform {
     /// 
     /// Make caution, for a single instance of SKPhysicsBody can only be used by 1 (one) instance of SKNode.
     static func defaultPhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
-        let pb = SKPhysicsBody( texture: texture, size: size )
+        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 2).cgPath )
         
-        pb.isDynamic          = GameConfig.platformIsDynamic
-        pb.restitution        = GameConfig.platformRestitution
-        pb.allowsRotation     = GameConfig.platformRotates
-        pb.friction           = GameConfig.platformFriction
-                
-        pb.categoryBitMask    = BitMaskConstant.platform
-        pb.contactTestBitMask = BitMaskConstant.player
+            pb.isDynamic          = GameConfig.platformIsDynamic
+            pb.restitution        = GameConfig.platformRestitution
+            pb.allowsRotation     = GameConfig.platformRotates
+            pb.friction           = GameConfig.platformFriction
+                    
+            pb.categoryBitMask    = BitMaskConstant.platform
+            pb.contactTestBitMask = BitMaskConstant.player
         
         return pb
     }

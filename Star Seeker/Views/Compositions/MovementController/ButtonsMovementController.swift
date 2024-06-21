@@ -21,7 +21,7 @@ class ButtonsMovementController : MovementController {
         
         bLeft = HoldButtonNode (
             name: NodeNamingConstant.Button.leftControl,
-            imageNamed: ImageNamingConstant.Button.left, 
+            imageNamed: ImageNamingConstant.Interface.Button.MovementControl.left, 
             command: {
                 target.facingDirection = .leftward
                 switch ( target.previousState ) {
@@ -50,7 +50,7 @@ class ButtonsMovementController : MovementController {
         
         bRight = HoldButtonNode (
             name: NodeNamingConstant.Button.rightControl,
-            imageNamed: ImageNamingConstant.Button.right, 
+            imageNamed: ImageNamingConstant.Interface.Button.MovementControl.right, 
             command: { 
                 target.facingDirection = .rightward
                 switch ( target.previousState ) {
@@ -79,7 +79,7 @@ class ButtonsMovementController : MovementController {
         
         bJump = PressButtonNode (
             name: NodeNamingConstant.Button.jumpControl,
-            imageNamed: ImageNamingConstant.Button.jump, 
+            imageNamed: ImageNamingConstant.Interface.Button.MovementControl.jump, 
             maxPressedCount: 2,
             timeIntervalToReset: 0.632,
             command: { 
@@ -114,7 +114,7 @@ class ButtonsMovementController : MovementController {
         
         bClimb = HoldButtonNode (
             name: NodeNamingConstant.Button.climbControl,
-            imageNamed: ImageNamingConstant.Button.climb, 
+            imageNamed: ImageNamingConstant.Interface.Button.MovementControl.climb, 
             command: { 
                 target.state = .climbing
                 target.physicsBody?.applyForce(CGVectorMake(0, vForce))

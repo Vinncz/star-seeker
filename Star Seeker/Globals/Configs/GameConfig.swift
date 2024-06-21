@@ -8,11 +8,11 @@ struct GameConfig {
     /** Dictates how much should a movement controller button applies a horizontal force to a target */
     static let lateralForce       : CGFloat = 1250
     /** Dictates how much should a movement controller button applies a horizontal impulse to a target */
-    static let lateralImpulse     : CGFloat = 500
+    static let lateralImpulse     : CGFloat = 1000
     /** Dictates how much should a movement controller button applies a vertical force to a target */
     static let elevationalForce   : CGFloat = 2350
     /** Dictates how much should a movement controller button applies a vertical impulse to a target */
-    static let elevationalImpulse : CGFloat = 650
+    static let elevationalImpulse : CGFloat = 1000
     
     static let playerIsDynamic    : Bool    = true
     static let playerMass         : CGFloat = 0.25
@@ -35,13 +35,13 @@ struct GameConfig {
     static let stickyFrictionModifier   : CGFloat = 0.8
     
     /** Area where drag inputs are nullified if their distance fall below this threshold */
-    static let joystickSafeArea              : CGFloat = 32
+    static let joystickSafeArea              : CGFloat = 10
     /** Dictates how far can you pull on the joystick knob*/
-    static let joystickMaxDistance           : CGFloat = 100
+    static let joystickMaxDistance           : CGFloat = 50
     /** Compensates for the width of the touch, for the joystick's maximum pull distance */
     static let joystickInaccuracyCompensator : CGFloat = 0.9
     /** A factor which reduces the impulse given by pulling on a joystick knob */
-    static let joystickDampeningFactor       : CGFloat = 400
+    static let joystickDampeningFactor       : CGFloat = 250
     
     static let characterMapping : [String : (Season) -> SKSpriteNode] = [
         "PLY" : { season in 

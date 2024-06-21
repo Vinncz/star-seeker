@@ -16,8 +16,17 @@ import Observation
         
         let physicsBody = Player.defaultPhysicsBody()
         self.physicsBody = physicsBody
+        
+        self.boundingBox = SKShapeNode(rectOf: ValueProvider.playerPhysicsBodyDimension)
+        self.boundingBox?.lineWidth = 2
+        self.boundingBox?.strokeColor = .black
+        self.boundingBox?.fillColor = .clear
+        self.boundingBox?.path = self.boundingBox?.path?.copy(dashingWithPhase: 0, lengths: [5, 5])
+        self.boundingBox?.position = CGPoint(x: 0, y: -5)
+        addChild(self.boundingBox!)
     }
     
+    var boundingBox     : SKShapeNode?
     var statistics      : PlayerStatistic?
     var facingDirection : MovementDirection {
         didSet {
@@ -56,17 +65,55 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            debug("Player collided with \(platform.position) platform -- with player's feet position of \(player.position.y   - (player.size.height   / 2)) and platform's top at \(platform.position.y + (platform.size.height / 2))")
+            let contactPoint  = contact.contactPoint
             
-            let expandedFrame = platform.frame.insetBy(dx: -2, dy: -2)
-            let contactPoint = contact.contactPoint
-            if ( expandedFrame.contains(contactPoint) ) {
+            let useGrid : Bool = true
+            let playerTop : CGFloat = player.position.y + ValueProvider.playerPhysicsBodyDimension.height / 2
+            let playerBottom : CGFloat = player.position.y - ValueProvider.playerPhysicsBodyDimension.height / 2
+            let playerLeft : CGFloat = player.position.x - ValueProvider.playerPhysicsBodyDimension.width / 2
+            let playerRight: CGFloat = player.position.x + ValueProvider.playerPhysicsBodyDimension.width / 2
+            let platformTop : CGFloat = platform.position.y + platform.size.height / 2
+            let platformBottom : CGFloat = platform.position.y - platform.size.height / 2
+            let platformLeft : CGFloat = platform.position.x - platform.size.width / 2
+            let platformRight: CGFloat = platform.position.x + platform.size.width / 2
+            
+            print("Player collided with a platform @(\(platform.position.toString(useGrid: useGrid))) -- while they're on \(player.position.toString(useGrid: useGrid))")
+            print("    lowest bounding box came to be: \(playerBottom) -- contactPoint was at: \(contactPoint.toString(useGrid: useGrid))")
+            print("    highest bounding box came to be: \(playerTop)")
+            print("    highest point of the block was: \(platformTop)")
+            print("    lowest point of the block was: \(platformBottom)")
+            
+            print("    leftmost point of the block was: \(platformLeft)")
+            print("    leftmost point of the player was: \(playerLeft)")
+            print("    rightmost point of the block was: \(platformRight)")
+            print("    rightmost point of the player was: \(playerRight)")
+            
+            if ( 
+                contactPoint.y - 2 <= platformTop && 
+                contactPoint.y > platformBottom && 
+                contactPoint.x > platformLeft && 
+                contactPoint.x < platformRight
+            ) {
                 player.statistics!.currentlyStandingOn.insert(platform)
+                
+                let centerPoint = SKShapeNode(circleOfRadius: 2)
+                centerPoint.strokeColor = .blue
+                centerPoint.fillColor = .red
+                centerPoint.lineWidth = 2
+                centerPoint.position = player.position
+                player.parent?.addChild(centerPoint)
+                
+                let marker = SKShapeNode(circleOfRadius: 2)
+                marker.strokeColor = .red
+                marker.fillColor = .blue
+                marker.lineWidth = 2
+                marker.position = CGPoint(x: contactPoint.x, y: contactPoint.y)
+                player.parent?.addChild(marker)
                 
                 if ( player.statistics!.highestPlatform.y < platform.position.y ) {
                     player.statistics!.highestPlatform = platform.position
-                }                                
-            } 
+                }    
+            }                            
         }
     }
     
@@ -97,7 +144,7 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let darkness = nodes[1] as? Darkness {
-            debug("Player collided with darkness object at \(darkness.position) -- with player's feet position of \(player.position.y - (player.size.height / 2)) and darkness' top at \(darkness.position.y + (darkness.size.height / 2))")
+            debug("Player collided with darkness object at \(darkness.position.toString(useGrid: true)) -- with player's feet position of \(player.position.y - (player.size.height / 2)) and darkness' top at \(darkness.position.y + (darkness.size.height / 2))")
             player.state = .dying
         }
     }
@@ -257,11 +304,11 @@ extension Player {
     var currentHeight   : CGPoint = CGPoint(x: 0, y: 0)
     var currentlyStandingOn : Set<Platform> = [] {
         didSet {
-            debug("player is standing on:")
+            print("player is standing on:")
             currentlyStandingOn.forEach {
-                debug("    \($0.name), \($0.position)")
+                print("    \($0.name), \($0.position.toString(useGrid: true))")
             }
-            debug("")
+            print("")
             
             if ( currentlyStandingOn.first == nil ) {
                 self.currentHeight = oldValue.first?.position ?? CGPoint(x: 0, y: 0)

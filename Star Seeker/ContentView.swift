@@ -6,13 +6,14 @@ struct ContentView : View {
     
     var body: some View {
         ZStack ( alignment: .topLeading ) {
-            Image(ImageNamingConstant.Background.Autumn.background)
+            Image(background())
                 .resizable()
                 .scaledToFit()
                 .ignoresSafeArea(.all)
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
+            GridScreen()
             HStack {
                 PauseButton().font(.largeTitle).foregroundStyle(.white)
                 Spacer()
@@ -27,6 +28,20 @@ struct ContentView : View {
     let sw = UIScreen.main.bounds.width
     let sh = UIScreen.main.bounds.height
     
+    func background () -> String {
+        switch ( scene.currentTheme ) {
+            case .autumn:
+                return ImageNamingConstant.Background.Autumn.background
+            case .winter:
+                return ImageNamingConstant.Background.Winter.background
+            case .spring:
+                return ImageNamingConstant.Background.Spring.background
+            case .summer:
+                return ImageNamingConstant.Background.Summer.background
+            default:
+                return ImageNamingConstant.Background.Autumn.background
+        }
+    }
     @State var scene : Game = Game(size: UIScreen.main.bounds.size)
     @State var stopwatch : CountdownTimer?
     @State var gameIsTransitioningToPlaying : Bool = false

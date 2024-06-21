@@ -17,6 +17,10 @@ struct ImageNamingConstant {
             static let background : String = "background.autumn.background"
             static let overlay    : String = "background.autumn.overlay"
         }
+        struct Summer {
+            static let background : String = "background.summer.background"
+            static let overlay    : String = "background.summer.overlay"
+        }
     }
     
     struct Platform {
@@ -55,12 +59,28 @@ struct ImageNamingConstant {
         }
     }
     
-    struct Button {
-        static let climb : String = "button.climb"
-        static let jump  : String = "button.jump"
-        static let left  : String = "button.left"
-        static let right : String = "button.right"
-        static let up    : String = "button.up"
+    struct Interface {
+        struct Button {
+            struct GameControl {
+                static let exit    : String = "interface.button.gamecontrol.exit"
+                static let pause   : String = "interface.button.gamecontrol.pause"
+                static let play    : String = "interface.button.gamecontrol.play"
+                static let restart : String = "interface.button.gamecontrol.restart"
+            }
+            struct MovementControl {
+                static let climb   : String = "interface.button.movementcontrol.climb"
+                static let jump    : String = "interface.button.movementcontrol.jump"
+                static let left    : String = "interface.button.movementcontrol.left"
+                static let right   : String = "interface.button.movementcontrol.right"
+                static let up      : String = "interface.button.movementcontrol.up"
+                
+                struct Joystick {
+                    static let knob              : String = "interface.button.movementcontrol.joystick.knob"
+                    static let dragAreaIndicator : String = "interface.button.movementcontrol.joystick.dragAreaIndicator"
+                    static let pullDownIndicator : String = "interface.button.movementcontrol.joystick.pullDownIndicator"
+                }
+            }
+        }
     }
     
     struct Player {

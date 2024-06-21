@@ -10,7 +10,6 @@ import SwiftUI
     
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
-    static var levelCounter : Int = 2
     
     override init ( size: CGSize ) {
         self.state = .playing
@@ -27,12 +26,12 @@ import SwiftUI
         ValueProvider.screenDimension = UIScreen.main.bounds.size
         
         setup(view)
-        attachElements()
+        levelDidLoad()
         
         self.player      = try? findPlayerElement()
         self.controller  = setupMovementController(for: self.player!)
         
-        attachDarkness()
+//        attachDarkness()
         addChild(controller!)
     }
     
@@ -68,6 +67,10 @@ import SwiftUI
     var player        : Player?
     /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
     var controller    : MovementController?
+    
+    var levelTrack    : Int  = 1
+    var currentTheme  : Season = .autumn
+    var themedLevels  : Bool = true
     
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
@@ -151,7 +154,7 @@ extension Game {
     }
     
     /** Renders all platforms to the scene */
-    func attachElements ( fromLevelOf: String = "easy-01" ) {
+    func attachElements ( fromLevelOf: String ) {
         self.generator = LevelGenerator( for: self, decipherer: CSVtoNodesDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ) )
         self.generator?.generate()
     }
@@ -166,7 +169,7 @@ extension Game {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
         if ( player == nil ) { 
             print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
-            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
+//            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
         return player
     }
@@ -197,6 +200,7 @@ extension Game {
         }
     }
     
+    /// Performs a transition to the scene's elements, deloads it, renders, and animate the new level.
     func advanceToNextLevel () {
         guard ( self.state != .levelChange ) else {return}
         self.state = .levelChange
@@ -205,14 +209,37 @@ extension Game {
             self.detachAllElements()
             self.player = nil
             self.controller = nil
-            self.attachElements(fromLevelOf: "easy-0" + String(Game.levelCounter))
-            Game.levelCounter += 1
+            
+            self.levelDidLoad()
+            
             self.player = try? self.findPlayerElement()
             self.controller = self.setupMovementController(for: self.player!)
             self.attachDarkness()
             self.addChild(self.controller!)
             self.state = .playing
         }
+    }
+    
+    func levelDidLoad () {
+        if ( levelTrack - LevelDesignConstant.LevelRange.autumn.upperBound == 0 ) {
+            self.currentTheme = .winter
+            levelTrack = 1
+        }
+        
+        let alias = LevelDesignConstant.Naming.self
+        
+        var levelFilename : String = alias.prefix
+        if ( self.themedLevels ) {
+            levelFilename += alias.Seasonal.seasonal + currentTheme.rawValue
+        } else {
+            levelFilename += alias.Seasonal.nonseasonal
+        }
+        
+            levelFilename += String(self.levelTrack)
+        
+        print(levelFilename)
+        self.attachElements(fromLevelOf: levelFilename)
+        levelTrack += 1
     }
     
     /// Resets the game, and returns it to how it initially was after self's state becomes .playing
@@ -229,9 +256,9 @@ extension Game {
         self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
         self.speed = 1
         self.isPaused = false
-        Game.levelCounter = 2
+        self.levelTrack = 1
         detachAllElements()
-        attachElements()
+        levelDidLoad()
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
         attachDarkness()

@@ -24,4 +24,16 @@ extension CGPoint {
         self.init(x: (CGFloat(xGrid) * unitSize) + (unitSize * CGFloat(width) * 0.5), y: (CGFloat(yGrid) * unitSize) + (unitSize * CGFloat(height) * 0.5))
     }
     
+    func convertToGrids () -> CGPoint {
+        let x = self.x / ValueProvider.gridDimension.width
+        let y = self.y / ValueProvider.gridDimension.height
+        
+        return CGPoint(x: x, y: y)
+    }
+    
+    func toString ( useGrid: Bool ) -> String {
+        let grid = self.convertToGrids()
+        return useGrid ? "x: \(grid.x + 0.5), y: \(grid.y + 0.51)" : "x: \(self.x), y: \(self.y)"
+    }
+    
 }
