@@ -29,21 +29,14 @@ class JoystickMovementController : MovementController {
         
         super.init(controls: target)
         
-        let bottomControllerTexture = SKTexture(imageNamed: ImageNamingConstant.Interface.Joystick.bottom)
-        self.bottomController = SKSpriteNode(texture: bottomControllerTexture, color: .clear, size: bottomControllerTexture.size())
-        self.bottomController?.setScale(0)
-        self.bottomController?.size = CGSize(width: (bSize * 2) + GameConfig.joystickMaxDistance, height: (bSize * 2) + GameConfig.joystickMaxDistance)
+        self.bottomController = JoystickMovementController.bottomControllerNode(buttonSize: bSize, maxDistance: self.joystickMaxDistance)
         addChild(self.bottomController!)
         
         let joystick      = attachJoystick()
         joystick.size = CGSize(width: bSize, height: bSize)
         addChild(joystick)
         
-        let arrowControllerTexture = SKTexture(imageNamed: ImageNamingConstant.Interface.Joystick.arrow)
-        self.arrowController = SKSpriteNode(texture: arrowControllerTexture, color: .clear, size: arrowControllerTexture.size())
-        self.arrowController?.size = CGSize(width: bSize, height: bSize)
-        self.arrowController?.position = CGPoint(x: 0, y: -(bSize+20))
-        self.arrowController?.name = "arrowController"
+        self.arrowController = JoystickMovementController.arrowControllerNode(buttonSize: bSize)
         addChild(self.arrowController!)
         
     }
@@ -66,35 +59,35 @@ class JoystickMovementController : MovementController {
             },
             command    : { [weak self] deltaX, deltaY in
                 switch ( self?.target.state ) {
-                    case .moving, .jumping:
-                        break                     
-                    default:
-                        self?.target.state = .squating
-                        break
+                case .moving, .jumping:
+                    break
+                default:
+                    self?.target.state = .squating
+                    break
                 }
                 
-                let bothDeltasExceedMinimumTreshold =  abs(deltaX) > self!.joystickSafeArea || abs(deltaY) > self!.joystickSafeArea
-                let bothDeltasExceedMaxTreshold =  abs(deltaX) > self!.joystickMaxDistance || abs(deltaY) > self!.joystickMaxDistance
+                let bothDeltasExceedMinimumTreshold =  abs(deltaX) >= self!.joystickSafeArea || abs(deltaY) >= self!.joystickSafeArea
+                let bothDeltasExceedMaxTreshold =  abs(deltaX) >= self!.joystickMaxDistance || abs(deltaY) >= self!.joystickMaxDistance
+                
+                /* MARK: Begin arrow logic */
                 guard ( bothDeltasExceedMinimumTreshold ) else {
                     self?.directionIndicator?.isHidden = true
                     return
                 }
+                self?.directionIndicator?.isHidden = false
+                let angle = atan2(deltaY, deltaX)
+                self?.directionIndicator?.zRotation = angle + .pi / 2
                 
-                /* MARK: Begin arrow logic */
-                    self?.directionIndicator?.isHidden = false
-                    let angle = atan2(deltaY, deltaX)
-                    self?.directionIndicator?.zRotation = angle + .pi / 2
-
-                    let distanceAr = sqrt(deltaX * deltaX + deltaY * deltaY)
-                    let scale = distanceAr / maxDraggableDistance
-                    self?.directionIndicator?.xScale = scale
-                    self?.directionIndicator?.yScale = scale
+                let distanceAr = sqrt(deltaX * deltaX + deltaY * deltaY)
+                let scale = distanceAr / maxDraggableDistance
+                self?.directionIndicator?.xScale = scale
+                self?.directionIndicator?.yScale = scale
                 
-                    let radius = self?.target.size.height ?? 0
-                    self?.directionIndicator?.position = CGPoint(
-                        x: radius * -cos(angle),
-                        y: radius * -sin(angle)
-                    )
+                let radius = self?.target.size.height ?? 0
+                self?.directionIndicator?.position = CGPoint(
+                    x: radius * -cos(angle),
+                    y: radius * -sin(angle)
+                )
                 /* MARK: End arrow logic */
                 
                 if ( bothDeltasExceedMinimumTreshold ) {
@@ -109,12 +102,11 @@ class JoystickMovementController : MovementController {
                 self?.directionIndicator?.isHidden = true
                 guard let target = self?.target else { return }
                 
-                let deltaXIsLessThanTreshold : Bool = deltaX >= -GameConfig.joystickSafeArea && deltaX <= GameConfig.joystickSafeArea
-                let deltaYIsLessThanTreshold : Bool = deltaY >= -GameConfig.joystickSafeArea && deltaY <= GameConfig.joystickSafeArea
-                guard ( !( deltaXIsLessThanTreshold && deltaYIsLessThanTreshold ) ) else { 
+                let bothDeltasExceedMinimumTreshold =  abs(deltaX) >= self!.joystickSafeArea || abs(deltaY) >= self!.joystickSafeArea
+                guard !bothDeltasExceedMinimumTreshold else {
                     target.state = .idle
                     target.restrictions.list.removeValue(forKey: RestrictionConstant.Player.jump)
-                    return 
+                    return
                 }
                 
                 guard ( target.restrictions.list[RestrictionConstant.Player.jump] == nil ) else { return }
@@ -122,7 +114,7 @@ class JoystickMovementController : MovementController {
                 let snapshotOfNodesWhichCollidedWithPlayer = target.statistics!.currentlyStandingOn
                 
                 let resultingImpulse = CGVector (
-                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0), 
+                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self?.hImpls ?? 0),
                     dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self?.vImpls ?? 0)
                 )
                 target.facingDirection = deltaX > 0 ? .leftward : .rightward
@@ -156,13 +148,32 @@ class JoystickMovementController : MovementController {
     static func defaultDirectionIndicator ( to target: SKSpriteNode ) -> SKSpriteNode {
         let arrowTexture                = SKTexture( image: UIImage(systemName: "arrowshape.up.fill")! )
         let directionIndicator          = SKSpriteNode( texture: arrowTexture, size: arrowTexture.size() )
-        directionIndicator.isHidden = true
-        directionIndicator.size     = CGSize( width: 50, height: 50 )
-        directionIndicator.position = CGPoint( x: target.position.x, y: target.position.y + target.size.height )
+        directionIndicator.isHidden     = true
+        directionIndicator.size         = CGSize( width: 35, height: 35 )
+        directionIndicator.position     = CGPoint( x: 0, y: 0 )
         
         return directionIndicator
     }
+    
+    static func arrowControllerNode (buttonSize: Double) -> SKSpriteNode {
+        let arrowControllerTexture = SKTexture(imageNamed: ImageNamingConstant.Interface.Joystick.arrow)
+        let arrowController = SKSpriteNode(texture: arrowControllerTexture, color: .clear, size: arrowControllerTexture.size())
+        arrowController.size = CGSize(width: buttonSize, height: buttonSize)
+        arrowController.position = CGPoint(x: 0, y: -(buttonSize + 20))
+        arrowController.name = "arrowController"
         
+        return arrowController
+    }
+    
+    static func bottomControllerNode (buttonSize: Double, maxDistance: Double) -> SKSpriteNode {
+        let bottomControllerTexture = SKTexture(imageNamed: ImageNamingConstant.Interface.Joystick.bottom)
+        let bottomController = SKSpriteNode(texture: bottomControllerTexture, color: .clear, size: bottomControllerTexture.size())
+        bottomController.setScale(0)
+        bottomController.size = CGSize(width: (buttonSize * 2) + maxDistance, height: (buttonSize * 2) + maxDistance)
+        
+        return bottomController
+    }
+    
     /** Convenience method to trigger a vibration */
     private func commenceVibration ( force: UIImpactFeedbackGenerator.FeedbackStyle ) {
         let feedbackGenerator = UIImpactFeedbackGenerator(style: force)
