@@ -25,7 +25,8 @@ class JoystickMovementController : MovementController {
     
     override init ( controls target : Player ) {
         self.directionIndicator = JoystickMovementController.defaultDirectionIndicator(to: target)
-        target.addChild(directionIndicator!)
+        self.directionIndicator?.zPosition = 1000
+        target.addChild(self.directionIndicator!)
         
         super.init(controls: target)
         

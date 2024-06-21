@@ -34,7 +34,7 @@ struct GameConfig {
     /** Compensates for the width of the touch, for the joystick's maximum pull distance */
     static let joystickInaccuracyCompensator : CGFloat = 0.9
     /** A factor which reduces the impulse given by pulling on a joystick knob */
-    static let joystickDampeningFactor       : CGFloat = 300
+    static let joystickDampeningFactor       : CGFloat = 250
     
     static let characterMapping : [String : () -> SKSpriteNode] = [
         "PLY" : { Player          () },
