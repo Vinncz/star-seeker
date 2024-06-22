@@ -71,6 +71,7 @@
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
 		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 		6790D6F02C2560DE000B5F50 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D6EF2C2560DE000B5F50 /* View.swift */; };
+		6790D6F22C26EC88000B5F50 /* OutBoundIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D6F12C26EC88000B5F50 /* OutBoundIndicator.swift */; };
 		67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44542C217E020081CC26 /* Chainwhacks.ttf */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +142,7 @@
 		674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 		6790D6EF2C2560DE000B5F50 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		6790D6F12C26EC88000B5F50 /* OutBoundIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutBoundIndicator.swift; sourceTree = "<group>"; };
 		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -366,6 +368,7 @@
 				204FC3D12C1B652F00C1BBCC /* LevelResetters */,
 				2097B7B72C12FC18002261C3 /* Obstacles */,
 				2097B7B62C12FC13002261C3 /* Platforms */,
+				6790D6F12C26EC88000B5F50 /* OutBoundIndicator.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
 				2097B7E62C170228002261C3 /* SlipperyPlatform.swift in Sources */,
 				2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */,
+				6790D6F22C26EC88000B5F50 /* OutBoundIndicator.swift in Sources */,
 				206332AD2C21648C004270C7 /* MovementController.swift in Sources */,
 				2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */,
 				206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */,

@@ -10,6 +10,7 @@ struct NodeNamingConstant {
     static let game             : String = "VERTEX.STAR_SEEKER.NODE.GAME_SCENE.OBJECT"
     static let movementControls : String = "VERTEX.STAR_SEEKER.NODE.MOVEMENT_CONTROLS.OBJECT"
     static let darkness         : String = "VERTEX.STAR_SEEKER.NODE.DARKNESS.OBJECT"
+    static let outboundIndicator: String = "VERTEX.STAR_SEEKER.NODE.OUTBOUND_INDICATOR.OBJECT"
     
     struct Platform {
         static let platform : String = "VERTEX.STAR_SEEKER.NODE.PLATFORM.OBJECT"

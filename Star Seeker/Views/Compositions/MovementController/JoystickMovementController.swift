@@ -156,7 +156,7 @@ class JoystickMovementController : MovementController {
         let shapeNode = SKShapeNode(path: path)
         shapeNode.strokeColor = .white
         shapeNode.lineWidth = 3.0
-        shapeNode.zPosition = 1000
+        shapeNode.zPosition = 20
         
         return shapeNode
         
@@ -171,7 +171,6 @@ class JoystickMovementController : MovementController {
         
         let numberOfPoints = 50
         let timeStep = 0.1
-        let distanceToPosition = startingPosition.getDistance()
         
         for i in 0..<numberOfPoints {
             let t = Double(i) * timeStep

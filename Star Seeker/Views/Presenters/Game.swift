@@ -2,14 +2,22 @@ import SpriteKit
 import SwiftUI
 
 /// An object that organizes all of the active SpriteKit content contained within it.
-/// 
+///
 /// ## Overview
 /// Game, as the name suggest, is the location of where everything happen.
 /// To display and interact with the game, you present an instance of this, inside an SKView from your SwiftUI file.
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
-    
+    /** The previous state of self */
+    var previousState : GameState = .notYetStarted
+    /** An instance of generator object which renders the needed level to the scene. Level generator object persists between game resets */
+    var generator     : LevelGenerator?
+    /** An instance of SKNode which represents the player in game. Player object does not persist between game resets */
+    var player        : Player?
+    /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
+    var controller    : MovementController?
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
+    var outboundIndicator: SKSpriteNode?
     static var levelCounter : Int = 2
     
     override init ( size: CGSize ) {
@@ -25,16 +33,17 @@ import SwiftUI
     /** Called after an instace of Game is ready to be shown at some SKView instance. */
     override func didMove ( to view: SKView ) {
         ValueProvider.screenDimension = UIScreen.main.bounds.size
-        self.physicsWorld.gravity = GameConfig.playerGravity
         
         setup(view)
         attachElements()
         
         self.player      = try? findPlayerElement()
         self.controller  = setupMovementController(for: self.player!)
+        addChild(controller!)
+        self.outboundIndicator = setupOutboundIndicator()
+        addChild(outboundIndicator!)
         
         attachDarkness()
-        addChild(controller!)
     }
     
     /** The state of situation for self */
@@ -42,33 +51,25 @@ import SwiftUI
         didSet {
             previousState = oldValue
             switch ( state ) {
-                case .playing:
-                    self.isPaused = false
-                    break
-                case .paused:
-                    self.isPaused = true
-                    break
-                case .finished:
-                    let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
-                        let progress = elapsedTime / 6
-                        self.speed = 1 - progress
-                    }
-                    self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
-                default:
-                    break
+            case .playing:
+                self.isPaused = false
+                break
+            case .paused:
+                self.isPaused = true
+                break
+            case .finished:
+                let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
+                    let progress = elapsedTime / 6
+                    self.speed = 1 - progress
+                }
+                self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
+            default:
+                break
             }
             
             debug("Game state was updated to: \(state)")
         }
     }
-    /** The previous state of self */
-    var previousState : GameState = .notYetStarted
-    /** An instance of generator object which renders the needed level to the scene. Level generator object persists between game resets */
-    var generator     : LevelGenerator?
-    /** An instance of SKNode which represents the player in game. Player object does not persist between game resets */
-    var player        : Player?
-    /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
-    var controller    : MovementController?
     
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
@@ -90,6 +91,31 @@ extension Game {
                 currentMovingPlatformPosition = currentMovingPlatform?.position
             }
         }
+        
+        guard let playerPosition = self.player?.position,
+              let outboundIndicatorNode = self.outboundIndicator else {
+            fatalError("player and outbound indicator not found")
+        }
+        let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
+        if isPlayerOutbound {
+            let indicatorVerticalOffset = outboundIndicatorNode.size.width / 2
+            let indicatorHeightOffset = outboundIndicatorNode.size.height / 2
+            outboundIndicatorNode.isHidden = false
+            if (playerPosition.y < ValueProvider.screenDimension.height){
+                if (playerPosition.x < ValueProvider.screenDimension.width / 2) {
+                    outboundIndicatorNode.position = CGPoint(x: 0 + indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = 1.6
+                } else {
+                    outboundIndicatorNode.position = CGPoint(x: ValueProvider.screenDimension.width - indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = -1.6
+                }
+            } else {
+                outboundIndicatorNode.position = CGPoint(x: playerPosition.x, y: ValueProvider.screenDimension.height - indicatorHeightOffset)
+                outboundIndicatorNode.zRotation = 0
+            }
+        } else {
+            outboundIndicatorNode.isHidden = true
+        }
     }
     
     /** Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called. */
@@ -109,7 +135,7 @@ extension Game {
                     self.currentMovingPlatform = contact.bodyB.node as? SKSpriteNode
                 }
             },
-            [BitMaskConstant.player, BitMaskConstant.darkness]: { contact in 
+            [BitMaskConstant.player, BitMaskConstant.darkness]: { contact in
                 if ( self.state != .finished ) {
                     self.state = .finished
                 }
@@ -142,13 +168,13 @@ extension Game {
 
 /* MARK: -- Extension which gives Game the ability to attend to itself. */
 extension Game {
-    
     /** Sets the required one-time configurations to the passed SKView */
     func setup ( _ view: SKView ) {
         view.allowsTransparency = true
         self.view!.isMultipleTouchEnabled = true
         self.backgroundColor = .clear
         self.physicsWorld.speed = 1
+        self.physicsWorld.gravity = GameConfig.playerGravity
     }
     
     /** Renders all platforms to the scene */
@@ -165,9 +191,9 @@ extension Game {
     /** After the generator has been ran, this function is called to find the attached Player node. Player object does not persist between game resets and should NOT be reattached to instance of self. */
     func findPlayerElement () throws -> Player? {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
-        if ( player == nil ) { 
-            print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
-            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
+        if ( player == nil ) {
+            print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?")
+            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?")
         }
         return player
     }
@@ -179,6 +205,12 @@ extension Game {
         controller.zPosition = 20
         
         return controller
+    }
+    
+    func setupOutboundIndicator () -> SKSpriteNode {
+        let indicatorNode = OutBoundIndicator()
+        indicatorNode.isHidden = true
+        return indicatorNode
     }
     
     func attachDarkness () {
@@ -214,11 +246,13 @@ extension Game {
             self.attachDarkness()
             self.addChild(self.controller!)
             self.state = .playing
+            self.outboundIndicator = self.setupOutboundIndicator()
+            self.addChild(self.outboundIndicator!)
         }
     }
     
     /// Resets the game, and returns it to how it initially was after self's state becomes .playing
-    /// 
+    ///
     /// The logic is as follows:
     /// 1. It resets the state to .notYetStarted
     /// 2. It removes all elements from screen
@@ -238,6 +272,8 @@ extension Game {
         self.controller = setupMovementController(for: self.player!)
         attachDarkness()
         addChild(controller!)
+        self.outboundIndicator = setupOutboundIndicator()
+        self.addChild(outboundIndicator!)
         self.state = .playing
     }
     
