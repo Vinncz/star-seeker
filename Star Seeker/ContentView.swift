@@ -13,7 +13,6 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            GridScreen()
             HStack {
                 PauseButton().font(.largeTitle).foregroundStyle(.white)
                 Spacer()
@@ -50,6 +49,7 @@ struct ContentView : View {
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
 extension ContentView {
+    
     func RestartButton () -> some View {
         Button {
             scene.restart()
@@ -107,7 +107,7 @@ extension ContentView {
     
     func PlayerScore () -> some View {
         withAnimation {
-            StrokeText(text: String(format: "%.0fm", scene.player?.statistics!.currentHeight.y ?? 0), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
+            StrokeText(text: String(format: "%.0fm", (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
                 .scaleEffect(playerScoreScalingFactor)
                 .animation(.bouncy(duration: 0.1), value: playerScoreScalingFactor)
                 .onChange(of: scene.player?.statistics!.currentHeight.y) { oldValue, newValue in
@@ -186,10 +186,10 @@ extension ContentView {
                         .scaledToFit()
                     VStack (spacing: UIConfig.Spacings.large) {
                         VStack (spacing: UIConfig.Spacings.nano){
-                            Text(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))
+                            Text(String(format: "%.0fm", (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)))
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
                                 .foregroundStyle(Color(hue: 0, saturation: 0, brightness: 0.37))
-                            Text("Hi Score: \(String(format: "%.0fm", scene.player?.statistics!.highestPlatform.y ?? 0))")
+                            Text("Hi Score: \(String(format: "%.0fm", (scene.player?.statistics!.highestPlatform.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)))")
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.micro))
                                 .foregroundStyle(.gray)
                         }

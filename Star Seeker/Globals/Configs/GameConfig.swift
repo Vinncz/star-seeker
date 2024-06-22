@@ -14,6 +14,8 @@ struct GameConfig {
     /** Dictates how much should a movement controller button applies a vertical impulse to a target */
     static let elevationalImpulse : CGFloat = 1000
     
+    static let collisionSafeMargin: CGFloat = 2
+    
     static let playerIsDynamic    : Bool    = true
     static let playerMass         : CGFloat = 0.25
     static let playerLinearDamping: CGFloat = 1

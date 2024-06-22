@@ -5,11 +5,15 @@ import SwiftUI
 /// 
 /// ## Overview
 /// Game, as the name suggest, is the location of where everything happen.
-/// To display and interact with the game, you present an instance of this, inside an SKView from your SwiftUI file.
+/// To display and interact with the game, you present an instance of this, inside an SKView from a SwiftUI file.
+/// 
+/// ## Transparency
+/// Game uses a state, levelTrack, theme, and themedLevel to indicate "in what state they are", and "what matters the most now".
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
+    var outboundIndicator: SKSpriteNode?
     
     override init ( size: CGSize ) {
         self.state = .playing
@@ -31,8 +35,18 @@ import SwiftUI
         self.player      = try? findPlayerElement()
         self.controller  = setupMovementController(for: self.player!)
         
-//        attachDarkness()
+        attachDarkness()
+        
+        self.outboundIndicator = setupOutboundIndicator()
+        addChild(outboundIndicator!)
+        
         addChild(controller!)
+    }
+    
+    func setupOutboundIndicator () -> SKSpriteNode {
+        let indicatorNode = ArrowPointingToPlayersLocationWhenOffScreen()
+        indicatorNode.isHidden = true
+        return indicatorNode
     }
     
     /** The state of situation for self */
@@ -92,43 +106,67 @@ extension Game {
                 currentMovingPlatformPosition = currentMovingPlatform?.position
             }
         }
+        
+        guard let playerPosition = self.player?.position,
+              let outboundIndicatorNode = self.outboundIndicator else {
+            fatalError("player and outbound indicator not found")
+        }
+        let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
+        if isPlayerOutbound {
+            let indicatorVerticalOffset = outboundIndicatorNode.size.width / 2
+            let indicatorHeightOffset = outboundIndicatorNode.size.height / 2
+            outboundIndicatorNode.isHidden = false
+            if (playerPosition.y < ValueProvider.screenDimension.height){
+                if (playerPosition.x < ValueProvider.screenDimension.width / 2) {
+                    outboundIndicatorNode.position = CGPoint(x: 0 + indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = 1.6
+                } else {
+                    outboundIndicatorNode.position = CGPoint(x: ValueProvider.screenDimension.width - indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = -1.6
+                }
+            } else {
+                outboundIndicatorNode.position = CGPoint(x: playerPosition.x, y: ValueProvider.screenDimension.height - indicatorHeightOffset)
+                outboundIndicatorNode.zRotation = 0
+            }
+        } else {
+            outboundIndicatorNode.isHidden = true
+        }
     }
     
     /** Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called. */
     func didBegin ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact) -> Void] = [
-            [BitMaskConstant.player, BitMaskConstant.platform]: Player.intoContactWithPlatform,
-            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact in
-                Player.intoContactWithPlatform(contact: contact)
-                self.advanceToNextLevel()
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, () -> Void) -> Void] = [
+            [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
+                Player.intoContactWithPlatform(contact: contact, completion: completion)
             },
-            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
-                Player.intoContactWithPlatform(contact: contact)
-                // TODO: -- Fix this mess
-                if (contact.bodyA.node?.name == NodeNamingConstant.Platform.Inert.Dynamic.moving){
-                    self.currentMovingPlatform = contact.bodyA.node as? SKSpriteNode
-                } else {
-                    self.currentMovingPlatform = contact.bodyB.node as? SKSpriteNode
-                }
+            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact, completion in
+                Player.intoContactWithPlatform(contact: contact, completion: self.advanceToNextLevel)
             },
-            [BitMaskConstant.player, BitMaskConstant.darkness]: { contact in 
+            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
+                Player.intoContactWithPlatform(contact: contact, completion: completion)
+            },
+            [BitMaskConstant.player, BitMaskConstant.darkness]: { contact, completion in 
                 if ( self.state != .finished ) {
                     self.state = .finished
                 }
-                Player.intoContactWithDarkness(contact: contact)
+                Player.intoContactWithDarkness(contact: contact, completion: completion)
             }
         ]
         let collision         = Set([contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask])
         
-        collisionHandlers[collision]?(contact)
+        collisionHandlers[collision]?(contact, {})
     }
     
     /** Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute. */
     func didEnd ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact) -> Void] = [
-            [BitMaskConstant.player, BitMaskConstant.platform]: Player.releaseContactWithPlatform,
-            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: Player.releaseContactWithPlatform,
-            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact in
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, () -> Void) -> Void] = [
+            [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
+                Player.releaseContactWithPlatform(contact: contact, completion: completion)
+            },
+            [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact, completion in
+                Player.releaseContactWithPlatform(contact: contact, completion: completion)
+            },
+            [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
                 self.currentMovingPlatform = nil
                 self.currentMovingPlatformPosition = nil
                 Player.releaseContactWithPlatform(contact: contact)
@@ -137,7 +175,7 @@ extension Game {
         ]
         let collision         = Set([contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask])
         
-        collisionHandlers[collision]?(contact)
+        collisionHandlers[collision]?(contact, {})
     }
     
 }
@@ -168,8 +206,7 @@ extension Game {
     func findPlayerElement () throws -> Player? {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
         if ( player == nil ) { 
-            print("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
-//            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
+            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
         return player
     }
@@ -177,17 +214,23 @@ extension Game {
     /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
     func setupMovementController ( for target: Player ) -> MovementController {
         let controller = JoystickMovementController( controls: target )
-        controller.position = CGPoint(5, 6)
+        controller.position = CGPoint(5, 4)
         
         return controller
     }
     
     func attachDarkness () {
         let darkness = Darkness()
-        darkness.position = CGPoint(5, -7)
+        darkness.position = CGPoint(5, -11)
         
-        let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
-        darkness.run(moveAction)
+        let spawnAction = SKAction.move(to: CGPoint(5, -7), duration: 3)
+            spawnAction.timingMode = .easeInEaseOut
+        let waitAction = SKAction.wait(forDuration: 2)
+        let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 75)
+        
+        let moveSequence = SKAction.sequence([spawnAction, waitAction, moveAction])
+        
+        darkness.run(moveSequence)
         
         addChild(darkness)
     }
@@ -237,7 +280,7 @@ extension Game {
         
             levelFilename += String(self.levelTrack)
         
-        print(levelFilename)
+        debug("\n### Loaded \(levelFilename) ###\n")
         self.attachElements(fromLevelOf: levelFilename)
         levelTrack += 1
     }
@@ -257,11 +300,14 @@ extension Game {
         self.speed = 1
         self.isPaused = false
         self.levelTrack = 1
+        self.currentTheme = .autumn
         detachAllElements()
         levelDidLoad()
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
         attachDarkness()
+        self.outboundIndicator = setupOutboundIndicator()
+        addChild(outboundIndicator!)
         addChild(controller!)
         self.state = .playing
     }

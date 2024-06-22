@@ -45,11 +45,14 @@
 		205A99B82C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AE2C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv */; };
 		205A99B92C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AF2C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv */; };
 		205A99BB2C255ED800C85B1B /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BA2C255ED800C85B1B /* View.swift */; };
+		205A99BD2C25FBE400C85B1B /* HoldableDragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */; };
+		205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */; };
+		205A99C52C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */; };
 		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
 		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
 		206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A42C21642A004270C7 /* LevelGenerator.swift */; };
 		206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A72C21648C004270C7 /* ButtonsMovementController.swift */; };
-		206332AC2C21648C004270C7 /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A82C21648C004270C7 /* JoystickMovementController.swift */; };
+		206332AC2C21648C004270C7 /* LegacyJoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */; };
 		206332AD2C21648C004270C7 /* MovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A92C21648C004270C7 /* MovementController.swift */; };
 		2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */; };
 		2097B7822C114C00002261C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7812C114C00002261C3 /* ContentView.swift */; };
@@ -133,11 +136,14 @@
 		205A99AE2C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.7.csv; sourceTree = "<group>"; };
 		205A99AF2C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.1.csv; sourceTree = "<group>"; };
 		205A99BA2C255ED800C85B1B /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldableDragButton.swift; sourceTree = "<group>"; };
+		205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
+		205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowPointingToPlayersLocationWhenOffScreen.swift; sourceTree = "<group>"; };
 		2063329F2C2163F2004270C7 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		206332A02C2163F2004270C7 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		206332A42C21642A004270C7 /* LevelGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		206332A72C21648C004270C7 /* ButtonsMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsMovementController.swift; sourceTree = "<group>"; };
-		206332A82C21648C004270C7 /* JoystickMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
+		206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyJoystickMovementController.swift; sourceTree = "<group>"; };
 		206332A92C21648C004270C7 /* MovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementController.swift; sourceTree = "<group>"; };
 		2097B77C2C114C00002261C3 /* Star Seeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Seeker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_SeekerApp.swift; sourceTree = "<group>"; };
@@ -202,13 +208,6 @@
 				20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */,
 			);
 			path = Decipherer;
-			sourceTree = "<group>";
-		};
-		204FC3BF2C1A1BB100C1BBCC /* Handler */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Handler;
 			sourceTree = "<group>";
 		};
 		204FC3C22C1AE10D00C1BBCC /* Restrictions */ = {
@@ -318,6 +317,15 @@
 			path = "Star Seeker/Raws/levelDesign/seasonal/winter";
 			sourceTree = SOURCE_ROOT;
 		};
+		205A99C32C274B7500C85B1B /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7CF2C169CA3002261C3 /* Player.swift */,
+				205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		206332A12C2163F2004270C7 /* CoreGraphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,8 +347,9 @@
 			isa = PBXGroup;
 			children = (
 				206332A72C21648C004270C7 /* ButtonsMovementController.swift */,
-				206332A82C21648C004270C7 /* JoystickMovementController.swift */,
+				206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */,
 				206332A92C21648C004270C7 /* MovementController.swift */,
+				205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */,
 			);
 			path = MovementController;
 			sourceTree = "<group>";
@@ -462,11 +471,9 @@
 			children = (
 				206332A52C21642A004270C7 /* Generator */,
 				204FC3C22C1AE10D00C1BBCC /* Restrictions */,
-				204FC3BF2C1A1BB100C1BBCC /* Handler */,
 				204FC3B92C19F97700C1BBCC /* Decipherer */,
 				2097B7BC2C15E12A002261C3 /* Scalable */,
 				2097B7B92C12FC2C002261C3 /* Movable */,
-				2097B7B82C12FC1F002261C3 /* Position */,
 			);
 			path = Concepts;
 			sourceTree = "<group>";
@@ -502,13 +509,6 @@
 			children = (
 			);
 			path = Obstacles;
-			sourceTree = "<group>";
-		};
-		2097B7B82C12FC1F002261C3 /* Position */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Position;
 			sourceTree = "<group>";
 		};
 		2097B7B92C12FC2C002261C3 /* Movable */ = {
@@ -600,11 +600,11 @@
 		2097B7F42C175F4C002261C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				205A99C32C274B7500C85B1B /* Player */,
 				2097B7F62C175F6A002261C3 /* Buttons */,
 				2097B7F72C17F342002261C3 /* DelayedExecution */,
 				2097B7A42C115E99002261C3 /* Wrapper.swift */,
 				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
-				2097B7CF2C169CA3002261C3 /* Player.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -624,6 +624,7 @@
 				2097B7A62C119C27002261C3 /* HoldButton.swift */,
 				2097B7AB2C122000002261C3 /* PressButton.swift */,
 				204FC3C02C1A9B7700C1BBCC /* DragButton.swift */,
+				205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -741,8 +742,9 @@
 				2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
+				205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */,
 				204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */,
-				206332AC2C21648C004270C7 /* JoystickMovementController.swift in Sources */,
+				206332AC2C21648C004270C7 /* LegacyJoystickMovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
 				2097B7E42C17021F002261C3 /* StickyPlatform.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
@@ -763,6 +765,7 @@
 				2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */,
 				205A99BB2C255ED800C85B1B /* View.swift in Sources */,
 				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
+				205A99BD2C25FBE400C85B1B /* HoldableDragButton.swift in Sources */,
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
 				206332A22C2163F2004270C7 /* CGPoint.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
@@ -771,6 +774,7 @@
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */,
+				205A99C52C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift in Sources */,
 				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
 				206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */,
 				204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */,

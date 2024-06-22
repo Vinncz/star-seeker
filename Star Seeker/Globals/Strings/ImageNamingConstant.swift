@@ -81,6 +81,9 @@ struct ImageNamingConstant {
                 }
             }
         }
+        struct Indicator {
+            static let arrowPointingToPlayersLocationWhenOffScreen : String = "interface.indicator.arrowpointingtoplayerslocationwhenoffscreen"
+        }
     }
     
     struct Player {

@@ -24,6 +24,7 @@ extension CGPoint {
         self.init(x: (CGFloat(xGrid) * unitSize) + (unitSize * CGFloat(width) * 0.5), y: (CGFloat(yGrid) * unitSize) + (unitSize * CGFloat(height) * 0.5))
     }
     
+    /// Converts the unit of measurement from points to grids.
     func convertToGrids () -> CGPoint {
         let x = self.x / ValueProvider.gridDimension.width
         let y = self.y / ValueProvider.gridDimension.height

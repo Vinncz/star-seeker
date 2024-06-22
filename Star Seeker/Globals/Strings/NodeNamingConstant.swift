@@ -41,6 +41,10 @@ struct NodeNamingConstant {
         }
     }
     
+    struct Indicator {
+        static let arrowPointingToPlayersLocationWhenOffScreen : String = "VERTEX.STAR_SEEKER.NODE.INDICATOR.ARROWPOINTINGTOPLAYERSLOCATIONWHENOFFSCREEN"
+    }
+    
     struct Button {
         static let leftControl  : String = "VERTEX.STAR_SEEKER.BUTTON.LEFT.OBJECT"
         static let rightControl : String = "VERTEX.STAR_SEEKER.BUTTON.RIGHT.OBJECT"

@@ -22,13 +22,11 @@ class CSVtoNodesDecipherer : Decipherer {
 
             let columns = row.components(separatedBy: AppConfig.delimiter)
             for c in columns {
-//                print("column \(c.count)")
                 let column = c.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard ( !column.isEmpty && column.count > 1 ) else { rowResult.append(nil); continue }
                 
                 let rawResult        = column.split(separator: "-")
                 let rawData          = rawResult[0]
-//                print("rawData \(rawData)")
                 let seasonalModifier : Season
                 
                 if ( rawResult.count > 1  ) {
@@ -48,7 +46,6 @@ class CSVtoNodesDecipherer : Decipherer {
                 } else {
                     seasonalModifier = .notApplicable
                 }
-//                print("seModif \(seasonalModifier)")
                 
                 if let nodeType = nodeConfigurations[String(rawData)] {
                     let node: SKSpriteNode? = nodeType(seasonalModifier)
