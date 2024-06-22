@@ -150,16 +150,60 @@ class JoystickMovementController : MovementController {
     
     static func defaultDirectionIndicator (impulse: CGVector, startingPosition: CGPoint) -> SKShapeNode {
         let points = calculateTrajectoryPoints(impulse: impulse, startingPosition: startingPosition)
+        let dashedPath = createDashedPath(points: points, lineWidth: 2.0, dashLength: 10.0, gapLength: 5.0)
+        
         let path = CGMutablePath()
         path.addLines(between: points)
         
-        let shapeNode = SKShapeNode(path: path)
+        let shapeNode = SKShapeNode(path: dashedPath)
         shapeNode.strokeColor = .white
         shapeNode.lineWidth = 3.0
         shapeNode.zPosition = 20
         
         return shapeNode
         
+    }
+    
+    static func createDashedPath(points: [CGPoint], lineWidth: CGFloat, dashLength: CGFloat, gapLength: CGFloat) -> CGPath {
+        let path = CGMutablePath()
+        if (points.count == 0) {
+            return path
+        }
+        var currentPoint = points[0]
+        path.move(to: currentPoint)
+
+        var isDrawing = true
+        var distanceRemaining: CGFloat = dashLength
+        
+        for i in 0..<points.count {
+            let nextPoint = points[i]
+            let segmentVector = CGVector(dx: nextPoint.x - currentPoint.x, dy: nextPoint.y - currentPoint.y)
+            let segmentLength = sqrt(segmentVector.dx * segmentVector.dx + segmentVector.dy * segmentVector.dy)
+            var segmentProgress: CGFloat = 0
+
+            while segmentProgress < segmentLength {
+                let drawLength = min(distanceRemaining, segmentLength - segmentProgress)
+                let drawVector = CGVector(dx: segmentVector.dx * drawLength / segmentLength, dy: segmentVector.dy * drawLength / segmentLength)
+                let drawPoint = CGPoint(x: currentPoint.x + drawVector.dx, y: currentPoint.y + drawVector.dy)
+
+                if isDrawing {
+                    path.addLine(to: drawPoint)
+                } else {
+                    path.move(to: drawPoint)
+                }
+
+                currentPoint = drawPoint
+                segmentProgress += drawLength
+                distanceRemaining -= drawLength
+
+                if distanceRemaining <= 0 {
+                    isDrawing = !isDrawing
+                    distanceRemaining = isDrawing ? dashLength : gapLength
+                }
+            }
+        }
+
+        return path
     }
     
     static func calculateTrajectoryPoints(impulse: CGVector, startingPosition: CGPoint) -> [CGPoint] {
