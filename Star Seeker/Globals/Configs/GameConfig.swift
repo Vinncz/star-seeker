@@ -19,6 +19,7 @@ struct GameConfig {
     static let playerLinearDamping: CGFloat = 1
     static let playerFriction     : CGFloat = 0.4
     static let playerRotates      : Bool    = false
+    static let playerGravity      : CGVector = CGVector(dx: 0, dy: -9.8)
     
     /** Dictates whether platform can be affected by other physics bodies that came into contact with them */
     static let platformIsDynamic    : Bool    = false

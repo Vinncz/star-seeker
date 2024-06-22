@@ -54,7 +54,7 @@ class DragButtonNode : SKSpriteNode {
         
         let dx = location.x - initialTouchPosition.x
         let dy = location.y - initialTouchPosition.y
-        let distance = sqrt(dx*dx + dy*dy)
+        let distance = CGPoint(x: dx, y: dy).getDistance()
         
         if ( distance > maxDraggableDistance ) {
             let directionX = dx / distance

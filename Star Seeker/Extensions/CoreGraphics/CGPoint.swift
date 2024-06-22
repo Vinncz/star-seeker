@@ -24,4 +24,8 @@ extension CGPoint {
         self.init(x: (CGFloat(xGrid) * unitSize) + (unitSize * CGFloat(width) * 0.5), y: (CGFloat(yGrid) * unitSize) + (unitSize * CGFloat(height) * 0.5))
     }
     
+    func getDistance () -> Double {
+        return sqrt(self.x * self.x + self.y * self.y)
+    }
+    
 }

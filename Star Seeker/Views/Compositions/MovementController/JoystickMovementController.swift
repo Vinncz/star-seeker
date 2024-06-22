@@ -19,15 +19,11 @@ class JoystickMovementController : MovementController {
         }
     }
     
-    var directionIndicator : SKSpriteNode?
+    var directionIndicator : SKShapeNode?
     var bottomController : SKSpriteNode?
     var arrowController : SKSpriteNode?
     
     override init ( controls target : Player ) {
-        self.directionIndicator = JoystickMovementController.defaultDirectionIndicator(to: target)
-        self.directionIndicator?.zPosition = 1000
-        target.addChild(self.directionIndicator!)
-        
         super.init(controls: target)
         
         self.bottomController = JoystickMovementController.bottomControllerNode(buttonSize: bSize, maxDistance: self.joystickMaxDistance)
@@ -67,7 +63,7 @@ class JoystickMovementController : MovementController {
                     break
                 }
                 
-                let deltaDistance = sqrt(deltaX * deltaX + deltaY * deltaY)
+                let deltaDistance = CGPoint(x: deltaX, y: deltaY).getDistance()
                 
                 let deltasExceedMinimumTreshold =  deltaDistance >= self!.joystickSafeArea
                 let deltasExceedMaxTreshold =  deltaDistance >= self!.joystickMaxDistance
@@ -77,20 +73,23 @@ class JoystickMovementController : MovementController {
                     self?.directionIndicator?.isHidden = true
                     return
                 }
-                self?.directionIndicator?.isHidden = false
                 let angle = atan2(deltaY, deltaX)
-                self?.directionIndicator?.zRotation = angle + .pi / 2
-                
-                let distanceAr = sqrt(deltaX * deltaX + deltaY * deltaY)
-                let scale = distanceAr / maxDraggableDistance
-                self?.directionIndicator?.xScale = scale
-                self?.directionIndicator?.yScale = scale
-                
-                let radius = self?.target.size.height ?? 0
-                self?.directionIndicator?.position = CGPoint(
+                let radius = (self?.target.size.height)! - 20
+                let indicatorPosition = CGPoint(
                     x: radius * -cos(angle),
                     y: radius * -sin(angle)
                 )
+                let resultingImpulse = CGVector (
+                    dx: -1 * (deltaX / GameConfig.joystickDampeningFactor) * (self!.hImpls),
+                    dy: -1 * (deltaY / GameConfig.joystickDampeningFactor) * (self!.vImpls)
+                )
+                self?.directionIndicator?.removeFromParent()
+                let directionIndicatorNode = JoystickMovementController.defaultDirectionIndicator(impulse: resultingImpulse, startingPosition: indicatorPosition)
+                self?.directionIndicator = directionIndicatorNode
+                if let targetNode = self?.target {
+                    targetNode.addChild(directionIndicatorNode)
+                }
+                
                 /* MARK: End arrow logic */
                 
                 if ( deltasExceedMinimumTreshold ) {
@@ -105,7 +104,7 @@ class JoystickMovementController : MovementController {
                 self?.directionIndicator?.isHidden = true
                 guard let target = self?.target else { return }
                 
-                let deltaDistance = sqrt(deltaX * deltaX + deltaY * deltaY)
+                let deltaDistance = CGPoint(x: deltaX, y: deltaY).getDistance()
                 let deltasExceedMinimumTreshold =  deltaDistance >= self!.joystickSafeArea
                 guard deltasExceedMinimumTreshold else {
                     target.state = .idle
@@ -149,14 +148,42 @@ class JoystickMovementController : MovementController {
         target.run(action, withKey: "\(key)\(String(describing: target.name))")
     }
     
-    static func defaultDirectionIndicator ( to target: SKSpriteNode ) -> SKSpriteNode {
-        let arrowTexture                = SKTexture( image: UIImage(systemName: "arrowshape.up.fill")! )
-        let directionIndicator          = SKSpriteNode( texture: arrowTexture, size: arrowTexture.size() )
-        directionIndicator.isHidden     = true
-        directionIndicator.size         = CGSize( width: 35, height: 35 )
-        directionIndicator.position     = CGPoint( x: 0, y: 0 )
+    static func defaultDirectionIndicator (impulse: CGVector, startingPosition: CGPoint) -> SKShapeNode {
+        let points = calculateTrajectoryPoints(impulse: impulse, startingPosition: startingPosition)
+        let path = CGMutablePath()
+        path.addLines(between: points)
         
-        return directionIndicator
+        let shapeNode = SKShapeNode(path: path)
+        shapeNode.strokeColor = .white
+        shapeNode.lineWidth = 3.0
+        shapeNode.zPosition = 1000
+        
+        return shapeNode
+        
+    }
+    
+    static func calculateTrajectoryPoints(impulse: CGVector, startingPosition: CGPoint) -> [CGPoint] {
+        var points = [CGPoint]()
+        
+        let gravity = GameConfig.playerGravity
+        let mass = GameConfig.playerMass
+        let initialVelocity = CGVector(dx: impulse.dx * mass, dy: impulse.dy * mass)
+        
+        let numberOfPoints = 50
+        let timeStep = 0.1
+        let distanceToPosition = startingPosition.getDistance()
+        
+        for i in 0..<numberOfPoints {
+            let t = Double(i) * timeStep
+            let x = initialVelocity.dx * CGFloat(t)
+            let y = initialVelocity.dy * CGFloat(t) + 0.5 * gravity.dy * CGFloat(t * t)
+            let point = CGPoint(x: x, y: y)
+            if (point.getDistance() > startingPosition.getDistance()) {
+                points.append(point)
+            }
+        }
+        
+        return points
     }
     
     static func arrowControllerNode (buttonSize: Double) -> SKSpriteNode {

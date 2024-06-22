@@ -25,6 +25,7 @@ import SwiftUI
     /** Called after an instace of Game is ready to be shown at some SKView instance. */
     override func didMove ( to view: SKView ) {
         ValueProvider.screenDimension = UIScreen.main.bounds.size
+        self.physicsWorld.gravity = GameConfig.playerGravity
         
         setup(view)
         attachElements()
