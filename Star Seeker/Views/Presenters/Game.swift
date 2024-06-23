@@ -146,6 +146,7 @@ extension Game {
             [BitMaskConstant.player, BitMaskConstant.darkness]: { contact in
                 if ( self.state != .finished ) {
                     self.state = .finished
+                    SoundManager.instance.playSound(.GameOver)
                 }
                 Player.intoContactWithDarkness(contact: contact)
             }

@@ -47,6 +47,7 @@ extension Player {
     
     /// Called when an instance of player collided with an instance of platform.
     static func intoContactWithPlatform ( contact: SKPhysicsContact ) {
+        SoundManager.instance.playSound(.PlatformCollision)
         let nodes = UniversalNodeIdentifier.identify (
             checks: [
                 { $0 as? Player },

@@ -72,6 +72,12 @@
 		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 		6790D6F02C2560DE000B5F50 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D6EF2C2560DE000B5F50 /* View.swift */; };
 		6790D6F22C26EC88000B5F50 /* OutBoundIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790D6F12C26EC88000B5F50 /* OutBoundIndicator.swift */; };
+		679FBF282C27E419008866D6 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679FBF272C27E419008866D6 /* PlaySound.swift */; };
+		679FBF302C27E79A008866D6 /* PlatformCollision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 679FBF2B2C27E79A008866D6 /* PlatformCollision.mp3 */; };
+		679FBF312C27E79A008866D6 /* Button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 679FBF2C2C27E79A008866D6 /* Button.mp3 */; };
+		679FBF322C27E79A008866D6 /* SlingshotRelease.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 679FBF2D2C27E79A008866D6 /* SlingshotRelease.mp3 */; };
+		679FBF332C27E79A008866D6 /* SlingshotPull.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 679FBF2E2C27E79A008866D6 /* SlingshotPull.mp3 */; };
+		679FBF342C27E79A008866D6 /* GameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 679FBF2F2C27E79A008866D6 /* GameOver.mp3 */; };
 		67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44542C217E020081CC26 /* Chainwhacks.ttf */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +149,12 @@
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 		6790D6EF2C2560DE000B5F50 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		6790D6F12C26EC88000B5F50 /* OutBoundIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutBoundIndicator.swift; sourceTree = "<group>"; };
+		679FBF272C27E419008866D6 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		679FBF2B2C27E79A008866D6 /* PlatformCollision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlatformCollision.mp3; sourceTree = "<group>"; };
+		679FBF2C2C27E79A008866D6 /* Button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Button.mp3; sourceTree = "<group>"; };
+		679FBF2D2C27E79A008866D6 /* SlingshotRelease.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SlingshotRelease.mp3; sourceTree = "<group>"; };
+		679FBF2E2C27E79A008866D6 /* SlingshotPull.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SlingshotPull.mp3; sourceTree = "<group>"; };
+		679FBF2F2C27E79A008866D6 /* GameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameOver.mp3; sourceTree = "<group>"; };
 		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,7 +218,8 @@
 				205A996D2C23C52700C85B1B /* easy-02.csv */,
 				205A996E2C23C52700C85B1B /* easy-03.csv */,
 			);
-			path = LevelDesign;
+			name = LevelDesign;
+			path = ../LevelDesign;
 			sourceTree = "<group>";
 		};
 		206332A12C2163F2004270C7 /* CoreGraphics */ = {
@@ -255,12 +268,11 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
-				205A996C2C23C50F00C85B1B /* LevelDesign */,
 				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
-				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
 				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
+				679FBF292C27E76E008866D6 /* Shared */,
 				2097B79C2C115A87002261C3 /* Globals */,
 				2097B7922C114C74002261C3 /* Extensions */,
 				2097B7902C114C20002261C3 /* Models */,
@@ -336,6 +348,7 @@
 			children = (
 				2097B79E2C115AA5002261C3 /* Debug.swift */,
 				204FC3CB2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift */,
+				679FBF272C27E419008866D6 /* PlaySound.swift */,
 			);
 			path = Functions;
 			sourceTree = "<group>";
@@ -527,6 +540,28 @@
 			path = DelayedExecution;
 			sourceTree = "<group>";
 		};
+		679FBF292C27E76E008866D6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				205A996C2C23C50F00C85B1B /* LevelDesign */,
+				679FBF2A2C27E77A008866D6 /* Sound */,
+				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		679FBF2A2C27E77A008866D6 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				679FBF2C2C27E79A008866D6 /* Button.mp3 */,
+				679FBF2F2C27E79A008866D6 /* GameOver.mp3 */,
+				679FBF2B2C27E79A008866D6 /* PlatformCollision.mp3 */,
+				679FBF2E2C27E79A008866D6 /* SlingshotPull.mp3 */,
+				679FBF2D2C27E79A008866D6 /* SlingshotRelease.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -585,9 +620,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				679FBF322C27E79A008866D6 /* SlingshotRelease.mp3 in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
+				679FBF342C27E79A008866D6 /* GameOver.mp3 in Resources */,
 				205A99722C23C52700C85B1B /* easy-01.csv in Resources */,
+				679FBF332C27E79A008866D6 /* SlingshotPull.mp3 in Resources */,
+				679FBF302C27E79A008866D6 /* PlatformCollision.mp3 in Resources */,
 				205A99712C23C52700C85B1B /* easy-03.csv in Resources */,
+				679FBF312C27E79A008866D6 /* Button.mp3 in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
@@ -644,6 +684,7 @@
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */,
 				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
+				679FBF282C27E419008866D6 /* PlaySound.swift in Sources */,
 				206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */,
 				204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */,
 				2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */,
