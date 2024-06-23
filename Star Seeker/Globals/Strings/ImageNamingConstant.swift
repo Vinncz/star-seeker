@@ -73,6 +73,7 @@ struct ImageNamingConstant {
         
         static let box          : String = "interface.box"
         static let outboundIndicator: String = "interface.outbound-indicator"
+        static let startTitle: String = "interface.start-title"
         
         struct Joystick {
             static let top      : String = "interface.joystick.top"

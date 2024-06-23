@@ -15,13 +15,14 @@ import SwiftUI
     var player        : Player?
     /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
     var controller    : MovementController?
+    var darkness       : Darkness?
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
     var outboundIndicator: SKSpriteNode?
     static var levelCounter : Int = 2
     
     override init ( size: CGSize ) {
-        self.state = .playing
+        self.state = .startScreen
         
         super.init(size: size)
         
@@ -39,6 +40,7 @@ import SwiftUI
         
         self.player      = try? findPlayerElement()
         self.controller  = setupMovementController(for: self.player!)
+        self.controller?.isHidden = true
         addChild(controller!)
         self.outboundIndicator = setupOutboundIndicator()
         addChild(outboundIndicator!)
@@ -51,7 +53,13 @@ import SwiftUI
         didSet {
             previousState = oldValue
             switch ( state ) {
+            case .startScreen:
+                exitGame()
+                break
             case .playing:
+                let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
+                self.darkness?.run(moveAction)
+                self.controller?.isHidden = false
                 self.isPaused = false
                 break
             case .paused:
@@ -216,9 +224,7 @@ extension Game {
     func attachDarkness () {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -7)
-        
-        let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
-        darkness.run(moveAction)
+        self.darkness = darkness
         
         addChild(darkness)
     }
@@ -270,11 +276,28 @@ extension Game {
         attachElements()
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
+        self.controller?.isHidden = false
         attachDarkness()
         addChild(controller!)
         self.outboundIndicator = setupOutboundIndicator()
         self.addChild(outboundIndicator!)
         self.state = .playing
+    }
+    
+    func exitGame() {
+        self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
+        self.speed = 1
+        self.isPaused = false
+        Game.levelCounter = 2
+        detachAllElements()
+        attachElements()
+        self.player = try? findPlayerElement()
+        self.controller = setupMovementController(for: self.player!)
+        self.controller?.isHidden = true
+        attachDarkness()
+        addChild(controller!)
+        self.outboundIndicator = setupOutboundIndicator()
+        self.addChild(outboundIndicator!)
     }
     
 }
@@ -286,7 +309,8 @@ extension Game {
              paused,
              notYetStarted,
              levelChange,
-             finished
+             finished,
+             startScreen
     }
     enum GeneratorError : Error {
         case playerIsNotAdded(String)
