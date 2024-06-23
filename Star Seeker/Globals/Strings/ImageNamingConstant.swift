@@ -81,46 +81,57 @@ struct ImageNamingConstant {
                 }
             }
         }
+        
+        static let box          : String = "interface.box"
+        static let outboundIndicator: String = "interface.outbound-indicator"
+        static let startTitle: String = "interface.start-title"
+        
+        struct Joystick {
+            static let top      : String = "interface.joystick.top"
+            static let bottom   : String = "interface.joystick.bottom"
+            static let arrow    : String = "interface.joystick.drag-indicator"
+        }
+        
         struct Indicator {
             static let arrowPointingToPlayersLocationWhenOffScreen : String = "interface.indicator.arrowpointingtoplayerslocationwhenoffscreen"
         }
+        
+        struct Player {
+            struct Idle {
+                struct Left {
+                    static let name : String = "player.idle.left."
+                }
+                struct Right {
+                    static let name : String = "player.idle.right."
+                }
+            }
+            
+            struct Moving {
+                struct Left {
+                    static let name : String = "player.moving.left."
+                }
+                struct Right {
+                    static let name : String = "player.moving.right."
+                }
+            }
+            
+            struct Squating {
+                static let name : String = "player.squat."
+            }
+            
+            struct Jumping {
+                struct Left {
+                    static let name : String = "player.jumping.left."
+                }
+                struct Right {
+                    static let name : String = "player.jumping.right."
+                }
+            }
+            
+            struct Climbing {
+                static let name : String = "player.climbing."
+            }
+        }
+        
     }
-    
-    struct Player {
-        struct Idle {
-            struct Left {
-                static let name : String = "player.idle.left."
-            }
-            struct Right {
-                static let name : String = "player.idle.right."
-            }
-        }
-        
-        struct Moving {
-            struct Left {
-                static let name : String = "player.moving.left."
-            }
-            struct Right {
-                static let name : String = "player.moving.right."
-            }
-        }
-        
-        struct Squating {
-            static let name : String = "player.squat."
-        }
-        
-        struct Jumping {
-            struct Left {
-                static let name : String = "player.jumping.left."
-            }
-            struct Right {
-                static let name : String = "player.jumping.right."
-            } 
-        }
-        
-        struct Climbing {
-            static let name : String = "player.climbing."
-        }
-    }
-    
 }

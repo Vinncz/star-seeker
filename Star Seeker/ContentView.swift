@@ -16,12 +16,18 @@ struct ContentView : View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            HStack {
-                PauseButton().font(.largeTitle).foregroundStyle(.white)
-                Spacer()
-                PlayerScore()
-            }
+            //            GridScreen()
+            if (scene.state != .startScreen) {
+                HStack {
+                    if (scene.state != .levelChange || scene.state != .notYetStarted) {
+                        PauseButton()
+                    }
+                    Spacer()
+                    PlayerScore()
+                }
                 .padding()
+            }
+            if ( scene.state == .startScreen ) { StartScreen().background(.black.opacity(0.3)) }
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .levelChange ) { doSomething({
@@ -55,6 +61,7 @@ struct ContentView : View {
     @State var stopwatch : CountdownTimer?
     @State var gameIsTransitioningToPlaying : Bool = false
     @State var playerScoreScalingFactor : Double = 1.0
+    @State var tapToStartScale: CGFloat = 1.0
 }
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
@@ -78,7 +85,10 @@ extension ContentView {
     
     func ExitButton () -> some View {
         Button {
-            print("go to start screen")
+            let game = self.scene
+            if ( game.state == .finished ) {
+                game.state = .startScreen
+            }
         } label: {
             Image("exit-button")
                 .resizable()
@@ -154,6 +164,39 @@ extension ContentView {
             AnyView (
                 EmptyView()
             )
+        }
+    }
+    
+    func StartScreen () -> some View {
+        AnyView (
+            VStack {
+                HStack {
+                    Image(ImageNamingConstant.Interface.startTitle)
+                        .resizable()
+                        .scaledToFit()
+                }
+                .padding(.top, 40)
+                .frame(width: .infinity)
+                Spacer()
+                StrokeText(text: "Tap To Play", width: 3, borderColor: .black.opacity(0.5), size: UIConfig.FontSizes.mini, foregroudColor: .white)
+                    .padding(.bottom, 120)
+                    .scaleEffect(tapToStartScale, anchor: .top)
+                    .onAppear {
+                        self.tapToStartScale = 1.0
+                        withAnimation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                            self.tapToStartScale = 1.1
+                        }
+                    }
+            }
+            .padding(.horizontal, UIConfig.Spacings.huge)
+            .frame(width: .infinity, height: .infinity)
+            
+        )
+        .onTapGesture {
+            let game = self.scene
+            if ( game.state == .startScreen ) {
+                game.state = .playing
+            }
         }
     }
     

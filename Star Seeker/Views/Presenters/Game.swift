@@ -12,7 +12,7 @@ import SwiftUI
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
     override init ( size: CGSize ) {
-        self.state = .playing
+        self.state = .startScreen
         
         super.init(size: size)
         
@@ -30,14 +30,13 @@ import SwiftUI
         
         self.player      = try? findPlayerElement()
         self.controller  = setupMovementController(for: self.player!)
+        self.controller?.isHidden = true
+        addChild(controller!)
+        self.outboundIndicator = setupOutboundIndicator()
+        addChild(outboundIndicator!)
         
         attachDarkness()
-        
-        self.outboundIndicator = setupOutboundIndicator()
-        
-        addChild(outboundIndicator!)
-        addChild(controller!)
-        
+
         playAnimation()
     }
     
@@ -47,18 +46,28 @@ import SwiftUI
             previousState = oldValue
             
             switch ( state ) {
-                case .playing:
-                    self.isPaused = false
-                case .paused:
-                    self.isPaused = true
-                case .finished:
-                    let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
-                        let progress = elapsedTime / 6
-                        self.speed = 1 - progress
-                    }
-                    self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
-                default:
-                    break
+            case .startScreen:
+                exitGame()
+                break
+            case .playing:
+//                let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
+                if let movement = self.darknessMovement {
+                    self.darkness?.run(movement)
+                }
+                self.controller?.isHidden = false
+                self.isPaused = false
+                break
+            case .paused:
+                self.isPaused = true
+                break
+            case .finished:
+                let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
+                    let progress = elapsedTime / 6
+                    self.speed = 1 - progress
+                }
+                self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
+            default:
+                break
             }
             
             debug("Game state was updated to: \(state)")
@@ -79,7 +88,9 @@ import SwiftUI
     
     var outboundIndicator: SKSpriteNode?
     var currentMovingPlatform: SKSpriteNode?
+    var darkness: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
+    var darknessMovement: SKAction?
 
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
@@ -263,6 +274,7 @@ extension Game {
     func setupMovementController ( for target: Player ) -> MovementController {
         let controller = JoystickMovementController( controls: target )
         controller.position = CGPoint(5, 4)
+        controller.zPosition = 100
         
         return controller
     }
@@ -284,7 +296,11 @@ extension Game {
         
         let moveSequence = SKAction.sequence([spawnAction, waitAction, moveAction])
         
-        darkness.run(moveSequence)
+        self.darknessMovement = moveSequence
+        
+//        darkness.run(moveSequence)
+        
+        self.darkness = darkness
         
         addChild(darkness)
     }
@@ -362,11 +378,32 @@ extension Game {
         levelDidLoad()
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
+        self.controller?.isHidden = false
         attachDarkness()
         self.outboundIndicator = setupOutboundIndicator()
         addChild(outboundIndicator!)
         addChild(controller!)
         self.state = .playing
+        findMovingPLatforms().forEach { mp in
+            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+        }
+    }
+    
+    func exitGame() {
+        self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
+        self.speed = 1
+        self.isPaused = false
+        self.levelTrack = 1
+        self.currentTheme = .autumn
+        detachAllElements()
+        levelDidLoad()
+        self.player = try? findPlayerElement()
+        self.controller = setupMovementController(for: self.player!)
+        self.controller?.isHidden = false
+        attachDarkness()
+        self.outboundIndicator = setupOutboundIndicator()
+        addChild(outboundIndicator!)
+        addChild(controller!)
         findMovingPLatforms().forEach { mp in
             mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
         }
@@ -381,7 +418,8 @@ extension Game {
              paused,
              notYetStarted,
              levelChange,
-             finished
+             finished,
+             startScreen
     }
     enum GeneratorError : Error {
         case playerIsNotAdded(String)
