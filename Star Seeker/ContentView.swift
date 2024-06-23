@@ -2,14 +2,24 @@ import SpriteKit
 import SwiftData
 import SwiftUI
 
-struct ContentView : View {
+struct ContentView : View { 
+    @StateObject private var viewModel = ContentViewModel(scene: "art.scnassets/tower_autumn.scn")
     
     var body: some View {
-        ZStack ( alignment: .topLeading ) {
-            Image(ImageNamingConstant.Background.Autumn.background)
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea(.all)
+        ZStack(alignment: .topLeading) {
+            // SceneKit view as the background
+            SceneKitView(scene: viewModel.scene)
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onEnded { _ in
+                            viewModel.handleSwipe()
+                        }
+                )
+                .edgesIgnoringSafeArea(.all)
+//            Image(ImageNamingConstant.Background.Autumn.background)
+//                .resizable()
+//                .scaledToFit()
+//                .ignoresSafeArea(.all)
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
@@ -22,6 +32,7 @@ struct ContentView : View {
             .padding()
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+            //can u move the gesture here
         }
     }
     
