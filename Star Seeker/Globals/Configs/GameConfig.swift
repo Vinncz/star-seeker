@@ -14,6 +14,7 @@ struct GameConfig {
     /** Dictates how much should a movement controller button applies a vertical impulse to a target */
     static let elevationalImpulse : CGFloat = 1000
     
+    /** Dictates how sensitive the game will interpret a collision. Default of 2 means the game will only register a collision, if both physics bodies has a minimum of 2 distance points from each-other */
     static let collisionSafeMargin: CGFloat = 2
     
     static let playerIsDynamic    : Bool    = true
@@ -61,12 +62,12 @@ struct GameConfig {
         "pCP" : { season in 
             CollapsiblePlatform(themed: season) 
         },
-        "pMV" : { season in 
-            MovingPlatform(themed: season) 
-        },
-        "pMT" : { season in 
-            Platform(themed: season) 
-        },
+//        "pMV" : { season in 
+//            MovingPlatform(themed: season) 
+//        },
+//        "pMT" : { season in 
+//            Platform(themed: season) 
+//        },
         "pST" : { season in 
             StickyPlatform(themed: season) 
         },
@@ -76,5 +77,11 @@ struct GameConfig {
         "pCL" : { season in 
             ClimbablePlatform(themed: season) 
         },
+    ]
+    
+    static let movingPlatformMapping : [String : (Season, CGVector) -> SKSpriteNode] = [
+        "pMV" : { season, movementVector in
+            MovingPlatform(themed: season, movingTo: movementVector)
+        }
     ]
 }

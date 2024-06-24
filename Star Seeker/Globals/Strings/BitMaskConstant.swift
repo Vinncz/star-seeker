@@ -19,4 +19,5 @@ struct BitMaskConstant {
         static let lethalObstacle              : UInt32 = 0b100_01__0000000
         static let nonLethalObstacle           : UInt32 = 0b100_10__0000000
     static let darkness                        : UInt32 = 0b011___000000001
+    static let sensor                          : UInt32 = 0b111___000000000
 }

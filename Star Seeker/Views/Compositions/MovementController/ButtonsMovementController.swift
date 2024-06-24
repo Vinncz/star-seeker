@@ -16,7 +16,6 @@ class ButtonsMovementController : MovementController {
     override init ( controls target: Player ) {
         let hForce = self.hForce
         let vForce = self.vForce
-        let hImpls = self.hImpls
         let vImpls = self.vImpls
         
         bLeft = HoldButtonNode (
@@ -34,7 +33,7 @@ class ButtonsMovementController : MovementController {
                 }
                 
                 target.physicsBody?.velocity = CGVector(dx: -100, dy: target.physicsBody?.velocity.dy ?? 0)
-//                target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
+                target.physicsBody?.applyForce(CGVectorMake(-hForce, 0))
                 debug("\(target) was moved leftward")
             },
             completion: { 
@@ -62,7 +61,7 @@ class ButtonsMovementController : MovementController {
                         break
                 }
                 
-//                target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
+                target.physicsBody?.applyForce(CGVectorMake(hForce, 0))
                 target.physicsBody?.velocity = CGVector(dx: 100, dy: target.physicsBody?.velocity.dy ?? 0)
                 debug("\(target) was moved rightward")
             },

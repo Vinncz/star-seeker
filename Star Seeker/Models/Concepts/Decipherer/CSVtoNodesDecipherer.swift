@@ -23,7 +23,10 @@ class CSVtoNodesDecipherer : Decipherer {
             let columns = row.components(separatedBy: AppConfig.delimiter)
             for c in columns {
                 let column = c.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard ( !column.isEmpty && column.count > 1 ) else { rowResult.append(nil); continue }
+                guard ( !column.isEmpty && column.count > 1 ) else { 
+                    rowResult.append(nil); 
+                    continue 
+                }
                 
                 let rawResult        = column.split(separator: "-")
                 let rawData          = rawResult[0]
@@ -43,8 +46,10 @@ class CSVtoNodesDecipherer : Decipherer {
                         default:
                             seasonalModifier = .notApplicable
                     }
+                    
                 } else {
                     seasonalModifier = .notApplicable
+                    
                 }
                 
                 if let nodeType = nodeConfigurations[String(rawData)] {

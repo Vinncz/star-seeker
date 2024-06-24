@@ -32,6 +32,11 @@ extension CGPoint {
         return CGPoint(x: x, y: y)
     }
     
+    /// Returns the distance between self's x and y points
+    func getDistance () -> Double {
+        return sqrt(self.x * self.x + self.y * self.y)
+    }
+    
     func toString ( useGrid: Bool ) -> String {
         let grid = self.convertToGrids()
         return useGrid ? "x: \(grid.x + 0.5), y: \(grid.y + 0.51)" : "x: \(self.x), y: \(self.y)"

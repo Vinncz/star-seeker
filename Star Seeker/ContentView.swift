@@ -3,13 +3,16 @@ import SwiftData
 import SwiftUI
 
 struct ContentView : View {
+    @State private var viewModel = ContentViewModel(scene: "art.scnassets/towerLayer1.scn")
+    
+    var scview : SceneKitView {
+        SceneKitView(scene: viewModel.scene)
+    }
     
     var body: some View {
         ZStack ( alignment: .topLeading ) {
-            Image(background())
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea(.all)
+            scview
+                .edgesIgnoringSafeArea(.all)
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
@@ -21,6 +24,13 @@ struct ContentView : View {
                 .padding()
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+            if ( scene.state == .levelChange ) { doSomething({
+                viewModel.state = .progressing
+            }) }
+            if ( viewModel.state == .finished ) { doSomething({
+                viewModel.state = .ready
+                scene.state = .playing
+            }) }
         }
     }
     
@@ -49,6 +59,11 @@ struct ContentView : View {
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
 extension ContentView {
+    
+    func doSomething ( _ command: () -> Void ) -> some View {
+        command()
+        return EmptyView()
+    }
     
     func RestartButton () -> some View {
         Button {

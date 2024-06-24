@@ -68,11 +68,11 @@ struct ImageNamingConstant {
                 static let restart : String = "interface.button.gamecontrol.restart"
             }
             struct MovementControl {
-                static let climb   : String = "interface.button.movementcontrol.climb"
-                static let jump    : String = "interface.button.movementcontrol.jump"
-                static let left    : String = "interface.button.movementcontrol.left"
-                static let right   : String = "interface.button.movementcontrol.right"
-                static let up      : String = "interface.button.movementcontrol.up"
+                static let climb   : String = "interface.button.movementcontrol.buttons.climb"
+                static let jump    : String = "interface.button.movementcontrol.buttons.jump"
+                static let left    : String = "interface.button.movementcontrol.buttons.left"
+                static let right   : String = "interface.button.movementcontrol.buttons.right"
+                static let up      : String = "interface.button.movementcontrol.buttons.up"
                 
                 struct Joystick {
                     static let knob              : String = "interface.button.movementcontrol.joystick.knob"

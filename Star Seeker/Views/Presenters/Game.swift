@@ -11,9 +11,6 @@ import SwiftUI
 /// Game uses a state, levelTrack, theme, and themedLevel to indicate "in what state they are", and "what matters the most now".
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
-    var currentMovingPlatform: SKSpriteNode?
-    var currentMovingPlatformPosition: CGPoint?
-    var outboundIndicator: SKSpriteNode?
     
     override init ( size: CGSize ) {
         self.state = .playing
@@ -38,15 +35,11 @@ import SwiftUI
         attachDarkness()
         
         self.outboundIndicator = setupOutboundIndicator()
-        addChild(outboundIndicator!)
         
+        addChild(outboundIndicator!)
         addChild(controller!)
-    }
-    
-    func setupOutboundIndicator () -> SKSpriteNode {
-        let indicatorNode = ArrowPointingToPlayersLocationWhenOffScreen()
-        indicatorNode.isHidden = true
-        return indicatorNode
+        
+        playAnimation()
     }
     
     /** The state of situation for self */
@@ -86,6 +79,9 @@ import SwiftUI
     var currentTheme  : Season = .autumn
     var themedLevels  : Bool = true
     
+    var outboundIndicator: SKSpriteNode?
+    var movingPlatform   : SKSpriteNode?
+
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
         fatalError("init(coder:) has not been implemented")
@@ -97,18 +93,11 @@ import SwiftUI
 extension Game {
     
     override func update ( _ currentTime: TimeInterval ) {
-        if let platform = currentMovingPlatform {
-            if let previousPosition = currentMovingPlatformPosition {
-                let deltaX = platform.position.x - previousPosition.x
-                currentMovingPlatformPosition = platform.position
-                self.player?.position.x += deltaX
-            } else {
-                currentMovingPlatformPosition = currentMovingPlatform?.position
-            }
+        if ( movingPlatform != nil ) {
+            self.player?.position.x = movingPlatform!.position.x
         }
         
-        guard let playerPosition = self.player?.position,
-              let outboundIndicatorNode = self.outboundIndicator else {
+        guard let playerPosition = self.player?.position, let outboundIndicatorNode = self.outboundIndicator else {
             fatalError("player and outbound indicator not found")
         }
         let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
@@ -135,15 +124,33 @@ extension Game {
     
     /** Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called. */
     func didBegin ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, () -> Void) -> Void] = [
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
                 Player.intoContactWithPlatform(contact: contact, completion: completion)
             },
             [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact, completion in
-                Player.intoContactWithPlatform(contact: contact, completion: self.advanceToNextLevel)
+                let command : ( Player ) -> Void = { player in
+                    self.advanceToNextLevel()
+                }
+                Player.intoContactWithPlatform(contact: contact, completion: command)
             },
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
-                Player.intoContactWithPlatform(contact: contact, completion: completion)
+                let command : (Player) -> Void = { player in
+                    let nodes = UniversalNodeIdentifier.identify (
+                        checks: [
+                            { $0 as? Player },
+                            { $0 as? MovingPlatform },
+                        ], 
+                        contact.bodyA.node!, 
+                        contact.bodyB.node!
+                    )
+                    if let player = nodes[0] as? Player, let platform = nodes[1] as? MovingPlatform {
+                        if ( self.movingPlatform == nil ) {
+                            self.movingPlatform = platform
+                        } 
+                    }
+                }
+                Player.intoContactWithPlatform(contact: contact, completion: command)
             },
             [BitMaskConstant.player, BitMaskConstant.darkness]: { contact, completion in 
                 if ( self.state != .finished ) {
@@ -154,12 +161,12 @@ extension Game {
         ]
         let collision         = Set([contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask])
         
-        collisionHandlers[collision]?(contact, {})
+        collisionHandlers[collision]?(contact, { _ in })
     }
     
     /** Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute. */
     func didEnd ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, () -> Void) -> Void] = [
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
                 Player.releaseContactWithPlatform(contact: contact, completion: completion)
             },
@@ -167,15 +174,24 @@ extension Game {
                 Player.releaseContactWithPlatform(contact: contact, completion: completion)
             },
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
-                self.currentMovingPlatform = nil
-                self.currentMovingPlatformPosition = nil
-                Player.releaseContactWithPlatform(contact: contact)
+                let command : (Player) -> Void = { player in
+                    self.movingPlatform = nil
+                }
+                Player.releaseContactWithPlatform(contact: contact, completion: command)
             },
             [BitMaskConstant.player, BitMaskConstant.darkness]: Player.releaseContactWithDarkness
         ]
         let collision         = Set([contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask])
         
-        collisionHandlers[collision]?(contact, {})
+        collisionHandlers[collision]?(contact, { _ in })
+    }
+    
+}
+
+extension Game {
+    
+    func perform () {
+        
     }
     
 }
@@ -193,7 +209,10 @@ extension Game {
     
     /** Renders all platforms to the scene */
     func attachElements ( fromLevelOf: String ) {
-        self.generator = LevelGenerator( for: self, decipherer: CSVtoNodesDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ) )
+        self.generator = LevelGenerator( for: self, decipherer: [
+            CSVtoNodesDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ),
+            CSVtoMovingPlatformDecipherer(csvFileName: fromLevelOf, movingPlatformConfigurrations: GameConfig.movingPlatformMapping)
+        ] )
         self.generator?.generate()
     }
     
@@ -202,13 +221,30 @@ extension Game {
         self.removeAllChildren()
     }
     
+    func playAnimation () {
+        findMovingPLatforms().forEach { mp in
+            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+        }
+    }
+    
     /** After the generator has been ran, this function is called to find the attached Player node. Player object does not persist between game resets and should NOT be reattached to instance of self. */
     func findPlayerElement () throws -> Player? {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
         if ( player == nil ) { 
-            throw GeneratorError.playerIsNotAdded("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
+            fatalError("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
         return player
+    }
+    
+    func findMovingPLatforms () -> [MovingPlatform] {
+        var movingPlatform : [MovingPlatform] = []
+        self.children.forEach { mp in
+            if (mp.name == NodeNamingConstant.Platform.Inert.Dynamic.moving) {
+                movingPlatform.append(mp as! MovingPlatform)
+            }
+        }
+        
+        return movingPlatform
     }
     
     /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
@@ -219,11 +255,17 @@ extension Game {
         return controller
     }
     
+    func setupOutboundIndicator () -> SKSpriteNode {
+        let indicatorNode = ArrowPointingToPlayersLocationWhenOffScreen()
+        indicatorNode.isHidden = true
+        return indicatorNode
+    }
+    
     func attachDarkness () {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -11)
         
-        let spawnAction = SKAction.move(to: CGPoint(5, -7), duration: 3)
+        let spawnAction = SKAction.move(to: CGPoint(5, -5), duration: 1.5)
             spawnAction.timingMode = .easeInEaseOut
         let waitAction = SKAction.wait(forDuration: 2)
         let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 75)
@@ -260,6 +302,9 @@ extension Game {
             self.attachDarkness()
             self.addChild(self.controller!)
             self.state = .playing
+            self.findMovingPLatforms().forEach { mp in
+                mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+            }
         }
     }
     
@@ -310,6 +355,9 @@ extension Game {
         addChild(outboundIndicator!)
         addChild(controller!)
         self.state = .playing
+        findMovingPLatforms().forEach { mp in
+            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+        }
     }
     
 }
