@@ -11,7 +11,6 @@ import SwiftUI
 /// Game uses a state, levelTrack, theme, and themedLevel to indicate "in what state they are", and "what matters the most now".
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
-    
     override init ( size: CGSize ) {
         self.state = .playing
         
@@ -46,13 +45,12 @@ import SwiftUI
     var state         : GameState {
         didSet {
             previousState = oldValue
+            
             switch ( state ) {
                 case .playing:
                     self.isPaused = false
-                    break
                 case .paused:
                     self.isPaused = true
-                    break
                 case .finished:
                     let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
                         let progress = elapsedTime / 6
@@ -80,7 +78,8 @@ import SwiftUI
     var themedLevels  : Bool = true
     
     var outboundIndicator: SKSpriteNode?
-    var movingPlatform   : SKSpriteNode?
+    var currentMovingPlatform: SKSpriteNode?
+    var currentMovingPlatformPosition: CGPoint?
 
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
@@ -93,8 +92,16 @@ import SwiftUI
 extension Game {
     
     override func update ( _ currentTime: TimeInterval ) {
-        if ( movingPlatform != nil ) {
-            self.player?.position.x = movingPlatform!.position.x
+        if let platform = currentMovingPlatform {
+            if let previousPosition = currentMovingPlatformPosition {
+                let deltaX = platform.position.x - previousPosition.x
+                currentMovingPlatformPosition = platform.position
+                if let player {
+                    player.position.x += deltaX
+                }
+            } else {
+                currentMovingPlatformPosition = currentMovingPlatform?.position
+            }
         }
         
         guard let playerPosition = self.player?.position, let outboundIndicatorNode = self.outboundIndicator else {
@@ -145,8 +152,8 @@ extension Game {
                         contact.bodyB.node!
                     )
                     if let player = nodes[0] as? Player, let platform = nodes[1] as? MovingPlatform {
-                        if ( self.movingPlatform == nil ) {
-                            self.movingPlatform = platform
+                        if ( self.currentMovingPlatform == nil ) {
+                            self.currentMovingPlatform = platform
                         } 
                     }
                 }
@@ -175,7 +182,8 @@ extension Game {
             },
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
                 let command : (Player) -> Void = { player in
-                    self.movingPlatform = nil
+                    self.currentMovingPlatform = nil
+                    self.currentMovingPlatformPosition = nil
                 }
                 Player.releaseContactWithPlatform(contact: contact, completion: command)
             },
