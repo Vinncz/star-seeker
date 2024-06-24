@@ -5,10 +5,10 @@
 ,,,,,,,,,,
 ,,,,,,,,pFN-wi,pFN-wi,pFN-wi
 ,,,,,,,,,,
-,,pTM-wi,pMV-wi,pMV-wi,pMV-wi,,,,,
+,,,pMV-wi-1:0,pMV-wi-1:0,pMV-wi-1:0,,,,,,
 ,,,,,,,,,,
 W-wi,,,,,,,,,,W-wi
-pBP-wi,pBP-wi,pBP-wi,,,,pTM-wi,pMV-wi,pMV-wi,pMV-wi,pTM-wi
+pBP-wi,pBP-wi,pBP-wi,,,,,pMV-wi-2:0,pMV-wi-2:0,pMV-wi-2:0,,
 ,,,W-wi,,,,,,,
 ,,,pCP-wi,pCP-wi,pCP-wi,,,,,
 ,,,,,,,,,W-wi,

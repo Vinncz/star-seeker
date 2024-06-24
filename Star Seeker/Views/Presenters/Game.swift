@@ -151,7 +151,7 @@ extension Game {
                         contact.bodyA.node!, 
                         contact.bodyB.node!
                     )
-                    if let player = nodes[0] as? Player, let platform = nodes[1] as? MovingPlatform {
+                    if let _ = nodes[0] as? Player, let platform = nodes[1] as? MovingPlatform {
                         if ( self.currentMovingPlatform == nil ) {
                             self.currentMovingPlatform = platform
                         } 
@@ -213,6 +213,10 @@ extension Game {
         self.view!.isMultipleTouchEnabled = true
         self.backgroundColor = .clear
         self.physicsWorld.speed = 1
+    }
+    
+    func reset () {
+        detachAllElements()
     }
     
     /** Renders all platforms to the scene */
