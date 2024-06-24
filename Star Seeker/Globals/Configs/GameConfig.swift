@@ -75,7 +75,7 @@ struct GameConfig {
             SlipperyPlatform(themed: season) 
         },
         "pCL" : { season in 
-            ClimbablePlatform(themed: season) 
+            CollapsiblePlatform(themed: season) 
         },
     ]
     

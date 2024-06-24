@@ -49,7 +49,7 @@ import Observation
 extension Player {
     
     /// Called when an instance of player collided with an instance of platform.
-    static func intoContactWithPlatform ( contact: SKPhysicsContact, completion: (Player) -> Void = { _ in } ) {
+    static func intoContactWithPlatform ( contact: SKPhysicsContact, completion: @escaping (Player) -> Void = { _ in } ) {
         let nodes = UniversalNodeIdentifier.identify (
             checks: [
                 { $0 as? Player },
@@ -77,7 +77,7 @@ extension Player {
     }
     
     /// Called when an instance of player is no longer in contact with an instance of platform.
-    static func releaseContactWithPlatform ( contact: SKPhysicsContact, completion: (Player) -> Void = { _ in } ) {
+    static func releaseContactWithPlatform ( contact: SKPhysicsContact, completion: @escaping (Player) -> Void = { _ in } ) {
         let nodes = UniversalNodeIdentifier.identify (
             checks: [
                 { $0 as? Player },
@@ -232,26 +232,13 @@ extension Player {
     } 
     
     static func playerIsStandingOnTopOfPlatform(_ platform: SKSpriteNode, _ contact: SKPhysicsContact) -> Bool {
-        // Convert the contact point to the platform's coordinate system
         let contactPointInPlatform = platform.scene!.convert(contact.contactPoint, to: platform)
 
-        print("\(contactPointInPlatform.y) \(platform.size.height / 2) \(abs(contactPointInPlatform.x))")
-        
-        // Check if the contact point is below the top of the platform and within its width
         if contactPointInPlatform.y >= platform.size.height / 2 && abs(contactPointInPlatform.x) <= platform.size.width / 2 {
             return true
         }
 
         return false
-    }
-
-    // Point-in-triangle test
-    static func pointInTriangle(point: CGPoint, vertexA: CGPoint, vertexB: CGPoint, vertexC: CGPoint) -> Bool {
-        let area = 0.5 * (-vertexB.y * vertexC.x + vertexA.y * (-vertexB.x + vertexC.x) + vertexA.x * (vertexB.y - vertexC.y) + vertexB.x * vertexC.y)
-        let s = 1 / (2 * area) * (vertexA.y * vertexC.x - vertexA.x * vertexC.y + (vertexC.y - vertexA.y) * point.x + (vertexA.x - vertexC.x) * point.y)
-        let t = 1 / (2 * area) * (vertexA.x * vertexB.y - vertexA.y * vertexB.x + (vertexA.y - vertexB.y) * point.x + (vertexB.x - vertexA.x) * point.y)
-
-        return s > 0 && t > 0 && 1 - s - t > 0
     }
     
 }
@@ -380,11 +367,11 @@ extension Player {
     var spawnPosition   : CGPoint = CGPoint(x: -.infinity, y: -.infinity)
     var currentlyStandingOn : Set<Platform> = [] {
         didSet {
-            debug("player is standing on:")
+            print("player is standing on:")
             currentlyStandingOn.forEach {
-                debug("    \($0.name), \($0.position.toString(useGrid: true))")
+                print("    \($0.name), \($0.position.toString(useGrid: true))")
             }
-            debug("")
+            print("")
             
             if ( currentlyStandingOn.isEmpty ) {
                 self.currentHeight = currentHeight
