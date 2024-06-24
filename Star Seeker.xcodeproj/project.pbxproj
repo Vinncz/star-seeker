@@ -10,7 +10,7 @@
 		0702566E2C2261B700372B87 /* Star-Seeker-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0702566D2C2261B700372B87 /* Star-Seeker-Info.plist */; };
 		070256712C22811100372B87 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070256702C22811100372B87 /* ContentViewModel.swift */; };
 		070256732C22814700372B87 /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070256722C22814700372B87 /* SceneKitView.swift */; };
-		072065502C28247400CEA482 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0720654F2C28247400CEA482 /* art.scnassets */; };
+		072065522C28EED500CEA482 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 072065512C28EED500CEA482 /* art.scnassets */; };
 		20006B1B2C18BB0200EC46C6 /* CSVDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
@@ -76,7 +76,7 @@
 		0702566D2C2261B700372B87 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Star-Seeker-Info.plist"; sourceTree = "<group>"; };
 		070256702C22811100372B87 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		070256722C22814700372B87 /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
-		0720654F2C28247400CEA482 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		072065512C28EED500CEA482 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDecipherer.swift; sourceTree = "<group>"; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		0702566F2C2280E900372B87 /* SceneKit */ = {
 			isa = PBXGroup;
 			children = (
-				0720654F2C28247400CEA482 /* art.scnassets */,
+				072065512C28EED500CEA482 /* art.scnassets */,
 				070256702C22811100372B87 /* ContentViewModel.swift */,
 				070256722C22814700372B87 /* SceneKitView.swift */,
 			);
@@ -575,7 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0702566E2C2261B700372B87 /* Star-Seeker-Info.plist in Resources */,
-				072065502C28247400CEA482 /* art.scnassets in Resources */,
+				072065522C28EED500CEA482 /* art.scnassets in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
