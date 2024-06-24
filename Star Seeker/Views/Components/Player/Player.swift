@@ -6,7 +6,7 @@ import Observation
     init () {
         self.state = .idle
         self.facingDirection = .rightward
-        let texture = SKTexture( imageNamed: ImageNamingConstant.Player.Idle.Right.name )
+        let texture = SKTexture( imageNamed: ImageNamingConstant.Interface.Player.Idle.Right.name )
         
         super.init( texture: texture, color: .clear, size: ValueProvider.playerDimension )
         
@@ -60,12 +60,12 @@ extension Player {
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
             let contactPoint  = contact.contactPoint
-            debugContact(player, platform, contact)
+//            debugContact(player, platform, contact)
             
             if ( playerIsStandingOnTopOfPlatform(platform, contact) ) {
                 player.statistics!.currentlyStandingOn.insert(platform)
                 
-                drawCollisionPoints(contactPoint: contactPoint, actor: player)
+//                drawCollisionPoints(contactPoint: contactPoint, actor: player)
                 
                 if ( player.statistics!.highestPlatform.y < platform.position.y ) {
                     player.statistics!.highestPlatform = platform.position
@@ -274,7 +274,7 @@ extension Player {
                 self.removeAction( forKey: ActionNamingConstant.jumping  )
                 self.removeAction( forKey: ActionNamingConstant.climbing )
                 if ( self.action ( forKey: ActionNamingConstant.idle     ) == nil ) {
-                    let textureName  : String = self.facingDirection == .leftward ? ImageNamingConstant.Player.Idle.Left.name : ImageNamingConstant.Player.Idle.Right.name
+                    let textureName  : String = self.facingDirection == .leftward ? ImageNamingConstant.Interface.Player.Idle.Left.name : ImageNamingConstant.Interface.Player.Idle.Right.name
                     let idleTextures : [SKTexture] = ImageSequenceCountConstant.Player.idle.map { SKTexture( imageNamed: textureName + String($0) ) }
                     let idleAction   = SKAction.animate(with: idleTextures, timePerFrame: 0.034)
                     
@@ -286,7 +286,7 @@ extension Player {
                 self.removeAction( forKey: ActionNamingConstant.idle    )
                 self.removeAction( forKey: ActionNamingConstant.jumping )
                 if ( self.action ( forKey: ActionNamingConstant.moving  ) == nil ) {
-                    let textureName    : String = self.facingDirection == .leftward ? ImageNamingConstant.Player.Moving.Left.name : ImageNamingConstant.Player.Moving.Right.name
+                    let textureName    : String = self.facingDirection == .leftward ? ImageNamingConstant.Interface.Player.Moving.Left.name : ImageNamingConstant.Interface.Player.Moving.Right.name
                     let movingTextures : [SKTexture] = ImageSequenceCountConstant.Player.moving.map { SKTexture( imageNamed: textureName + String($0) ) }
                     let movingAction   = SKAction.animate(with: movingTextures, timePerFrame: 0.05)
                     
@@ -300,7 +300,7 @@ extension Player {
                 self.removeAction( forKey: ActionNamingConstant.jumping  )
                 self.removeAction( forKey: ActionNamingConstant.climbing )
                 if ( self.action ( forKey: ActionNamingConstant.squating ) == nil ) {
-                    let textureName      : String = ImageNamingConstant.Player.Squating.name
+                    let textureName      : String = ImageNamingConstant.Interface.Player.Squating.name
                     let squatingTextures : [SKTexture] = ImageSequenceCountConstant.Player.squatting.map { SKTexture( imageNamed: textureName + String($0) ) }
                     let squatingAction   = SKAction.animate(with: squatingTextures, timePerFrame: 0.05)
                     
@@ -315,7 +315,7 @@ extension Player {
                 self.removeAction( forKey: ActionNamingConstant.climbing )
                 self.removeAction( forKey: ActionNamingConstant.squating )
                 if ( self.action ( forKey: ActionNamingConstant.jumping  ) == nil ) {
-                    let textureName     : String = self.facingDirection == .leftward ? ImageNamingConstant.Player.Jumping.Left.name : ImageNamingConstant.Player.Jumping.Right.name
+                    let textureName     : String = self.facingDirection == .leftward ? ImageNamingConstant.Interface.Player.Jumping.Left.name : ImageNamingConstant.Interface.Player.Jumping.Right.name
                     let jumpingTextures : [SKTexture] = ImageSequenceCountConstant.Player.jumping.map { SKTexture( imageNamed: textureName + String($0) ) }
                     let jumpingAction   = SKAction.animate( with: jumpingTextures, timePerFrame: 0.03 )
 
@@ -328,7 +328,7 @@ extension Player {
                 self.removeAction( forKey: ActionNamingConstant.moving   )
                 self.removeAction( forKey: ActionNamingConstant.jumping  )
                 if ( self.action ( forKey: ActionNamingConstant.climbing ) == nil ) {
-                    let textureName      : String = ImageNamingConstant.Player.Climbing.name
+                    let textureName      : String = ImageNamingConstant.Interface.Player.Climbing.name
                     let climbingTextures : [SKTexture] = ImageSequenceCountConstant.Player.climbing.map { SKTexture( imageNamed: textureName + String($0) ) }
                     let climbingAction   = SKAction.animate( with: climbingTextures, timePerFrame: 0.05 )
                     

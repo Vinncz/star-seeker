@@ -159,7 +159,7 @@ extension Platform {
     /// 
     /// Make caution, for a single instance of SKPhysicsBody can only be used by 1 (one) instance of SKNode.
     static func defaultPhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
-        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 10).cgPath )
+        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 5).cgPath )
         
             pb.isDynamic          = GameConfig.platformIsDynamic
             pb.restitution        = GameConfig.platformRestitution
