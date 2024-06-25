@@ -49,7 +49,6 @@ class JoystickMovementController : MovementController {
             onTouch    : {
                 JoystickMovementController.scaleBottomController(target: (self.bottomController)!, to: 1)
                 JoystickMovementController.fadeInOutNode(target: (self.arrowController)!, isFadeIn: false)
-                SoundManager.instance.playSound(.SlingshotPull)
             },
             onTouchEnd : {
                 JoystickMovementController.scaleBottomController(target: (self.bottomController)!, to: 0)
@@ -122,7 +121,6 @@ class JoystickMovementController : MovementController {
                 )
                 target.facingDirection = deltaX > 0 ? .leftward : .rightward
                 target.physicsBody?.applyImpulse(resultingImpulse)
-                SoundManager.instance.playSound(.SlingshotRelease)
                 
                 if ( target.statistics!.currentlyStandingOn == snapshotOfNodesWhichCollidedWithPlayer ) {
                     target.state = .idle

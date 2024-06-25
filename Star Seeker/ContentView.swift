@@ -74,7 +74,6 @@ extension ContentView {
     
     func RestartButton () -> some View {
         Button {
-            SoundManager.instance.playSound(.Button)
             scene.restart()
         } label: {
             Image("reset-button")
@@ -86,7 +85,6 @@ extension ContentView {
     
     func ExitButton () -> some View {
         Button {
-            SoundManager.instance.playSound(.Button)
             let game = self.scene
             if ( game.state == .finished ) {
                 game.state = .startScreen
@@ -101,7 +99,6 @@ extension ContentView {
     
     func PlayButton () -> some View {
         Button {
-            SoundManager.instance.playSound(.Button)
             let game = self.scene
             self.gameIsTransitioningToPlaying = true
             self.stopwatch = CountdownTimer(duration: 2, action: {
@@ -121,7 +118,6 @@ extension ContentView {
     
     func PauseButton () -> some View {
         Button {
-            SoundManager.instance.playSound(.Button)
             let game = self.scene
             if ( game.state == .playing ) {
                 game.state = .paused
@@ -197,7 +193,6 @@ extension ContentView {
             
         )
         .onTapGesture {
-            SoundManager.instance.playSound(.Button)
             let game = self.scene
             if ( game.state == .startScreen ) {
                 game.state = .playing
