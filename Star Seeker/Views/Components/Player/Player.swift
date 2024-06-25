@@ -54,11 +54,12 @@ extension Player {
             checks: [
                 { $0 as? Player },
                 { $0 as? Platform },
-            ], 
-            contact.bodyA.node!, 
+            ],
+            contact.bodyA.node!,
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
+            SoundManager.instance.playSound(named: .PlatformCollision, on: player)
             let contactPoint  = contact.contactPoint
 //            debugContact(player, platform, contact)
             
