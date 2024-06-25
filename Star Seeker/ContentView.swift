@@ -196,6 +196,10 @@ extension ContentView {
             let game = self.scene
             if ( game.state == .startScreen ) {
                 game.state = .playing
+                if let darknessNode = game.darkness,
+                   let darknessMovement = game.darknessMovement {
+                    darknessNode.run(darknessMovement)
+                }
             }
         }
     }

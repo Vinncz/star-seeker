@@ -35,7 +35,7 @@ import SwiftUI
         self.outboundIndicator = setupOutboundIndicator()
         addChild(outboundIndicator!)
         
-        attachDarkness()
+        attachDarkness(isRunAction: false)
 
         playAnimation()
     }
@@ -47,13 +47,9 @@ import SwiftUI
             
             switch ( state ) {
             case .startScreen:
-                exitGame()
+                restart(isExitGame: true)
                 break
             case .playing:
-//                let moveAction = SKAction.move(to: CGPoint(5, 11), duration: 100)
-                if let movement = self.darknessMovement {
-                    self.darkness?.run(movement)
-                }
                 self.controller?.isHidden = false
                 self.isPaused = false
                 break
@@ -320,7 +316,7 @@ extension Game {
         return indicatorNode
     }
     
-    func attachDarkness () {
+    func attachDarkness (isRunAction: Bool = true) {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -11)
         
@@ -333,7 +329,9 @@ extension Game {
         
         self.darknessMovement = moveSequence
         
-//        darkness.run(moveSequence)
+        if (isRunAction) {
+            darkness.run(moveSequence)
+        }
         
         self.darkness = darkness
         
@@ -402,8 +400,10 @@ extension Game {
     /// 4. It finds the player node from the generated level
     /// 5. It attaches the found player node
     /// 6. it attaches the controller node
-    func restart () {
-        self.state = .notYetStarted
+    func restart (isExitGame: Bool = false) {
+        if !isExitGame {
+            self.state = .notYetStarted
+        }
         self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
         self.speed = 1
         self.isPaused = false
@@ -414,36 +414,19 @@ extension Game {
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
         self.controller?.isHidden = false
-        attachDarkness()
         self.outboundIndicator = setupOutboundIndicator()
         addChild(outboundIndicator!)
         addChild(controller!)
-        self.state = .playing
-        findMovingPLatforms().forEach { mp in
-            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+        if !isExitGame {
+            attachDarkness()
+            self.state = .playing
+            findMovingPLatforms().forEach { mp in
+                mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+            }
+        } else {
+            attachDarkness(isRunAction: false)
         }
     }
-    
-    func exitGame() {
-        self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
-        self.speed = 1
-        self.isPaused = false
-        self.levelTrack = 1
-        self.currentTheme = .autumn
-        detachAllElements()
-        levelDidLoad()
-        self.player = try? findPlayerElement()
-        self.controller = setupMovementController(for: self.player!)
-        self.controller?.isHidden = false
-        attachDarkness()
-        self.outboundIndicator = setupOutboundIndicator()
-        addChild(outboundIndicator!)
-        addChild(controller!)
-        findMovingPLatforms().forEach { mp in
-            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
-        }
-    }
-    
 }
 
 /* MARK: -- Extension which lets Game track "in what state its in". */
