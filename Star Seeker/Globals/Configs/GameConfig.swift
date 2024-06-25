@@ -62,12 +62,6 @@ struct GameConfig {
         "pCP" : { season in 
             CollapsiblePlatform(themed: season) 
         },
-//        "pMV" : { season in 
-//            MovingPlatform(themed: season) 
-//        },
-//        "pMT" : { season in 
-//            Platform(themed: season) 
-//        },
         "pST" : { season in 
             StickyPlatform(themed: season) 
         },
@@ -75,7 +69,7 @@ struct GameConfig {
             SlipperyPlatform(themed: season) 
         },
         "pCL" : { season in 
-            ClimbablePlatform(themed: season) 
+            CollapsiblePlatform(themed: season) 
         },
     ]
     

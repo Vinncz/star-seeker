@@ -10,4 +10,5 @@ struct ActionNamingConstant {
     static let dyingRotation   : String = "VERTEX.STAR_SEEKER.ANIMATION.DYING.ROTATING"
     static let gameSlowingDown : String = "VERTEX.STAR_SEEKER.ANIMATION.GAME_SLOWING_DOWN"
     static let movingPlatformMovement : String = "VERTEX.STAR_SEEKER.ANIMATION.PLATFORM.MOVE"
+    static let collapseOfCollapsiblePlatform : String = "VERTEX.STAR_SEEKER.ANIMATION.PLATFORM.COLLAPSE"
 }

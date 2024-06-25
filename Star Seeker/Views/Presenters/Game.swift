@@ -142,7 +142,7 @@ extension Game {
     
     /** Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called. */
     func didBegin ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, (Player) -> Void) -> Void] = [
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, @escaping (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
                 Player.intoContactWithPlatform(contact: contact, completion: completion)
             },
@@ -170,6 +170,25 @@ extension Game {
                 }
                 Player.intoContactWithPlatform(contact: contact, completion: command)
             },
+            [BitMaskConstant.player, BitMaskConstant.collapsiblePlatform]: { contact, completion in
+                let command : ( Player ) -> Void = { player in
+                    let nodes = UniversalNodeIdentifier.identify (
+                        checks: [
+                            { $0 as? Player },
+                            { $0 as? CollapsiblePlatform },
+                        ], 
+                        contact.bodyA.node!, 
+                        contact.bodyB.node!
+                    )
+                    if let player = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
+                        platform.playAction(named: ActionNamingConstant.collapseOfCollapsiblePlatform) { 
+                            platform.actionPool.removeValue(forKey: ActionNamingConstant.collapseOfCollapsiblePlatform)
+                            platform.removeFromParent()
+                        }
+                    }
+                }
+                Player.intoContactWithPlatform(contact: contact, completion: command)
+            },
             [BitMaskConstant.player, BitMaskConstant.darkness]: { contact, completion in 
                 if ( self.state != .finished ) {
                     self.state = .finished
@@ -184,7 +203,7 @@ extension Game {
     
     /** Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute. */
     func didEnd ( _ contact: SKPhysicsContact ) {
-        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, (Player) -> Void) -> Void] = [
+        let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, @escaping (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
                 Player.releaseContactWithPlatform(contact: contact, completion: completion)
             },
@@ -197,6 +216,22 @@ extension Game {
                     self.currentMovingPlatformPosition = nil
                 }
                 Player.releaseContactWithPlatform(contact: contact, completion: command)
+            },
+            [BitMaskConstant.player, BitMaskConstant.collapsiblePlatform]: { contact, completion in
+                let command : ( Player ) -> Void = { player in
+                    let nodes = UniversalNodeIdentifier.identify (
+                        checks: [
+                            { $0 as? Player },
+                            { $0 as? CollapsiblePlatform },
+                        ], 
+                        contact.bodyA.node!, 
+                        contact.bodyB.node!
+                    )
+                    if let player = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
+//                        while ( platform.hasActions() )
+                    }
+                }
+                Player.intoContactWithPlatform(contact: contact, completion: command)
             },
             [BitMaskConstant.player, BitMaskConstant.darkness]: Player.releaseContactWithDarkness
         ]

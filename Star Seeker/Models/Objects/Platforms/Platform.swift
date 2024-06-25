@@ -89,11 +89,11 @@ class Platform : SKSpriteNode, Identifiable {
     
     /// Performs an SKAction from the platform's actionPool. 
     /// Should the supplied name does not match any of the actions present, no action will be performed.
-    func playAction ( named key: String ) -> Void {
+    func playAction ( named key: String, completion: @escaping () -> Void = {} ) -> Void {
         guard let action = actionPool[key] else {
             return
         }
-        self.run(action, withKey: key)
+        self.run(action, completion: completion)
     }    
     
     
@@ -159,7 +159,7 @@ extension Platform {
     /// 
     /// Make caution, for a single instance of SKPhysicsBody can only be used by 1 (one) instance of SKNode.
     static func defaultPhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
-        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 5).cgPath )
+        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 4).cgPath )
         
             pb.isDynamic          = GameConfig.platformIsDynamic
             pb.restitution        = GameConfig.platformRestitution
