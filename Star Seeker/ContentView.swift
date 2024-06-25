@@ -122,7 +122,11 @@ extension ContentView {
     
     func PlayerScore () -> some View {
         withAnimation {
-            StrokeText(text: String(format: "%.0fm", (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
+            let playerSideScore = (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)
+            let sceneSideScore  = scene.statistics.accumulativeScore
+            let shownScore      = playerSideScore + sceneSideScore
+            
+            return StrokeText(text: String(format: "%.0fm", shownScore), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
                 .scaleEffect(playerScoreScalingFactor)
                 .animation(.bouncy(duration: 0.1), value: playerScoreScalingFactor)
                 .onChange(of: scene.player?.statistics!.currentHeight.y) { oldValue, newValue in
@@ -193,7 +197,13 @@ extension ContentView {
     
     func EndScreen () -> some View {
         withAnimation {
-            VStack {
+            let highestPlayerSideScore = (scene.player!.statistics!.highestPlatform.y) - (scene.player!.statistics!.spawnPosition.y)
+            let sceneSideScore  = scene.statistics.accumulativeScore
+            let currentPlayerSideScore = (scene.player!.statistics!.currentHeight.y) - (scene.player!.statistics!.spawnPosition.y)
+            let currHeightScore = sceneSideScore + currentPlayerSideScore
+            let maxScore        = highestPlayerSideScore + sceneSideScore
+            
+            return VStack {
                 Spacer()
                 ZStack {
                     Image("pause-box")
@@ -201,10 +211,10 @@ extension ContentView {
                         .scaledToFit()
                     VStack (spacing: UIConfig.Spacings.large) {
                         VStack (spacing: UIConfig.Spacings.nano){
-                            Text(String(format: "%.0fm", (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)))
+                            Text(String(format: "%.0fm", currHeightScore))
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.normal))
                                 .foregroundStyle(Color(hue: 0, saturation: 0, brightness: 0.37))
-                            Text("Hi Score: \(String(format: "%.0fm", (scene.player?.statistics!.highestPlatform.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)))")
+                            Text("You did reach: \(String(format: "%.0fm", maxScore))")
                                 .font(.custom("Chainwhacks", size: UIConfig.FontSizes.micro))
                                 .foregroundStyle(.gray)
                         }
