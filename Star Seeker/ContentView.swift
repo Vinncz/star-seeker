@@ -200,6 +200,7 @@ extension ContentView {
                    let darknessMovement = game.darknessMovement {
                     darknessNode.run(darknessMovement)
                 }
+                game.playAnimation()
             }
         }
     }

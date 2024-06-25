@@ -413,7 +413,7 @@ extension Game {
         levelDidLoad()
         self.player = try? findPlayerElement()
         self.controller = setupMovementController(for: self.player!)
-        self.controller?.isHidden = false
+        self.controller?.isHidden = isExitGame ? true : false
         self.outboundIndicator = setupOutboundIndicator()
         addChild(outboundIndicator!)
         addChild(controller!)
