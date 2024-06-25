@@ -21,24 +21,11 @@ import SwiftUI
         self.physicsWorld.contactDelegate = self
     }
     
-    /** Called after an instace of Game is ready to be shown at some SKView instance. */
+    /** Called after an instace of Game is shown at some SKView instance. */
     override func didMove ( to view: SKView ) {
         ValueProvider.screenDimension = UIScreen.main.bounds.size
-        
-        setup(view)
-        levelDidLoad()
-        
-        self.player      = try? findPlayerElement()
-        self.controller  = setupMovementController(for: self.player!)
-        
-        attachDarkness()
-        
-        self.outboundIndicator = setupOutboundIndicator()
-        
-        addChild(outboundIndicator!)
-        addChild(controller!)
-        
-        playAnimation()
+        prepareForPerformance()
+        perform()
     }
     
     /** The state of situation for self */
@@ -52,7 +39,7 @@ import SwiftUI
                 case .paused:
                     self.isPaused = true
                 case .finished:
-                    let slowDownAction = SKAction.customAction(withDuration: 6) { _, elapsedTime in
+                    let slowDownAction = SKAction.customAction(withDuration: 2) { _, elapsedTime in
                         let progress = elapsedTime / 6
                         self.speed = 1 - progress
                     }
@@ -72,6 +59,7 @@ import SwiftUI
     var player        : Player?
     /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
     var controller    : MovementController?
+    var statistics    : GameStatistic = GameStatistic()
     
     var levelTrack    : Int  = 1
     var currentTheme  : Season = .autumn
@@ -80,6 +68,9 @@ import SwiftUI
     var outboundIndicator: SKSpriteNode?
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
+    
+    var levelDesignFileName : String = "leveldesign.seasonal.autumn.1"
+    var themeSequence       : [Season] = [.autumn, .winter, .spring, .summer]
 
     /* Inherited from SKScene. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {
@@ -91,45 +82,14 @@ import SwiftUI
 /* MARK: -- Extension which gives Game the ability to recieve and respond to contact between two physics bodies within its physicsWorld. */
 extension Game {
     
+    /// Called everytime the frame updates
     override func update ( _ currentTime: TimeInterval ) {
-        if let platform = currentMovingPlatform {
-            if let previousPosition = currentMovingPlatformPosition {
-                let deltaX = platform.position.x - previousPosition.x
-                currentMovingPlatformPosition = platform.position
-                if let player {
-                    player.position.x += deltaX
-                }
-            } else {
-                currentMovingPlatformPosition = currentMovingPlatform?.position
-            }
-        }
-        
-        guard let playerPosition = self.player?.position, let outboundIndicatorNode = self.outboundIndicator else {
-            fatalError("player and outbound indicator not found")
-        }
-        let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
-        if isPlayerOutbound {
-            let indicatorVerticalOffset = outboundIndicatorNode.size.width / 2
-            let indicatorHeightOffset = outboundIndicatorNode.size.height / 2
-            outboundIndicatorNode.isHidden = false
-            if (playerPosition.y < ValueProvider.screenDimension.height){
-                if (playerPosition.x < ValueProvider.screenDimension.width / 2) {
-                    outboundIndicatorNode.position = CGPoint(x: 0 + indicatorVerticalOffset, y: playerPosition.y)
-                    outboundIndicatorNode.zRotation = 1.6
-                } else {
-                    outboundIndicatorNode.position = CGPoint(x: ValueProvider.screenDimension.width - indicatorVerticalOffset, y: playerPosition.y)
-                    outboundIndicatorNode.zRotation = -1.6
-                }
-            } else {
-                outboundIndicatorNode.position = CGPoint(x: playerPosition.x, y: ValueProvider.screenDimension.height - indicatorHeightOffset)
-                outboundIndicatorNode.zRotation = 0
-            }
-        } else {
-            outboundIndicatorNode.isHidden = true
-        }
+        updatePlayerPositionIfTheyAreOnMovingPlatform()
+        updateOutboundIndicator()
     }
     
-    /** Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called. */
+    /// Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. 
+    /// Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called.
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, @escaping (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
@@ -137,7 +97,10 @@ extension Game {
             },
             [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact, completion in
                 let command : ( Player ) -> Void = { player in
-                    self.advanceToNextLevel()
+                    if ( self.state != .levelChange ) { 
+                        self.statistics.accumulativeScore += (player.statistics!.currentHeight.y) - (player.statistics!.spawnPosition.y)
+                        self.transitionToNextScene()
+                    }
                 }
                 Player.intoContactWithPlatform(contact: contact, completion: command)
             },
@@ -169,7 +132,7 @@ extension Game {
                         contact.bodyA.node!, 
                         contact.bodyB.node!
                     )
-                    if let player = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
+                    if let _ = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
                         platform.playAction(named: ActionNamingConstant.collapseOfCollapsiblePlatform) { 
                             platform.actionPool.removeValue(forKey: ActionNamingConstant.collapseOfCollapsiblePlatform)
                             platform.removeFromParent()
@@ -190,7 +153,7 @@ extension Game {
         collisionHandlers[collision]?(contact, { _ in })
     }
     
-    /** Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute. */
+    /// Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute.
     func didEnd ( _ contact: SKPhysicsContact ) {
         let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, @escaping (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
@@ -207,20 +170,7 @@ extension Game {
                 Player.releaseContactWithPlatform(contact: contact, completion: command)
             },
             [BitMaskConstant.player, BitMaskConstant.collapsiblePlatform]: { contact, completion in
-                let command : ( Player ) -> Void = { player in
-                    let nodes = UniversalNodeIdentifier.identify (
-                        checks: [
-                            { $0 as? Player },
-                            { $0 as? CollapsiblePlatform },
-                        ], 
-                        contact.bodyA.node!, 
-                        contact.bodyB.node!
-                    )
-                    if let player = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
-//                        while ( platform.hasActions() )
-                    }
-                }
-                Player.intoContactWithPlatform(contact: contact, completion: command)
+                Player.releaseContactWithPlatform(contact: contact, completion: completion)
             },
             [BitMaskConstant.player, BitMaskConstant.darkness]: Player.releaseContactWithDarkness
         ]
@@ -231,68 +181,345 @@ extension Game {
     
 }
 
+
+/* MARK: -- Extension which lets Game to attend to itself */
 extension Game {
     
-    func perform () {
+    
+    /// Restarts the game (cold-start)
+    final func restart () {
+        self.removeAllActions()
+        self.haltPerformance()
+        self.performersToRest()
+        self.prepareForNextPerformance()
+        self.statistics.reset()
         
+        self.levelDesignFileName = "leveldesign.seasonal.autumn.1"
+        self.currentTheme = .autumn
+        self.levelTrack = 1
+        
+        self.prepareForPerformance()
+        self.perform()
+    }
+    
+    
+    /// Prepares self for gameplay activity.
+    /// 
+    /// Preparations include:
+    /// 1. Setting up one-time stage attributes
+    /// 2. Instanciating SKNodes (performers) which later will be attached
+    /// 3. Assigning SKAction to performers
+    /// 4. Miscl. preparations
+    final func prepareForPerformance () {
+        debug("executing: \(#function)")
+        prepareStage()
+        
+        let performersPreparation = preparePerformers()
+                   self.generator = performersPreparation.performersManager
+               rehearsePerformers ( performersPreparation.performers )
+        
+        prepareExtras()
+        
+    }
+    
+    
+    /// Performs the gameplay activity.
+    /// 
+    /// 1. Performers are let onto stage.
+    /// 2. Performers are given cue to begin their SKActions.
+    /// 3. Miscl. actions
+    final func perform () {
+        debug("executing: \(#function)")
+        performersToStage()
+        performersMayPerform()
+        performExtras()
+    }
+    
+    
+    /// Cleanse the scene to start anew on a clean slate.
+    /// 
+    /// This method:
+    /// 1. Animates all performers to leave the stage, elegantly
+    /// 2. Removes the performers after they're out of view
+    /// 3. Resets the applicable statistics. Statistics which attach itself to the scene's lifecycle will not be reset. However, if the scene were to be destroyed, all statistics will also be reset.
+    final func cleanup () {
+        debug("executing: \(#function)")
+        haltPerformance()
+        performersToLeaveTheStage()
+        self.run(.wait(forDuration: 2)) {
+            self.performersToRest()
+            self.prepareForNextPerformance()
+        }
+    }
+    
+    
+    /// Signals every scene-observers that: the scene is currently underway in changing the played level with a new one. This function alone ___won't___ change the currently active level.
+    /// 
+    /// To commit to a level change, ``proceedWithGeneratingNewLevel()`` needs to be called to actually populate the level with new level design.
+    /// 
+    /// This function does not shut down the scene. To shut down a scene, like you would after the player has exited the game, refer to ``endPerformance()``.
+    final func transitionToNextScene () {
+        debug("executing: \(#function)")
+        guard ( self.state != .levelChange ) else {return}
+        
+        self.state = .levelChange
+        cleanup()
+        proceedWithGeneratingNewLevel()
+    }
+
+    
+    /// Executed in tandem with ``transitionToNextScene()``. This method awaits execution after the tower has done transitioning, and once it is called, it populate the game with new level design.
+    /// 
+    /// This method:
+    /// 1. Changes the level being played
+    /// 2. Updates the season, if level design does not have any more levels matching ``currentTheme`` , 
+    /// 3. Calls
+    func proceedWithGeneratingNewLevel () {
+        let levelBound : ClosedRange<Int>
+        switch ( currentTheme ) {
+            case .autumn:
+                levelBound = LevelDesignConstant.LevelRange.autumn
+            case .winter:
+                levelBound = LevelDesignConstant.LevelRange.winter
+            case .spring:
+                levelBound = LevelDesignConstant.LevelRange.spring
+            case .summer:
+                levelBound = LevelDesignConstant.LevelRange.summer
+            default:
+                levelBound = 0...0
+        }
+        
+        if ( self.levelTrack % levelBound.upperBound == 0 ) {
+            if let currentIndex = themeSequence.firstIndex(of: currentTheme) {
+                let nextIndex = (currentIndex + 1) % themeSequence.count
+                self.currentTheme = themeSequence[nextIndex]
+            }
+            self.levelTrack = 1
+        }
+        
+        self.levelDesignFileName = LevelDesignConstant.Naming.prefix 
+        if ( themedLevels ) {
+            self.levelDesignFileName += LevelDesignConstant.Naming.Seasonal.seasonal + self.currentTheme.rawValue 
+        } else {
+            self.levelDesignFileName += LevelDesignConstant.Naming.Seasonal.nonseasonal
+        }
+        self.levelTrack += 1
+        self.levelDesignFileName += "\(self.levelTrack)"
+        
+        self.run(.wait(forDuration: 2)) {
+            self.prepareForPerformance()
+            self.perform()
+        }
+    }
+    
+    
+    /// Shuts down a scene, reverting it back to how it was, when its state is ``.notYetStarted``.
+    final func endPerformance () {
+        cleanup()
+        resetEverything()
+    }
+    
+    
+    /// Resets every statistics, be it marked specifically to persist between game resets or not.
+    /// 
+    /// If the scene were to be destroyed, all statistics will also be reset regardless.
+    func resetEverything () {
+        self.state         = .notYetStarted
+        physicsWorld.speed = 1
+        isPaused           = false
+        statistics.reset()
+    }
+        
+}
+
+/* MARK: -- Extension which supports Game's ``prepareForPerformance()`` method */
+extension Game {
+    
+    /// Sets up one-time stage attributes.
+    func prepareStage () {
+        debug("executing: \(#function)")
+        view?.allowsTransparency     = true
+        view?.isMultipleTouchEnabled = true
+        backgroundColor              = .clear
+        physicsWorld.speed           = 1
+        self.state                   = .notYetStarted
+        self.isPaused                = false
+    }
+    
+    
+    /// Creates instances of SKNodes, through the means of setting up one ``LevelGenerator``, and getting the generated nodes from there.
+    /// 
+    /// "Generated" doesn't mean the SKNodes are put to scene -- LevelGenerator will not populate the scene, until ``performersToStage()`` is called.
+    func preparePerformers () -> ( performersManager: LevelGenerator, performers: [SKSpriteNode]) {
+        debug("executing: \(#function)")
+        debug("Opening up level design: \(self.levelDesignFileName)")
+        let gene = LevelGenerator ( 
+            for        : self, 
+            decipherer : [
+                CSVtoNodesDecipherer          ( csvFileName: self.levelDesignFileName, nodeConfigurations           : GameConfig.characterMapping     ),
+                CSVtoMovingPlatformDecipherer ( csvFileName: self.levelDesignFileName, movingPlatformConfigurrations: GameConfig.movingPlatformMapping)
+            ]
+        )
+                
+        return (gene, gene.getValuedNodes())
+    }
+    
+    
+    /// Attaches additional SKActions to every performers's actionPool.
+    /// 
+    /// These actions will not execute until ``performersMayPerform()`` is called.
+    func rehearsePerformers ( _ performers: [SKNode] ) {
+        debug("executing: \(#function)")
+        
+        performers.forEach { p in
+            let additionalActions : [String : SKAction] = [
+                ActionNamingConstant.spawnIn : SKAction.sequence([
+                    SKAction.group([
+                        SKAction.fadeOut(withDuration: 0.001),
+                        SKAction.moveBy(x: 0, y: -12, duration: 0.001),
+                        SKAction.scale(to: 0.5, duration: 0.001)
+                    ]),
+                    SKAction.group([
+                        SKAction.fadeIn(withDuration: Double.random(in: 0...1.5)),
+                        SKAction.moveBy(x: 0, y: 12, duration: Double.random(in: 0...0.75)),
+                        SKAction.scale(to: 1, duration: Double.random(in: 0...0.75))
+                    ])
+                ])
+            ]
+            
+            /* Overrides any old value with the ones in `additionalActions` */
+            p.actionPool.merge(additionalActions) { _, new in new }
+        }
+    }
+    
+    
+    /// Performs any last bit of preparation, before self is managed by ``perform()``.
+    func prepareExtras () {
+        debug("executing: \(#function)")
     }
     
 }
 
-/* MARK: -- Extension which gives Game the ability to attend to itself. */
+
+/* MARK: -- Extension which supports Game's ``perform()`` method */
 extension Game {
     
-    /** Sets the required one-time configurations to the passed SKView */
-    func setup ( _ view: SKView ) {
-        view.allowsTransparency = true
-        self.view!.isMultipleTouchEnabled = true
-        self.backgroundColor = .clear
-        self.physicsWorld.speed = 1
-    }
-    
-    func reset () {
-        detachAllElements()
-    }
-    
-    /** Renders all platforms to the scene */
-    func attachElements ( fromLevelOf: String ) {
-        self.generator = LevelGenerator( for: self, decipherer: [
-            CSVtoNodesDecipherer( csvFileName: fromLevelOf, nodeConfigurations: GameConfig.characterMapping ),
-            CSVtoMovingPlatformDecipherer(csvFileName: fromLevelOf, movingPlatformConfigurrations: GameConfig.movingPlatformMapping)
-        ] )
+    /// Populates the scene with SKNodes which were generated by ``LevelGenerator``.
+    /// 
+    /// This method does not make ``LevelGenerator`` to generate new SKNodes. To make it to do so, refer to ``preparePerformers()``.
+    func performersToStage () {
+        debug("executing: \(#function)")
         self.generator?.generate()
+        
+        self.player            = findPlayerElement()
+        self.controller        = setupMovementController(for: player!)
+        self.outboundIndicator = setupOutboundIndicator()
+        
+        addChild(prepareDarkness())
+        addChild(outboundIndicator!)
+        addChild(controller!)
     }
     
-    /** Removes all elements from the scene */
-    func detachAllElements () {
-        self.removeAllChildren()
+    
+    /// Cue the performers to begin performing their SKActions.
+    func performersMayPerform () {
+        debug("executing: \(#function)")
+        self.generator?.getNodes().forEach({ decipherers2DNodes in
+            decipherers2DNodes.forEach { decipherersRow in
+                decipherersRow.forEach { decipherersColumn in
+                    decipherersColumn?.playAction(named: ActionNamingConstant.spawnIn)
+                    decipherersColumn?.playAction(named: ActionNamingConstant.movingPlatformMovement)
+                }
+            }
+        })
+        self.state = .playing
     }
     
-    func playAnimation () {
-        findMovingPLatforms().forEach { mp in
-            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+    /// Extra
+    func performExtras () {
+        debug("executing: \(#function)")
+        self.state = .playing
+        self.isPaused = false
+        self.physicsWorld.speed = 1
+        self.run(.wait(forDuration: 0.75)) {
+            let p = self.findPlayerElement()
+            p.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
+//            p.position.y += ValueProvider.gridDimension.height
+            p.state = .idle
         }
     }
     
-    /** After the generator has been ran, this function is called to find the attached Player node. Player object does not persist between game resets and should NOT be reattached to instance of self. */
-    func findPlayerElement () throws -> Player? {
+}
+
+
+/* MARK: -- Extension which supports Game's ``cleanup()`` method */
+extension Game {
+    
+    
+    func haltPerformance () {
+        debug("executing: \(#function)")
+        for node in self.children {
+            node.removeAllActions()
+        }
+    }
+    
+    func performersToLeaveTheStage () {
+        debug("executing: \(#function)")
+        let moveAction = SKAction.move(by: CGVector(dx: 0, dy: -899), duration: 2)
+        for node in self.children {
+            node.run(moveAction)
+        }
+    }
+    
+    func performersToRest () {
+        debug("executing: \(#function)")
+        self.removeAllChildren()
+    }
+    
+    /// Resets variables that are bound to a 
+    func prepareForNextPerformance () {
+        debug("executing: \(#function)")
+        self.outboundIndicator = nil
+        self.player = nil
+        self.controller = nil
+    }
+    
+}
+
+
+/* MARK: -- Extension which enables Game to examine itself */
+extension Game {
+    
+    /// Searches self structure tree for a single SKNode with the signature of ``Player``. 
+    /// 
+    /// Since player object does not persist between game resets and is ___not___ to be reattached to instance of self, one is generated everytime the scene is populated.
+    /// 
+    /// Should there be no Player not to be found, the game will not load -- since the winning condition will never be met.
+    func findPlayerElement () -> Player {
         let player : Player? = self.childNode(withName: NodeNamingConstant.player) as? Player
         if ( player == nil ) { 
             fatalError("Did not find player node after generating the level. Did you forget to write one \"PLY\" node to your file?") 
         }
-        return player
+        return player!
     }
     
+    
+    /// Searches self structure tree for SKNodes with the signature of ``MovingPlatform``. 
+    /// 
+    /// Since player object does not persist between game resets and is ___not___ to be reattached to instance of self, one is generated everytime the scene is populated.
+    /// 
+    /// Should there be no Player not to be found, the game will not load -- since the winning condition will never be met.
     func findMovingPLatforms () -> [MovingPlatform] {
         var movingPlatform : [MovingPlatform] = []
         self.children.forEach { mp in
-            if (mp.name == NodeNamingConstant.Platform.Inert.Dynamic.moving) {
+            if (mp.physicsBody?.categoryBitMask == BitMaskConstant.movingPlatform) {
                 movingPlatform.append(mp as! MovingPlatform)
             }
         }
         
         return movingPlatform
     }
+    
     
     /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
     func setupMovementController ( for target: Player ) -> MovementController {
@@ -308,7 +535,7 @@ extension Game {
         return indicatorNode
     }
     
-    func attachDarkness () {
+    func prepareDarkness () -> Darkness {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -11)
         
@@ -321,93 +548,56 @@ extension Game {
         
         darkness.run(moveSequence)
         
-        addChild(darkness)
+        return darkness
     }
+}
+
+
+/* MARK: -- Extension which gives Game the ability to attend to itself. */
+extension Game {
     
-    func slideEverythingDown () {
-        let moveAction = SKAction.move(by: CGVector(dx: 0, dy: -899), duration: 5)
-        for node in self.children {
-            node.removeAllActions()
-            node.run(moveAction)
-        }
-    }
-    
-    /// Performs a transition to the scene's elements, deloads it, renders, and animate the new level.
-    func advanceToNextLevel () {
-        guard ( self.state != .levelChange ) else {return}
-        self.state = .levelChange
-        slideEverythingDown()
-        self.run(.wait(forDuration: 5)) {
-            self.detachAllElements()
-            self.player = nil
-            self.controller = nil
-            
-            self.levelDidLoad()
-            
-            self.player = try? self.findPlayerElement()
-            self.controller = self.setupMovementController(for: self.player!)
-            self.attachDarkness()
-            self.addChild(self.controller!)
-            self.state = .playing
-            self.findMovingPLatforms().forEach { mp in
-                mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+    func updatePlayerPositionIfTheyAreOnMovingPlatform () {
+        if let platform = currentMovingPlatform {
+            if let previousPosition = currentMovingPlatformPosition {
+                let deltaX = platform.position.x - previousPosition.x
+                currentMovingPlatformPosition = platform.position
+                if let player {
+                    player.position.x += deltaX
+                }
+            } else {
+                currentMovingPlatformPosition = currentMovingPlatform?.position
             }
         }
     }
     
-    func levelDidLoad () {
-        if ( levelTrack - LevelDesignConstant.LevelRange.autumn.upperBound == 0 ) {
-            self.currentTheme = .winter
-            levelTrack = 1
+    func updateOutboundIndicator () {
+        guard let playerPosition = self.player?.position, let outboundIndicatorNode = self.outboundIndicator else {
+            fatalError("player and outbound indicator not found")
         }
-        
-        let alias = LevelDesignConstant.Naming.self
-        
-        var levelFilename : String = alias.prefix
-        if ( self.themedLevels ) {
-            levelFilename += alias.Seasonal.seasonal + currentTheme.rawValue
+        let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
+        if isPlayerOutbound {
+            let indicatorVerticalOffset = outboundIndicatorNode.size.width / 2
+            let indicatorHeightOffset = outboundIndicatorNode.size.height / 2
+            outboundIndicatorNode.isHidden = false
+            if (playerPosition.y < ValueProvider.screenDimension.height){
+                if (playerPosition.x < ValueProvider.screenDimension.width / 2) {
+                    outboundIndicatorNode.position = CGPoint(x: 0 + indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = 1.6
+                } else {
+                    outboundIndicatorNode.position = CGPoint(x: ValueProvider.screenDimension.width - indicatorVerticalOffset, y: playerPosition.y)
+                    outboundIndicatorNode.zRotation = -1.6
+                }
+            } else {
+                outboundIndicatorNode.position = CGPoint(x: playerPosition.x, y: ValueProvider.screenDimension.height - indicatorHeightOffset)
+                outboundIndicatorNode.zRotation = 0
+            }
         } else {
-            levelFilename += alias.Seasonal.nonseasonal
-        }
-        
-            levelFilename += String(self.levelTrack)
-        
-        debug("\n### Loaded \(levelFilename) ###\n")
-        self.attachElements(fromLevelOf: levelFilename)
-        levelTrack += 1
-    }
-    
-    /// Resets the game, and returns it to how it initially was after self's state becomes .playing
-    /// 
-    /// The logic is as follows:
-    /// 1. It resets the state to .notYetStarted
-    /// 2. It removes all elements from screen
-    /// 3. It regenerates all elements anew again
-    /// 4. It finds the player node from the generated level
-    /// 5. It attaches the found player node
-    /// 6. it attaches the controller node
-    func restart () {
-        self.state = .notYetStarted
-        self.removeAction( forKey: ActionNamingConstant.gameSlowingDown  )
-        self.speed = 1
-        self.isPaused = false
-        self.levelTrack = 1
-        self.currentTheme = .autumn
-        detachAllElements()
-        levelDidLoad()
-        self.player = try? findPlayerElement()
-        self.controller = setupMovementController(for: self.player!)
-        attachDarkness()
-        self.outboundIndicator = setupOutboundIndicator()
-        addChild(outboundIndicator!)
-        addChild(controller!)
-        self.state = .playing
-        findMovingPLatforms().forEach { mp in
-            mp.playAction(named: ActionNamingConstant.movingPlatformMovement)
+            outboundIndicatorNode.isHidden = true
         }
     }
     
 }
+
 
 /* MARK: -- Extension which lets Game track "in what state its in". */
 extension Game {
@@ -421,4 +611,14 @@ extension Game {
     enum GeneratorError : Error {
         case playerIsNotAdded(String)
     }
+}
+
+@Observable class GameStatistic {
+    
+    var accumulativeScore : Double = 0 
+    
+    func reset () {
+        self.accumulativeScore = 0
+    }
+    
 }

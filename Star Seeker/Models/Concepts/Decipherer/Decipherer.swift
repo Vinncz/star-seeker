@@ -1,14 +1,14 @@
 import Foundation
 
-protocol Decipherer {
-    func accessResource ( named: String, format: String ) -> (Any, Error?)
-    func decipher () -> (Any, Error?)
+protocol Decipherer : Identifiable {
+    func accessResource ( named: String, format: String ) -> ( result: Any, error: Error? )
+    func decipher () -> ( result: Any, error: Error? )
 }
 
 extension Decipherer {
     
     /** Provides a basic implmentation for accessing a string-based file */
-    func accessResource ( named: String, format: String = "" ) -> (Any, Error?) {
+    func accessResource ( named: String, format: String = "" ) -> (result: Any, error: Error?) {
         guard let fileURL = Bundle.main.url(forResource: named, withExtension: format) else {
             return ([], DecipherError.fileNotFound)
         }

@@ -1,5 +1,22 @@
 import SpriteKit
 
+protocol HoldsAction {
+    
+    /// Stores a pair of String-SKAction to be retrieved and performed later by the SKNode.
+    var actionPool : [String: SKAction] { get set }
+    
+    
+    /// Performs an SKAction from the SKNode's actionPool. 
+    /// Should the supplied name does not match any of the actions present, no action will be performed.
+    func playAction ( named key: String, completion: @escaping () -> Void ) -> Void    
+    
+    
+    /// Stops an SKAction from the SKNode's actionPool. 
+    /// Should the supplied name does not match any of the actions present, no action will be performed.
+    func stopAction ( named key: String ) -> Void
+    
+}
+
 /// The base class that describes any "landable piece of land, that enables the player to not fall".
 class Platform : SKSpriteNode, Identifiable {
     
@@ -76,7 +93,7 @@ class Platform : SKSpriteNode, Identifiable {
     
     
     /// Creates a dictionary of [String: SKAction] to be saved by the platform.
-    /// These actions will not perform by itself, until ordered so by calling ``playAction(named:)``
+    /// These actions will not perform by itself, until ordered so by calling ``playAction(named:completion:)``
     /// 
     /// This method is intended to be overriden by a subclass, while still providing the default implementation if not overriden.
     /// 
@@ -86,25 +103,25 @@ class Platform : SKSpriteNode, Identifiable {
         return [:]
     }
     
-    
-    /// Performs an SKAction from the platform's actionPool. 
-    /// Should the supplied name does not match any of the actions present, no action will be performed.
-    func playAction ( named key: String, completion: @escaping () -> Void = {} ) -> Void {
-        guard let action = actionPool[key] else {
-            return
-        }
-        self.run(action, completion: completion)
-    }    
-    
-    
-    /// Stops an SKAction from the platform's actionPool. 
-    /// Should the supplied name does not match any of the actions present, no action will be performed.
-    func stopAction ( named key: String ) -> Void {
-        guard let _ = actionPool[key] else {
-            return
-        }
-        self.removeAction(forKey: key)
-    }
+//    
+//    /// Performs an SKAction from the platform's actionPool. 
+//    /// Should the supplied name does not match any of the actions present, no action will be performed.
+//    func playAction ( named key: String, completion: @escaping () -> Void = {} ) -> Void {
+//        guard let action = actionPool[key] else {
+//            return
+//        }
+//        self.run(action, completion: completion)
+//    }    
+//    
+//    
+//    /// Stops an SKAction from the platform's actionPool. 
+//    /// Should the supplied name does not match any of the actions present, no action will be performed.
+//    func stopAction ( named key: String ) -> Void {
+//        guard let _ = actionPool[key] else {
+//            return
+//        }
+//        self.removeAction(forKey: key)
+//    }
     
     
     /// Boilerplate method which implements the same behavior, across many instances and subclasses of platform.
@@ -130,9 +147,9 @@ class Platform : SKSpriteNode, Identifiable {
     /// Affects which SKTexture will ``prepareTexture()``  generate: be it summer textures, winters', etc.
     let theme: Season
     
-    
-    /// Stores a pair of String-SKAction to be retrieved and performed later by the platform.
-    var actionPool: [String: SKAction] = [:]
+//    
+//    /// Stores a pair of String-SKAction to be retrieved and performed later by the platform.
+//    var actionPool: [String: SKAction] = [:]
     
     
     /// The differentiating factor, of which the extenders of Platform class must modify.

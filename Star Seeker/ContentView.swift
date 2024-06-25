@@ -25,11 +25,11 @@ struct ContentView : View {
             if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
             if ( scene.state == .levelChange ) { doSomething({
-                viewModel.state = .progressing
+//                viewModel.handleSwipe()
             }) }
             if ( viewModel.state == .finished ) { doSomething({
                 viewModel.state = .ready
-                scene.state = .playing
+                scene.proceedWithGeneratingNewLevel()
             }) }
         }
     }
@@ -78,7 +78,7 @@ extension ContentView {
     
     func ExitButton () -> some View {
         Button {
-            print("go to start screen")
+            debug("go to start screen")
         } label: {
             Image("exit-button")
                 .resizable()

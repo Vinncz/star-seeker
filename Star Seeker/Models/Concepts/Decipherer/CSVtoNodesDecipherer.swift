@@ -1,6 +1,7 @@
 import SpriteKit
 
 class CSVtoNodesDecipherer : Decipherer {
+    let id = UUID()
     private var csvFileName        : String
     private var nodeConfigurations : [String: (Season) -> SKSpriteNode]
     
@@ -9,7 +10,7 @@ class CSVtoNodesDecipherer : Decipherer {
         self.nodeConfigurations = nodeConfigurations
     }
     
-    func decipher () -> (Any, (any Error)?) {
+    func decipher () -> ( result: Any, error: (any Error)? ) {
         let (resource, error) = accessResource(named: csvFileName, format: "csv")
         guard ( error == nil ) else { return ([], error) }
         

@@ -367,11 +367,11 @@ extension Player {
     var spawnPosition   : CGPoint = CGPoint(x: -.infinity, y: -.infinity)
     var currentlyStandingOn : Set<Platform> = [] {
         didSet {
-            print("player is standing on:")
+            debug("player is standing on:")
             currentlyStandingOn.forEach {
-                print("    \($0.name), \($0.position.toString(useGrid: true))")
+                debug("    \($0.name), \($0.position.toString(useGrid: true))")
             }
-            print("")
+            debug("")
             
             if ( currentlyStandingOn.isEmpty ) {
                 self.currentHeight = currentHeight
