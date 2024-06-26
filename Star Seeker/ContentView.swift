@@ -4,6 +4,8 @@ import SwiftUI
 
 struct ContentView : View {
     @State private var viewModel = ContentViewModel(scene: "art.scnassets/towerLayer1.scn")
+    @State private var isShowSplash = true
+    @State private var isShowLogo = false
     
     var scview : SceneKitView {
         SceneKitView(scene: viewModel.scene)
@@ -11,32 +13,36 @@ struct ContentView : View {
     
     var body: some View {
         ZStack ( alignment: .topLeading ) {
-            scview
-                .edgesIgnoringSafeArea(.all)
-            SpriteView(scene: scene, options: [.allowsTransparency])
-                .ignoresSafeArea(.all)
-                .background(.clear)
-            //            GridScreen()
-            if (scene.state != .startScreen) {
-                HStack {
-                    if (scene.state != .levelChange || scene.state != .notYetStarted) {
-                        PauseButton()
+            if isShowSplash {
+                SplashScreen()
+            } else {
+                scview
+                    .edgesIgnoringSafeArea(.all)
+                SpriteView(scene: scene, options: [.allowsTransparency])
+                    .ignoresSafeArea(.all)
+                    .background(.clear)
+                //            GridScreen()
+                if (scene.state != .startScreen) {
+                    HStack {
+                        if (scene.state != .levelChange || scene.state != .notYetStarted) {
+                            PauseButton()
+                        }
+                        Spacer()
+                        PlayerScore()
                     }
-                    Spacer()
-                    PlayerScore()
+                    .padding()
                 }
-                .padding()
+                if ( scene.state == .startScreen ) { StartScreen().background(.black.opacity(0.3)) }
+                else if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
+                else if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+                else if ( scene.state == .levelChange ) { doSomething({
+                    viewModel.state = .progressing
+                }) }
+                else if ( viewModel.state == .finished ) { doSomething({
+                    viewModel.state = .ready
+                    scene.state = .playing
+                }) }
             }
-            if ( scene.state == .startScreen ) { StartScreen().background(.black.opacity(0.3)) }
-            if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
-            if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
-            if ( scene.state == .levelChange ) { doSomething({
-                viewModel.state = .progressing
-            }) }
-            if ( viewModel.state == .finished ) { doSomething({
-                viewModel.state = .ready
-                scene.state = .playing
-            }) }
         }
     }
     
@@ -45,16 +51,16 @@ struct ContentView : View {
     
     func background () -> String {
         switch ( scene.currentTheme ) {
-            case .autumn:
-                return ImageNamingConstant.Background.Autumn.background
-            case .winter:
-                return ImageNamingConstant.Background.Winter.background
-            case .spring:
-                return ImageNamingConstant.Background.Spring.background
-            case .summer:
-                return ImageNamingConstant.Background.Summer.background
-            default:
-                return ImageNamingConstant.Background.Autumn.background
+        case .autumn:
+            return ImageNamingConstant.Background.Autumn.background
+        case .winter:
+            return ImageNamingConstant.Background.Winter.background
+        case .spring:
+            return ImageNamingConstant.Background.Spring.background
+        case .summer:
+            return ImageNamingConstant.Background.Summer.background
+        default:
+            return ImageNamingConstant.Background.Autumn.background
         }
     }
     @State var scene : Game = Game(size: UIScreen.main.bounds.size)
@@ -171,6 +177,34 @@ extension ContentView {
         }
     }
     
+    func SplashScreen () -> some View {
+        AnyView (
+            VStack {
+                if isShowLogo {
+                    Image(ImageNamingConstant.Interface.logo)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 130)
+                }
+            }
+                .padding(.horizontal, UIConfig.Spacings.huge)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black)
+        )
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation {
+                    isShowLogo = true
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation {
+                    isShowSplash = false
+                }
+            }
+        }
+    }
+    
     func StartScreen () -> some View {
         AnyView (
             VStack {
@@ -192,12 +226,12 @@ extension ContentView {
                         }
                     }
             }
-            .padding(.horizontal, UIConfig.Spacings.huge)
-            .frame(width: .infinity, height: .infinity)
+                .padding(.horizontal, UIConfig.Spacings.huge)
+                .frame(width: .infinity, height: .infinity)
             
         )
         .onTapGesture {
-//            SoundManagerAV.instance.playSound(named: .Button, on: viewModel.scene)
+            //            SoundManagerAV.instance.playSound(named: .Button, on: viewModel.scene)
             let game = self.scene
             if ( game.state == .startScreen ) {
                 game.state = .playing

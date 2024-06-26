@@ -140,13 +140,13 @@ extension Game {
     func didBegin ( _ contact: SKPhysicsContact ) {
         let collisionHandlers : [Set<UInt32>: (SKPhysicsContact, @escaping (Player) -> Void) -> Void] = [
             [BitMaskConstant.player, BitMaskConstant.platform]: { contact, completion in
-                Player.intoContactWithPlatform(contact: contact, completion: completion)
+                Player.intoContactWithPlatform(contact: contact, completion: completion, gameState: self.state)
             },
             [BitMaskConstant.player, BitMaskConstant.levelChangePlatform]: { contact, completion in
                 let command : ( Player ) -> Void = { player in
                     self.advanceToNextLevel()
                 }
-                Player.intoContactWithPlatform(contact: contact, completion: command)
+                Player.intoContactWithPlatform(contact: contact, completion: command, gameState: self.state)
             },
             [BitMaskConstant.player, BitMaskConstant.movingPlatform]: { contact, completion in
                 let command : (Player) -> Void = { player in
@@ -164,7 +164,7 @@ extension Game {
                         } 
                     }
                 }
-                Player.intoContactWithPlatform(contact: contact, completion: command)
+                Player.intoContactWithPlatform(contact: contact, completion: command, gameState: self.state)
             },
             [BitMaskConstant.player, BitMaskConstant.collapsiblePlatform]: { contact, completion in
                 let command : ( Player ) -> Void = { player in
@@ -349,7 +349,7 @@ extension Game {
     
     /// Performs a transition to the scene's elements, deloads it, renders, and animate the new level.
     func advanceToNextLevel () {
-        guard ( self.state != .levelChange ) else {return}
+        guard ( self.state != .levelChange ) else { return }
         self.state = .levelChange
         slideEverythingDown()
         self.run(.wait(forDuration: 5)) {
@@ -431,15 +431,15 @@ extension Game {
 }
 
 /* MARK: -- Extension which lets Game track "in what state its in". */
+enum GameState {
+    case playing,
+         paused,
+         notYetStarted,
+         levelChange,
+         finished,
+         startScreen
+}
 extension Game {
-    enum GameState {
-        case playing,
-             paused,
-             notYetStarted,
-             levelChange,
-             finished,
-             startScreen
-    }
     enum GeneratorError : Error {
         case playerIsNotAdded(String)
     }

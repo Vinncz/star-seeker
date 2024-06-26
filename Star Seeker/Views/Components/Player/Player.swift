@@ -49,7 +49,7 @@ import Observation
 extension Player {
     
     /// Called when an instance of player collided with an instance of platform.
-    static func intoContactWithPlatform ( contact: SKPhysicsContact, completion: @escaping (Player) -> Void = { _ in } ) {
+    static func intoContactWithPlatform ( contact: SKPhysicsContact, completion: @escaping (Player) -> Void = { _ in }, gameState: GameState = .startScreen ) {
         let nodes = UniversalNodeIdentifier.identify (
             checks: [
                 { $0 as? Player },
@@ -59,8 +59,10 @@ extension Player {
             contact.bodyB.node!
         )
         if let player = nodes[0] as? Player, let platform = nodes[1] as? Platform {
-            SoundManager.instance.playSound(named: .PlatformCollision, on: player)
-            let contactPoint  = contact.contactPoint
+            if (gameState != .startScreen) {
+                SoundManager.instance.playSound(named: .PlatformCollision, on: player)
+            }
+//            let contactPoint  = contact.contactPoint
 //            debugContact(player, platform, contact)
             
             if ( playerIsStandingOnTopOfPlatform(platform, contact) ) {
