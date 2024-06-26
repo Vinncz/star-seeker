@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		078C7E8B2C2BAACD004B7218 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E8A2C2BAACD004B7218 /* art.scnassets */; };
+		078C7E932C2BF78C004B7218 /* autumnOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E8E2C2BF78B004B7218 /* autumnOverlay.sks */; };
+		078C7E942C2BF78C004B7218 /* springOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E8F2C2BF78B004B7218 /* springOverlay.sks */; };
+		078C7E952C2BF78C004B7218 /* summerOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E902C2BF78B004B7218 /* summerOverlay.sks */; };
+		078C7E992C2BF911004B7218 /* winterOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E972C2BF911004B7218 /* winterOverlay.sks */; };
+		078C7E9A2C2BF911004B7218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E982C2BF911004B7218 /* Assets.xcassets */; };
 		20006B1B2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
@@ -104,6 +109,11 @@
 
 /* Begin PBXFileReference section */
 		078C7E8A2C2BAACD004B7218 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		078C7E8E2C2BF78B004B7218 /* autumnOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = autumnOverlay.sks; sourceTree = "<group>"; };
+		078C7E8F2C2BF78B004B7218 /* springOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = springOverlay.sks; sourceTree = "<group>"; };
+		078C7E902C2BF78B004B7218 /* summerOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = summerOverlay.sks; sourceTree = "<group>"; };
+		078C7E972C2BF911004B7218 /* winterOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = winterOverlay.sks; sourceTree = "<group>"; };
+		078C7E982C2BF911004B7218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoNodesDecipherer.swift; sourceTree = "<group>"; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
@@ -211,6 +221,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		078C7E922C2BF78B004B7218 /* overlays */ = {
+			isa = PBXGroup;
+			children = (
+				078C7E8E2C2BF78B004B7218 /* autumnOverlay.sks */,
+				078C7E8F2C2BF78B004B7218 /* springOverlay.sks */,
+				078C7E902C2BF78B004B7218 /* summerOverlay.sks */,
+				078C7E972C2BF911004B7218 /* winterOverlay.sks */,
+				078C7E982C2BF911004B7218 /* Assets.xcassets */,
+			);
+			path = overlays;
+			sourceTree = "<group>";
+		};
 		204FC3B92C19F97700C1BBCC /* Decipherer */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +416,7 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				078C7E922C2BF78B004B7218 /* overlays */,
 				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
 				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
@@ -731,12 +754,16 @@
 				205A99B82C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv in Resources */,
 				205A99B32C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv in Resources */,
 				205A99A02C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv in Resources */,
+				078C7E942C2BF78C004B7218 /* springOverlay.sks in Resources */,
 				205A999E2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				078C7E8B2C2BAACD004B7218 /* art.scnassets in Resources */,
 				205A99A32C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv in Resources */,
+				078C7E952C2BF78C004B7218 /* summerOverlay.sks in Resources */,
 				205A99B62C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx in Resources */,
 				205A999D2C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv in Resources */,
+				078C7E992C2BF911004B7218 /* winterOverlay.sks in Resources */,
+				078C7E9A2C2BF911004B7218 /* Assets.xcassets in Resources */,
 				205A99B02C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv in Resources */,
 				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
 				205A99A22C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv in Resources */,
@@ -744,6 +771,7 @@
 				205A99A42C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv in Resources */,
 				205A99B92C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
+				078C7E932C2BF78C004B7218 /* autumnOverlay.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

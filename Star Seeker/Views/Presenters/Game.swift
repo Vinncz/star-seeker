@@ -214,6 +214,14 @@ extension Game {
         debug("executing: \(#function)")
         prepareStage()
         
+        if let particle = SKEmitterNode(fileNamed: "autumnOverlay.sks") {
+            // Position the particle at the center of the target node
+            particle.position = CGPoint(x: ValueProvider.screenDimension.width / 2, y: ValueProvider.screenDimension.height)
+            
+            // Add the particle as a child of the target node
+            self.addChild(particle)
+        }
+        
         let performersPreparation = preparePerformers()
                    self.generator = performersPreparation.performersManager
                rehearsePerformers ( performersPreparation.performers )
