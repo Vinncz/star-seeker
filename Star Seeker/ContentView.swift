@@ -3,7 +3,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView : View {
-    @State private var viewModel = ContentViewModel(scene: "art.scnassets/towerLayer1.scn")
+    @State private var viewModel = ContentViewModel(scene: "art.scnassets/tower.scn")
     
     var scview : SceneKitView {
         SceneKitView(scene: viewModel.scene)

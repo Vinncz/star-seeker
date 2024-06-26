@@ -264,9 +264,10 @@ extension Game {
         
         self.state = .levelChange
         cleanup()
+        
         proceedWithGeneratingNewLevel()
     }
-
+    
     
     /// Executed in tandem with ``transitionToNextScene()``. This method awaits execution after the tower has done transitioning, and once it is called, it populate the game with new level design.
     /// 
