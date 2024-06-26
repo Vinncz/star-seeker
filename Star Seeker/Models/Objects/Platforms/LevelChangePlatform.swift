@@ -3,11 +3,11 @@ import SpriteKit
 class LevelChangePlatform : Platform {
     
     override var role : String {
-        ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.base
+        ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.levelChange
     }
     
     override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
-        super.init(themed: themed, size: size)
+        super.init(themed: .notApplicable, size: size)
         self.prepare()
     }
     

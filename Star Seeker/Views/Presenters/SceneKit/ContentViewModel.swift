@@ -79,6 +79,7 @@ import SceneKit
 //            changeBackgroundAndTexture()  // Mengganti background dan tekstur
 //            swipeCounter = 0
 //        }
+        self.state = .progressing
         rotateTower()
     }
     
@@ -129,22 +130,19 @@ import SceneKit
         let increaseTowerHeight = SCNAction.move(by: SCNVector3(x: 0, y: 0, z: -0.3), duration: 0.8)
         
         let actionGroup = SCNAction.group([zoomOut, rotateTower, increaseTowerHeight])
-        let actionSequence = SCNAction.sequence([actionGroup, zoomIn])
+        let actionSequence = SCNAction.sequence([.wait(duration: 2), actionGroup, zoomIn])
         
-        towerLayer2.runAction(actionSequence)
-        towerLayer1.runAction(actionSequence)
+        self.towerLayer2.runAction(actionSequence)
+        self.towerLayer1.runAction(actionSequence)
         
-        self.state = .finished
+        scene.rootNode.runAction(.wait(duration: 4)){
+            self.state = .finished
+        }
     }
     
     var state : BackgroundState = .ready {
         didSet {
-            switch ( state ) {
-                case .progressing:
-                    self.handleSwipe()
-                default:
-                    break
-            }
+            print("scene state: \(state)")
         }
     }
 }

@@ -36,6 +36,7 @@ struct ImageNamingConstant {
             
             static let base   : String = "base"
             static let wall   : String = "wall"
+            static let levelChange   : String = "levelchange"
             
             struct Dynamic {
                 static let prefix      : String = "dynamic."
@@ -60,6 +61,10 @@ struct ImageNamingConstant {
     }
     
     struct Interface {
+        struct Screen {
+            static let startTitle  : String = "interface.screen.starttitle"
+        }
+        
         struct Button {
             struct GameControl {
                 static let exit    : String = "interface.button.gamecontrol.exit"

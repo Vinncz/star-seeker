@@ -13,23 +13,28 @@ struct ContentView : View {
         ZStack ( alignment: .topLeading ) {
             scview
                 .edgesIgnoringSafeArea(.all)
-            SpriteView(scene: scene, options: [.allowsTransparency])
+            SpriteView(scene: game, options: [.allowsTransparency])
                 .ignoresSafeArea(.all)
                 .background(.clear)
-            HStack {
-                PauseButton().font(.largeTitle).foregroundStyle(.white)
-                Spacer()
-                PlayerScore()
+            if ( game.state == .notYetStarted ) {
+                StartScreen()
+            } else {
+                HStack {
+                    PauseButton().font(.largeTitle).foregroundStyle(.white)
+                    Spacer()
+                    PlayerScore()
+                }
+                    .padding()
             }
-                .padding()
-            if ( scene.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
-            if ( scene.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
-            if ( scene.state == .levelChange ) { doSomething({
-//                viewModel.handleSwipe()
+            if ( game.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
+            if ( game.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+            if ( game.state == .levelChange ) { doSomething({
+                viewModel.handleSwipe()
+                game.state = .awaitingTransitionFinish
             }) }
             if ( viewModel.state == .finished ) { doSomething({
                 viewModel.state = .ready
-                scene.proceedWithGeneratingNewLevel()
+                game.proceedWithGeneratingNewLevel()
             }) }
         }
     }
@@ -38,7 +43,7 @@ struct ContentView : View {
     let sh = UIScreen.main.bounds.height
     
     func background () -> String {
-        switch ( scene.currentTheme ) {
+        switch ( game.currentTheme ) {
             case .autumn:
                 return ImageNamingConstant.Background.Autumn.background
             case .winter:
@@ -51,14 +56,47 @@ struct ContentView : View {
                 return ImageNamingConstant.Background.Autumn.background
         }
     }
-    @State var scene : Game = Game(size: UIScreen.main.bounds.size)
+    @State var game : Game = Game(size: UIScreen.main.bounds.size)
     @State var stopwatch : CountdownTimer?
     @State var gameIsTransitioningToPlaying : Bool = false
     @State var playerScoreScalingFactor : Double = 1.0
+    @State var tapToStartScale: CGFloat = 1.0
 }
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
 extension ContentView {
+    
+    func StartScreen () -> some View {
+        HStack {
+            Spacer()
+            VStack {
+                Spacer()
+                HStack {
+                    Image(ImageNamingConstant.Interface.Screen.startTitle)
+                        .resizable()
+                        .scaledToFit()
+                }
+                .padding(.top, 40)
+                .frame(width: .infinity)
+                Spacer()
+                StrokeText(text: "Tap To Play", width: 3, borderColor: .black.opacity(0.5), size: UIConfig.FontSizes.mini, foregroudColor: .white)
+                    .padding(.bottom, 120)
+                    .scaleEffect(tapToStartScale, anchor: .top)
+                    .onAppear {
+                        self.tapToStartScale = 1.0
+                        withAnimation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                            self.tapToStartScale = 1.1
+                        }
+                    }
+                Spacer()
+            }
+                .onTapGesture {
+                    self.game.perform()
+                }
+            Spacer()
+        }
+            .background(.black.opacity(0.6))
+    }
     
     func doSomething ( _ command: () -> Void ) -> some View {
         command()
@@ -67,7 +105,7 @@ extension ContentView {
     
     func RestartButton () -> some View {
         Button {
-            scene.restart()
+            game.restart()
         } label: {
             Image("reset-button")
                 .resizable()
@@ -89,7 +127,7 @@ extension ContentView {
     
     func PlayButton () -> some View {
         Button {
-            let game = self.scene
+            let game = self.game
             self.gameIsTransitioningToPlaying = true
             self.stopwatch = CountdownTimer(duration: 2, action: {
                 game.state = .playing
@@ -108,7 +146,7 @@ extension ContentView {
     
     func PauseButton () -> some View {
         Button {
-            let game = self.scene
+            let game = self.game
             if ( game.state == .playing ) {
                 game.state = .paused
             }
@@ -122,14 +160,14 @@ extension ContentView {
     
     func PlayerScore () -> some View {
         withAnimation {
-            let playerSideScore = (scene.player?.statistics!.currentHeight.y ?? 0) - (scene.player?.statistics!.spawnPosition.y ?? 0)
-            let sceneSideScore  = scene.statistics.accumulativeScore
+            let playerSideScore = (game.player?.statistics!.currentHeight.y ?? 0) - (game.player?.statistics!.spawnPosition.y ?? 0)
+            let sceneSideScore  = game.statistics.accumulativeScore
             let shownScore      = playerSideScore + sceneSideScore
             
             return StrokeText(text: String(format: "%.0fm", shownScore), width: 0.5, borderColor: .black, size: UIConfig.FontSizes.mini, foregroudColor: .white)
                 .scaleEffect(playerScoreScalingFactor)
                 .animation(.bouncy(duration: 0.1), value: playerScoreScalingFactor)
-                .onChange(of: scene.player?.statistics!.currentHeight.y) { oldValue, newValue in
+                .onChange(of: game.player?.statistics!.currentHeight.y) { oldValue, newValue in
                     playerScoreScalingFactor = 1.25
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3){
                         playerScoreScalingFactor = 1.0
@@ -197,9 +235,9 @@ extension ContentView {
     
     func EndScreen () -> some View {
         withAnimation {
-            let highestPlayerSideScore = (scene.player!.statistics!.highestPlatform.y) - (scene.player!.statistics!.spawnPosition.y)
-            let sceneSideScore  = scene.statistics.accumulativeScore
-            let currentPlayerSideScore = (scene.player!.statistics!.currentHeight.y) - (scene.player!.statistics!.spawnPosition.y)
+            let highestPlayerSideScore = (game.player!.statistics!.highestPlatform.y) - (game.player!.statistics!.spawnPosition.y)
+            let sceneSideScore  = game.statistics.accumulativeScore
+            let currentPlayerSideScore = (game.player!.statistics!.currentHeight.y) - (game.player!.statistics!.spawnPosition.y)
             let currHeightScore = sceneSideScore + currentPlayerSideScore
             let maxScore        = highestPlayerSideScore + sceneSideScore
             

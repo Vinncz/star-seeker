@@ -25,25 +25,6 @@
 		205A99752C242B4D00C85B1B /* SeasonConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99742C242B4D00C85B1B /* SeasonConstant.swift */; };
 		205A99772C24ADE700C85B1B /* LevelChangePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */; };
 		205A99792C251B7E00C85B1B /* LevelDesignNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99782C251B7E00C85B1B /* LevelDesignNamingConstant.swift */; };
-		205A999D2C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99892C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv */; };
-		205A999E2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998A2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv */; };
-		205A999F2C251D0400C85B1B /* leveldesign.seasonal.winter.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998B2C251D0400C85B1B /* leveldesign.seasonal.winter.3.csv */; };
-		205A99A02C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998C2C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv */; };
-		205A99A12C251D0400C85B1B /* leveldesign.seasonal.winter.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998D2C251D0400C85B1B /* leveldesign.seasonal.winter.5.csv */; };
-		205A99A22C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998E2C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv */; };
-		205A99A32C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A998F2C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv */; };
-		205A99A42C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99902C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv */; };
-		205A99A52C251D0400C85B1B /* leveldesign.seasonal.winter.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 205A99912C251D0400C85B1B /* leveldesign.seasonal.winter.xlsx */; };
-		205A99B02C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99A62C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv */; };
-		205A99B12C25213E00C85B1B /* leveldesign.seasonal.autumn.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99A72C25213E00C85B1B /* leveldesign.seasonal.autumn.8.csv */; };
-		205A99B22C25213E00C85B1B /* leveldesign.seasonal.autumn.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99A82C25213E00C85B1B /* leveldesign.seasonal.autumn.6.csv */; };
-		205A99B32C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99A92C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv */; };
-		205A99B42C25213E00C85B1B /* leveldesign.seasonal.autumn.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AA2C25213E00C85B1B /* leveldesign.seasonal.autumn.4.csv */; };
-		205A99B52C25213E00C85B1B /* leveldesign.seasonal.autumn.9.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AB2C25213E00C85B1B /* leveldesign.seasonal.autumn.9.csv */; };
-		205A99B62C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AC2C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx */; };
-		205A99B72C25213E00C85B1B /* leveldesign.seasonal.autumn.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AD2C25213E00C85B1B /* leveldesign.seasonal.autumn.3.csv */; };
-		205A99B82C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AE2C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv */; };
-		205A99B92C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A99AF2C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv */; };
 		205A99BB2C255ED800C85B1B /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BA2C255ED800C85B1B /* View.swift */; };
 		205A99BD2C25FBE400C85B1B /* HoldableDragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */; };
 		205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */; };
@@ -99,6 +80,39 @@
 		2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F82C17F350002261C3 /* CountdownTimer.swift */; };
 		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
+		20D109D52C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */; };
+		20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */; };
+		20D109D72C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */; };
+		20D109D82C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */; };
+		20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */; };
+		20D109DA2C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */; };
+		20D109DB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */; };
+		20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */; };
+		20D109DD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */; };
+		20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */; };
+		20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */; };
+		20D109E82C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */; };
+		20D109E92C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */; };
+		20D109EA2C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */; };
+		20D109EB2C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */; };
+		20D109EC2C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */; };
+		20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */; };
+		20D109EE2C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */; };
+		20D109F72C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */; };
+		20D109F82C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */; };
+		20D109F92C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */; };
+		20D109FA2C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */; };
+		20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */; };
+		20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */; };
+		20D109FD2C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */; };
+		20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */; };
+		20D10A062C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */; };
+		20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */; };
+		20D10A082C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */; };
+		20D10A092C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */; };
+		20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */; };
+		20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */; };
+		20D10A0C2C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */; };
 		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 		67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44542C217E020081CC26 /* Chainwhacks.ttf */; };
 /* End PBXBuildFile section */
@@ -122,25 +136,6 @@
 		205A99742C242B4D00C85B1B /* SeasonConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonConstant.swift; sourceTree = "<group>"; };
 		205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelChangePlatform.swift; sourceTree = "<group>"; };
 		205A99782C251B7E00C85B1B /* LevelDesignNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignNamingConstant.swift; sourceTree = "<group>"; };
-		205A99892C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.1.csv; sourceTree = "<group>"; };
-		205A998A2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.2.csv; sourceTree = "<group>"; };
-		205A998B2C251D0400C85B1B /* leveldesign.seasonal.winter.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.3.csv; sourceTree = "<group>"; };
-		205A998C2C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.4.csv; sourceTree = "<group>"; };
-		205A998D2C251D0400C85B1B /* leveldesign.seasonal.winter.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.5.csv; sourceTree = "<group>"; };
-		205A998E2C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.6.csv; sourceTree = "<group>"; };
-		205A998F2C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.7.csv; sourceTree = "<group>"; };
-		205A99902C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.8.csv; sourceTree = "<group>"; };
-		205A99912C251D0400C85B1B /* leveldesign.seasonal.winter.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = leveldesign.seasonal.winter.xlsx; sourceTree = "<group>"; };
-		205A99A62C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.2.csv; sourceTree = "<group>"; };
-		205A99A72C25213E00C85B1B /* leveldesign.seasonal.autumn.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.8.csv; sourceTree = "<group>"; };
-		205A99A82C25213E00C85B1B /* leveldesign.seasonal.autumn.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.6.csv; sourceTree = "<group>"; };
-		205A99A92C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.5.csv; sourceTree = "<group>"; };
-		205A99AA2C25213E00C85B1B /* leveldesign.seasonal.autumn.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.4.csv; sourceTree = "<group>"; };
-		205A99AB2C25213E00C85B1B /* leveldesign.seasonal.autumn.9.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.9.csv; sourceTree = "<group>"; };
-		205A99AC2C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = leveldesign.seasonal.autumn.xlsx; sourceTree = "<group>"; };
-		205A99AD2C25213E00C85B1B /* leveldesign.seasonal.autumn.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.3.csv; sourceTree = "<group>"; };
-		205A99AE2C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.7.csv; sourceTree = "<group>"; };
-		205A99AF2C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.1.csv; sourceTree = "<group>"; };
 		205A99BA2C255ED800C85B1B /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldableDragButton.swift; sourceTree = "<group>"; };
 		205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
@@ -197,6 +192,39 @@
 		2097B7F82C17F350002261C3 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
+		20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.1.csv; sourceTree = "<group>"; };
+		20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.9.csv; sourceTree = "<group>"; };
+		20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.2.csv; sourceTree = "<group>"; };
+		20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.5.csv; sourceTree = "<group>"; };
+		20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.4.csv; sourceTree = "<group>"; };
+		20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.3.csv; sourceTree = "<group>"; };
+		20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.6.csv; sourceTree = "<group>"; };
+		20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.7.csv; sourceTree = "<group>"; };
+		20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.8.csv; sourceTree = "<group>"; };
+		20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.10.csv; sourceTree = "<group>"; };
+		20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.2.csv; sourceTree = "<group>"; };
+		20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.7.csv; sourceTree = "<group>"; };
+		20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.3.csv; sourceTree = "<group>"; };
+		20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.1.csv; sourceTree = "<group>"; };
+		20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.4.csv; sourceTree = "<group>"; };
+		20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.8.csv; sourceTree = "<group>"; };
+		20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.5.csv; sourceTree = "<group>"; };
+		20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.6.csv; sourceTree = "<group>"; };
+		20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.2.csv; sourceTree = "<group>"; };
+		20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.5.csv; sourceTree = "<group>"; };
+		20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.3.csv; sourceTree = "<group>"; };
+		20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.4.csv; sourceTree = "<group>"; };
+		20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.1.csv; sourceTree = "<group>"; };
+		20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.7.csv; sourceTree = "<group>"; };
+		20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.8.csv; sourceTree = "<group>"; };
+		20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.6.csv; sourceTree = "<group>"; };
+		20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.1.csv; sourceTree = "<group>"; };
+		20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.6.csv; sourceTree = "<group>"; };
+		20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.7.csv; sourceTree = "<group>"; };
+		20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.4.csv; sourceTree = "<group>"; };
+		20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.2.csv; sourceTree = "<group>"; };
+		20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.5.csv; sourceTree = "<group>"; };
+		20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.3.csv; sourceTree = "<group>"; };
 		674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
@@ -282,6 +310,13 @@
 		205A997C2C251D0400C85B1B /* spring */ = {
 			isa = PBXGroup;
 			children = (
+				20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */,
+				20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */,
+				20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */,
+				20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */,
+				20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */,
+				20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */,
+				20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */,
 			);
 			name = spring;
 			path = "Star Seeker/Raws/levelDesign/seasonal/spring";
@@ -290,6 +325,14 @@
 		205A997D2C251D0400C85B1B /* summer */ = {
 			isa = PBXGroup;
 			children = (
+				20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */,
+				20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */,
+				20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */,
+				20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */,
+				20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */,
+				20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */,
+				20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */,
+				20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */,
 			);
 			name = summer;
 			path = "Star Seeker/Raws/levelDesign/seasonal/summer";
@@ -298,16 +341,16 @@
 		205A99882C251D0400C85B1B /* autumn */ = {
 			isa = PBXGroup;
 			children = (
-				205A99AF2C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv */,
-				205A99A62C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv */,
-				205A99AD2C25213E00C85B1B /* leveldesign.seasonal.autumn.3.csv */,
-				205A99AA2C25213E00C85B1B /* leveldesign.seasonal.autumn.4.csv */,
-				205A99A92C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv */,
-				205A99A82C25213E00C85B1B /* leveldesign.seasonal.autumn.6.csv */,
-				205A99AE2C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv */,
-				205A99A72C25213E00C85B1B /* leveldesign.seasonal.autumn.8.csv */,
-				205A99AB2C25213E00C85B1B /* leveldesign.seasonal.autumn.9.csv */,
-				205A99AC2C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx */,
+				20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */,
+				20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */,
+				20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */,
+				20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */,
+				20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */,
+				20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */,
+				20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */,
+				20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */,
+				20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */,
+				20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */,
 			);
 			name = autumn;
 			path = "Star Seeker/Raws/levelDesign/seasonal/autumn";
@@ -316,15 +359,14 @@
 		205A99922C251D0400C85B1B /* winter */ = {
 			isa = PBXGroup;
 			children = (
-				205A99892C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv */,
-				205A998A2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv */,
-				205A998B2C251D0400C85B1B /* leveldesign.seasonal.winter.3.csv */,
-				205A998C2C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv */,
-				205A998D2C251D0400C85B1B /* leveldesign.seasonal.winter.5.csv */,
-				205A998E2C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv */,
-				205A998F2C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv */,
-				205A99902C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv */,
-				205A99912C251D0400C85B1B /* leveldesign.seasonal.winter.xlsx */,
+				20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */,
+				20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */,
+				20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */,
+				20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */,
+				20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */,
+				20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */,
+				20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */,
+				20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */,
 			);
 			name = winter;
 			path = "Star Seeker/Raws/levelDesign/seasonal/winter";
@@ -529,10 +571,10 @@
 				2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */,
 				2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */,
 				2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */,
+				205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */,
 				2097B7E72C170230002261C3 /* PassThrough */,
 				2097B7DB2C1701C5002261C3 /* Inert */,
 				2097B7E12C170202002261C3 /* Reactive */,
-				205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */,
 			);
 			path = Platforms;
 			sourceTree = "<group>";
@@ -729,31 +771,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				205A99A12C251D0400C85B1B /* leveldesign.seasonal.winter.5.csv in Resources */,
-				205A99B22C25213E00C85B1B /* leveldesign.seasonal.autumn.6.csv in Resources */,
-				205A99B12C25213E00C85B1B /* leveldesign.seasonal.autumn.8.csv in Resources */,
-				205A99A52C251D0400C85B1B /* leveldesign.seasonal.winter.xlsx in Resources */,
-				205A99B72C25213E00C85B1B /* leveldesign.seasonal.autumn.3.csv in Resources */,
-				205A999F2C251D0400C85B1B /* leveldesign.seasonal.winter.3.csv in Resources */,
+				20D109D52C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv in Resources */,
+				20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */,
+				20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */,
+				20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */,
+				20D109F92C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv in Resources */,
+				20D10A062C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv in Resources */,
+				20D109E92C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv in Resources */,
+				20D109F72C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv in Resources */,
+				20D109D72C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv in Resources */,
+				20D10A082C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv in Resources */,
+				20D109DB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv in Resources */,
+				20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */,
+				20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */,
+				20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
+				20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */,
 				205A99722C23C52700C85B1B /* easy-01.csv in Resources */,
-				205A99B52C25213E00C85B1B /* leveldesign.seasonal.autumn.9.csv in Resources */,
+				20D10A0C2C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv in Resources */,
 				205A99712C23C52700C85B1B /* easy-03.csv in Resources */,
-				205A99B82C25213E00C85B1B /* leveldesign.seasonal.autumn.7.csv in Resources */,
-				205A99B32C25213E00C85B1B /* leveldesign.seasonal.autumn.5.csv in Resources */,
-				205A99A02C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv in Resources */,
-				205A999E2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv in Resources */,
+				20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */,
+				20D109EE2C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv in Resources */,
+				20D109F82C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv in Resources */,
+				20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */,
+				20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */,
+				20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
+				20D10A092C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv in Resources */,
 				205A99D32C2926EA00C85B1B /* art.scnassets in Resources */,
-				205A99A32C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv in Resources */,
-				205A99B62C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx in Resources */,
-				205A999D2C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv in Resources */,
-				205A99B02C25213E00C85B1B /* leveldesign.seasonal.autumn.2.csv in Resources */,
+				20D109D82C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv in Resources */,
+				20D109DA2C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv in Resources */,
+				20D109FA2C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv in Resources */,
+				20D109DD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv in Resources */,
+				20D109E82C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv in Resources */,
+				20D109FD2C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv in Resources */,
+				20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */,
+				20D109EA2C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv in Resources */,
 				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
-				205A99A22C251D0400C85B1B /* leveldesign.seasonal.winter.6.csv in Resources */,
-				205A99B42C25213E00C85B1B /* leveldesign.seasonal.autumn.4.csv in Resources */,
-				205A99A42C251D0400C85B1B /* leveldesign.seasonal.winter.8.csv in Resources */,
-				205A99B92C25213E00C85B1B /* leveldesign.seasonal.autumn.1.csv in Resources */,
+				20D109EB2C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv in Resources */,
+				20D109EC2C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

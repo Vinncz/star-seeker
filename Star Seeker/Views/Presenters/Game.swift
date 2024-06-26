@@ -12,7 +12,7 @@ import SwiftUI
 @Observable class Game : SKScene, SKPhysicsContactDelegate {
     
     override init ( size: CGSize ) {
-        self.state = .playing
+        self.state = .notYetStarted
         
         super.init(size: size)
         
@@ -25,7 +25,7 @@ import SwiftUI
     override func didMove ( to view: SKView ) {
         ValueProvider.screenDimension = UIScreen.main.bounds.size
         prepareForPerformance()
-        perform()
+        
     }
     
     /** The state of situation for self */
@@ -40,7 +40,7 @@ import SwiftUI
                     self.isPaused = true
                 case .finished:
                     let slowDownAction = SKAction.customAction(withDuration: 2) { _, elapsedTime in
-                        let progress = elapsedTime / 6
+                        let progress = elapsedTime / 2
                         self.speed = 1 - progress
                     }
                     self.run(slowDownAction, withKey: ActionNamingConstant.gameSlowingDown)
@@ -48,7 +48,7 @@ import SwiftUI
                     break
             }
             
-            debug("Game state was updated to: \(state)")
+            print("Game state was updated to: \(state)")
         }
     }
     /** The previous state of self */
@@ -59,17 +59,19 @@ import SwiftUI
     var player        : Player?
     /** An instance of SKNode which controls another SKNode. Controller object persists between game resets, but require its target attribute to be updated to the new target */
     var controller    : MovementController?
+    var darkness      : Darkness?
+    var darknessOverlay : SKSpriteNode?
     var statistics    : GameStatistic = GameStatistic()
     
     var levelTrack    : Int  = 1
-    var currentTheme  : Season = .autumn
+    var currentTheme  : Season = .spring
     var themedLevels  : Bool = true
     
     var outboundIndicator: SKSpriteNode?
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
     
-    var levelDesignFileName : String = "leveldesign.seasonal.autumn.1"
+    var levelDesignFileName : String = "leveldesign.seasonal.spring.1"
     var themeSequence       : [Season] = [.autumn, .winter, .spring, .summer]
 
     /* Inherited from SKScene. Refrain from altering the following */
@@ -86,6 +88,7 @@ extension Game {
     override func update ( _ currentTime: TimeInterval ) {
         updatePlayerPositionIfTheyAreOnMovingPlatform()
         updateOutboundIndicator()
+//        applyVignetteIfDarknessComesTooClose()
     }
     
     /// Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. 
@@ -101,6 +104,7 @@ extension Game {
                         self.statistics.accumulativeScore += (player.statistics!.currentHeight.y) - (player.statistics!.spawnPosition.y)
                         self.transitionToNextScene()
                     }
+                    player.statistics!.currentHeight.y = player.statistics!.spawnPosition.y
                 }
                 Player.intoContactWithPlatform(contact: contact, completion: command)
             },
@@ -194,9 +198,10 @@ extension Game {
         self.prepareForNextPerformance()
         self.statistics.reset()
         
-        self.levelDesignFileName = "leveldesign.seasonal.autumn.1"
-        self.currentTheme = .autumn
+        self.levelDesignFileName = "leveldesign.seasonal.spring.1"
+        self.currentTheme = .spring
         self.levelTrack = 1
+        self.speed = 1
         
         self.prepareForPerformance()
         self.perform()
@@ -260,11 +265,11 @@ extension Game {
     /// This function does not shut down the scene. To shut down a scene, like you would after the player has exited the game, refer to ``endPerformance()``.
     final func transitionToNextScene () {
         debug("executing: \(#function)")
-        guard ( self.state != .levelChange ) else {return}
+        guard ( self.state != .levelChange && self.state != .awaitingTransitionFinish ) else {return}
         
         self.state = .levelChange
         cleanup()
-        proceedWithGeneratingNewLevel()
+//        proceedWithGeneratingNewLevel()
     }
 
     
@@ -275,6 +280,8 @@ extension Game {
     /// 2. Updates the season, if level design does not have any more levels matching ``currentTheme`` , 
     /// 3. Calls
     func proceedWithGeneratingNewLevel () {
+        guard ( self.state == .awaitingTransitionFinish ) else { return }
+        
         let levelBound : ClosedRange<Int>
         switch ( currentTheme ) {
             case .autumn:
@@ -306,10 +313,8 @@ extension Game {
         self.levelTrack += 1
         self.levelDesignFileName += "\(self.levelTrack)"
         
-        self.run(.wait(forDuration: 2)) {
-            self.prepareForPerformance()
-            self.perform()
-        }
+        self.prepareForPerformance()
+        self.perform()
     }
     
     
@@ -414,8 +419,11 @@ extension Game {
         self.player            = findPlayerElement()
         self.controller        = setupMovementController(for: player!)
         self.outboundIndicator = setupOutboundIndicator()
+        self.darknessOverlay   = prepareDarknessOverlay()
+        self.darkness          = prepareDarkness()
         
-        addChild(prepareDarkness())
+        addChild(darkness!)
+        addChild(darknessOverlay!)
         addChild(outboundIndicator!)
         addChild(controller!)
     }
@@ -444,7 +452,6 @@ extension Game {
         self.run(.wait(forDuration: 0.75)) {
             let p = self.findPlayerElement()
             p.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
-//            p.position.y += ValueProvider.gridDimension.height
             p.state = .idle
         }
     }
@@ -572,7 +579,7 @@ extension Game {
     
     func updateOutboundIndicator () {
         guard let playerPosition = self.player?.position, let outboundIndicatorNode = self.outboundIndicator else {
-            fatalError("player and outbound indicator not found")
+            return
         }
         let isPlayerOutbound = playerPosition.x < 0 || playerPosition.x > ValueProvider.screenDimension.width || playerPosition.y > ValueProvider.screenDimension.height
         if isPlayerOutbound {
@@ -596,6 +603,31 @@ extension Game {
         }
     }
     
+    func applyVignetteIfDarknessComesTooClose () {
+        guard let player = self.player, let darkness = self.darkness else { return }
+        let distance = abs(player.position.y - darkness.position.y)
+        print("darkness distance: \(distance) -- darkness height: \(self.darknessOverlay?.size.height ?? 0)")
+        if ( distance <= 50 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+            self.darknessOverlay?.alpha = 1
+            
+        } else if ( distance <= 75 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+            self.darknessOverlay?.alpha = 0.75
+            
+        } else if ( distance <= 100 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+            self.darknessOverlay?.alpha = 0.5
+            
+        } else {
+            self.darknessOverlay?.alpha = 0
+        }
+    }
+    
+    func prepareDarknessOverlay () -> SKSpriteNode {
+        let overlay = SKSpriteNode(texture: SKTexture(imageNamed: "darknes_vignette"), color: .clear, size: ValueProvider.screenDimension)
+            overlay.position = CGPoint(x: ValueProvider.screenDimension.width / 2, y: ValueProvider.screenDimension.height / 2)
+            overlay.alpha = 0
+        return overlay
+    }
+    
 }
 
 
@@ -606,6 +638,7 @@ extension Game {
              paused,
              notYetStarted,
              levelChange,
+             awaitingTransitionFinish,
              finished
     }
     enum GeneratorError : Error {
