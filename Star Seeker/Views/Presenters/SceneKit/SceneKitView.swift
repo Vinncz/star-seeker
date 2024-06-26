@@ -2,13 +2,13 @@ import SwiftUI
 import SceneKit
 
 struct SceneKitView: UIViewRepresentable {
-    var scene: SCNScene
+    @State var scene: SCNScene
     
     func makeUIView(context: Context) -> SCNView {
         let scnView = SCNView()
         scnView.scene = scene
         scnView.allowsCameraControl = true
-        scnView.showsStatistics = true
+        scnView.showsStatistics = false
         scnView.backgroundColor = UIColor.black
         return scnView
     }

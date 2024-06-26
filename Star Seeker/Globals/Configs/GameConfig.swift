@@ -51,7 +51,7 @@ struct GameConfig {
             Player() 
         },
         "pBG" : { season in 
-            Platform(themed: season) 
+            BeginPlatform(themed: season) 
         },
         "pFN" : { season in 
             LevelChangePlatform(themed: season) 

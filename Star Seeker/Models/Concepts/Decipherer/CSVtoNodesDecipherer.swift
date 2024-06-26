@@ -42,7 +42,7 @@ class CSVtoNodesDecipherer : Decipherer {
                             seasonalModifier = .winter
                         case "sp":
                             seasonalModifier = .spring
-                        case "su":
+                        case "sm":
                             seasonalModifier = .summer
                         default:
                             seasonalModifier = .notApplicable

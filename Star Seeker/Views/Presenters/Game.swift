@@ -48,7 +48,7 @@ import SwiftUI
                     break
             }
             
-            print("Game state was updated to: \(state)")
+            debug("Game state was updated to: \(state)")
         }
     }
     /** The previous state of self */
@@ -61,17 +61,22 @@ import SwiftUI
     var controller    : MovementController?
     var darkness      : Darkness?
     var darknessOverlay : SKSpriteNode?
+    var seasonalParticlesOverlay : SKEmitterNode?
     var statistics    : GameStatistic = GameStatistic()
     
     var levelTrack    : Int  = 1
-    var currentTheme  : Season = .spring
+    var currentTheme  : Season = .autumn {
+        didSet {
+            debug("game season: \(currentTheme)")
+        }
+    }
     var themedLevels  : Bool = true
     
     var outboundIndicator: SKSpriteNode?
     var currentMovingPlatform: SKSpriteNode?
     var currentMovingPlatformPosition: CGPoint?
     
-    var levelDesignFileName : String = "leveldesign.seasonal.spring.1"
+    var levelDesignFileName : String = "leveldesign.seasonal.autumn.1"
     var themeSequence       : [Season] = [.autumn, .winter, .spring, .summer]
 
     /* Inherited from SKScene. Refrain from altering the following */
@@ -138,8 +143,12 @@ extension Game {
                     )
                     if let _ = nodes[0] as? Player, let platform = nodes[1] as? CollapsiblePlatform {
                         platform.playAction(named: ActionNamingConstant.collapseOfCollapsiblePlatform) { 
-                            platform.actionPool.removeValue(forKey: ActionNamingConstant.collapseOfCollapsiblePlatform)
                             platform.removeFromParent()
+                            self.removeChildren(in: [platform])
+                            self.run(.wait(forDuration: 1)) {
+                                platform.move(toParent: self)
+                                platform.playAction(named: ActionNamingConstant.spawnIn)
+                            }
                         }
                     }
                 }
@@ -198,8 +207,8 @@ extension Game {
         self.prepareForNextPerformance()
         self.statistics.reset()
         
-        self.levelDesignFileName = "leveldesign.seasonal.spring.1"
-        self.currentTheme = .spring
+        self.levelDesignFileName = "leveldesign.seasonal.autumn.1"
+        self.currentTheme = .autumn
         self.levelTrack = 1
         self.speed = 1
         
@@ -269,7 +278,6 @@ extension Game {
         
         self.state = .levelChange
         cleanup()
-//        proceedWithGeneratingNewLevel()
     }
 
     
@@ -365,6 +373,7 @@ extension Game {
                 CSVtoMovingPlatformDecipherer ( csvFileName: self.levelDesignFileName, movingPlatformConfigurrations: GameConfig.movingPlatformMapping)
             ]
         )
+        self.seasonalParticlesOverlay = SKEmitterNode( fileNamed: self.currentTheme.rawValue + "seasonalparticles.sks" )?.withPositionOf(pos: CGPoint(x: ValueProvider.screenDimension.width/2, y: ValueProvider.screenDimension.height))
                 
         return (gene, gene.getValuedNodes())
     }
@@ -423,6 +432,7 @@ extension Game {
         self.darkness          = prepareDarkness()
         
         addChild(darkness!)
+        addChild(seasonalParticlesOverlay!)
         addChild(darknessOverlay!)
         addChild(outboundIndicator!)
         addChild(controller!)
@@ -567,9 +577,11 @@ extension Game {
         if let platform = currentMovingPlatform {
             if let previousPosition = currentMovingPlatformPosition {
                 let deltaX = platform.position.x - previousPosition.x
+                let deltaY = platform.position.y - previousPosition.y - 2
                 currentMovingPlatformPosition = platform.position
                 if let player {
                     player.position.x += deltaX
+                    player.position.y += deltaY
                 }
             } else {
                 currentMovingPlatformPosition = currentMovingPlatform?.position
@@ -606,7 +618,6 @@ extension Game {
     func applyVignetteIfDarknessComesTooClose () {
         guard let player = self.player, let darkness = self.darkness else { return }
         let distance = abs(player.position.y - darkness.position.y)
-        print("darkness distance: \(distance) -- darkness height: \(self.darknessOverlay?.size.height ?? 0)")
         if ( distance <= 50 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
             self.darknessOverlay?.alpha = 1
             

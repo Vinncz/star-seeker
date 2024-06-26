@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Autumn_Tower_Design_Stacked.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Autumn_Tower_Design@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

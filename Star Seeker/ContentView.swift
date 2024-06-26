@@ -3,7 +3,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView : View {
-    @State private var viewModel = ContentViewModel(scene: "art.scnassets/towerLayer1.scn")
+    @State private var viewModel = ContentViewModel(scene: "art.scnassets/tower.scn")
     
     var scview : SceneKitView {
         SceneKitView(scene: viewModel.scene)
@@ -29,12 +29,27 @@ struct ContentView : View {
             if ( game.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
             if ( game.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
             if ( game.state == .levelChange ) { doSomething({
+                guard ( viewModel.state != .progressing ) else { return }
                 viewModel.handleSwipe()
                 game.state = .awaitingTransitionFinish
             }) }
             if ( viewModel.state == .finished ) { doSomething({
-                viewModel.state = .ready
                 game.proceedWithGeneratingNewLevel()
+                let ts : TowerSeason
+                switch ( game.currentTheme ) {
+                    case .autumn:
+                        ts = .autumn
+                    case .winter:
+                        ts = .winter
+                    case .spring:
+                        ts = .spring
+                    case .summer:
+                        ts = .summer
+                    default:
+                        ts = .autumn
+                }
+                viewModel.changeToSeason(ts)
+                viewModel.state = .ready
             }) }
         }
     }

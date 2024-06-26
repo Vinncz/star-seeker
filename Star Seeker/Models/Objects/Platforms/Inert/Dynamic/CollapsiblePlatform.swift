@@ -38,9 +38,9 @@ class CollapsiblePlatform : DynamicPlatform {
                         SKAction.wait(forDuration: 0.025),
                         SKAction.moveBy(x: -7, y: 3, duration: 0.075).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 0.025),
-                        SKAction.moveBy(x: 5, y: -3, duration: 0.075).withTimingModeOf(.easeInEaseOut),
+                        SKAction.moveBy(x: 5, y: -4, duration: 0.075).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 0.025),
-                        SKAction.moveBy(x: 5, y: -3, duration: 0.075).withTimingModeOf(.easeInEaseOut),
+                        SKAction.moveBy(x: 5, y: -4, duration: 0.075).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 0.025),
                         SKAction.moveBy(x: -7, y: 3, duration: 0.075).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 0.025),
@@ -54,6 +54,7 @@ class CollapsiblePlatform : DynamicPlatform {
         
         return map
     }
+    
         
     /* Inherited from SKNode. Refrain from altering the following */
     required init? ( coder aDecoder: NSCoder ) {

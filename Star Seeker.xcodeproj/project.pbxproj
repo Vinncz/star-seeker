@@ -113,6 +113,12 @@
 		20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */; };
 		20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */; };
 		20D10A0C2C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */; };
+		20D10A102C2BF5DA0067EE56 /* BeginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */; };
+		20D10A172C2C13AD0067EE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A112C2C13AD0067EE56 /* Assets.xcassets */; };
+		20D10A182C2C13AD0067EE56 /* autumn.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */; };
+		20D10A192C2C13AD0067EE56 /* spring.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */; };
+		20D10A1A2C2C13AE0067EE56 /* summer.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */; };
+		20D10A1B2C2C13AE0067EE56 /* winter.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */; };
 		6776F3422C209C61009EB559 /* MovingTrackPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */; };
 		67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44542C217E020081CC26 /* Chainwhacks.ttf */; };
 /* End PBXBuildFile section */
@@ -225,6 +231,12 @@
 		20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.2.csv; sourceTree = "<group>"; };
 		20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.5.csv; sourceTree = "<group>"; };
 		20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.3.csv; sourceTree = "<group>"; };
+		20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginPlatform.swift; sourceTree = "<group>"; };
+		20D10A112C2C13AD0067EE56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = autumn.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spring.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = summer.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = winter.seasonalparticles.sks; sourceTree = "<group>"; };
 		674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6776F3412C209C61009EB559 /* MovingTrackPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTrackPlatform.swift; sourceTree = "<group>"; };
 		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
@@ -446,6 +458,7 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				20D10A162C2C13AD0067EE56 /* overlays */,
 				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
 				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
@@ -571,6 +584,7 @@
 				2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */,
 				2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */,
 				2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */,
+				20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */,
 				205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */,
 				2097B7E72C170230002261C3 /* PassThrough */,
 				2097B7DB2C1701C5002261C3 /* Inert */,
@@ -713,6 +727,19 @@
 			path = DelayedExecution;
 			sourceTree = "<group>";
 		};
+		20D10A162C2C13AD0067EE56 /* overlays */ = {
+			isa = PBXGroup;
+			children = (
+				20D10A112C2C13AD0067EE56 /* Assets.xcassets */,
+				20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */,
+				20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */,
+				20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */,
+				20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */,
+			);
+			name = overlays;
+			path = Raws/scene/overlays;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -775,6 +802,7 @@
 				20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */,
 				20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */,
 				20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */,
+				20D10A1B2C2C13AE0067EE56 /* winter.seasonalparticles.sks in Resources */,
 				20D109F92C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv in Resources */,
 				20D10A062C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv in Resources */,
 				20D109E92C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv in Resources */,
@@ -785,6 +813,7 @@
 				20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */,
 				20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */,
 				20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */,
+				20D10A182C2C13AD0067EE56 /* autumn.seasonalparticles.sks in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
 				20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */,
 				205A99722C23C52700C85B1B /* easy-01.csv in Resources */,
@@ -793,9 +822,12 @@
 				20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */,
 				20D109EE2C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv in Resources */,
 				20D109F82C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv in Resources */,
+				20D10A1A2C2C13AE0067EE56 /* summer.seasonalparticles.sks in Resources */,
+				20D10A192C2C13AD0067EE56 /* spring.seasonalparticles.sks in Resources */,
 				20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */,
 				20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */,
 				20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */,
+				20D10A172C2C13AD0067EE56 /* Assets.xcassets in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
 				20D10A092C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv in Resources */,
 				205A99D32C2926EA00C85B1B /* art.scnassets in Resources */,
@@ -834,6 +866,7 @@
 				2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
+				20D10A102C2BF5DA0067EE56 /* BeginPlatform.swift in Sources */,
 				205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */,
 				204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */,
 				206332AC2C21648C004270C7 /* LegacyJoystickMovementController.swift in Sources */,
@@ -1027,6 +1060,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sun Seeker";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1059,6 +1093,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Star-Seeker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sun Seeker";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

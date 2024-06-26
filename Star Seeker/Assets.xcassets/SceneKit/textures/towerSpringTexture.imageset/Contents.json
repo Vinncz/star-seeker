@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Spring_Tower_Stacked.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Spring_Tower_Designx2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

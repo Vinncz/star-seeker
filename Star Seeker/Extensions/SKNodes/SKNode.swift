@@ -59,4 +59,9 @@ extension SKNode: HoldsAction {
         )
     }
     
+    func withPositionOf ( pos: CGPoint ) -> Self {
+        self.position = pos
+        return self
+    }
+    
 }
