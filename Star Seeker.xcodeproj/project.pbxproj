@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078C7E8B2C2BAACD004B7218 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 078C7E8A2C2BAACD004B7218 /* art.scnassets */; };
 		20006B1B2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
@@ -52,7 +53,6 @@
 		205A99C92C28930F00C85B1B /* SKAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99C82C28930F00C85B1B /* SKAction.swift */; };
 		205A99CC2C29261D00C85B1B /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99CB2C29261D00C85B1B /* SceneKitView.swift */; };
 		205A99CE2C29263300C85B1B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99CD2C29263300C85B1B /* ContentViewModel.swift */; };
-		205A99D32C2926EA00C85B1B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 205A99D22C2926EA00C85B1B /* art.scnassets */; };
 		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
 		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
 		206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A42C21642A004270C7 /* LevelGenerator.swift */; };
@@ -103,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		078C7E8A2C2BAACD004B7218 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoNodesDecipherer.swift; sourceTree = "<group>"; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		205A99C82C28930F00C85B1B /* SKAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKAction.swift; sourceTree = "<group>"; };
 		205A99CB2C29261D00C85B1B /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
 		205A99CD2C29263300C85B1B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		205A99D22C2926EA00C85B1B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		2063329F2C2163F2004270C7 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		206332A02C2163F2004270C7 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		206332A42C21642A004270C7 /* LevelGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
@@ -340,9 +340,9 @@
 		205A99CA2C2925CE00C85B1B /* SceneKit */ = {
 			isa = PBXGroup;
 			children = (
+				078C7E8A2C2BAACD004B7218 /* art.scnassets */,
 				205A99CB2C29261D00C85B1B /* SceneKitView.swift */,
 				205A99CD2C29263300C85B1B /* ContentViewModel.swift */,
-				205A99D22C2926EA00C85B1B /* art.scnassets */,
 			);
 			path = SceneKit;
 			sourceTree = "<group>";
@@ -733,7 +733,7 @@
 				205A99A02C251D0400C85B1B /* leveldesign.seasonal.winter.4.csv in Resources */,
 				205A999E2C251D0400C85B1B /* leveldesign.seasonal.winter.2.csv in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
-				205A99D32C2926EA00C85B1B /* art.scnassets in Resources */,
+				078C7E8B2C2BAACD004B7218 /* art.scnassets in Resources */,
 				205A99A32C251D0400C85B1B /* leveldesign.seasonal.winter.7.csv in Resources */,
 				205A99B62C25213E00C85B1B /* leveldesign.seasonal.autumn.xlsx in Resources */,
 				205A999D2C251D0400C85B1B /* leveldesign.seasonal.winter.1.csv in Resources */,

@@ -17,3 +17,4 @@ struct SceneKitView: UIViewRepresentable {
         scnView.scene = scene
     }
 }
+
