@@ -27,7 +27,12 @@ struct ContentView : View {
                     .padding()
             }
             if ( game.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
-            if ( game.state == .finished ) { EndScreen().background(.black.opacity(0.5)) }
+            if ( game.state == .finished ) { 
+                EndScreen().background(.black.opacity(0.5)) 
+                doSomething {
+                    viewModel.resetTowerPosition()
+                }
+            }
             if ( game.state == .levelChange ) { doSomething({
                 guard ( viewModel.state != .progressing ) else { return }
                 viewModel.handleSwipe()
