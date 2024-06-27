@@ -69,6 +69,7 @@ struct ImageNamingConstant {
     struct Interface {
         struct Screen {
             static let startTitle  : String = "interface.screen.starttitle"
+            static let teamLogo    : String = "interface.screen.teamlogo"
         }
         
         struct Button {

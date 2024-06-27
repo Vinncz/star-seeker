@@ -11,67 +11,71 @@ struct ContentView : View {
     
     var body: some View {
         ZStack ( alignment: .topLeading ) {
-            scview
-                .edgesIgnoringSafeArea(.all)
-            SpriteView(scene: game, options: [.allowsTransparency])
-                .ignoresSafeArea(.all)
-                .background(.clear)
-            if ( game.state == .notYetStarted ) {
-                StartScreen()
+            if ( isShowSplash ) {
+                SplashScreen()
             } else {
-                HStack {
-                    PauseButton().font(.largeTitle).foregroundStyle(.white)
-                    Spacer()
-                    PlayerScore()
-                }
-                    .padding()
-            }
-            if ( game.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
-            if ( game.state == .finished ) { 
-                EndScreen().background(.black.opacity(0.5)) 
-                doSomething {
-                    viewModel.resetTowerPosition()
-                    viewModel.changeToSeason(.autumn)
-                }
-            }
-            if ( game.state == .levelChange ) { doSomething({
-                guard ( viewModel.state != .progressing ) else { return }
-                viewModel.handleSwipe()
-                game.state = .awaitingTransitionFinish
-                if ( game.themeShouldChange() ) {
-                    var a = game.prepareCloudTransition()
-                    game.rehearseCloudTransition(&a)
-                    game.run(.wait(forDuration: 3)) {
-                        game.performCloudTransition(a)
+                scview
+                    .edgesIgnoringSafeArea(.all)
+                SpriteView(scene: game, options: [.allowsTransparency])
+                    .ignoresSafeArea(.all)
+                    .background(.clear)
+                if ( game.state == .notYetStarted ) {
+                    StartScreen()
+                } else {
+                    HStack {
+                        PauseButton().font(.largeTitle).foregroundStyle(.white)
+                        Spacer()
+                        PlayerScore()
                     }
-                    // TODO: - Refactor these logic, so it reside within the Game
-                    if let currentIndex = game.themeSequence.firstIndex(of: game.currentTheme) {
-                        let nextIndex = (currentIndex + 1) % game.themeSequence.count
-                        game.currentTheme = game.themeSequence[nextIndex]
+                        .padding()
+                }
+                if ( game.state == .paused ) { PauseScreen().background(.black.opacity(0.5)) }
+                if ( game.state == .finished ) { 
+                    EndScreen().background(.black.opacity(0.5)) 
+                    doSomething {
+                        viewModel.resetTowerPosition()
+                        viewModel.changeToSeason(.autumn)
                     }
-                    game.levelTrack = 1
-                    game.run(.wait(forDuration: 3.5)) {
-                        let ts : TowerSeason
-                        switch ( game.currentTheme ) {
-                            case .autumn:
-                                ts = .autumn
-                            case .winter:
-                                ts = .winter
-                            case .spring:
-                                ts = .spring
-                            case .summer:
-                                ts = .summer
-                            default:
-                                ts = .autumn
+                }
+                if ( game.state == .levelChange ) { doSomething({
+                    guard ( viewModel.state != .progressing ) else { return }
+                    viewModel.handleSwipe()
+                    game.state = .awaitingTransitionFinish
+                    if ( game.themeShouldChange() ) {
+                        var a = game.prepareCloudTransition()
+                        game.rehearseCloudTransition(&a)
+                        game.run(.wait(forDuration: 3)) {
+                            game.performCloudTransition(a)
                         }
-                        viewModel.changeToSeason(ts)
+                        // TODO: - Refactor these logic, so it reside within the Game
+                        if let currentIndex = game.themeSequence.firstIndex(of: game.currentTheme) {
+                            let nextIndex = (currentIndex + 1) % game.themeSequence.count
+                            game.currentTheme = game.themeSequence[nextIndex]
+                        }
+                        game.levelTrack = 1
+                        game.run(.wait(forDuration: 3.5)) {
+                            let ts : TowerSeason
+                            switch ( game.currentTheme ) {
+                                case .autumn:
+                                    ts = .autumn
+                                case .winter:
+                                    ts = .winter
+                                case .spring:
+                                    ts = .spring
+                                case .summer:
+                                    ts = .summer
+                                default:
+                                    ts = .autumn
+                            }
+                            viewModel.changeToSeason(ts)
+                        }
                     }
-                }
-            }) }
-            if ( viewModel.state == .finished ) { doSomething({
-                game.proceedWithGeneratingNewLevel()
-                viewModel.state = .ready
-            }) }
+                }) }
+                if ( viewModel.state == .finished ) { doSomething({
+                    game.proceedWithGeneratingNewLevel()
+                    viewModel.state = .ready
+                }) }
+            }
         }
     }
     
@@ -97,6 +101,8 @@ struct ContentView : View {
     @State var gameIsTransitioningToPlaying : Bool = false
     @State var playerScoreScalingFactor : Double = 1.0
     @State var tapToStartScale: CGFloat = 1.0
+    @State private var isShowSplash = true
+    @State private var isShowLogo = false
 }
 
 /* MARK: -- Extension which provides ContentView with file-specific visual components */
@@ -137,6 +143,34 @@ extension ContentView {
     func doSomething ( _ command: () -> Void ) -> some View {
         command()
         return EmptyView()
+    }
+    
+    func SplashScreen () -> some View {
+        AnyView (
+            VStack {
+                if isShowLogo {
+                    Image(ImageNamingConstant.Interface.Screen.teamLogo)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 130)
+                }
+            }
+                .padding(.horizontal, UIConfig.Spacings.huge)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black)
+        )
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation {
+                    isShowLogo = true
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation {
+                    isShowSplash = false
+                }
+            }
+        }
     }
     
     func RestartButton () -> some View {
