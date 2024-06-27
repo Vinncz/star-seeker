@@ -15,4 +15,9 @@ struct ActionNamingConstant {
     static let spawnIn         : String = "VERTEX.STAR_SEEKER.ANIMATION.SPAWN_IN"
     
     static let cloudTransition : String = "VERTEX.STAR_SEEKER.TRANSITION.CLOUD_COVER"
+    
+    static let landsOnPlatform : String = "VERTEX.STAR_SEEKER.SOUNDFX.LANDS"
+    static let jumpsOnPlatform : String = "VERTEX.STAR_SEEKER.SOUNDFX.JUMPS"
+    static let joystickGotPulled : String = "VERTEX.STAR_SEEKER.SOUNDFX.JOYSTICK.PULLED"
+    static let joystickGotReleased : String = "VERTEX.STAR_SEEKER.SOUNDFX.JOYSTICK.RELEASED"
 }

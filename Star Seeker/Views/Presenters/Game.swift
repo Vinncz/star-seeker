@@ -376,12 +376,12 @@ extension Game {
                 ActionNamingConstant.spawnIn : SKAction.sequence([
                     SKAction.group([
                         SKAction.fadeOut(withDuration: 0.001),
-                        SKAction.moveBy(x: 0, y: -12, duration: 0.001),
+                        SKAction.moveBy(x: 0, y: -8, duration: 0.001),
                         SKAction.scale(to: 0.5, duration: 0.001)
                     ]),
                     SKAction.group([
                         SKAction.fadeIn(withDuration: Double.random(in: 0...1.5)),
-                        SKAction.moveBy(x: 0, y: 12, duration: Double.random(in: 0...0.75)),
+                        SKAction.moveBy(x: 0, y: 8, duration: Double.random(in: 0...1)),
                         SKAction.scale(to: 1, duration: Double.random(in: 0...0.75))
                     ])
                 ])
@@ -468,9 +468,9 @@ extension Game {
         self.state = .playing
         self.isPaused = false
         self.physicsWorld.speed = 1
-        self.run(.wait(forDuration: 0.75)) {
+        self.run(.wait(forDuration: 0.5)) {
             let p = self.findPlayerElement()
-            p.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
+            p.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 75))
             p.state = .idle
         }
     }

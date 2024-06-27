@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		20006B1B2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */; };
+		204449592C2DC87200AC1806 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204449582C2DC87200AC1806 /* SoundManager.swift */; };
+		2044495F2C2DC8F000AC1806 /* SlingshotPull.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */; };
+		204449602C2DC8F000AC1806 /* SlingshotRelease.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */; };
+		204449612C2DC8F000AC1806 /* GameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495C2C2DC8F000AC1806 /* GameOver.mp3 */; };
+		204449622C2DC8F000AC1806 /* PlatformCollision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */; };
+		204449632C2DC8F000AC1806 /* Button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495E2C2DC8F000AC1806 /* Button.mp3 */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
 		204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3C02C1A9B7700C1BBCC /* DragButton.swift */; };
@@ -124,6 +130,12 @@
 
 /* Begin PBXFileReference section */
 		20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoNodesDecipherer.swift; sourceTree = "<group>"; };
+		204449582C2DC87200AC1806 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SlingshotPull.mp3; path = "Star Seeker/Raws/sound/SlingshotPull.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SlingshotRelease.mp3; path = "Star Seeker/Raws/sound/SlingshotRelease.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495C2C2DC8F000AC1806 /* GameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GameOver.mp3; path = "Star Seeker/Raws/sound/GameOver.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = PlatformCollision.mp3; path = "Star Seeker/Raws/sound/PlatformCollision.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495E2C2DC8F000AC1806 /* Button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Button.mp3; path = "Star Seeker/Raws/sound/Button.mp3"; sourceTree = SOURCE_ROOT; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
 		204FC3C02C1A9B7700C1BBCC /* DragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragButton.swift; sourceTree = "<group>"; };
@@ -251,6 +263,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		204449572C2DC86700AC1806 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				2044495E2C2DC8F000AC1806 /* Button.mp3 */,
+				2044495C2C2DC8F000AC1806 /* GameOver.mp3 */,
+				2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */,
+				2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */,
+				2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */,
+				204449582C2DC87200AC1806 /* SoundManager.swift */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		204FC3B92C19F97700C1BBCC /* Decipherer */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,7 +481,6 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
-				20D10A162C2C13AD0067EE56 /* overlays */,
 				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
 				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
@@ -686,6 +710,8 @@
 		2097B7F42C175F4C002261C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				20D10A162C2C13AD0067EE56 /* Overlays */,
+				204449572C2DC86700AC1806 /* AudioPlayer */,
 				205A99C32C274B7500C85B1B /* Player */,
 				2097B7F62C175F6A002261C3 /* Buttons */,
 				2097B7F72C17F342002261C3 /* DelayedExecution */,
@@ -724,7 +750,7 @@
 			path = DelayedExecution;
 			sourceTree = "<group>";
 		};
-		20D10A162C2C13AD0067EE56 /* overlays */ = {
+		20D10A162C2C13AD0067EE56 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
 				20D10A112C2C13AD0067EE56 /* Assets.xcassets */,
@@ -733,8 +759,7 @@
 				20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */,
 				20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */,
 			);
-			name = overlays;
-			path = Raws/scene/overlays;
+			path = Overlays;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -795,8 +820,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204449632C2DC8F000AC1806 /* Button.mp3 in Resources */,
 				20D109D52C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv in Resources */,
 				20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */,
+				204449602C2DC8F000AC1806 /* SlingshotRelease.mp3 in Resources */,
 				20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */,
 				20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */,
 				20D10A1B2C2C13AE0067EE56 /* winter.seasonalparticles.sks in Resources */,
@@ -810,6 +837,7 @@
 				20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */,
 				20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */,
 				20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */,
+				204449612C2DC8F000AC1806 /* GameOver.mp3 in Resources */,
 				20D10A182C2C13AD0067EE56 /* autumn.seasonalparticles.sks in Resources */,
 				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
 				20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */,
@@ -823,6 +851,7 @@
 				20D10A192C2C13AD0067EE56 /* spring.seasonalparticles.sks in Resources */,
 				20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */,
 				20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */,
+				204449622C2DC8F000AC1806 /* PlatformCollision.mp3 in Resources */,
 				20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */,
 				20D10A172C2C13AD0067EE56 /* Assets.xcassets in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
@@ -836,6 +865,7 @@
 				20D109FD2C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv in Resources */,
 				20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */,
 				20D109EA2C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv in Resources */,
+				2044495F2C2DC8F000AC1806 /* SlingshotPull.mp3 in Resources */,
 				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
 				20D109EB2C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv in Resources */,
 				20D109EC2C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv in Resources */,
@@ -909,6 +939,7 @@
 				2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
 				2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */,
+				204449592C2DC87200AC1806 /* SoundManager.swift in Sources */,
 				205A996B2C2343CC00C85B1B /* ImageSequenceCountConstant.swift in Sources */,
 				205A99752C242B4D00C85B1B /* SeasonConstant.swift in Sources */,
 				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,

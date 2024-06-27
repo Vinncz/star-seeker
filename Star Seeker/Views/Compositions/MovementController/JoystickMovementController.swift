@@ -49,10 +49,12 @@ class JoystickMovementController : MovementController {
             onTouch    : {
                 JoystickMovementController.scaleBottomController(target: (self.bottomController)!, to: 1)
                 JoystickMovementController.fadeInOutNode(target: (self.arrowController)!, isFadeIn: false)
+                SoundManager.instance.playSound(named: .SlingshotPull, on: self)
             },
             onTouchEnd : {
                 JoystickMovementController.scaleBottomController(target: (self.bottomController)!, to: 0)
                 JoystickMovementController.fadeInOutNode(target: (self.arrowController)!, isFadeIn: true)
+                SoundManager.instance.playSound(named: .SlingshotRelease, on: self)
             },
             command    : { [weak self] deltaX, deltaY in
                 switch ( self?.target.state ) {

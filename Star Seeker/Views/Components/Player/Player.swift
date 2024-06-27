@@ -63,6 +63,7 @@ extension Player {
             debugContact(player, platform, contact)
             
             if ( playerIsStandingOnTopOfPlatform(platform, contact) ) {
+                SoundManager.instance.playSound(named: .PlatformCollision, on: player)
                 player.statistics!.currentlyStandingOn.insert(platform)
                 
                 drawCollisionPoints(contactPoint: contactPoint, actor: player)
@@ -106,6 +107,7 @@ extension Player {
         )
         if let player = nodes[0] as? Player, let darkness = nodes[1] as? Darkness {
             debug("Player collided with darkness object at \(darkness.position.toString(useGrid: true)) -- with player's feet position of \(player.position.y - (player.size.height / 2)) and darkness' top at \(darkness.position.y + (darkness.size.height / 2))\n")
+            if ( player.state != .dying ) { SoundManager.instance.playSound(named: .GameOver, on: player) }
             player.state = .dying
             
             completion(player)
