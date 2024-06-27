@@ -31,6 +31,7 @@ struct ContentView : View {
                 EndScreen().background(.black.opacity(0.5)) 
                 doSomething {
                     viewModel.resetTowerPosition()
+                    viewModel.changeToSeason(.autumn)
                 }
             }
             if ( game.state == .levelChange ) { doSomething({
