@@ -93,8 +93,9 @@ extension Game {
     override func update ( _ currentTime: TimeInterval ) {
         updatePlayerPositionIfTheyAreOnMovingPlatform()
         updateOutboundIndicator()
-//        applyVignetteIfDarknessComesTooClose()
+        applyVignetteIfDarknessComesTooClose()
     }
+    
     
     /// Called after an instace of SKPhysicsBody collided with another instance of SKPhysicsBody inside self's physicsWorld attribute. 
     /// Their contactBitMask attribute must match the bitwise operation "OR" in order for this method to be called.
@@ -165,6 +166,7 @@ extension Game {
         
         collisionHandlers[collision]?(contact, { _ in })
     }
+    
     
     /// Called after an instance of SKPhysicsBody no longer made contact with the previously connected instance of SKPhysicsBody inside self's physicsWorld attribute.
     func didEnd ( _ contact: SKPhysicsContact ) {
@@ -279,17 +281,8 @@ extension Game {
         self.state = .levelChange
         cleanup()
     }
-
     
-    /// Executed in tandem with ``transitionToNextScene()``. This method awaits execution after the tower has done transitioning, and once it is called, it populate the game with new level design.
-    /// 
-    /// This method:
-    /// 1. Changes the level being played
-    /// 2. Updates the season, if level design does not have any more levels matching ``currentTheme`` , 
-    /// 3. Calls
-    func proceedWithGeneratingNewLevel () {
-        guard ( self.state == .awaitingTransitionFinish ) else { return }
-        
+    func themeShouldChange () -> Bool {
         let levelBound : ClosedRange<Int>
         switch ( currentTheme ) {
             case .autumn:
@@ -303,14 +296,18 @@ extension Game {
             default:
                 levelBound = 0...0
         }
-        
-        if ( self.levelTrack % levelBound.upperBound == 0 ) {
-            if let currentIndex = themeSequence.firstIndex(of: currentTheme) {
-                let nextIndex = (currentIndex + 1) % themeSequence.count
-                self.currentTheme = themeSequence[nextIndex]
-            }
-            self.levelTrack = 1
-        }
+        return self.levelTrack % levelBound.upperBound == 0
+    }
+
+    
+    /// Executed in tandem with ``transitionToNextScene()``. This method awaits execution after the tower has done transitioning, and once it is called, it populate the game with new level design.
+    /// 
+    /// This method:
+    /// 1. Changes the level being played
+    /// 2. Updates the season, if level design does not have any more levels matching ``currentTheme`` , 
+    /// 3. Calls
+    func proceedWithGeneratingNewLevel () {
+        guard ( self.state == .awaitingTransitionFinish ) else { return }
         
         self.levelDesignFileName = LevelDesignConstant.Naming.prefix 
         if ( themedLevels ) {
@@ -332,17 +329,6 @@ extension Game {
         resetEverything()
     }
     
-    
-    /// Resets every statistics, be it marked specifically to persist between game resets or not.
-    /// 
-    /// If the scene were to be destroyed, all statistics will also be reset regardless.
-    func resetEverything () {
-        self.state         = .notYetStarted
-        physicsWorld.speed = 1
-        isPaused           = false
-        statistics.reset()
-    }
-        
 }
 
 /* MARK: -- Extension which supports Game's ``prepareForPerformance()`` method */
@@ -412,6 +398,29 @@ extension Game {
         debug("executing: \(#function)")
     }
     
+    
+    /// Instanciates an SKNode which gives 'cloud cover' for seasonal changes.
+    /// 
+    /// Executed only when ``currentTheme`` has changed.
+    func prepareCloudTransition () -> SKSpriteNode {
+        let ct = SKTexture(imageNamed: ImageNamingConstant.Transition.prefix + ImageNamingConstant.Transition.cloud + "67")
+        let cl = SKSpriteNode( texture: ct, color: .clear, size: ValueProvider.screenDimension )
+            cl.position = CGPoint(x: ValueProvider.screenDimension.width / 2, y: ValueProvider.screenDimension.height / 2)
+        
+        return cl
+    }
+    
+    
+    /// Attaches SKAction.animate to the supplied ``cloudNode`` which would change its textures.
+    /// 
+    /// Executed only when ``currentTheme`` has changed.
+    func rehearseCloudTransition ( _ cloudNode : inout SKSpriteNode ) {
+        let textureName   : String = ImageNamingConstant.Transition.prefix + ImageNamingConstant.Transition.cloud
+        let cloudTextures : [SKTexture] = ImageSequenceCountConstant.Transition.cloud.map { SKTexture( imageNamed: textureName + String($0) ) }
+                
+        cloudNode.actionPool[ActionNamingConstant.cloudTransition] = SKAction.animate(with: cloudTextures, timePerFrame: 0.01)
+    }
+    
 }
 
 
@@ -466,6 +475,12 @@ extension Game {
         }
     }
     
+    
+    func performCloudTransition ( _ cloudNode : SKSpriteNode ) {
+        addChild(cloudNode)
+        cloudNode.playAction(named: ActionNamingConstant.cloudTransition)
+    }
+    
 }
 
 
@@ -499,6 +514,16 @@ extension Game {
         self.outboundIndicator = nil
         self.player = nil
         self.controller = nil
+    }
+    
+    /// Resets every statistics, be it marked specifically to persist between game resets or not.
+    /// 
+    /// If the scene were to be destroyed, all statistics will also be reset regardless.
+    func resetEverything () {
+        self.state         = .notYetStarted
+        physicsWorld.speed = 1
+        isPaused           = false
+        statistics.reset()
     }
     
 }
@@ -538,7 +563,9 @@ extension Game {
     }
     
     
-    /** Instanciates a movement controller that controls something. Controller object deos not persist  between game reset. */
+    /// Instanciates a movement controller that controls something. 
+    /// 
+    /// Controller object deos not persist between game resets.
     func setupMovementController ( for target: Player ) -> MovementController {
         let controller = JoystickMovementController( controls: target )
         controller.position = CGPoint(5, 4)
@@ -546,12 +573,19 @@ extension Game {
         return controller
     }
     
+    /// Instanciates an outbound indicator which points to player's position. 
+    /// 
+    /// The indicator is only visible when the player goes outside of camera's perspective.
     func setupOutboundIndicator () -> SKSpriteNode {
         let indicatorNode = ArrowPointingToPlayersLocationWhenOffScreen()
         indicatorNode.isHidden = true
         return indicatorNode
     }
     
+    
+    /// Instanciates a darkness object which becomes the game's sole losing condition.
+    /// 
+    /// Darkness does not persist between game resets. 
     func prepareDarkness () -> Darkness {
         let darkness = Darkness()
         darkness.position = CGPoint(5, -11)
@@ -577,7 +611,7 @@ extension Game {
         if let platform = currentMovingPlatform {
             if let previousPosition = currentMovingPlatformPosition {
                 let deltaX = platform.position.x - previousPosition.x
-                let deltaY = platform.position.y - previousPosition.y - 2
+                let deltaY = platform.position.y - previousPosition.y - 4
                 currentMovingPlatformPosition = platform.position
                 if let player {
                     player.position.x += deltaX
@@ -618,17 +652,21 @@ extension Game {
     func applyVignetteIfDarknessComesTooClose () {
         guard let player = self.player, let darkness = self.darkness else { return }
         let distance = abs(player.position.y - darkness.position.y)
-        if ( distance <= 50 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+        if ( distance <= 40 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
             self.darknessOverlay?.alpha = 1
             
-        } else if ( distance <= 75 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+        } else if ( distance <= 60 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
             self.darknessOverlay?.alpha = 0.75
             
-        } else if ( distance <= 100 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+        } else if ( distance <= 80 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
             self.darknessOverlay?.alpha = 0.5
             
+        } else if ( distance <= 100 + (self.darknessOverlay?.size.height ?? 0) / 2 ) {
+            self.darknessOverlay?.alpha = 0.25
+
         } else {
             self.darknessOverlay?.alpha = 0
+            
         }
     }
     

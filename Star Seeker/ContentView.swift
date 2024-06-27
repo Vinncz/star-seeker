@@ -32,23 +32,38 @@ struct ContentView : View {
                 guard ( viewModel.state != .progressing ) else { return }
                 viewModel.handleSwipe()
                 game.state = .awaitingTransitionFinish
+                if ( game.themeShouldChange() ) {
+                    var a = game.prepareCloudTransition()
+                    game.rehearseCloudTransition(&a)
+                    game.run(.wait(forDuration: 3)) {
+                        game.performCloudTransition(a)
+                    }
+                    // TODO: - Refactor these logic, so it reside within the Game
+                    if let currentIndex = game.themeSequence.firstIndex(of: game.currentTheme) {
+                        let nextIndex = (currentIndex + 1) % game.themeSequence.count
+                        game.currentTheme = game.themeSequence[nextIndex]
+                    }
+                    game.levelTrack = 1
+                    game.run(.wait(forDuration: 3.5)) {
+                        let ts : TowerSeason
+                        switch ( game.currentTheme ) {
+                            case .autumn:
+                                ts = .autumn
+                            case .winter:
+                                ts = .winter
+                            case .spring:
+                                ts = .spring
+                            case .summer:
+                                ts = .summer
+                            default:
+                                ts = .autumn
+                        }
+                        viewModel.changeToSeason(ts)
+                    }
+                }
             }) }
             if ( viewModel.state == .finished ) { doSomething({
                 game.proceedWithGeneratingNewLevel()
-                let ts : TowerSeason
-                switch ( game.currentTheme ) {
-                    case .autumn:
-                        ts = .autumn
-                    case .winter:
-                        ts = .winter
-                    case .spring:
-                        ts = .spring
-                    case .summer:
-                        ts = .summer
-                    default:
-                        ts = .autumn
-                }
-                viewModel.changeToSeason(ts)
                 viewModel.state = .ready
             }) }
         }

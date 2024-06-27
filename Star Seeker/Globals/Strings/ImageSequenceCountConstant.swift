@@ -9,4 +9,7 @@ struct ImageSequenceCountConstant {
         static let moving    : ClosedRange<Int> = 0...19
     }
     static let darkness : ClosedRange<Int> = 0...59
+    struct Transition {
+        static let cloud    : ClosedRange<Int> = 0...129
+    }
 }

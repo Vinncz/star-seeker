@@ -13,8 +13,16 @@ class SlipperyPlatform : ReactivePlatform {
     }
     
     override func preparePhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
-        let pb          = Platform.defaultPhysicsBody(texture: texture, size: size)
-            pb.friction = GameConfig.slipperyFrictionModifier
+        let pb                = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: -size.height * 0.5, width: size.width, height: size.height), cornerRadius: 4).cgPath )
+            
+        pb.isDynamic          = GameConfig.platformIsDynamic
+        pb.restitution        = GameConfig.platformRestitution
+        pb.allowsRotation     = GameConfig.platformRotates
+        pb.friction           = GameConfig.slipperyFrictionModifier
+                
+        pb.categoryBitMask    = BitMaskConstant.platform
+        pb.contactTestBitMask = BitMaskConstant.player
+        
         
         return pb
     }

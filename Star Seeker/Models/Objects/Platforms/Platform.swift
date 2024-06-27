@@ -110,10 +110,6 @@ class Platform : SKSpriteNode, Identifiable {
     /// Affects which SKTexture will ``prepareTexture()``  generate: be it summer textures, winters', etc.
     let theme: Season
     
-//    
-//    /// Stores a pair of String-SKAction to be retrieved and performed later by the platform.
-//    var actionPool: [String: SKAction] = [:]
-    
     
     /// The differentiating factor, of which the extenders of Platform class must modify.
     /// 
@@ -135,6 +131,7 @@ class Platform : SKSpriteNode, Identifiable {
 
 /* MARK: -- Extension which provides Platform with convenient functions */
 extension Platform {
+    
     /// Instanciates the default preset of SKPhysicsBody for a platform to use. Appropriate for any platform with default friction values.
     /// 
     /// Make caution, for a single instance of SKPhysicsBody can only be used by 1 (one) instance of SKNode.
@@ -151,28 +148,35 @@ extension Platform {
         
         return pb
     }
+    
 }
 
 /* MARK: -- Extension which enables the creation of Platform objects, by the way of chaining methods together */
 extension Platform {
+    
     func enableCollisionWith ( _ pb: SKPhysicsBody ) -> Self {
         self.physicsBody?.contactTestBitMask |= pb.contactTestBitMask
         return self
     }
+    
     func withName ( _ to: String ) -> Self {
         self.name = to
         return self
     }
+    
     func withCategoryBitMask ( _ to: UInt32 ) -> Self {
         self.physicsBody?.categoryBitMask = to
         return self
     }
+    
     func withCollisionBitMask ( _ to: UInt32 ) -> Self {
         self.physicsBody?.collisionBitMask = to
         return self
     }
+    
     func withContactTestBitMask ( _ to: UInt32 ) -> Self {
         self.physicsBody?.contactTestBitMask = to
         return self
     }
+    
 }

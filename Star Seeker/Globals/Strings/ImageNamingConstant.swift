@@ -4,6 +4,12 @@ struct ImageNamingConstant {
     
     static let darkness : String = "darkness."
     
+    struct Transition {
+        static let prefix : String = "transition."
+        
+        static let cloud  : String = "cloud."
+    }
+    
     struct Background {
         struct Winter {
             static let background : String = "background.winter.background"

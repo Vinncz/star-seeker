@@ -21,7 +21,7 @@ class MovingPlatform : DynamicPlatform {
     }
     
     override func preparePhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
-        let pb = SKPhysicsBody(texture: texture, size: size)
+        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: size.width * 0.25, width: size.width, height: size.height / 3), cornerRadius: 0.5).cgPath  )
         
             pb.isDynamic          = GameConfig.platformIsDynamic
             pb.restitution        = GameConfig.platformRestitution
@@ -39,9 +39,9 @@ class MovingPlatform : DynamicPlatform {
             map = [
                 ActionNamingConstant.movingPlatformMovement : SKAction.repeatForever(
                     SKAction.sequence([
-                        SKAction.moveBy(x: movementVector.dx, y: movementVector.dy, duration: 3).withTimingModeOf(.easeInEaseOut),
+                        SKAction.moveBy(x: movementVector.dx, y: movementVector.dy, duration: 2).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 1),
-                        SKAction.moveBy(x: -movementVector.dx, y: -movementVector.dy, duration: 3).withTimingModeOf(.easeInEaseOut),
+                        SKAction.moveBy(x: -movementVector.dx, y: -movementVector.dy, duration: 2).withTimingModeOf(.easeInEaseOut),
                         SKAction.wait(forDuration: 1)
                     ])
                 )
@@ -50,7 +50,7 @@ class MovingPlatform : DynamicPlatform {
         return map
     }
     
-    override func prepareExtras() {
+    override func prepareExtras () {
         self.name = NodeNamingConstant.Platform.Inert.Dynamic.moving
     }
     

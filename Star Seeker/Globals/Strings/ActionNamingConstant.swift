@@ -13,4 +13,6 @@ struct ActionNamingConstant {
     static let collapseOfCollapsiblePlatform : String = "VERTEX.STAR_SEEKER.ANIMATION.PLATFORM.COLLAPSE"
     
     static let spawnIn         : String = "VERTEX.STAR_SEEKER.ANIMATION.SPAWN_IN"
+    
+    static let cloudTransition : String = "VERTEX.STAR_SEEKER.TRANSITION.CLOUD_COVER"
 }
