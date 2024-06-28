@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		20006B1B2C18BB0200EC46C6 /* CSVDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */; };
-		20006B1D2C18BB1D00EC46C6 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */; };
-		20006B232C18C6D800EC46C6 /* LevelFormat2 in Resources */ = {isa = PBXBuildFile; fileRef = 20006B222C18C6D800EC46C6 /* LevelFormat2 */; };
+		20006B1B2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */; };
+		204449592C2DC87200AC1806 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204449582C2DC87200AC1806 /* SoundManager.swift */; };
+		2044495F2C2DC8F000AC1806 /* SlingshotPull.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */; };
+		204449602C2DC8F000AC1806 /* SlingshotRelease.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */; };
+		204449612C2DC8F000AC1806 /* GameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495C2C2DC8F000AC1806 /* GameOver.mp3 */; };
+		204449622C2DC8F000AC1806 /* PlatformCollision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */; };
+		204449632C2DC8F000AC1806 /* Button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2044495E2C2DC8F000AC1806 /* Button.mp3 */; };
 		204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B52C19915700C1BBCC /* MovementDirection.swift */; };
-		204FC3B82C19B37300C1BBCC /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */; };
 		204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3BA2C19F98300C1BBCC /* Decipherer.swift */; };
 		204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3C02C1A9B7700C1BBCC /* DragButton.swift */; };
 		204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3C32C1AE11B00C1BBCC /* Restriction.swift */; };
@@ -21,6 +24,29 @@
 		204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */; };
 		204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */; };
 		204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204FC3D22C1B655100C1BBCC /* Darkness.swift */; };
+		205A996B2C2343CC00C85B1B /* ImageSequenceCountConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */; };
+		205A99702C23C52700C85B1B /* easy-02.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996D2C23C52700C85B1B /* easy-02.csv */; };
+		205A99712C23C52700C85B1B /* easy-03.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996E2C23C52700C85B1B /* easy-03.csv */; };
+		205A99722C23C52700C85B1B /* easy-01.csv in Resources */ = {isa = PBXBuildFile; fileRef = 205A996F2C23C52700C85B1B /* easy-01.csv */; };
+		205A99752C242B4D00C85B1B /* SeasonConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99742C242B4D00C85B1B /* SeasonConstant.swift */; };
+		205A99772C24ADE700C85B1B /* LevelChangePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */; };
+		205A99792C251B7E00C85B1B /* LevelDesignNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99782C251B7E00C85B1B /* LevelDesignNamingConstant.swift */; };
+		205A99BB2C255ED800C85B1B /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BA2C255ED800C85B1B /* View.swift */; };
+		205A99BD2C25FBE400C85B1B /* HoldableDragButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */; };
+		205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */; };
+		205A99C52C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */; };
+		205A99C72C28899A00C85B1B /* CSVtoMovingPlatformDecipherer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99C62C28899A00C85B1B /* CSVtoMovingPlatformDecipherer.swift */; };
+		205A99C92C28930F00C85B1B /* SKAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99C82C28930F00C85B1B /* SKAction.swift */; };
+		205A99CC2C29261D00C85B1B /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99CB2C29261D00C85B1B /* SceneKitView.swift */; };
+		205A99CE2C29263300C85B1B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99CD2C29263300C85B1B /* ContentViewModel.swift */; };
+		205A99D32C2926EA00C85B1B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 205A99D22C2926EA00C85B1B /* art.scnassets */; };
+		205A99D62C2AC1AB00C85B1B /* HoldsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A99D52C2AC1AB00C85B1B /* HoldsAction.swift */; };
+		206332A22C2163F2004270C7 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063329F2C2163F2004270C7 /* CGPoint.swift */; };
+		206332A32C2163F2004270C7 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A02C2163F2004270C7 /* CGSize.swift */; };
+		206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A42C21642A004270C7 /* LevelGenerator.swift */; };
+		206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A72C21648C004270C7 /* ButtonsMovementController.swift */; };
+		206332AC2C21648C004270C7 /* LegacyJoystickMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */; };
+		206332AD2C21648C004270C7 /* MovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206332A92C21648C004270C7 /* MovementController.swift */; };
 		2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */; };
 		2097B7822C114C00002261C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7812C114C00002261C3 /* ContentView.swift */; };
 		2097B7842C114C00002261C3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7832C114C00002261C3 /* Item.swift */; };
@@ -32,7 +58,6 @@
 		2097B7A32C115AED002261C3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A22C115AED002261C3 /* Logger.swift */; };
 		2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A42C115E99002261C3 /* Wrapper.swift */; };
 		2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A62C119C27002261C3 /* HoldButton.swift */; };
-		2097B7AA2C121DA8002261C3 /* ButtonsMovementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */; };
 		2097B7AC2C122000002261C3 /* PressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AB2C122000002261C3 /* PressButton.swift */; };
 		2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AD2C1227EE002261C3 /* UIConfig.swift */; };
 		2097B7B02C122862002261C3 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7AF2C122862002261C3 /* GameConfig.swift */; };
@@ -47,7 +72,6 @@
 		2097B7D02C169CA3002261C3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7CF2C169CA3002261C3 /* Player.swift */; };
 		2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */; };
 		2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D32C16E0BD002261C3 /* ValueProvider.swift */; };
-		2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D52C16E14F002261C3 /* CGPoint.swift */; };
 		2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D72C16EFE5002261C3 /* Platform.swift */; };
 		2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7D92C16F03E002261C3 /* BasePlatform.swift */; };
 		2097B7DE2C1701DC002261C3 /* CollapsiblePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */; };
@@ -60,17 +84,59 @@
 		2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */; };
 		2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */; };
 		2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7F82C17F350002261C3 /* CountdownTimer.swift */; };
-		2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FA2C17F891002261C3 /* PauseScreen.swift */; };
 		2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FC2C17F8B9002261C3 /* GridView.swift */; };
 		2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */; };
+		20D109D52C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */; };
+		20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */; };
+		20D109D72C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */; };
+		20D109D82C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */; };
+		20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */; };
+		20D109DA2C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */; };
+		20D109DB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */; };
+		20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */; };
+		20D109DD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */; };
+		20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */; };
+		20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */; };
+		20D109E82C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */; };
+		20D109E92C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */; };
+		20D109EA2C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */; };
+		20D109EB2C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */; };
+		20D109EC2C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */; };
+		20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */; };
+		20D109EE2C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */; };
+		20D109F72C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */; };
+		20D109F82C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */; };
+		20D109F92C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */; };
+		20D109FA2C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */; };
+		20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */; };
+		20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */; };
+		20D109FD2C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */; };
+		20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */; };
+		20D10A062C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */; };
+		20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */; };
+		20D10A082C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */; };
+		20D10A092C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */; };
+		20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */; };
+		20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */; };
+		20D10A0C2C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */; };
+		20D10A102C2BF5DA0067EE56 /* BeginPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */; };
+		20D10A172C2C13AD0067EE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A112C2C13AD0067EE56 /* Assets.xcassets */; };
+		20D10A182C2C13AD0067EE56 /* autumn.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */; };
+		20D10A192C2C13AD0067EE56 /* spring.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */; };
+		20D10A1A2C2C13AE0067EE56 /* summer.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */; };
+		20D10A1B2C2C13AE0067EE56 /* winter.seasonalparticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */; };
+		67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FD44542C217E020081CC26 /* Chainwhacks.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVDecipherer.swift; sourceTree = "<group>"; };
-		20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelGenerator.swift; path = "/Users/vin/Documents/Projects/Star Seeker/Star Seeker/Views/Components/LevelGenerator/LevelGenerator.swift"; sourceTree = "<absolute>"; };
-		20006B222C18C6D800EC46C6 /* LevelFormat2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = LevelFormat2; sourceTree = "<group>"; };
+		20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoNodesDecipherer.swift; sourceTree = "<group>"; };
+		204449582C2DC87200AC1806 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SlingshotPull.mp3; path = "Star Seeker/Raws/sound/SlingshotPull.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SlingshotRelease.mp3; path = "Star Seeker/Raws/sound/SlingshotRelease.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495C2C2DC8F000AC1806 /* GameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GameOver.mp3; path = "Star Seeker/Raws/sound/GameOver.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = PlatformCollision.mp3; path = "Star Seeker/Raws/sound/PlatformCollision.mp3"; sourceTree = SOURCE_ROOT; };
+		2044495E2C2DC8F000AC1806 /* Button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Button.mp3; path = "Star Seeker/Raws/sound/Button.mp3"; sourceTree = SOURCE_ROOT; };
 		204FC3B52C19915700C1BBCC /* MovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementDirection.swift; sourceTree = "<group>"; };
-		204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
 		204FC3BA2C19F98300C1BBCC /* Decipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decipherer.swift; sourceTree = "<group>"; };
 		204FC3C02C1A9B7700C1BBCC /* DragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragButton.swift; sourceTree = "<group>"; };
 		204FC3C32C1AE11B00C1BBCC /* Restriction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restriction.swift; sourceTree = "<group>"; };
@@ -80,6 +146,29 @@
 		204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskConstant.swift; sourceTree = "<group>"; };
 		204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionConstant.swift; sourceTree = "<group>"; };
 		204FC3D22C1B655100C1BBCC /* Darkness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darkness.swift; sourceTree = "<group>"; };
+		205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSequenceCountConstant.swift; sourceTree = "<group>"; };
+		205A996D2C23C52700C85B1B /* easy-02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-02.csv"; path = "Star Seeker/Raws/levelDesign/easy-02.csv"; sourceTree = SOURCE_ROOT; };
+		205A996E2C23C52700C85B1B /* easy-03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-03.csv"; path = "Star Seeker/Raws/levelDesign/easy-03.csv"; sourceTree = SOURCE_ROOT; };
+		205A996F2C23C52700C85B1B /* easy-01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "easy-01.csv"; path = "Star Seeker/Raws/levelDesign/easy-01.csv"; sourceTree = SOURCE_ROOT; };
+		205A99742C242B4D00C85B1B /* SeasonConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonConstant.swift; sourceTree = "<group>"; };
+		205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelChangePlatform.swift; sourceTree = "<group>"; };
+		205A99782C251B7E00C85B1B /* LevelDesignNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignNamingConstant.swift; sourceTree = "<group>"; };
+		205A99BA2C255ED800C85B1B /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldableDragButton.swift; sourceTree = "<group>"; };
+		205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickMovementController.swift; sourceTree = "<group>"; };
+		205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowPointingToPlayersLocationWhenOffScreen.swift; sourceTree = "<group>"; };
+		205A99C62C28899A00C85B1B /* CSVtoMovingPlatformDecipherer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoMovingPlatformDecipherer.swift; sourceTree = "<group>"; };
+		205A99C82C28930F00C85B1B /* SKAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKAction.swift; sourceTree = "<group>"; };
+		205A99CB2C29261D00C85B1B /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
+		205A99CD2C29263300C85B1B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		205A99D22C2926EA00C85B1B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		205A99D52C2AC1AB00C85B1B /* HoldsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldsAction.swift; sourceTree = "<group>"; };
+		2063329F2C2163F2004270C7 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		206332A02C2163F2004270C7 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		206332A42C21642A004270C7 /* LevelGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		206332A72C21648C004270C7 /* ButtonsMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsMovementController.swift; sourceTree = "<group>"; };
+		206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyJoystickMovementController.swift; sourceTree = "<group>"; };
+		206332A92C21648C004270C7 /* MovementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementController.swift; sourceTree = "<group>"; };
 		2097B77C2C114C00002261C3 /* Star Seeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Seeker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_SeekerApp.swift; sourceTree = "<group>"; };
 		2097B7812C114C00002261C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,7 +181,6 @@
 		2097B7A22C115AED002261C3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2097B7A42C115E99002261C3 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		2097B7A62C119C27002261C3 /* HoldButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldButton.swift; sourceTree = "<group>"; };
-		2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsMovementController.swift; sourceTree = "<group>"; };
 		2097B7AB2C122000002261C3 /* PressButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButton.swift; sourceTree = "<group>"; };
 		2097B7AD2C1227EE002261C3 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
 		2097B7AF2C122862002261C3 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
@@ -107,7 +195,6 @@
 		2097B7CF2C169CA3002261C3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2097B7D12C169DC0002261C3 /* ImageNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNamingConstant.swift; sourceTree = "<group>"; };
 		2097B7D32C16E0BD002261C3 /* ValueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueProvider.swift; sourceTree = "<group>"; };
-		2097B7D52C16E14F002261C3 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		2097B7D72C16EFE5002261C3 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		2097B7D92C16F03E002261C3 /* BasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlatform.swift; sourceTree = "<group>"; };
 		2097B7DD2C1701DC002261C3 /* CollapsiblePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsiblePlatform.swift; sourceTree = "<group>"; };
@@ -120,9 +207,49 @@
 		2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPlatform.swift; sourceTree = "<group>"; };
 		2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactivePlatform.swift; sourceTree = "<group>"; };
 		2097B7F82C17F350002261C3 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
-		2097B7FA2C17F891002261C3 /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
 		2097B7FC2C17F8B9002261C3 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNamingConstant.swift; sourceTree = "<group>"; };
+		20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.1.csv; sourceTree = "<group>"; };
+		20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.9.csv; sourceTree = "<group>"; };
+		20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.2.csv; sourceTree = "<group>"; };
+		20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.5.csv; sourceTree = "<group>"; };
+		20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.4.csv; sourceTree = "<group>"; };
+		20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.3.csv; sourceTree = "<group>"; };
+		20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.6.csv; sourceTree = "<group>"; };
+		20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.7.csv; sourceTree = "<group>"; };
+		20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.8.csv; sourceTree = "<group>"; };
+		20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.autumn.10.csv; sourceTree = "<group>"; };
+		20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.2.csv; sourceTree = "<group>"; };
+		20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.7.csv; sourceTree = "<group>"; };
+		20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.3.csv; sourceTree = "<group>"; };
+		20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.1.csv; sourceTree = "<group>"; };
+		20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.4.csv; sourceTree = "<group>"; };
+		20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.8.csv; sourceTree = "<group>"; };
+		20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.5.csv; sourceTree = "<group>"; };
+		20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.winter.6.csv; sourceTree = "<group>"; };
+		20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.2.csv; sourceTree = "<group>"; };
+		20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.5.csv; sourceTree = "<group>"; };
+		20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.3.csv; sourceTree = "<group>"; };
+		20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.4.csv; sourceTree = "<group>"; };
+		20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.1.csv; sourceTree = "<group>"; };
+		20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.7.csv; sourceTree = "<group>"; };
+		20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.8.csv; sourceTree = "<group>"; };
+		20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.summer.6.csv; sourceTree = "<group>"; };
+		20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.1.csv; sourceTree = "<group>"; };
+		20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.6.csv; sourceTree = "<group>"; };
+		20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.7.csv; sourceTree = "<group>"; };
+		20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.4.csv; sourceTree = "<group>"; };
+		20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.2.csv; sourceTree = "<group>"; };
+		20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.5.csv; sourceTree = "<group>"; };
+		20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leveldesign.seasonal.spring.3.csv; sourceTree = "<group>"; };
+		20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginPlatform.swift; sourceTree = "<group>"; };
+		20D10A112C2C13AD0067EE56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = autumn.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spring.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = summer.seasonalparticles.sks; sourceTree = "<group>"; };
+		20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = winter.seasonalparticles.sks; sourceTree = "<group>"; };
+		674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Star-Seeker-Info.plist"; sourceTree = SOURCE_ROOT; };
+		67FD44542C217E020081CC26 /* Chainwhacks.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chainwhacks.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,29 +263,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		20006B192C18BAE400EC46C6 /* LevelGenerator */ = {
+		204449572C2DC86700AC1806 /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				20006B1C2C18BB1D00EC46C6 /* LevelGenerator.swift */,
-				20006B222C18C6D800EC46C6 /* LevelFormat2 */,
+				2044495E2C2DC8F000AC1806 /* Button.mp3 */,
+				2044495C2C2DC8F000AC1806 /* GameOver.mp3 */,
+				2044495D2C2DC8F000AC1806 /* PlatformCollision.mp3 */,
+				2044495A2C2DC8F000AC1806 /* SlingshotPull.mp3 */,
+				2044495B2C2DC8F000AC1806 /* SlingshotRelease.mp3 */,
+				204449582C2DC87200AC1806 /* SoundManager.swift */,
 			);
-			path = LevelGenerator;
+			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 		204FC3B92C19F97700C1BBCC /* Decipherer */ = {
 			isa = PBXGroup;
 			children = (
 				204FC3BA2C19F98300C1BBCC /* Decipherer.swift */,
-				20006B1A2C18BB0200EC46C6 /* CSVDecipherer.swift */,
+				20006B1A2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift */,
+				205A99C62C28899A00C85B1B /* CSVtoMovingPlatformDecipherer.swift */,
 			);
 			path = Decipherer;
-			sourceTree = "<group>";
-		};
-		204FC3BF2C1A1BB100C1BBCC /* Handler */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Handler;
 			sourceTree = "<group>";
 		};
 		204FC3C22C1AE10D00C1BBCC /* Restrictions */ = {
@@ -187,6 +312,156 @@
 			path = LevelResetters;
 			sourceTree = "<group>";
 		};
+		205A996C2C23C50F00C85B1B /* LevelDesign */ = {
+			isa = PBXGroup;
+			children = (
+				205A997B2C251CE200C85B1B /* NonSeasonal */,
+				205A997A2C251CDC00C85B1B /* Seasonal */,
+				205A996F2C23C52700C85B1B /* easy-01.csv */,
+				205A996D2C23C52700C85B1B /* easy-02.csv */,
+				205A996E2C23C52700C85B1B /* easy-03.csv */,
+			);
+			path = LevelDesign;
+			sourceTree = "<group>";
+		};
+		205A997A2C251CDC00C85B1B /* Seasonal */ = {
+			isa = PBXGroup;
+			children = (
+				205A99882C251D0400C85B1B /* autumn */,
+				205A997C2C251D0400C85B1B /* spring */,
+				205A997D2C251D0400C85B1B /* summer */,
+				205A99922C251D0400C85B1B /* winter */,
+			);
+			path = Seasonal;
+			sourceTree = "<group>";
+		};
+		205A997B2C251CE200C85B1B /* NonSeasonal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NonSeasonal;
+			sourceTree = "<group>";
+		};
+		205A997C2C251D0400C85B1B /* spring */ = {
+			isa = PBXGroup;
+			children = (
+				20D109FF2C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv */,
+				20D10A032C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv */,
+				20D10A052C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv */,
+				20D10A022C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv */,
+				20D10A042C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv */,
+				20D10A002C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv */,
+				20D10A012C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv */,
+			);
+			name = spring;
+			path = "Star Seeker/Raws/levelDesign/seasonal/spring";
+			sourceTree = SOURCE_ROOT;
+		};
+		205A997D2C251D0400C85B1B /* summer */ = {
+			isa = PBXGroup;
+			children = (
+				20D109F32C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv */,
+				20D109EF2C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv */,
+				20D109F12C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv */,
+				20D109F22C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv */,
+				20D109F02C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv */,
+				20D109F62C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv */,
+				20D109F42C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv */,
+				20D109F52C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv */,
+			);
+			name = summer;
+			path = "Star Seeker/Raws/levelDesign/seasonal/summer";
+			sourceTree = SOURCE_ROOT;
+		};
+		205A99882C251D0400C85B1B /* autumn */ = {
+			isa = PBXGroup;
+			children = (
+				20D109CB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv */,
+				20D109CD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv */,
+				20D109D02C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv */,
+				20D109CF2C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv */,
+				20D109CE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv */,
+				20D109D12C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv */,
+				20D109D22C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv */,
+				20D109D32C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv */,
+				20D109CC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv */,
+				20D109D42C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv */,
+			);
+			name = autumn;
+			path = "Star Seeker/Raws/levelDesign/seasonal/autumn";
+			sourceTree = SOURCE_ROOT;
+		};
+		205A99922C251D0400C85B1B /* winter */ = {
+			isa = PBXGroup;
+			children = (
+				20D109E22C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv */,
+				20D109DF2C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv */,
+				20D109E12C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv */,
+				20D109E32C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv */,
+				20D109E52C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv */,
+				20D109E62C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv */,
+				20D109E02C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv */,
+				20D109E42C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv */,
+			);
+			name = winter;
+			path = "Star Seeker/Raws/levelDesign/seasonal/winter";
+			sourceTree = SOURCE_ROOT;
+		};
+		205A99C32C274B7500C85B1B /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				2097B7CF2C169CA3002261C3 /* Player.swift */,
+				205A99C42C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		205A99CA2C2925CE00C85B1B /* SceneKit */ = {
+			isa = PBXGroup;
+			children = (
+				205A99CB2C29261D00C85B1B /* SceneKitView.swift */,
+				205A99CD2C29263300C85B1B /* ContentViewModel.swift */,
+				205A99D22C2926EA00C85B1B /* art.scnassets */,
+			);
+			path = SceneKit;
+			sourceTree = "<group>";
+		};
+		205A99D42C2AC19600C85B1B /* Animatable */ = {
+			isa = PBXGroup;
+			children = (
+				205A99D52C2AC1AB00C85B1B /* HoldsAction.swift */,
+			);
+			path = Animatable;
+			sourceTree = "<group>";
+		};
+		206332A12C2163F2004270C7 /* CoreGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				2063329F2C2163F2004270C7 /* CGPoint.swift */,
+				206332A02C2163F2004270C7 /* CGSize.swift */,
+			);
+			path = CoreGraphics;
+			sourceTree = "<group>";
+		};
+		206332A52C21642A004270C7 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				206332A42C21642A004270C7 /* LevelGenerator.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
+		206332AA2C21648C004270C7 /* MovementController */ = {
+			isa = PBXGroup;
+			children = (
+				206332A72C21648C004270C7 /* ButtonsMovementController.swift */,
+				206332A82C21648C004270C7 /* LegacyJoystickMovementController.swift */,
+				206332A92C21648C004270C7 /* MovementController.swift */,
+				205A99BE2C25FC9600C85B1B /* JoystickMovementController.swift */,
+			);
+			path = MovementController;
+			sourceTree = "<group>";
+		};
 		2097B7732C114C00002261C3 = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +481,8 @@
 		2097B77E2C114C00002261C3 /* Star Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				674A87442C21E85200773CF3 /* Star-Seeker-Info.plist */,
+				67FD44542C217E020081CC26 /* Chainwhacks.ttf */,
 				2097B7852C114C01002261C3 /* Assets.xcassets */,
 				2097B7812C114C00002261C3 /* ContentView.swift */,
 				2097B77F2C114C00002261C3 /* Star_SeekerApp.swift */,
@@ -213,6 +490,7 @@
 				2097B7922C114C74002261C3 /* Extensions */,
 				2097B7902C114C20002261C3 /* Models */,
 				2097B78F2C114C1A002261C3 /* Views */,
+				205A996C2C23C50F00C85B1B /* LevelDesign */,
 				2097B7872C114C01002261C3 /* Preview Content */,
 			);
 			path = "Star Seeker";
@@ -259,10 +537,12 @@
 		2097B7922C114C74002261C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				206332A12C2163F2004270C7 /* CoreGraphics */,
 				2097B7C62C15FAEF002261C3 /* SKNodes */,
 				2097B7A22C115AED002261C3 /* Logger.swift */,
 				2097B7B22C12ABC2002261C3 /* Bundle.swift */,
-				2097B7D52C16E14F002261C3 /* CGPoint.swift */,
+				205A99BA2C255ED800C85B1B /* View.swift */,
+				205A99C82C28930F00C85B1B /* SKAction.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,12 +578,12 @@
 		2097B7B42C12FC02002261C3 /* Concepts */ = {
 			isa = PBXGroup;
 			children = (
+				205A99D42C2AC19600C85B1B /* Animatable */,
+				206332A52C21642A004270C7 /* Generator */,
 				204FC3C22C1AE10D00C1BBCC /* Restrictions */,
-				204FC3BF2C1A1BB100C1BBCC /* Handler */,
 				204FC3B92C19F97700C1BBCC /* Decipherer */,
 				2097B7BC2C15E12A002261C3 /* Scalable */,
 				2097B7B92C12FC2C002261C3 /* Movable */,
-				2097B7B82C12FC1F002261C3 /* Position */,
 			);
 			path = Concepts;
 			sourceTree = "<group>";
@@ -326,6 +606,8 @@
 				2097B7EA2C170268002261C3 /* PassThroughPlatform.swift */,
 				2097B7F02C1702CD002261C3 /* ReactivePlatform.swift */,
 				2097B7EE2C1702A0002261C3 /* DynamicPlatform.swift */,
+				20D10A0F2C2BF5DA0067EE56 /* BeginPlatform.swift */,
+				205A99762C24ADE700C85B1B /* LevelChangePlatform.swift */,
 				2097B7E72C170230002261C3 /* PassThrough */,
 				2097B7DB2C1701C5002261C3 /* Inert */,
 				2097B7E12C170202002261C3 /* Reactive */,
@@ -338,13 +620,6 @@
 			children = (
 			);
 			path = Obstacles;
-			sourceTree = "<group>";
-		};
-		2097B7B82C12FC1F002261C3 /* Position */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Position;
 			sourceTree = "<group>";
 		};
 		2097B7B92C12FC2C002261C3 /* Movable */ = {
@@ -372,6 +647,9 @@
 				2097B7FE2C185307002261C3 /* ActionNamingConstant.swift */,
 				204FC3CD2C1B006D00C1BBCC /* BitMaskConstant.swift */,
 				204FC3CF2C1B008400C1BBCC /* RestrictionConstant.swift */,
+				205A996A2C2343CC00C85B1B /* ImageSequenceCountConstant.swift */,
+				205A99742C242B4D00C85B1B /* SeasonConstant.swift */,
+				205A99782C251B7E00C85B1B /* LevelDesignNamingConstant.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -424,8 +702,7 @@
 		2097B7F32C175F40002261C3 /* Compositions */ = {
 			isa = PBXGroup;
 			children = (
-				2097B7A92C121DA8002261C3 /* ButtonsMovementController.swift */,
-				204FC3B72C19B37300C1BBCC /* JoystickMovementController.swift */,
+				206332AA2C21648C004270C7 /* MovementController */,
 			);
 			path = Compositions;
 			sourceTree = "<group>";
@@ -433,12 +710,13 @@
 		2097B7F42C175F4C002261C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				20D10A162C2C13AD0067EE56 /* Overlays */,
+				204449572C2DC86700AC1806 /* AudioPlayer */,
+				205A99C32C274B7500C85B1B /* Player */,
 				2097B7F62C175F6A002261C3 /* Buttons */,
-				20006B192C18BAE400EC46C6 /* LevelGenerator */,
 				2097B7F72C17F342002261C3 /* DelayedExecution */,
 				2097B7A42C115E99002261C3 /* Wrapper.swift */,
 				2097B7BA2C15DDD6002261C3 /* NeoWrapper.swift */,
-				2097B7CF2C169CA3002261C3 /* Player.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -446,8 +724,8 @@
 		2097B7F52C175F59002261C3 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				205A99CA2C2925CE00C85B1B /* SceneKit */,
 				2097B79A2C1152AD002261C3 /* Game.swift */,
-				2097B7FA2C17F891002261C3 /* PauseScreen.swift */,
 				2097B7FC2C17F8B9002261C3 /* GridView.swift */,
 			);
 			path = Presenters;
@@ -459,6 +737,7 @@
 				2097B7A62C119C27002261C3 /* HoldButton.swift */,
 				2097B7AB2C122000002261C3 /* PressButton.swift */,
 				204FC3C02C1A9B7700C1BBCC /* DragButton.swift */,
+				205A99BC2C25FBE400C85B1B /* HoldableDragButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -469,6 +748,18 @@
 				2097B7F82C17F350002261C3 /* CountdownTimer.swift */,
 			);
 			path = DelayedExecution;
+			sourceTree = "<group>";
+		};
+		20D10A162C2C13AD0067EE56 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				20D10A112C2C13AD0067EE56 /* Assets.xcassets */,
+				20D10A122C2C13AD0067EE56 /* autumn.seasonalparticles.sks */,
+				20D10A132C2C13AD0067EE56 /* spring.seasonalparticles.sks */,
+				20D10A142C2C13AD0067EE56 /* summer.seasonalparticles.sks */,
+				20D10A152C2C13AD0067EE56 /* winter.seasonalparticles.sks */,
+			);
+			path = Overlays;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,8 +820,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20006B232C18C6D800EC46C6 /* LevelFormat2 in Resources */,
+				204449632C2DC8F000AC1806 /* Button.mp3 in Resources */,
+				20D109D52C2BC0050067EE56 /* leveldesign.seasonal.autumn.1.csv in Resources */,
+				20D109DC2C2BC0050067EE56 /* leveldesign.seasonal.autumn.7.csv in Resources */,
+				204449602C2DC8F000AC1806 /* SlingshotRelease.mp3 in Resources */,
+				20D109FE2C2BC01D0067EE56 /* leveldesign.seasonal.summer.6.csv in Resources */,
+				20D109D92C2BC0050067EE56 /* leveldesign.seasonal.autumn.4.csv in Resources */,
+				20D10A1B2C2C13AE0067EE56 /* winter.seasonalparticles.sks in Resources */,
+				20D109F92C2BC01D0067EE56 /* leveldesign.seasonal.summer.3.csv in Resources */,
+				20D10A062C2BC0240067EE56 /* leveldesign.seasonal.spring.1.csv in Resources */,
+				20D109E92C2BC0160067EE56 /* leveldesign.seasonal.winter.3.csv in Resources */,
+				20D109F72C2BC01D0067EE56 /* leveldesign.seasonal.summer.2.csv in Resources */,
+				20D109D72C2BC0050067EE56 /* leveldesign.seasonal.autumn.2.csv in Resources */,
+				20D10A082C2BC0240067EE56 /* leveldesign.seasonal.spring.7.csv in Resources */,
+				20D109DB2C2BC0050067EE56 /* leveldesign.seasonal.autumn.6.csv in Resources */,
+				20D109D62C2BC0050067EE56 /* leveldesign.seasonal.autumn.9.csv in Resources */,
+				20D10A072C2BC0240067EE56 /* leveldesign.seasonal.spring.6.csv in Resources */,
+				20D109E72C2BC0160067EE56 /* leveldesign.seasonal.winter.2.csv in Resources */,
+				204449612C2DC8F000AC1806 /* GameOver.mp3 in Resources */,
+				20D10A182C2C13AD0067EE56 /* autumn.seasonalparticles.sks in Resources */,
+				67FD44552C217E020081CC26 /* Chainwhacks.ttf in Resources */,
+				20D109ED2C2BC0160067EE56 /* leveldesign.seasonal.winter.5.csv in Resources */,
+				205A99722C23C52700C85B1B /* easy-01.csv in Resources */,
+				20D10A0C2C2BC0240067EE56 /* leveldesign.seasonal.spring.3.csv in Resources */,
+				205A99712C23C52700C85B1B /* easy-03.csv in Resources */,
+				20D10A0B2C2BC0240067EE56 /* leveldesign.seasonal.spring.5.csv in Resources */,
+				20D109EE2C2BC0160067EE56 /* leveldesign.seasonal.winter.6.csv in Resources */,
+				20D109F82C2BC01D0067EE56 /* leveldesign.seasonal.summer.5.csv in Resources */,
+				20D10A1A2C2C13AE0067EE56 /* summer.seasonalparticles.sks in Resources */,
+				20D10A192C2C13AD0067EE56 /* spring.seasonalparticles.sks in Resources */,
+				20D109FC2C2BC01D0067EE56 /* leveldesign.seasonal.summer.7.csv in Resources */,
+				20D109DE2C2BC0050067EE56 /* leveldesign.seasonal.autumn.10.csv in Resources */,
+				204449622C2DC8F000AC1806 /* PlatformCollision.mp3 in Resources */,
+				20D109FB2C2BC01D0067EE56 /* leveldesign.seasonal.summer.1.csv in Resources */,
+				20D10A172C2C13AD0067EE56 /* Assets.xcassets in Resources */,
 				2097B7892C114C01002261C3 /* Preview Assets.xcassets in Resources */,
+				20D10A092C2BC0240067EE56 /* leveldesign.seasonal.spring.4.csv in Resources */,
+				205A99D32C2926EA00C85B1B /* art.scnassets in Resources */,
+				20D109D82C2BC0050067EE56 /* leveldesign.seasonal.autumn.5.csv in Resources */,
+				20D109DA2C2BC0050067EE56 /* leveldesign.seasonal.autumn.3.csv in Resources */,
+				20D109FA2C2BC01D0067EE56 /* leveldesign.seasonal.summer.4.csv in Resources */,
+				20D109DD2C2BC0050067EE56 /* leveldesign.seasonal.autumn.8.csv in Resources */,
+				20D109E82C2BC0160067EE56 /* leveldesign.seasonal.winter.7.csv in Resources */,
+				20D109FD2C2BC01D0067EE56 /* leveldesign.seasonal.summer.8.csv in Resources */,
+				20D10A0A2C2BC0240067EE56 /* leveldesign.seasonal.spring.2.csv in Resources */,
+				20D109EA2C2BC0160067EE56 /* leveldesign.seasonal.winter.1.csv in Resources */,
+				2044495F2C2DC8F000AC1806 /* SlingshotPull.mp3 in Resources */,
+				205A99702C23C52700C85B1B /* easy-02.csv in Resources */,
+				20D109EB2C2BC0160067EE56 /* leveldesign.seasonal.winter.4.csv in Resources */,
+				20D109EC2C2BC0160067EE56 /* leveldesign.seasonal.winter.8.csv in Resources */,
 				2097B7862C114C01002261C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,55 +881,71 @@
 			buildActionMask = 2147483647;
 			files = (
 				2097B7822C114C00002261C3 /* ContentView.swift in Sources */,
-				20006B1B2C18BB0200EC46C6 /* CSVDecipherer.swift in Sources */,
+				20006B1B2C18BB0200EC46C6 /* CSVtoNodesDecipherer.swift in Sources */,
 				2097B7BB2C15DDD6002261C3 /* NeoWrapper.swift in Sources */,
 				2097B7F92C17F350002261C3 /* CountdownTimer.swift in Sources */,
 				204FC3D02C1B008400C1BBCC /* RestrictionConstant.swift in Sources */,
 				2097B7B32C12ABC2002261C3 /* Bundle.swift in Sources */,
 				204FC3C82C1AE15A00C1BBCC /* PlayerRestriction.swift in Sources */,
 				204FC3BB2C19F98300C1BBCC /* Decipherer.swift in Sources */,
+				205A99D62C2AC1AB00C85B1B /* HoldsAction.swift in Sources */,
 				2097B7DE2C1701DC002261C3 /* CollapsiblePlatform.swift in Sources */,
 				2097B7D22C169DC0002261C3 /* ImageNamingConstant.swift in Sources */,
 				2097B7A52C115E99002261C3 /* Wrapper.swift in Sources */,
 				2097B7D02C169CA3002261C3 /* Player.swift in Sources */,
+				20D10A102C2BF5DA0067EE56 /* BeginPlatform.swift in Sources */,
+				205A99BF2C25FC9600C85B1B /* JoystickMovementController.swift in Sources */,
 				204FC3C42C1AE11B00C1BBCC /* Restriction.swift in Sources */,
-				2097B7AA2C121DA8002261C3 /* ButtonsMovementController.swift in Sources */,
+				206332AC2C21648C004270C7 /* LegacyJoystickMovementController.swift in Sources */,
 				2097B7B02C122862002261C3 /* GameConfig.swift in Sources */,
-				2097B7FB2C17F891002261C3 /* PauseScreen.swift in Sources */,
 				2097B7E42C17021F002261C3 /* StickyPlatform.swift in Sources */,
 				2097B79F2C115AA5002261C3 /* Debug.swift in Sources */,
 				2097B7842C114C00002261C3 /* Item.swift in Sources */,
+				205A99792C251B7E00C85B1B /* LevelDesignNamingConstant.swift in Sources */,
+				205A99CC2C29261D00C85B1B /* SceneKitView.swift in Sources */,
 				2097B7E62C170228002261C3 /* SlipperyPlatform.swift in Sources */,
 				2097B7C02C15E193002261C3 /* SKSpriteNode.swift in Sources */,
+				206332AD2C21648C004270C7 /* MovementController.swift in Sources */,
 				2097B7FD2C17F8B9002261C3 /* GridView.swift in Sources */,
+				206332AB2C21648C004270C7 /* ButtonsMovementController.swift in Sources */,
 				2097B7BE2C15E138002261C3 /* Sizeable.swift in Sources */,
 				2097B7A12C115AC2002261C3 /* AppConfig.swift in Sources */,
-				204FC3B82C19B37300C1BBCC /* JoystickMovementController.swift in Sources */,
 				2097B7A32C115AED002261C3 /* Logger.swift in Sources */,
 				2097B7C22C15E1EE002261C3 /* SKLabelNode.swift in Sources */,
+				205A99C92C28930F00C85B1B /* SKAction.swift in Sources */,
 				2097B7E92C170244002261C3 /* ClimbablePlatform.swift in Sources */,
 				2097B7802C114C00002261C3 /* Star_SeekerApp.swift in Sources */,
 				2097B7FF2C185307002261C3 /* ActionNamingConstant.swift in Sources */,
 				2097B7D82C16EFE5002261C3 /* Platform.swift in Sources */,
+				205A99BB2C255ED800C85B1B /* View.swift in Sources */,
+				205A99CE2C29263300C85B1B /* ContentViewModel.swift in Sources */,
 				2097B7ED2C17028A002261C3 /* InertPlatform.swift in Sources */,
+				205A99BD2C25FBE400C85B1B /* HoldableDragButton.swift in Sources */,
 				204FC3C12C1A9B7700C1BBCC /* DragButton.swift in Sources */,
+				205A99C72C28899A00C85B1B /* CSVtoMovingPlatformDecipherer.swift in Sources */,
+				206332A22C2163F2004270C7 /* CGPoint.swift in Sources */,
 				2097B7AC2C122000002261C3 /* PressButton.swift in Sources */,
+				205A99772C24ADE700C85B1B /* LevelChangePlatform.swift in Sources */,
 				204FC3D32C1B655100C1BBCC /* Darkness.swift in Sources */,
-				20006B1D2C18BB1D00EC46C6 /* LevelGenerator.swift in Sources */,
 				204FC3CC2C1AEC3C00C1BBCC /* UniversalNodeIdentifier.swift in Sources */,
 				2097B7CE2C161DB6002261C3 /* Movable.swift in Sources */,
 				204FC3CE2C1B006D00C1BBCC /* BitMaskConstant.swift in Sources */,
+				205A99C52C274BF000C85B1B /* ArrowPointingToPlayersLocationWhenOffScreen.swift in Sources */,
 				2097B7C82C15FAFC002261C3 /* SKNode.swift in Sources */,
+				206332A62C21642A004270C7 /* LevelGenerator.swift in Sources */,
 				204FC3B62C19915700C1BBCC /* MovementDirection.swift in Sources */,
 				2097B7C52C15E47D002261C3 /* NodeNamingConstant.swift in Sources */,
 				2097B7AE2C1227EE002261C3 /* UIConfig.swift in Sources */,
 				2097B7DA2C16F03E002261C3 /* BasePlatform.swift in Sources */,
 				2097B7A72C119C27002261C3 /* HoldButton.swift in Sources */,
 				2097B7F12C1702CD002261C3 /* ReactivePlatform.swift in Sources */,
+				204449592C2DC87200AC1806 /* SoundManager.swift in Sources */,
+				205A996B2C2343CC00C85B1B /* ImageSequenceCountConstant.swift in Sources */,
+				205A99752C242B4D00C85B1B /* SeasonConstant.swift in Sources */,
 				2097B7D42C16E0BD002261C3 /* ValueProvider.swift in Sources */,
 				2097B7E02C1701E9002261C3 /* MovingPlatform.swift in Sources */,
-				2097B7D62C16E14F002261C3 /* CGPoint.swift in Sources */,
 				2097B7EF2C1702A0002261C3 /* DynamicPlatform.swift in Sources */,
+				206332A32C2163F2004270C7 /* CGSize.swift in Sources */,
 				204FC3CA2C1AE4A200C1BBCC /* RestrictionGroup.swift in Sources */,
 				2097B79B2C1152AD002261C3 /* Game.swift in Sources */,
 				2097B7EB2C170268002261C3 /* PassThroughPlatform.swift in Sources */,
@@ -725,12 +1079,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
 				DEVELOPMENT_TEAM = STU45DAFT2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Star-Seeker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sun Seeker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -743,6 +1101,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VerteX.Star-Seeker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -754,12 +1113,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Star Seeker/Preview Content\"";
 				DEVELOPMENT_TEAM = STU45DAFT2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Star-Seeker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Sun Seeker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -772,6 +1135,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VerteX.Star-Seeker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -2,12 +2,13 @@ import SpriteKit
 
 class BasePlatform : InertPlatform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Inert.base ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size)        
-        self.name = NodeNamingConstant.Platform.Inert.base
+    override var role : String {
+        ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.base
+    } 
+    
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

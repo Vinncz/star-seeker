@@ -3,6 +3,8 @@ import Foundation
 struct BitMaskConstant {
     static let player                          : UInt32 = 0b001___000000001
     static let platform                        : UInt32 = 0b010___000000000
+        static let levelChangePlatform         : UInt32 = 0b010___000000001
+        static let levelBeginPlatform          : UInt32 = 0b010___000000010
         static let inertPlatform               : UInt32 = 0b010_01__0000000
             static let basePlatform            : UInt32 = 0b010_01__0000001
             static let dynamicPlatform         : UInt32 = 0b010_01_01_00000
@@ -16,5 +18,6 @@ struct BitMaskConstant {
     static let obstacle                        : UInt32 = 0b100___000000000
         static let lethalObstacle              : UInt32 = 0b100_01__0000000
         static let nonLethalObstacle           : UInt32 = 0b100_10__0000000
-    static let darkness                        : UInt32 = 0b011___000000000
+    static let darkness                        : UInt32 = 0b011___000000001
+    static let sensor                          : UInt32 = 0b111___000000000
 }

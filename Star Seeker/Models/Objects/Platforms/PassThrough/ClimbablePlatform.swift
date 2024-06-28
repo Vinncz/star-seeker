@@ -1,13 +1,14 @@
 import SpriteKit
 
-class ClimbablePlatform : PassTroughPlatform {
+class ClimbablePlatform : Platform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.PassThrough.climbable ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size) 
-        self.name = NodeNamingConstant.Platform.PassThrough.climbable
+    override var role : String {
+        ImageNamingConstant.Platform.PassThrough.prefix + ImageNamingConstant.Platform.PassThrough.climbable
+    } 
+    
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
     }
     
     /* Inherited from SKNode. Refrain from altering the following */

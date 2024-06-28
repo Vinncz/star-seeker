@@ -3,11 +3,54 @@ import SpriteKit
 /** Platform which moves around in a predicted path of movement */
 class MovingPlatform : DynamicPlatform {
     
-    override init ( 
-        texture: SKTexture = SKTexture( imageNamed: ImageNamingConstant.Platform.Inert.base ), 
-        size   : CGSize    = CGSize( width: ValueProvider.screenDimension.width, height: ValueProvider.screenDimension.height )
-    ) {
-        super.init(texture: texture, size: size)
+    var movementVector : CGVector = CGVector(dx: 0, dy: 0)
+    
+    override var role : String {
+        ImageNamingConstant.Platform.Inert.prefix + ImageNamingConstant.Platform.Inert.Dynamic.prefix + ImageNamingConstant.Platform.Inert.Dynamic.moving
+    } 
+    
+    override init ( themed: Season, size: CGSize = ValueProvider.gridDimension ) {        
+        super.init(themed: themed, size: size)
+        self.prepare()
+    }
+    
+    init ( themed: Season, movingTo: CGVector, size: CGSize = ValueProvider.gridDimension ) {
+        self.movementVector = movingTo
+        super.init(themed: themed, size: size)
+        self.prepare()
+    }
+    
+    override func preparePhysicsBody ( texture: SKTexture, size: CGSize ) -> SKPhysicsBody {
+        let pb = SKPhysicsBody( polygonFrom: UIBezierPath(roundedRect: CGRect(x: -size.width * 0.5, y: size.width * 0.25, width: size.width, height: size.height / 3), cornerRadius: 0.5).cgPath  )
+        
+            pb.isDynamic          = GameConfig.platformIsDynamic
+            pb.restitution        = GameConfig.platformRestitution
+            pb.allowsRotation     = GameConfig.platformRotates
+            pb.friction           = 1
+                    
+            pb.categoryBitMask    = BitMaskConstant.movingPlatform
+            pb.contactTestBitMask = BitMaskConstant.player
+        
+        return pb
+    }
+    
+    override func prepareAction () -> [String : SKAction] {
+        var map : [String: SKAction] = [:]
+            map = [
+                ActionNamingConstant.movingPlatformMovement : SKAction.repeatForever(
+                    SKAction.sequence([
+                        SKAction.moveBy(x: movementVector.dx, y: movementVector.dy, duration: 2).withTimingModeOf(.easeInEaseOut),
+                        SKAction.wait(forDuration: 1),
+                        SKAction.moveBy(x: -movementVector.dx, y: -movementVector.dy, duration: 2).withTimingModeOf(.easeInEaseOut),
+                        SKAction.wait(forDuration: 1)
+                    ])
+                )
+            ]
+        
+        return map
+    }
+    
+    override func prepareExtras () {
         self.name = NodeNamingConstant.Platform.Inert.Dynamic.moving
     }
     

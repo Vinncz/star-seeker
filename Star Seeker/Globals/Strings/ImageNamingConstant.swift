@@ -2,40 +2,100 @@ import Foundation
 
 struct ImageNamingConstant {
     
+    static let darkness : String = "darkness."
+    
+    struct Transition {
+        static let prefix : String = "transition."
+        
+        static let cloud  : String = "cloud."
+    }
+    
+    struct Background {
+        struct Winter {
+            static let background : String = "background.winter.background"
+            static let overlay    : String = "background.winter.overlay"
+        }
+        struct Spring {
+            static let background : String = "background.spring.background"
+            static let overlay    : String = "background.spring.overlay"
+        }
+        struct Autumn {
+            static let background : String = "background.autumn.background"
+            static let overlay    : String = "background.autumn.overlay"
+        }
+        struct Summer {
+            static let background : String = "background.summer.background"
+            static let overlay    : String = "background.summer.overlay"
+        }
+    }
+    
     struct Platform {
-        static let platform = "platform"
+        static let prefix = "platform."
+        
+        struct Seasonal {
+            static let nonseasonal : String = "nonseasonal."
+            static let seasonal    : String = "seasonal."
+        }
         
         struct Inert {
-            static let inert : String = "platform.inert"
-            static let base  : String = "platform.inert.base"
+            static let prefix : String = "inert."
+            
+            static let base   : String = "base"
+            static let wall   : String = "wall"
+            static let levelChange   : String = "levelchange"
             
             struct Dynamic {
-                static let dynamic     : String = "platform.inert.dynamic"
+                static let prefix      : String = "dynamic."
                 
-                static let collapsible : String = "platform.inert.dynamic.collapsible"
-                static let moving      : String = "platform.inert.dynamic.moving"
+                static let collapsible : String = "collapsible"
+                static let moving      : String = "moving"
             }
         }
         
         struct Reactive {
-            static let reactive : String = "platform.reactive"
-            static let slippery : String = "platform.reactive.slippery"
-            static let sticky   : String = "platform.reactive.sticky"
+            static let prefix   : String = "reactive."
+            
+            static let slippery : String = "slippery"
+            static let sticky   : String = "sticky"
         }
         
         struct PassThrough {
-            static let passThrough : String = "platform.passthrough"
-            static let climbable   : String = "platform.passthrough.climbable"
+            static let prefix : String = "passthrough."
+            
+            static let climbable : String = "climbable"
         }
-        
     }
     
-    struct Button {
-        static let climb : String = "button.climb"
-        static let jump  : String = "button.jump"
-        static let left  : String = "button.left"
-        static let right : String = "button.right"
-        static let up    : String = "button.up"
+    struct Interface {
+        struct Screen {
+            static let startTitle  : String = "interface.screen.starttitle"
+            static let teamLogo    : String = "interface.screen.teamlogo"
+        }
+        
+        struct Button {
+            struct GameControl {
+                static let exit    : String = "interface.button.gamecontrol.exit"
+                static let pause   : String = "interface.button.gamecontrol.pause"
+                static let play    : String = "interface.button.gamecontrol.play"
+                static let restart : String = "interface.button.gamecontrol.restart"
+            }
+            struct MovementControl {
+                static let climb   : String = "interface.button.movementcontrol.buttons.climb"
+                static let jump    : String = "interface.button.movementcontrol.buttons.jump"
+                static let left    : String = "interface.button.movementcontrol.buttons.left"
+                static let right   : String = "interface.button.movementcontrol.buttons.right"
+                static let up      : String = "interface.button.movementcontrol.buttons.up"
+                
+                struct Joystick {
+                    static let knob              : String = "interface.button.movementcontrol.joystick.knob"
+                    static let dragAreaIndicator : String = "interface.button.movementcontrol.joystick.dragAreaIndicator"
+                    static let pullDownIndicator : String = "interface.button.movementcontrol.joystick.pullDownIndicator"
+                }
+            }
+        }
+        struct Indicator {
+            static let arrowPointingToPlayersLocationWhenOffScreen : String = "interface.indicator.arrowpointingtoplayerslocationwhenoffscreen"
+        }
     }
     
     struct Player {
@@ -73,10 +133,6 @@ struct ImageNamingConstant {
         struct Climbing {
             static let name : String = "player.climbing."
         }
-        
-        static let idleLeft  : String = "player.idle.left"
-        static let idleRight : String = "player.idle.right"
-        static let climbing  : String = "player.idle.climb"
     }
     
 }
